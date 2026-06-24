@@ -5,13 +5,13 @@ import { themes as prismThemes } from 'prism-react-renderer';
 const config = {
   title: 'Think IT Telugu',
   tagline: 'Python for College Students - Nee coding journey ikkada start avuthundi! ',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/python-logo.svg',
 
   future: {
     v4: true,
   },
 
-  url: 'https://thinkittelugu.in',
+  url: 'https://python.thinkittelugu.in',
   baseUrl: '/',
 
   organizationName: 'thinkittelugu',
@@ -69,7 +69,7 @@ const config = {
         title: 'Think IT Telugu',
         logo: {
           alt: 'Think IT Telugu Logo',
-          src: 'img/logo.jpg',
+          src: 'img/python-logo.svg',
         },
         items: [
           {
