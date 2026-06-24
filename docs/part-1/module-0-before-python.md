@@ -68,9 +68,46 @@ A computer translates the English-like code we write (High-Level Language) into 
 
 * **CPU Basics:** The CPU (Central Processing Unit) is the brain of the computer. It can only understand electrical signals: On (1) and Off (0).
 * **Execution Flow:**
-```text
-High-Level Code (Python) ──> Translator (Interpreter) ──> Machine Code (0s & 1s) ──> CPU Executes
-```
+
+<div className="ill-wrapper">
+  <div className="ill-card">
+    <span className="ill-badge badge-python">Python Code</span>
+    <pre className="ill-code"><code>{`print("Hello")`}</code></pre>
+  </div>
+  <div className="ill-arrow-flow">
+    <span>Translate</span>
+    <svg className="ill-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </div>
+  <div className="ill-card">
+    <span className="ill-badge badge-translator">Interpreter</span>
+    <div className="ill-desc">Translates line-by-line</div>
+  </div>
+  <div className="ill-arrow-flow">
+    <span>Convert</span>
+    <svg className="ill-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </div>
+  <div className="ill-card">
+    <span className="ill-badge badge-binary">Machine Code</span>
+    <div className="ill-desc" style={{fontFamily: 'monospace', fontWeight: 'bold'}}>01001000 01100101</div>
+  </div>
+  <div className="ill-arrow-flow">
+    <span>Execute</span>
+    <svg className="ill-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </div>
+  <div className="ill-card">
+    <span className="ill-badge badge-cpu">CPU</span>
+    <div className="ill-desc">Executes instructions</div>
+  </div>
+</div>
 
 ---
 
@@ -84,6 +121,49 @@ A translator converts our code into machine code. There are two main types of tr
 | **Speed** | Fast execution because translation is done once. | Slower execution because it translates as it runs. |
 | **Errors** | Shows all errors only after reading the whole file. | Stops running immediately when it finds the first error. |
 | **Examples** | C, C++, Java | Python, JavaScript |
+
+### Visual Comparison:
+
+<div className="ill-compare">
+  <div className="ill-compare-column">
+    <div className="ill-compare-title">
+      <span>⚙️ Compiler (C, C++, Java)</span>
+    </div>
+    <div className="ill-step-list">
+      <div className="ill-step">
+        <span className="ill-step-num">1</span>
+        <span>Reads the <b>entire source code</b> at once.</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">2</span>
+        <span>Translates it into a <b>Machine Code File (.exe / binary)</b>.</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">3</span>
+        <span>The CPU directly executes the file <b>very fast</b>.</span>
+      </div>
+    </div>
+  </div>
+  <div className="ill-compare-column">
+    <div className="ill-compare-title">
+      <span>⚡ Interpreter (Python, JavaScript)</span>
+    </div>
+    <div className="ill-step-list">
+      <div className="ill-step">
+        <span className="ill-step-num">1</span>
+        <span>Reads the code <b>line-by-line</b>.</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">2</span>
+        <span>Translates and executes <b>each line immediately</b>.</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">3</span>
+        <span>Stops immediately if a line has an <b>error</b>.</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### Python Execution Process:
 Python is an **Interpreted Language**. When you run a Python program, it first compiles the code into `Bytecode` and then uses the **Python Virtual Machine (PVM)** to interpret and run it line-by-line.
