@@ -12,13 +12,13 @@
 
 /* ---- Root / Light Mode ---- */
 :root {
-  --ifm-color-primary: #6366F1;
-  --ifm-color-primary-dark: #4F46E5;
-  --ifm-color-primary-darker: #4338CA;
-  --ifm-color-primary-darkest: #3730A3;
-  --ifm-color-primary-light: #818CF8;
-  --ifm-color-primary-lighter: #A5B4FC;
-  --ifm-color-primary-lightest: #C7D2FE;
+  --ifm-color-primary: #00A859;
+  --ifm-color-primary-dark: #00964F;
+  --ifm-color-primary-darker: #008847;
+  --ifm-color-primary-darkest: #00703A;
+  --ifm-color-primary-light: #00BA62;
+  --ifm-color-primary-lighter: #00CD6C;
+  --ifm-color-primary-lightest: #00E076;
 
   --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
@@ -31,71 +31,136 @@
   --ifm-code-font-size: 88%;
   --ifm-global-radius: 0.75rem;
 
-  --brand-primary: #6366F1;
+  --brand-primary: #00A859;
   --brand-dark: #1E1E2E;
-  --brand-accent: #8B5CF6;
-  --brand-light: #EEF2FF;
-  --brand-lighter: #F5F3FF;
+  --brand-accent: #00A859;
+  --brand-light: #E8F5E9;
+  --brand-lighter: #F1FBF2;
+  --brand-gold: #00A859;
 
   --ifm-background-color: #FFFFFF;
   --ifm-navbar-background-color: #FFFFFF;
   --ifm-navbar-link-color: #374151;
-  --ifm-navbar-link-hover-color: #6366F1;
+  --ifm-navbar-link-hover-color: #00A859;
 
   --ifm-footer-background-color: #FFFFFF;
   --ifm-footer-color: #6B7280;
-  --ifm-footer-link-color: #6366F1;
+  --ifm-footer-link-color: #00A859;
   --ifm-footer-title-color: #1F2937;
 
-  --ifm-link-color: #6366F1;
-  --ifm-link-hover-color: #4F46E5;
+  --ifm-link-color: #00A859;
+  --ifm-link-hover-color: #00964F;
 
-  --ifm-menu-color-active: #6366F1;
-  --ifm-menu-color-background-active: rgba(99, 102, 241, 0.08);
+  --ifm-menu-color-active: #00A859;
+  --ifm-menu-color-background-active: rgba(0, 168, 89, 0.08);
 
-  --docusaurus-highlighted-code-line-bg: #EEF2FF;
+  --docusaurus-highlighted-code-line-bg: #E8F5E9;
   
-  /* Reset navbar offset */
-  --ifm-navbar-height: 60px;
+  /* Reset navbar offset for main navbar (60px) + sub-navbar (50px) */
+  --ifm-navbar-height: 110px;
 }
 
 /* ---- Dark Mode ---- */
 [data-theme='dark'] {
-  --ifm-color-primary: #818CF8;
-  --ifm-color-primary-dark: #6366F1;
-  --ifm-color-primary-darker: #4F46E5;
-  --ifm-color-primary-darkest: #4338CA;
-  --ifm-color-primary-light: #A5B4FC;
-  --ifm-color-primary-lighter: #C7D2FE;
-  --ifm-color-primary-lightest: #E0E7FF;
+  --ifm-color-primary: #00C86A;
+  --ifm-color-primary-dark: #00B45F;
+  --ifm-color-primary-darker: #00A054;
+  --ifm-color-primary-darkest: #008043;
+  --ifm-color-primary-light: #00DC75;
+  --ifm-color-primary-lighter: #00F080;
+  --ifm-color-primary-lightest: #1BFF94;
 
   --ifm-background-color: #0F0F1A;
   --ifm-background-surface-color: #1A1A2E;
 
   --ifm-navbar-background-color: #0A0A14;
   --ifm-navbar-link-color: #D1D5DB;
-  --ifm-navbar-link-hover-color: #A5B4FC;
+  --ifm-navbar-link-hover-color: #00C86A;
 
   --ifm-footer-background-color: #0A0A14;
 
-  --ifm-link-color: #A5B4FC;
-  --ifm-link-hover-color: #C7D2FE;
+  --ifm-link-color: #00C86A;
+  --ifm-link-hover-color: #00F080;
 
-  --ifm-menu-color-active: #A5B4FC;
-  --ifm-menu-color-background-active: rgba(165, 180, 252, 0.1);
+  --ifm-menu-color-active: #00C86A;
+  --ifm-menu-color-background-active: rgba(0, 200, 106, 0.1);
 
-  --docusaurus-highlighted-code-line-bg: rgba(99, 102, 241, 0.15);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 200, 106, 0.15);
 }
 
 
 /* ======= NAVBAR ======= */
 .navbar {
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: none;
   box-shadow: none;
+  height: 60px;
 }
 
-[data-theme='dark'] .navbar {
+/* ======= SUB-NAVBAR ======= */
+.sub-navbar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: var(--ifm-navbar-background-color);
+  border-bottom: 1px solid #e8e8e8;
+  z-index: 30; /* Keep aligned with main navbar */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+[data-theme='dark'] .sub-navbar {
   border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.sub-navbar-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 var(--ifm-navbar-padding-horizontal, 2rem);
+  align-items: center;
+}
+
+.sub-navbar-container::-webkit-scrollbar {
+  display: none;
+}
+
+.sub-navbar-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #4B5563;
+  padding: 0 0.1rem;
+}
+
+[data-theme='dark'] .sub-navbar-item {
+  color: #9CA3AF;
+}
+
+/* Hover state */
+.sub-navbar-item:hover {
+  color: var(--ifm-color-primary);
+  opacity: 0.9;
+}
+
+/* Active state */
+.sub-navbar-item--active {
+  border-bottom-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary) !important;
+  font-weight: 600;
 }
 
 .navbar__title {
@@ -177,12 +242,12 @@
 
 /* ======= SIDEBAR ======= */
 .menu {
-  padding: 1.5rem 1rem !important;
+  padding: 1rem 0.75rem !important;
 }
 
 /* Clean category headers matching the new reference design */
 .menu__list-item-collapsible {
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
 }
 
 .menu__link--sublist {
@@ -205,11 +270,11 @@
 /* Normal links */
 .menu__link {
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   border-radius: 8px;
   transition: all 0.2s ease;
-  padding: 0.6rem 0.8rem;
-  margin: 4px 0;
+  padding: 0.45rem 0.75rem;
+  margin: 2px 0;
   color: #4B5563;
 }
 
@@ -307,10 +372,10 @@
   background-color: transparent;
   color: #4B5563 !important;
   font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.6rem 0.8rem;
+  font-size: 0.88rem;
+  padding: 0.45rem 0.75rem;
   border-radius: 8px;
-  margin: 0.5rem 0 1.5rem 0;
+  margin: 0.25rem 0 0.5rem 0;
   text-decoration: none !important;
   transition: all 0.2s ease;
 }
@@ -346,11 +411,11 @@
 }
 
 .markdown h1 {
-  font-size: 2.2rem;
-  font-weight: 800;
+  font-size: 1.85rem;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: #1a1a1a;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   line-height: 1.25;
 }
 
@@ -359,13 +424,13 @@
 }
 
 .markdown h2 {
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: #1a1a1a;
   border-bottom: 1px solid #e8e8e8;
-  padding-bottom: 0.5rem;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 [data-theme='dark'] .markdown h2 {
@@ -374,15 +439,24 @@
 }
 
 .markdown h3 {
-  font-size: 1.35rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--brand-accent);
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
+  margin-top: 1.8rem;
+  margin-bottom: 0.75rem;
 }
 
 [data-theme='dark'] .markdown h3 {
   color: #FFD54F;
+}
+
+/* Constrain document layouts for premium reading margins */
+.theme-doc-markdown {
+  max-width: 800px !important;
+}
+
+.theme-doc-main-col {
+  max-width: 900px !important;
 }
 
 /* Paragraph and list spacings */
@@ -413,28 +487,28 @@
 code {
   border-radius: 6px;
   padding: 3px 6px;
-  background: #EEF2FF;
-  color: #4338CA;
+  background: #E8F5E9;
+  color: #00703A;
   font-weight: 600;
   font-size: 90%;
-  border: 1px solid rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(0, 168, 89, 0.15);
 }
 
 [data-theme='dark'] code {
-  background: rgba(99, 102, 241, 0.12);
-  color: #C7D2FE;
-  border-color: rgba(99, 102, 241, 0.2);
+  background: rgba(0, 200, 106, 0.12);
+  color: #1BFF94;
+  border-color: rgba(0, 200, 106, 0.2);
 }
 
 /* ======= ADMONITIONS (Cards matching screenshot) ======= */
 .admonition {
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  border-left: 4px solid #6366F1;
+  border-left: 4px solid #00A859;
   box-shadow: none;
   margin: 1.5rem 0;
   padding: 1.25rem;
-  background: #F5F3FF;
+  background: #F1FBF2;
 }
 
 .admonition-tip {

@@ -73,12 +73,6 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'courseSidebar',
-            position: 'left',
-            label: 'Course',
-          },
-          {
             href: 'https://youtube.com/@ThinkIT-Telugu',
             label: 'YouTube',
             position: 'right',
