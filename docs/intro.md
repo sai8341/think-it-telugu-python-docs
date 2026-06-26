@@ -47,6 +47,6 @@ We have divided this course into **3 Parts** to make learning and recording easi
 
 Let us begin our coding journey! Go to the first module:
 
-**[Module 0: Before Python →](./part-1/module-0-before-python.md)**
+**[Module 0: Before Python →](./part-1/module-0-before-python.mdx)**
 
 > *"A journey of a thousand miles begins with a single step."* - Your coding journey starts right here!

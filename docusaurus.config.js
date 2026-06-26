@@ -73,6 +73,12 @@ const config = {
         },
         items: [
           {
+            to: '/python-lab',
+            label: '🐍 Python Lab',
+            position: 'right',
+            className: 'navbar-python-lab',
+          },
+          {
             href: 'https://youtube.com/@ThinkIT-Telugu',
             label: 'YouTube',
             position: 'right',

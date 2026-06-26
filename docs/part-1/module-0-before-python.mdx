@@ -122,47 +122,16 @@ A translator converts our code into machine code. There are two main types of tr
 | **Errors** | Shows all errors only after reading the whole file. | Stops running immediately when it finds the first error. |
 | **Examples** | C, C++, Java | Python, JavaScript |
 
-### Visual Comparison:
+### Interactive Translation Visualizer:
+Use this lab to see how code translation works step by step.
 
-<div className="ill-compare">
-  <div className="ill-compare-column">
-    <div className="ill-compare-title">
-      <span>⚙️ Compiler (C, C++, Java)</span>
-    </div>
-    <div className="ill-step-list">
-      <div className="ill-step">
-        <span className="ill-step-num">1</span>
-        <span>Reads the <b>entire source code</b> at once.</span>
-      </div>
-      <div className="ill-step">
-        <span className="ill-step-num">2</span>
-        <span>Translates it into a <b>Machine Code File (.exe / binary)</b>.</span>
-      </div>
-      <div className="ill-step">
-        <span className="ill-step-num">3</span>
-        <span>The CPU directly executes the file <b>very fast</b>.</span>
-      </div>
-    </div>
+<div className="lab-cta lab-cta--compiler">
+  <div className="lab-cta__content">
+    <span className="lab-cta__eyebrow">Interactive lab</span>
+    <h3>Compiler vs Interpreter</h3>
+    <p>Trace Python interpreter execution and compare it with a C++ compiler build flow.</p>
   </div>
-  <div className="ill-compare-column">
-    <div className="ill-compare-title">
-      <span>⚡ Interpreter (Python, JavaScript)</span>
-    </div>
-    <div className="ill-step-list">
-      <div className="ill-step">
-        <span className="ill-step-num">1</span>
-        <span>Reads the code <b>line-by-line</b>.</span>
-      </div>
-      <div className="ill-step">
-        <span className="ill-step-num">2</span>
-        <span>Translates and executes <b>each line immediately</b>.</span>
-      </div>
-      <div className="ill-step">
-        <span className="ill-step-num">3</span>
-        <span>Stops immediately if a line has an <b>error</b>.</span>
-      </div>
-    </div>
-  </div>
+  <a className="lab-cta__button" href="/compiler-vs-interpreter">Open Lab</a>
 </div>
 
 ### Python Execution Process:
