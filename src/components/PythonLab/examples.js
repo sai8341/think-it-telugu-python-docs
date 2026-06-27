@@ -5,7 +5,7 @@
 
 const examples = [
   {
-    label: '👋 Hello World',
+    label: 'Module 1 - Hello World',
     module: 'Module 1',
     code: `# Module 1: Your First Python Program
 # Try clicking "Run" to see the output!
@@ -16,7 +16,7 @@ print("You are learning to code — let's go!")
 `,
   },
   {
-    label: '📦 Variables & Data Types',
+    label: 'Module 2 - Variables & Data Types',
     module: 'Module 2',
     code: `# Module 2: Variables & Data Types
 
@@ -38,7 +38,7 @@ print("Type of is_student:", type(is_student))
 `,
   },
   {
-    label: '🖨️ Input & Output',
+    label: 'Module 3 - Input & Output',
     module: 'Module 3',
     code: `# Module 3: Input & Output
 # Note: input() works in Python Lab!
@@ -55,7 +55,7 @@ print(f"The price is: ₹{price:.2f}")
 `,
   },
   {
-    label: '➕ Operators',
+    label: 'Module 4 - Operators',
     module: 'Module 4',
     code: `# Module 4: Operators
 
@@ -78,7 +78,7 @@ print("Is a != b?", a != b)
 `,
   },
   {
-    label: '🔀 Conditional Statements',
+    label: 'Module 5 - Conditional Statements',
     module: 'Module 5',
     code: `# Module 5: Conditional Statements
 
@@ -111,7 +111,7 @@ else:
 `,
   },
   {
-    label: '🔁 Loops',
+    label: 'Module 6 - Loops',
     module: 'Module 6',
     code: `# Module 6: Loops
 
@@ -138,7 +138,7 @@ print()
 `,
   },
   {
-    label: '📝 Strings',
+    label: 'Module 7 - Strings',
     module: 'Module 7',
     code: `# Module 7: Strings
 
@@ -165,7 +165,7 @@ print(f"\\n{name} scored {score}% in Python!")
 `,
   },
   {
-    label: '📋 Lists',
+    label: 'Module 8 - Lists',
     module: 'Module 8',
     code: `# Module 8: Lists
 
