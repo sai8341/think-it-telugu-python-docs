@@ -27,6 +27,10 @@ python --version
 ```
 If you see something like `Python 3.x.x` printed on the screen, Python is successfully installed!
 
+:::warning PATH Troubleshooting
+If typing `python --version` returns an error like `"python is not recognized as an internal or external command"`, it means Python was installed but the PATH was not configured. To fix this, simply run the Python installer file again, select **Modify**, and make sure the **Add Python to PATH** checkbox is selected.
+:::
+
 ---
 
 ## 1.2 Installing VS Code
@@ -45,16 +49,19 @@ We need a code editor to write our programs. **VS Code (Visual Studio Code)** is
 
 Now, let us write and run our first Python code!
 
-1. In VS Code, create a new file and name it `hello.py`. (All Python files must end with the `.py` extension).
-2. Type the following code in the file:
+1. **Create a Project Folder:** Create a new folder on your computer (for example, on your Desktop) and name it `PythonCourse`.
+2. **Open the Folder in VS Code:** Open VS Code, click on **File** in the top menu, select **Open Folder**, navigate to your `PythonCourse` folder, and click **Select Folder**.
+3. **Create Your First Python File:** Hover your mouse over the folder name in the VS Code sidebar and click the **New File** icon (or click **File -> New Text File**, then save it as `hello.py`). All Python files must end with the `.py` file extension.
+4. **Write the Code:** Type the following code in the file:
 ```python
 print("Hello World!")
 print("Welcome to your coding journey!")
 ```
-3. **How to run the code:**
-   * Click the **Run/Play** button in the top-right corner of VS Code, or
-   * Open the terminal inside VS Code, type `python hello.py`, and press Enter.
-4. You will see the following output in the terminal:
+5. **Open the Integrated Terminal:** Click on **Terminal** in the top menu of VS Code, and select **New Terminal** (or press ``Ctrl + ` ``). You will see a terminal pane open at the bottom.
+6. **How to run the code:**
+   * **Option A (Easiest):** Click the **Run/Play** button in the top-right corner of VS Code.
+   * **Option B (Terminal Command):** Inside the terminal pane at the bottom, type `python hello.py` and press **Enter**.
+7. You will see the following output in the terminal:
 ```text
 Hello World!
 Welcome to your coding journey!
@@ -66,8 +73,9 @@ Welcome to your coding journey!
 
 **Syntax** is the set of rules (like grammar rules) for writing code in a programming language.
 
-* Python does not need a semicolon (`;`) at the end of a line.
-* Python code is easy to read because it looks like regular English.
+* **No Semicolons:** Python does not need a semicolon (`;`) at the end of a line.
+* **Readable:** Python code is easy to read because it looks like regular English.
+* **Case-Sensitivity:** Python is case-sensitive. This means capital letters and lowercase letters are treated differently. For example, `print("Hello")` will work, but `Print("Hello")` with a capital `P` will cause a syntax error.
 * **Indentation (Spacing):** Python does not use curly braces (`{ }`) to group blocks of code. Instead, it uses spaces (usually four spaces or one Tab). We will learn more about this when we write conditions and loops.
 
 ---

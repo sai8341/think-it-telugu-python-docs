@@ -32,6 +32,14 @@ print("Remainder:", x % y)       # Output: 1
 print("Power:", x ** y)          # Output: 1000
 ```
 
+### Modulus Example (Even or Odd Check):
+A common practical use of the Modulus operator (`%`) is checking if a number is even or odd. If a number is divided by `2` and the remainder is `0`, it is an even number; otherwise, it is odd.
+```python
+number = 15
+remainder = number % 2
+print("Remainder is:", remainder) # Output: 1 (Since remainder is 1, 15 is an Odd number)
+```
+
 ---
 
 ## 4.2 Assignment Operators
@@ -49,9 +57,15 @@ These operators are used to store or update values in variables:
 
 ```python
 a = 10
-a += 5  # Adds 5 to a and saves it
+a += 5   # Adds 5 to a and saves the result back into a
 print(a) # Output: 15
 ```
+
+:::danger Warning: `=` vs `==`
+Do not confuse variable assignment with comparison.
+* **`=` (Single Equals):** Used to **assign** a value to a variable (e.g., `x = 5` stores 5 in x).
+* **`==` (Double Equals):** Used to **compare** two values (e.g., `x == 5` checks if x is equal to 5 and returns `True` or `False`).
+:::
 
 ---
 
@@ -86,46 +100,83 @@ These operators are used to combine multiple conditions:
 * **`not`:** Reverses the result (returns False if the result is True, and vice versa).
 
 ```python
-x = 10
-print(x > 5 and x < 20) # True and True => Output: True
-print(x > 15 or x < 20) # False or True => Output: True
-print(not(x == 10))     # not(True) => Output: False
+# Real-World Logical Examples:
+
+# 'and' requires BOTH conditions to be True
+age = 19
+has_id = True
+is_eligible_for_discount = (age >= 18) and has_id
+print(is_eligible_for_discount) # Output: True
+
+# 'or' requires AT LEAST ONE condition to be True
+has_ticket = False
+is_vip = True
+can_enter_party = has_ticket or is_vip
+print(can_enter_party) # Output: True
+
+# 'not' reverses the boolean value
+is_raining = False
+go_for_walk = not is_raining
+print(go_for_walk) # Output: True
 ```
 
 ---
 
 ## 4.5 Membership Operators
 
-These operators check if a value is present in a collection (like a list or string):
+These operators check if a value is present inside a sequence (like a string):
 
 * **`in`:** Returns **True** if the value is found.
 * **`not in`:** Returns **True** if the value is not found.
 
 ```python
-fruits = ["apple", "banana", "mango"]
+course = "Python AI Engineering"
 
-print("apple" in fruits)     # Output: True
-print("grapes" in fruits)    # Output: False
-print("grapes" not in fruits) # Output: True
+print("Python" in course)      # Output: True
+print("Java" in course)        # Output: False
+print("Java" not in course)    # Output: True
 ```
 
 ---
 
 ## 4.6 Identity Operators
 
-These operators check if two variables point to the same memory location (or the same object):
+These operators check if two variables point to the exact same memory location (or object) in the computer's memory:
 
-* **`is`:** Returns **True** if both variables are the exact same object.
-* **`is not`:** Returns **True** if they are different objects.
+* **`is`:** Returns **True** if both variables point to the exact same object.
+* **`is not`:** Returns **True** if they point to different objects.
 
 ```python
 x = [1, 2, 3]
-y = [1, 2, 3]
-z = x
+y = [1, 2, 3] # x and y have the same value, but they are stored in different boxes in memory
+z = x         # z is assigned to x, so they point to the exact same memory box
 
-# x and y have the same values, but they are different list objects in memory
-print(x == y) # Output: True (values are the same)
-print(x is y) # Output: False (different memory locations)
+# Checking values vs checking identity:
+print(x == y) # Output: True  (Their values are identical)
+print(x is y) # Output: False (They reside in different memory locations)
+print(x is z) # Output: True  (They point to the exact same memory location)
+```
 
-print(x is z) # Output: True (z is assigned to x, so they point to the same memory)
+---
+
+## 4.7 Operator Precedence
+
+When you write expressions with multiple operators, Python evaluates them in a specific order (similar to mathematical rules like BODMAS or PEMDAS).
+
+### Order of Evaluation (Highest to Lowest Priority):
+1. **Parentheses `()`** (Used to group calculations and force evaluation first)
+2. **Exponentiation `**`**
+3. **Multiplication `*`, Division `/`, Floor Division `//`, Modulus `%`**
+4. **Addition `+`, Subtraction `-`**
+5. **Comparisons (`==`, `>`, etc.)**
+6. **Logical Operators (`not`, `and`, `or`)**
+
+```python
+# Example 1: Multiplication evaluates before Addition
+result_1 = 5 + 3 * 2
+print(result_1) # Output: 11 (Since 3 * 2 is evaluated first)
+
+# Example 2: Parentheses override standard precedence
+result_2 = (5 + 3) * 2
+print(result_2) # Output: 16
 ```

@@ -33,14 +33,27 @@ Use this lab to observe `for`, `while`, `break`, and `continue` one step at a ti
 
 ## 6.2 The for Loop
 
-A **for loop** is used to iterate over a sequence (like a list, a string, or a range of numbers).
+A **for loop** is used to iterate over a sequence (like a string or a range of numbers). 
+
+* **Automatic Variable Updates:** In a `for` loop, you do not need to manually update the loop variable (like `i += 1`). Python automatically assigns the next item in the sequence to the variable at the start of every cycle.
 
 ### Using the range() Function:
-The `range(start, stop, step)` function generates a sequence of numbers.
+The `range(start, stop, step)` function generates a sequence of numbers. 
+* **Exclusive Stop Rule:** The generated sequence stops *before* the `stop` value. The end limit is always **exclusive**. For example, `range(1, 6)` generates numbers `1, 2, 3, 4, 5` (stops before 6).
+
 ```python
 # Print numbers from 1 to 5
 for i in range(1, 6):
     print(f"Number is {i}")
+```
+
+### range() with a Step:
+You can add a third argument to define the gap (step) between numbers.
+```python
+# Print even numbers from 2 to 10 (using a step of 2)
+for i in range(2, 11, 2):
+    print(f"Even number: {i}")
+# Output: 2, 4, 6, 8, 10
 ```
 
 ### Looping Through a String:
@@ -68,6 +81,19 @@ while count <= 5:
 :::danger Infinite Loop Warning
 If you forget to update the loop variable (like `count += 1`), the condition remains `True` forever. This creates an **Infinite Loop** that never stops. Press `Ctrl + C` in the terminal to force-stop it.
 :::
+
+* **Common Infinite Loop Mistakes:**
+  1. **Forgetting to update the variable:** Leaving out the increment step (`count += 1`) entirely.
+  2. **Wrong indentation:** Placing the update step inside an `if` statement block so it only increments under specific, unmet conditions.
+
+### When to use `for` vs. `while`:
+
+| Feature | `for` Loop | `while` Loop |
+| :--- | :--- | :--- |
+| **When to use** | When you know the number of repetitions in advance. | When you repeat based on a condition (unknown number of runs). |
+| **Loop Variable** | Managed and updated automatically by Python. | Must be initialized and updated manually inside the loop code. |
+| **Infinite Loop Risk** | Extremely low / Safe. | High (occurs if the exit condition is never met). |
+| **Common Example** | Printing numbers 1 to 10 or reading text characters. | Prompting a user to "Enter password" until it is correct. |
 
 ---
 

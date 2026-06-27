@@ -71,21 +71,122 @@ print(s[::-1]) # Output: esruoCNohtyp
 
 ## 7.4 Common String Methods
 
-Python provides several built-in methods to manipulate strings:
+Python provides built-in methods to manipulate strings easily. Here are the most important string methods every beginner must know:
 
+### 1. upper()
+Converts all characters in a string to uppercase letters.
+* **Syntax:** `string.upper()`
 ```python
-s = " Think IT Telugu "
+text = "hello python"
+print(text.upper())
+# Output: HELLO PYTHON
+```
+* **Real-World Use Case:** Standardizing user input (like coupon codes or PAN card numbers) to uppercase.
 
-print(s.upper())      # Output: " THINK IT TELUGU " (converts to uppercase)
-print(s.lower())      # Output: " think it telugu " (converts to lowercase)
-print(s.strip())      # Output: "Think IT Telugu" (removes spaces from start and end)
-print(s.replace("Telugu", "Coding")) # Output: " Think IT Coding " (replaces text)
+### 2. lower()
+Converts all characters in a string to lowercase letters.
+* **Syntax:** `string.lower()`
+```python
+text = "WELCOME"
+print(text.lower())
+# Output: welcome
+```
+* **Real-World Use Case:** Converting email addresses to lowercase before checking them in a database.
 
-# Splitting a string into a list of words
+### 3. title()
+Capitalizes the first letter of every word in the string.
+* **Syntax:** `string.title()`
+```python
+name = "sai kumar"
+print(name.title())
+# Output: Sai Kumar
+```
+* **Real-World Use Case:** Formatting user names nicely on profile pages.
+
+### 4. capitalize()
+Capitalizes only the very first letter of the entire string.
+* **Syntax:** `string.capitalize()`
+```python
+msg = "python is easy"
+print(msg.capitalize())
+# Output: Python is easy
+```
+
+### 5. strip()
+Removes extra spaces from the beginning and the end of a string.
+* **Syntax:** `string.strip()`
+```python
+user_input = "   Think IT Telugu   "
+print(user_input.strip())
+# Output: Think IT Telugu
+```
+* **Real-World Use Case:** Cleaning up accidental extra spaces typed by users in form inputs.
+
+### 6. replace()
+Replaces a specific phrase or word with another word inside the string.
+* **Syntax:** `string.replace(old_text, new_text)`
+```python
+sentence = "I love Java"
+print(sentence.replace("Java", "Python"))
+# Output: I love Python
+```
+
+### 7. split()
+Splits a string into a list of smaller strings based on a separator (like a space or comma).
+* **Syntax:** `string.split(separator)`
+```python
 msg = "Python is fun"
 words = msg.split(" ")
-print(words) # Output: ['Python', 'is', 'fun']
+print(words)
+# Output: ['Python', 'is', 'fun']
 ```
+* **Real-World Use Case:** Splitting a comma-separated list of tags into individual keywords.
+
+### 8. join()
+Combines a list of strings into one single string, using a specific separator between them.
+* **Syntax:** `separator.join(list_of_strings)`
+```python
+words = ['Python', 'is', 'fun']
+sentence = " ".join(words)
+print(sentence)
+# Output: Python is fun
+```
+
+### 9. find()
+Searches for a word inside a string and returns the index position where it starts. If it is not found, it returns `-1`.
+* **Syntax:** `string.find(search_text)`
+```python
+text = "Learn Python Coding"
+print(text.find("Python")) # Output: 6
+print(text.find("Java"))   # Output: -1
+```
+
+### 10. count()
+Counts how many times a specific word or character appears inside the string.
+* **Syntax:** `string.count(search_text)`
+```python
+word = "banana"
+print(word.count("a"))
+# Output: 3
+```
+
+### 11. startswith()
+Checks if a string starts with a specific text. Returns `True` or `False`.
+* **Syntax:** `string.startswith(check_text)`
+```python
+url = "https://google.com"
+print(url.startswith("https")) # Output: True
+```
+* **Real-World Use Case:** Verifying if a web address is secure (starts with https).
+
+### 12. endswith()
+Checks if a string ends with a specific text. Returns `True` or `False`.
+* **Syntax:** `string.endswith(check_text)`
+```python
+filename = "resume.pdf"
+print(filename.endswith(".pdf")) # Output: True
+```
+* **Real-World Use Case:** Checking uploaded file formats (like ensuring a file ends with `.jpg` or `.pdf`).
 
 ---
 

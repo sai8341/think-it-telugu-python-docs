@@ -19,7 +19,12 @@ In this module, we will learn about **Tuples**. A tuple is used to store multipl
 # Creating tuples
 coordinates = (10.5, 20.8)
 colors = ("red", "green", "blue")
-single_item_tuple = (5,) # Note: You must add a trailing comma for a single-item tuple
+
+# Single-element tuple gotcha:
+wrong_tuple = (5)   # Without comma, Python treats this as just the integer 5!
+correct_tuple = (5,) # You MUST add a comma to make it a tuple
+print(type(wrong_tuple))   # Output: <class 'int'>
+print(type(correct_tuple)) # Output: <class 'tuple'>
 ```
 
 ---
@@ -47,6 +52,22 @@ t1 = (1, 2)
 t2 = (3, 4)
 t3 = t1 + t2
 print(t3) # Output: (1, 2, 3, 4)
+```
+
+### Tuple Packing:
+Assigning multiple values to a single variable without parentheses automatically creates (packs) a tuple:
+```python
+person = "Sai", 22, "Hyderabad"
+print(person) # Output: ('Sai', 22, 'Hyderabad')
+```
+
+### Tuple Unpacking:
+Extracting the values back out of a tuple into individual variables:
+```python
+user = ("Ram", 25)
+name, age = user # Unpacks "Ram" into name and 25 into age
+print("Name:", name) # Output: Name: Ram
+print("Age:", age)   # Output: Age: 25
 ```
 
 ---
@@ -79,6 +100,20 @@ Understanding when to use a list and when to use a tuple is very important:
 | **Memory** | Uses more memory. | Uses less memory. |
 | **Use Case** | Use when data needs to change. | Use for constant values (data that never changes). |
 
-### Real-World Example:
+### Why are Tuples faster and more memory efficient?
+Because tuples cannot be changed after creation, Python does not need to allocate extra memory for future additions. This makes tuples slightly fixed, compact, and quicker to read than lists.
+
+### Side-by-Side Comparison Example:
+```python
+# List (Mutable - can change)
+cart_list = ["Shoes", "Watch"]
+cart_list[0] = "Bag" # Valid! List is updated.
+
+# Tuple (Immutable - cannot change)
+days_tuple = ("Monday", "Tuesday")
+# days_tuple[0] = "Sunday" # Throws TypeError! Cannot change constant data.
+```
+
+### Real-World Use Case:
 * The names of the days of the week (Monday, Tuesday...) never change. We should store them in a **Tuple**.
 * Items in a user's shopping cart change frequently. We should store them in a **List**.

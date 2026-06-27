@@ -62,30 +62,133 @@ print(nums[::-1]) # Output: [60, 50, 40, 30, 20, 10] (reverses the list)
 
 ## 8.4 List Methods
 
-Python has built-in methods to perform operations on lists:
+Python provides built-in methods to easily add, remove, organize, and search items inside a list. Here are the most essential list methods:
 
+### 1. append()
+Adds a single new item to the very end of the list.
+* **Syntax:** `list.append(item)`
 ```python
 names = ["Sai", "Ram"]
-
-# 1. append() - Adds an item to the end of the list
 names.append("Kiran")
-print(names) # Output: ['Sai', 'Ram', 'Kiran']
+print(names)
+# Output: ['Sai', 'Ram', 'Kiran']
+```
+* **Real-World Use Case:** Adding a new product to a user's shopping cart.
 
-# 2. insert() - Adds an item at a specific index
-names.insert(1, "Charan")
-print(names) # Output: ['Sai', 'Charan', 'Ram', 'Kiran']
+### 2. extend()
+Adds all items from another list to the end of the current list.
+* **Syntax:** `list.extend(another_list)`
+```python
+team1 = ["Sai", "Ram"]
+team2 = ["Charan", "Kiran"]
+team1.extend(team2)
+print(team1)
+# Output: ['Sai', 'Ram', 'Charan', 'Kiran']
+```
 
-# 3. remove() - Deletes an item by name
-names.remove("Ram")
-print(names) # Output: ['Sai', 'Charan', 'Kiran']
+### 3. insert()
+Adds an item at a specific index position inside the list.
+* **Syntax:** `list.insert(index, item)`
+```python
+fruits = ["apple", "mango"]
+fruits.insert(1, "banana") # Inserts at index 1
+print(fruits)
+# Output: ['apple', 'banana', 'mango']
+```
 
-# 4. pop() - Removes and returns the item at a specific index (removes the last item by default)
-removed_item = names.pop(0)
-print(removed_item) # Output: Sai
-print(names)        # Output: ['Charan', 'Kiran']
+### 4. remove()
+Deletes the first occurrence of a specific item by its value.
+* **Syntax:** `list.remove(item)`
+```python
+colors = ["red", "blue", "red", "green"]
+colors.remove("red") # Removes only the first 'red'
+print(colors)
+# Output: ['blue', 'red', 'green']
+```
 
-# 5. len() - Returns the size (length) of the list
-print(len(names)) # Output: 2
+### 5. pop()
+Removes and returns the item at a specific index position. If no index is given, it removes the very last item.
+* **Syntax:** `list.pop(index)`
+```python
+tasks = ["Coding", "Reading", "Sleeping"]
+completed = tasks.pop() # Removes the last item
+print("Done:", completed) # Output: Done: Sleeping
+print("Remaining:", tasks) # Output: ['Coding', 'Reading']
+```
+
+### 6. clear()
+Empties the entire list, removing all items.
+* **Syntax:** `list.clear()`
+```python
+cart = ["Shoes", "Watch"]
+cart.clear()
+print(cart) # Output: []
+```
+
+### 7. index()
+Searches for an item and returns its index position.
+* **Syntax:** `list.index(item)`
+```python
+vowels = ['a', 'e', 'i', 'o', 'u']
+print(vowels.index('o')) # Output: 3
+```
+
+### 8. count()
+Counts how many times a specific item appears inside the list.
+* **Syntax:** `list.count(item)`
+```python
+scores = [10, 20, 10, 30, 10]
+print(scores.count(10)) # Output: 3
+```
+
+### 9. sort()
+Sorts the items of the list in alphabetical or numerical order directly (changes the original list).
+* **Syntax:** `list.sort()`
+```python
+numbers = [40, 10, 30, 20]
+numbers.sort()
+print(numbers) # Output: [10, 20, 30, 40]
+```
+* **Real-World Use Case:** Sorting customer orders from lowest price to highest price.
+
+### 10. sorted()
+A built-in function that returns a **new** sorted list without modifying the original list.
+* **Syntax:** `sorted(list)`
+```python
+original = [3, 1, 2]
+new_sorted = sorted(original)
+print("Original:", original)     # Output: [3, 1, 2]
+print("New Sorted:", new_sorted) # Output: [1, 2, 3]
+```
+
+### 11. reverse()
+Reverses the order of the items in the list directly.
+* **Syntax:** `list.reverse()`
+```python
+letters = ['A', 'B', 'C']
+letters.reverse()
+print(letters) # Output: ['C', 'B', 'A']
+```
+
+### 12. copy()
+Creates a separate independent copy of the list.
+* **Syntax:** `list.copy()`
+```python
+list1 = ["Apple", "Mango"]
+list2 = list1.copy()
+list2.append("Banana")
+
+print("List 1:", list1) # Output: ['Apple', 'Mango'] (Unchanged!)
+print("List 2:", list2) # Output: ['Apple', 'Mango', 'Banana']
+```
+* **Real-World Use Case:** Creating a backup of data before making modifications to it.
+
+### 13. len()
+A built-in function that returns the total number of items inside the list.
+* **Syntax:** `len(list)`
+```python
+items = ["Pen", "Book", "Laptop"]
+print(len(items)) # Output: 3
 ```
 
 ---
