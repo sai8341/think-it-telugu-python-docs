@@ -7,6 +7,8 @@ export default function PythonLabPage() {
     <Layout
       title="Python Lab — Online Python Compiler"
       description="Write and run Python code instantly in your browser. No installation needed."
+      wrapperClassName="pylab-page"
+      noFooter
     >
       {/* 
         The pylab-page class hides the docs sub-navbar (Part 1/2/3 tabs)

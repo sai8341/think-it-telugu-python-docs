@@ -175,6 +175,7 @@ export default function PythonLab() {
   const lineNumbersRef = useRef(null);
   const pyodideRef = useRef(null);
   const outputRef = useRef(null);
+  const debugCodeRef = useRef(null);
 
   // Hide sub-navbar on mount, restore on unmount
   useEffect(() => {
@@ -505,10 +506,10 @@ builtins.input = fallback_input
 
       // Define the AST-based instrumenter (much faster than sys.settrace in WASM)
       await pyodide.runPythonAsync(`
-import sys, json, copy
+import sys, json, copy, ast, inspect
 from io import StringIO
 
-def __debug_trace_and_run(user_code, max_steps):
+async def __debug_trace_and_run(user_code, max_steps):
     steps = []
     output_stream = StringIO()
     old_stdout = sys.stdout
@@ -520,14 +521,20 @@ def __debug_trace_and_run(user_code, max_steps):
     import builtins
     import js
     old_input = builtins.input
-    def debug_input(prompt_text=""):
-        res = js.prompt(prompt_text)
+    async def debug_input(prompt_text=""):
+        js.window.__append_output(output_stream.getvalue())
+        output_stream.truncate(0)
+        output_stream.seek(0)
+        
+        res = await js.window.__request_terminal_input(prompt_text)
         if res is None:
             raise EOFError("EOF")
-        # Echo the input back to stdout so the trace captures it
-        sys.stdout.write(prompt_text + res + "\\n")
+        js.window.__append_output(res + "\\n")
+        output_stream.write(prompt_text + res + "\\n")
         return res
     builtins.input = debug_input
+    global __custom_input
+    __custom_input = debug_input
     
     class StepLimitExceeded(Exception):
         pass
@@ -561,8 +568,10 @@ def __debug_trace_and_run(user_code, max_steps):
     truncated = False
     
     try:
-        compiled = compile(user_code, '<debug>', 'exec')
-        exec(compiled, {})
+        compiled = compile(user_code, '<debug>', 'exec', ast.PyCF_ALLOW_TOP_LEVEL_AWAIT)
+        res = eval(compiled, {'__custom_input': debug_input})
+        if inspect.isawaitable(res):
+            await res
     except StepLimitExceeded:
         truncated = True
         steps.append({
@@ -597,8 +606,9 @@ def __debug_trace_and_run(user_code, max_steps):
       `);
 
       // Run the instrumenter with the user's code
+      const asyncDebugCode = code.replace(/(^|[^a-zA-Z0-9_.])input\s*\(/g, '$1await __custom_input(');
       const result = await pyodide.runPythonAsync(
-        `__debug_trace_and_run(${JSON.stringify(code)}, ${MAX_DEBUG_STEPS})`
+        `await __debug_trace_and_run(${JSON.stringify(asyncDebugCode)}, ${MAX_DEBUG_STEPS})`
       );
 
       const steps = JSON.parse(result);
@@ -663,6 +673,21 @@ def __debug_trace_and_run(user_code, max_steps):
   const debugCodeLines = code.split('\n');
   const isDebugComplete = debugStepIndex >= debugSteps.length - 1;
 
+  // Auto-scroll left editor and right debug code box to active debug line
+  useEffect(() => {
+    if (isDebugging && currentDebugStep && currentDebugStep.line > 0) {
+      const lineHeightPx = 22; // ~1.5em line height
+      const targetScrollTop = Math.max(0, (currentDebugStep.line - 4) * lineHeightPx);
+      if (textareaRef.current) {
+        textareaRef.current.scrollTop = targetScrollTop;
+        syncScroll();
+      }
+      if (debugCodeRef.current) {
+        debugCodeRef.current.scrollTop = targetScrollTop;
+      }
+    }
+  }, [currentDebugStep, isDebugging, syncScroll]);
+
   // ========== END DEBUGGER LOGIC ==========
 
   const lineCount = code.split('\n').length;
@@ -708,7 +733,7 @@ def __debug_trace_and_run(user_code, max_steps):
               disabled={!pyodideReady || isRunning}
               title={isDebugging ? 'Exit Debug' : 'Debug code step by step'}
             >
-              {isDebugging ? '✕ Exit Debug' : '🐛 Debug'}
+              {isDebugging ? '✕ Exit Debug' : 'Debug'}
             </button>
             <button
               className="pylab-run-btn2"
@@ -723,7 +748,7 @@ def __debug_trace_and_run(user_code, max_steps):
 
         {/* Output Toolbar */}
         <div className="pylab-toolbar-output">
-          <span className="pylab-output-tab">{isDebugging ? '🐛 Debugger' : 'Output'}</span>
+          <span className="pylab-output-tab">{isDebugging ? 'Debugger' : 'Output'}</span>
           {!isDebugging && (
             <button className="pylab-clear-btn2" onClick={() => { setOutput(''); setHasError(false); }}>Clear</button>
           )}
@@ -778,6 +803,8 @@ def __debug_trace_and_run(user_code, max_steps):
               onChange={(e) => setCode(e.target.value)}
               onKeyDown={handleKeyDown}
               onScroll={syncScroll}
+              readOnly={isDebugging || isRunning}
+              style={{ pointerEvents: isDebugging ? 'none' : 'auto' }}
               spellCheck={false}
               autoCapitalize="off"
               autoCorrect="off"
@@ -810,13 +837,13 @@ def __debug_trace_and_run(user_code, max_steps):
                   </span>
                 </div>
               )}
-              {isRunning && (
+              {isRunning && !output && !isWaitingForInput && (
                 <div className="pylab-loader">
                   <div className="pylab-spin"></div>
                   <span>Running...</span>
                 </div>
               )}
-              {output && (
+              {(output || isWaitingForInput) && (
                 <pre className={`pylab-out-text ${hasError ? 'pylab-error-state' : ''}`} onClick={() => terminalInputRef.current?.focus()}>
                   {output}
                   {isWaitingForInput && (
@@ -845,7 +872,7 @@ def __debug_trace_and_run(user_code, max_steps):
           {isDebugging && (
             <div className="pylab-debug-panel">
               {/* Debug Code View */}
-              <div className="pylab-debug-code">
+              <div className="pylab-debug-code" ref={debugCodeRef} style={{ pointerEvents: 'none' }}>
                 <div className="pylab-debug-section-title">📄 Code Execution</div>
                 <div className="pylab-debug-code-lines">
                   {debugCodeLines.map((line, idx) => {
@@ -939,6 +966,20 @@ def __debug_trace_and_run(user_code, max_steps):
               </div>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Footer Status Bar */}
+      <div className="pylab-statusbar">
+        <div className="pylab-statusbar-left">
+          <span>🐍 Python 3.11</span>
+          <span className="pylab-statusbar-sep">•</span>
+          <span>⚡ Pyodide Powered</span>
+        </div>
+        <div className="pylab-statusbar-right">
+          <span>{lineCount} {lineCount === 1 ? 'line' : 'lines'}</span>
+          <span className="pylab-statusbar-sep">•</span>
+          <span>UTF-8</span>
         </div>
       </div>
     </div>
