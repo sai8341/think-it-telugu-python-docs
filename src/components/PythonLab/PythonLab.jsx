@@ -149,6 +149,7 @@ export default function PythonLab() {
   const [code, setCode] = useState(examples[0].code);
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [pyodideReady, setPyodideReady] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState('Loading Python...');
   const [selectedExample, setSelectedExample] = useState(0);
@@ -161,6 +162,14 @@ export default function PythonLab() {
   const resolveInputRef = useRef(null);
   const terminalInputRef = useRef(null);
 
+  // Debug State
+  const [isDebugging, setIsDebugging] = useState(false);
+  const [debugSteps, setDebugSteps] = useState([]);
+  const [debugStepIndex, setDebugStepIndex] = useState(-1);
+  const [isDebugPlaying, setIsDebugPlaying] = useState(false);
+  const [debugError, setDebugError] = useState('');
+  const MAX_DEBUG_STEPS = 500;
+
   const textareaRef = useRef(null);
   const highlightRef = useRef(null);
   const lineNumbersRef = useRef(null);
@@ -172,6 +181,25 @@ export default function PythonLab() {
     document.body.classList.add('pylab-active');
     return () => document.body.classList.remove('pylab-active');
   }, []);
+
+  // Load from local storage on mount
+  useEffect(() => {
+    const savedCode = localStorage.getItem('pylab_saved_code');
+    const savedExampleIdx = localStorage.getItem('pylab_selected_example_idx');
+    
+    if (savedCode !== null) {
+      setCode(savedCode);
+    }
+    if (savedExampleIdx !== null) {
+      setSelectedExample(parseInt(savedExampleIdx, 10));
+    }
+  }, []);
+
+  // Save changes to local storage
+  useEffect(() => {
+    localStorage.setItem('pylab_saved_code', code);
+    localStorage.setItem('pylab_selected_example_idx', selectedExample.toString());
+  }, [code, selectedExample]);
 
   // Set up interactive terminal handlers
   useEffect(() => {
@@ -254,12 +282,22 @@ export default function PythonLab() {
     }
   }, []);
 
+  // Auto scroll console output to bottom
+  useEffect(() => {
+    if (outputRef.current) {
+      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+    }
+  }, [output, isRunning]);
+
   // Run code
   const runCode = useCallback(async () => {
     if (!pyodideRef.current || isRunning) return;
     setIsRunning(true);
+    setHasError(false);
     setOutput('');
     setActiveTab('output');
+
+    const startTime = performance.now();
 
     try {
       const pyodide = pyodideRef.current;
@@ -301,6 +339,7 @@ builtins.input = fallback_input
         const asyncCode = code.replace(/(^|[^a-zA-Z0-9_.])input\s*\(/g, '$1await __custom_input(');
         await pyodide.runPythonAsync(asyncCode);
       } catch (pyErr) {
+        setHasError(true);
         const stderr = pyodide.runPython('sys.stderr.getvalue()');
         const stdout = pyodide.runPython('sys.stdout.getvalue()');
         let err = (stdout || '') + (stderr || pyErr.message || 'An error occurred.');
@@ -314,13 +353,21 @@ builtins.input = fallback_input
       const stderr = pyodide.runPython('sys.stderr.getvalue()');
       pyodide.runPython('sys.stdout = sys.__stdout__\nsys.stderr = sys.__stderr__');
 
+      if (stderr) {
+        setHasError(true);
+      }
+
+      const endTime = performance.now();
+      const duration = ((endTime - startTime) / 1000).toFixed(2);
+
       let finalOutput = (stdout || '') + (stderr || '');
       setOutput(prev => {
         let result = prev + finalOutput;
         if (!result.trim()) result = '(No output — add a print() statement)\n';
-        return result + '\n=== Code Execution Successful ===';
+        return result + `\n\n[Finished in ${duration}s]`;
       });
     } catch (err) {
+      setHasError(true);
       setOutput(prev => prev + `\nError: ${err.message}`);
     }
     setIsRunning(false);
@@ -423,13 +470,200 @@ builtins.input = fallback_input
     setSelectedExample(idx);
     setCode(examples[idx].code);
     setOutput('');
+    setHasError(false);
     setActiveTab('editor');
+    exitDebug();
+  };
+
+  const handleResetExample = () => {
+    const originalCode = examples[selectedExample].code;
+    setCode(originalCode);
+    setOutput('');
+    setHasError(false);
+    exitDebug();
   };
 
   const toggleFullscreen = () => {
     setIsFullscreen(prev => !prev);
     document.body.classList.toggle('pylab-fullscreen-active');
   };
+
+  // ========== DEBUGGER LOGIC ==========
+
+  const debugCode = useCallback(async () => {
+    if (!pyodideRef.current || isRunning || isDebugging) return;
+
+    setDebugError('');
+    setIsRunning(true);
+    setOutput('');
+
+    // Let React render the "Running..." state before heavy work
+    await new Promise(r => setTimeout(r, 50));
+
+    try {
+      const pyodide = pyodideRef.current;
+
+      // Define the AST-based instrumenter (much faster than sys.settrace in WASM)
+      await pyodide.runPythonAsync(`
+import sys, json, copy
+from io import StringIO
+
+def __debug_trace_and_run(user_code, max_steps):
+    steps = []
+    output_stream = StringIO()
+    old_stdout = sys.stdout
+    old_stderr = sys.stderr
+    sys.stdout = output_stream
+    sys.stderr = output_stream
+    step_count = [0]
+    
+    import builtins
+    import js
+    old_input = builtins.input
+    def debug_input(prompt_text=""):
+        res = js.prompt(prompt_text)
+        if res is None:
+            raise EOFError("EOF")
+        # Echo the input back to stdout so the trace captures it
+        sys.stdout.write(prompt_text + res + "\\n")
+        return res
+    builtins.input = debug_input
+    
+    class StepLimitExceeded(Exception):
+        pass
+    
+    def tracer(frame, event, arg):
+        if frame.f_code.co_filename != '<debug>':
+            return None # CRITICAL FIX: Do not trace inside builtins like print(), which froze the browser!
+            
+        if event == 'line':
+            step_count[0] += 1
+            if step_count[0] > max_steps:
+                raise StepLimitExceeded()
+                
+            user_vars = {}
+            for k, v in frame.f_locals.items():
+                if not k.startswith('_') and not callable(v):
+                    try:
+                        user_vars[k] = repr(v)
+                    except:
+                        user_vars[k] = '<unrepresentable>'
+                        
+            steps.append({
+                'line': frame.f_lineno,
+                'vars': user_vars,
+                'stdout': output_stream.getvalue(),
+                'event': event
+            })
+        return tracer
+    
+    sys.settrace(tracer)
+    truncated = False
+    
+    try:
+        compiled = compile(user_code, '<debug>', 'exec')
+        exec(compiled, {})
+    except StepLimitExceeded:
+        truncated = True
+        steps.append({
+            'line': -1, 'vars': {},
+            'stdout': output_stream.getvalue(),
+            'event': 'truncated',
+            'error': f'Execution truncated at {max_steps} steps.'
+        })
+    except Exception as e:
+        steps.append({
+            'line': -1, 'vars': {},
+            'stdout': output_stream.getvalue(),
+            'event': 'exception',
+            'error': f'{type(e).__name__}: {e}'
+        })
+    finally:
+        sys.settrace(None)
+        sys.stdout = old_stdout
+        sys.stderr = old_stderr
+        builtins.input = old_input
+    
+    # Add final completed step
+    if not truncated and len(steps) > 0 and steps[-1].get('event') != 'exception':
+        steps.append({
+            'line': -1,
+            'vars': steps[-1]['vars'] if steps else {},
+            'stdout': output_stream.getvalue(),
+            'event': 'finished'
+        })
+    
+    return json.dumps(steps)
+      `);
+
+      // Run the instrumenter with the user's code
+      const result = await pyodide.runPythonAsync(
+        `__debug_trace_and_run(${JSON.stringify(code)}, ${MAX_DEBUG_STEPS})`
+      );
+
+      const steps = JSON.parse(result);
+
+      if (steps.length === 0) {
+        setDebugError('No executable steps found in the code.');
+        setIsRunning(false);
+        return;
+      }
+
+      setDebugSteps(steps);
+      setDebugStepIndex(0);
+      setIsDebugging(true);
+      setActiveTab('output');
+    } catch (err) {
+      setDebugError(`Debug failed: ${err.message}`);
+    }
+    setIsRunning(false);
+  }, [code, isRunning, isDebugging]);
+
+  const nextDebugStep = () => {
+    setDebugStepIndex(prev => Math.min(prev + 1, debugSteps.length - 1));
+  };
+
+  const prevDebugStep = () => {
+    setDebugStepIndex(prev => Math.max(prev - 1, 0));
+  };
+
+  const resetDebug = () => {
+    setDebugStepIndex(0);
+    setIsDebugPlaying(false);
+  };
+
+  const exitDebug = () => {
+    setIsDebugging(false);
+    setDebugSteps([]);
+    setDebugStepIndex(-1);
+    setIsDebugPlaying(false);
+    setDebugError('');
+  };
+
+  // Auto-play timer for debug
+  useEffect(() => {
+    if (!isDebugPlaying || !isDebugging) return;
+    if (debugStepIndex >= debugSteps.length - 1) {
+      setIsDebugPlaying(false);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setDebugStepIndex(prev => {
+        if (prev >= debugSteps.length - 1) {
+          setIsDebugPlaying(false);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 700);
+    return () => clearTimeout(timer);
+  }, [isDebugPlaying, debugStepIndex, debugSteps, isDebugging]);
+
+  const currentDebugStep = isDebugging && debugStepIndex >= 0 ? debugSteps[debugStepIndex] : null;
+  const debugCodeLines = code.split('\n');
+  const isDebugComplete = debugStepIndex >= debugSteps.length - 1;
+
+  // ========== END DEBUGGER LOGIC ==========
 
   const lineCount = code.split('\n').length;
   const highlightedCode = highlightPython(code);
@@ -452,6 +686,13 @@ builtins.input = fallback_input
                 <option key={i} value={i}>{ex.label}</option>
               ))}
             </select>
+            <button
+              className="pylab-reset-btn"
+              onClick={handleResetExample}
+              title="Reset code to original example"
+            >
+              🔄 Reset Example
+            </button>
           </div>
           <div className="pylab-toolbar-editor-right">
             <button
@@ -462,9 +703,18 @@ builtins.input = fallback_input
               {isFullscreen ? '⊡' : '⛶'}
             </button>
             <button
-              className="pylab-run-btn2"
-              onClick={runCode}
+              className="pylab-debug-btn2"
+              onClick={isDebugging ? exitDebug : debugCode}
               disabled={!pyodideReady || isRunning}
+              title={isDebugging ? 'Exit Debug' : 'Debug code step by step'}
+            >
+              {isDebugging ? '✕ Exit Debug' : '🐛 Debug'}
+            </button>
+            <button
+              className="pylab-run-btn2"
+              onClick={() => { if (isDebugging) exitDebug(); runCode(); }}
+              disabled={!pyodideReady || isRunning}
+              title="Run Program (Ctrl + Enter)"
             >
               {isRunning ? '⏳ Running...' : '▶ Run'}
             </button>
@@ -473,8 +723,13 @@ builtins.input = fallback_input
 
         {/* Output Toolbar */}
         <div className="pylab-toolbar-output">
-          <span className="pylab-output-tab">Output</span>
-          <button className="pylab-clear-btn2" onClick={() => setOutput('')}>Clear</button>
+          <span className="pylab-output-tab">{isDebugging ? '🐛 Debugger' : 'Output'}</span>
+          {!isDebugging && (
+            <button className="pylab-clear-btn2" onClick={() => { setOutput(''); setHasError(false); }}>Clear</button>
+          )}
+          {isDebugging && (
+            <span className="pylab-debug-step-counter">Step {debugStepIndex + 1} of {debugSteps.length}</span>
+          )}
         </div>
       </div>
 
@@ -483,7 +738,7 @@ builtins.input = fallback_input
         <button className={`pylab-mobtab ${activeTab === 'editor' ? 'active' : ''}`} onClick={() => setActiveTab('editor')}>
           main.py
         </button>
-        <button className={`pylab-mobtab pylab-mobrun`} onClick={runCode} disabled={!pyodideReady || isRunning}>
+        <button className={`pylab-mobtab pylab-mobrun`} onClick={runCode} disabled={!pyodideReady || isRunning} title="Run Program (Ctrl + Enter)">
           {isRunning ? '⏳' : '▶ Run'}
         </button>
         <button className={`pylab-mobtab ${activeTab === 'output' ? 'active' : ''}`} onClick={() => setActiveTab('output')}>
@@ -497,7 +752,7 @@ builtins.input = fallback_input
         <div className={`pylab-editor2 ${activeTab === 'editor' ? 'pylab-vis' : ''}`}>
           <div className="pylab-linenum" ref={lineNumbersRef}>
             {Array.from({ length: lineCount }, (_, i) => (
-              <div key={i}>{i + 1}</div>
+              <div key={i} className={isDebugging && currentDebugStep?.line === i + 1 ? 'pylab-active-num' : ''}>{i + 1}</div>
             ))}
           </div>
           <div className="pylab-editor-inner">
@@ -508,6 +763,13 @@ builtins.input = fallback_input
               aria-hidden="true"
               dangerouslySetInnerHTML={{ __html: highlightedCode + '\n' }}
             />
+            {/* Active Line Overlay */}
+            {isDebugging && currentDebugStep && currentDebugStep.line > 0 && (
+              <div 
+                className="pylab-active-line-overlay"
+                style={{ top: `calc(12px + ${(currentDebugStep.line - 1) * 1.5}em)` }}
+              />
+            )}
             {/* Invisible textarea for input */}
             <textarea
               ref={textareaRef}
@@ -528,43 +790,154 @@ builtins.input = fallback_input
         {/* Divider */}
         <div className="pylab-divider2"></div>
 
-        {/* Output */}
+        {/* Output / Debug Panel */}
         <div className={`pylab-output2 ${activeTab === 'output' ? 'pylab-vis' : ''}`} ref={outputRef}>
-          {!pyodideReady && (
-            <div className="pylab-loader">
-              <div className="pylab-spin"></div>
-              <span>{loadingProgress}</span>
-            </div>
-          )}
-          {pyodideReady && !output && !isRunning && (
-            <div className="pylab-loader pylab-idle">
-              Click <strong>▶ Run</strong> or press <strong>Ctrl+Enter</strong>
-            </div>
-          )}
-          {isRunning && (
-            <div className="pylab-loader">
-              <div className="pylab-spin"></div>
-              <span>Executing...</span>
-            </div>
-          )}
-          {output && (
-            <pre className="pylab-out-text" onClick={() => terminalInputRef.current?.focus()}>
-              {output}
-              {isWaitingForInput && (
-                <input
-                  ref={terminalInputRef}
-                  type="text"
-                  className="pylab-term-input"
-                  value={terminalInput}
-                  onChange={(e) => setTerminalInput(e.target.value)}
-                  onKeyDown={handleTerminalInputSubmit}
-                  autoFocus
-                  spellCheck={false}
-                  autoCapitalize="off"
-                  autoComplete="off"
-                />
+          {/* Normal output mode */}
+          {!isDebugging && (
+            <>
+              {!pyodideReady && (
+                <div className="pylab-loader">
+                  <div className="pylab-spin"></div>
+                  <span>{loadingProgress}</span>
+                </div>
               )}
-            </pre>
+              {pyodideReady && !output && !isRunning && (
+                <div className="pylab-empty-console">
+                  <span className="pylab-empty-icon">🐍</span>
+                  <p className="pylab-empty-title">Program output will appear here.</p>
+                  <span className="pylab-empty-hint">
+                    Click <strong>▶ Run</strong> or press <strong>Ctrl + Enter</strong> to execute your Python program.
+                  </span>
+                </div>
+              )}
+              {isRunning && (
+                <div className="pylab-loader">
+                  <div className="pylab-spin"></div>
+                  <span>Running...</span>
+                </div>
+              )}
+              {output && (
+                <pre className={`pylab-out-text ${hasError ? 'pylab-error-state' : ''}`} onClick={() => terminalInputRef.current?.focus()}>
+                  {output}
+                  {isWaitingForInput && (
+                    <input
+                      ref={terminalInputRef}
+                      type="text"
+                      className="pylab-term-input"
+                      value={terminalInput}
+                      onChange={(e) => setTerminalInput(e.target.value)}
+                      onKeyDown={handleTerminalInputSubmit}
+                      autoFocus
+                      spellCheck={false}
+                      autoCapitalize="off"
+                      autoComplete="off"
+                    />
+                  )}
+                </pre>
+              )}
+              {debugError && (
+                <div className="pylab-debug-error">{debugError}</div>
+              )}
+            </>
+          )}
+
+          {/* Debug Mode Panel */}
+          {isDebugging && (
+            <div className="pylab-debug-panel">
+              {/* Debug Code View */}
+              <div className="pylab-debug-code">
+                <div className="pylab-debug-section-title">📄 Code Execution</div>
+                <div className="pylab-debug-code-lines">
+                  {debugCodeLines.map((line, idx) => {
+                    const lineNum = idx + 1;
+                    const isActive = currentDebugStep && currentDebugStep.line === lineNum;
+                    const isErrorLine = currentDebugStep && currentDebugStep.event === 'exception' && currentDebugStep.line === lineNum;
+                    return (
+                      <div
+                        key={idx}
+                        className={`pylab-debug-line ${isActive ? 'pylab-debug-line--active' : ''} ${isErrorLine ? 'pylab-debug-line--error' : ''}`}
+                      >
+                        <span className="pylab-debug-line-num">{lineNum}</span>
+                        <span className="pylab-debug-line-indicator">{isActive ? '▶' : ' '}</span>
+                        <span
+                          className="pylab-debug-line-code"
+                          dangerouslySetInnerHTML={{ __html: highlightLine(line) || ' ' }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Variables Inspector */}
+              <div className="pylab-debug-vars">
+                <div className="pylab-debug-section-title">📊 Variables</div>
+                {currentDebugStep && Object.keys(currentDebugStep.vars).length > 0 ? (
+                  <table className="pylab-debug-vars-table">
+                    <thead>
+                      <tr><th>Name</th><th>Value</th></tr>
+                    </thead>
+                    <tbody>
+                      {Object.entries(currentDebugStep.vars).map(([name, value]) => (
+                        <tr key={name}>
+                          <td className="pylab-debug-var-name">{name}</td>
+                          <td className="pylab-debug-var-value">{value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <div className="pylab-debug-empty">No variables yet</div>
+                )}
+              </div>
+
+              {/* Console Output */}
+              <div className="pylab-debug-console">
+                <div className="pylab-debug-section-title">💻 Console Output</div>
+                <pre className="pylab-debug-console-text">
+                  {currentDebugStep && currentDebugStep.stdout
+                    ? currentDebugStep.stdout
+                    : <span className="pylab-debug-empty">No output yet</span>
+                  }
+                </pre>
+              </div>
+
+              {/* Status / Error */}
+              {currentDebugStep && currentDebugStep.event === 'exception' && (
+                <div className="pylab-debug-error-msg">
+                  ❌ {currentDebugStep.error}
+                </div>
+              )}
+              {currentDebugStep && currentDebugStep.event === 'truncated' && (
+                <div className="pylab-debug-warn-msg">
+                  ⚠️ {currentDebugStep.error}
+                </div>
+              )}
+              {currentDebugStep && currentDebugStep.event === 'finished' && (
+                <div className="pylab-debug-success-msg">
+                  ✅ Code execution completed successfully
+                </div>
+              )}
+
+              {/* Debug Controls */}
+              <div className="pylab-debug-controls">
+                <button className="pylab-dbg-btn" onClick={prevDebugStep} disabled={debugStepIndex <= 0}>
+                  ⏮ Prev
+                </button>
+                <button className="pylab-dbg-btn pylab-dbg-btn--primary" onClick={nextDebugStep} disabled={isDebugComplete || isDebugPlaying}>
+                  ▶ Next Step
+                </button>
+                <button className="pylab-dbg-btn pylab-dbg-btn--play" onClick={() => setIsDebugPlaying(!isDebugPlaying)} disabled={isDebugComplete}>
+                  {isDebugPlaying ? '⏸ Pause' : '⏩ Auto Play'}
+                </button>
+                <button className="pylab-dbg-btn" onClick={resetDebug}>
+                  🔄 Reset
+                </button>
+                <button className="pylab-dbg-btn pylab-dbg-btn--exit" onClick={exitDebug}>
+                  ✕ Exit
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>

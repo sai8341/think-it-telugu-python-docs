@@ -2943,25 +2943,25 @@ body.pylab-active .thin-scrollbar {
 }
 
 /* --- Syntax Highlighting Tokens --- */
-.pyhl-keyword { color: #0000ff; font-weight: 600; }
-.pyhl-builtin { color: #008000; }
-.pyhl-string { color: #a31515; }
-.pyhl-number { color: #098658; }
-.pyhl-comment { color: #008000; font-style: italic; }
-.pyhl-func { color: #795e26; }
-.pyhl-self { color: #0000ff; }
-.pyhl-decorator { color: #267f99; }
-.pyhl-operator { color: #000000; }
+.pyhl-keyword { color: #7c3aed; font-weight: 600; } /* Purple */
+.pyhl-builtin { color: #2563eb; } /* Blue */
+.pyhl-func { color: #2563eb; } /* Blue */
+.pyhl-string { color: #16a34a; } /* Green */
+.pyhl-number { color: #ea580c; } /* Orange */
+.pyhl-comment { color: #5b7065; font-style: italic; opacity: 0.85; } /* Muted Gray-Green */
+.pyhl-self { color: #7c3aed; }
+.pyhl-decorator { color: #0891b2; }
+.pyhl-operator { color: #1e293b; }
 
-[data-theme='dark'] .pyhl-keyword { color: #569cd6; }
-[data-theme='dark'] .pyhl-builtin { color: #4ec9b0; }
-[data-theme='dark'] .pyhl-string { color: #ce9178; }
-[data-theme='dark'] .pyhl-number { color: #b5cea8; }
-[data-theme='dark'] .pyhl-comment { color: #6a9955; }
-[data-theme='dark'] .pyhl-func { color: #dcdcaa; }
-[data-theme='dark'] .pyhl-self { color: #569cd6; }
-[data-theme='dark'] .pyhl-decorator { color: #4ec9b0; }
-[data-theme='dark'] .pyhl-operator { color: #d4d4d4; }
+[data-theme='dark'] .pyhl-keyword { color: #c084fc; } /* Purple */
+[data-theme='dark'] .pyhl-builtin { color: #60a5fa; } /* Blue */
+[data-theme='dark'] .pyhl-func { color: #60a5fa; } /* Blue */
+[data-theme='dark'] .pyhl-string { color: #4ade80; } /* Green */
+[data-theme='dark'] .pyhl-number { color: #fb923c; } /* Orange */
+[data-theme='dark'] .pyhl-comment { color: #829c8d; font-style: italic; opacity: 0.85; } /* Muted Gray-Green */
+[data-theme='dark'] .pyhl-self { color: #c084fc; }
+[data-theme='dark'] .pyhl-decorator { color: #22d3ee; }
+[data-theme='dark'] .pyhl-operator { color: #e2e8f0; }
 
 /* --- Divider --- */
 .pylab-divider2 {
@@ -3105,4 +3105,461 @@ body.pylab-active .thin-scrollbar {
 }
 [data-theme='dark'] .pylab-term-input {
   color: inherit;
+}
+
+/* --- Python Lab UI & UX Improvements --- */
+
+/* Reset Example Button */
+.pylab-reset-btn {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #4b5563;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+.pylab-reset-btn:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+  border-color: #9ca3af;
+}
+[data-theme='dark'] .pylab-reset-btn {
+  border-color: #475569;
+  color: #94a3b8;
+}
+[data-theme='dark'] .pylab-reset-btn:hover {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #64748b;
+}
+
+/* Empty Console / Placeholder State */
+.pylab-empty-console {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #6b7280;
+  padding: 24px;
+}
+[data-theme='dark'] .pylab-empty-console {
+  color: #94a3b8;
+}
+.pylab-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+.pylab-empty-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #374151;
+}
+[data-theme='dark'] .pylab-empty-title {
+  color: #f1f5f9;
+}
+.pylab-empty-hint {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+[data-theme='dark'] .pylab-empty-hint {
+  color: #64748b;
+}
+.pylab-empty-hint strong {
+  color: #6b7280;
+}
+[data-theme='dark'] .pylab-empty-hint strong {
+  color: #94a3b8;
+}
+
+/* Error Console State */
+.pylab-error-state {
+  color: #ef4444 !important; /* Soft Red */
+}
+[data-theme='dark'] .pylab-error-state {
+  color: #fca5a5 !important; /* Soft Red */
+}
+
+/* Small adjustments for output container height when showing empty */
+.pylab-output2 {
+  min-height: 150px;
+}
+
+/* ============================================
+   PYTHON VISUAL DEBUGGER
+   ============================================ */
+
+/* --- Debug Button --- */
+.pylab-debug-btn2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: #FFFFFF;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.pylab-debug-btn2:hover:not(:disabled) {
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+.pylab-debug-btn2:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- Debug Step Counter (in output toolbar) --- */
+.pylab-debug-step-counter {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  color: #F59E0B;
+  font-weight: 600;
+  background: rgba(245, 158, 11, 0.12);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+/* --- Debug Error / Warning (shown in normal output area) --- */
+.pylab-debug-error {
+  padding: 1.2rem;
+  color: #FBBF24;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- Debug Panel (replaces output area in debug mode) --- */
+.pylab-debug-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  overflow-y: auto;
+  background: #0a0f1c;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+[data-theme='light'] .pylab-debug-panel {
+  background: #F8FAFC;
+}
+
+/* --- Section Titles --- */
+.pylab-debug-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748B;
+  padding: 8px 12px 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+[data-theme='light'] .pylab-debug-section-title {
+  color: #475569;
+  border-bottom-color: rgba(0,0,0,0.06);
+}
+
+/* --- Debug Code View --- */
+.pylab-debug-code {
+  flex: 0 0 auto;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.pylab-debug-code-lines {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+.pylab-debug-line {
+  display: flex;
+  align-items: center;
+  padding: 1px 12px 1px 4px;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  min-height: 24px;
+}
+.pylab-debug-line-num {
+  flex: 0 0 28px;
+  color: #475569;
+  text-align: right;
+  font-size: 0.75rem;
+  user-select: none;
+  padding-right: 6px;
+}
+.pylab-debug-line-indicator {
+  flex: 0 0 18px;
+  color: #10B981;
+  font-size: 0.7rem;
+  text-align: center;
+}
+.pylab-debug-line-code {
+  flex: 1;
+  white-space: pre;
+  color: #E2E8F0;
+}
+[data-theme='light'] .pylab-debug-line-code {
+  color: #1E293B;
+}
+
+/* Active line highlight */
+.pylab-debug-line--active {
+  background: rgba(16, 185, 129, 0.15) !important;
+  box-shadow: inset 3px 0 0 #10B981;
+}
+[data-theme='light'] .pylab-debug-line--active {
+  background: rgba(16, 185, 129, 0.12) !important;
+}
+
+/* Error line */
+.pylab-debug-line--error {
+  background: rgba(239, 68, 68, 0.15) !important;
+  box-shadow: inset 3px 0 0 #EF4444;
+}
+
+/* --- Variables Inspector --- */
+.pylab-debug-vars {
+  flex: 0 0 auto;
+  max-height: 160px;
+  overflow-y: auto;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+[data-theme='light'] .pylab-debug-vars {
+  border-top-color: rgba(0,0,0,0.06);
+}
+.pylab-debug-vars-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.8rem;
+}
+.pylab-debug-vars-table thead th {
+  text-align: left;
+  padding: 5px 12px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748B;
+  background: rgba(255,255,255,0.03);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+[data-theme='light'] .pylab-debug-vars-table thead th {
+  background: rgba(0,0,0,0.02);
+  border-bottom-color: rgba(0,0,0,0.06);
+}
+.pylab-debug-vars-table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.12s;
+}
+.pylab-debug-vars-table tbody tr:hover {
+  background: rgba(255,255,255,0.04);
+}
+[data-theme='light'] .pylab-debug-vars-table tbody tr:hover {
+  background: rgba(0,0,0,0.03);
+}
+.pylab-debug-var-name {
+  padding: 5px 12px;
+  color: #60A5FA;
+  font-weight: 600;
+}
+.pylab-debug-var-value {
+  padding: 5px 12px;
+  color: #34D399;
+}
+[data-theme='light'] .pylab-debug-var-name {
+  color: #2563EB;
+}
+[data-theme='light'] .pylab-debug-var-value {
+  color: #059669;
+}
+
+/* --- Console Output --- */
+.pylab-debug-console {
+  flex: 1 1 auto;
+  min-height: 60px;
+  max-height: 140px;
+  overflow-y: auto;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+[data-theme='light'] .pylab-debug-console {
+  border-top-color: rgba(0,0,0,0.06);
+}
+.pylab-debug-console-text {
+  padding: 8px 12px;
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  color: #34D399;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: transparent;
+  line-height: 1.6;
+  min-height: 40px;
+}
+[data-theme='light'] .pylab-debug-console-text {
+  color: #065F46;
+}
+
+/* --- Empty State --- */
+.pylab-debug-empty {
+  padding: 8px 12px;
+  color: #64748B;
+  font-size: 0.82rem;
+  font-style: italic;
+}
+
+/* --- Status Messages --- */
+.pylab-debug-error-msg,
+.pylab-debug-warn-msg,
+.pylab-debug-success-msg {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.pylab-debug-error-msg {
+  color: #F87171;
+  background: rgba(239, 68, 68, 0.08);
+}
+.pylab-debug-warn-msg {
+  color: #FBBF24;
+  background: rgba(245, 158, 11, 0.08);
+}
+.pylab-debug-success-msg {
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.08);
+}
+[data-theme='light'] .pylab-debug-error-msg {
+  color: #DC2626;
+  background: rgba(239, 68, 68, 0.06);
+}
+[data-theme='light'] .pylab-debug-warn-msg {
+  color: #D97706;
+  background: rgba(245, 158, 11, 0.06);
+}
+[data-theme='light'] .pylab-debug-success-msg {
+  color: #059669;
+  background: rgba(16, 185, 129, 0.06);
+}
+
+/* --- Debug Controls --- */
+.pylab-debug-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.2);
+}
+[data-theme='light'] .pylab-debug-controls {
+  border-top-color: rgba(0,0,0,0.08);
+  background: rgba(0,0,0,0.03);
+}
+
+.pylab-dbg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.06);
+  color: #CBD5E1;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.pylab-dbg-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+.pylab-dbg-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+[data-theme='light'] .pylab-dbg-btn {
+  background: #F1F5F9;
+  color: #334155;
+  border-color: #CBD5E1;
+}
+[data-theme='light'] .pylab-dbg-btn:hover:not(:disabled) {
+  background: #E2E8F0;
+}
+
+.pylab-dbg-btn--primary {
+  background: #2563EB;
+  color: #FFFFFF;
+  border-color: transparent;
+}
+.pylab-dbg-btn--primary:hover:not(:disabled) {
+  background: #3B82F6;
+}
+
+.pylab-dbg-btn--play {
+  background: #059669;
+  color: #FFFFFF;
+  border-color: transparent;
+}
+.pylab-dbg-btn--play:hover:not(:disabled) {
+  background: #10B981;
+}
+
+.pylab-dbg-btn--exit {
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+  border-color: transparent;
+  margin-left: auto;
+}
+.pylab-dbg-btn--exit:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.25);
+}
+[data-theme='light'] .pylab-dbg-btn--primary {
+  background: #2563EB;
+  color: #FFFFFF;
+}
+[data-theme='light'] .pylab-dbg-btn--play {
+  background: #059669;
+  color: #FFFFFF;
+}
+[data-theme='light'] .pylab-dbg-btn--exit {
+  background: rgba(239, 68, 68, 0.1);
+  color: #DC2626;
+}
+
+/* --- Responsive: Debug panel on mobile --- */
+@media (max-width: 767px) {
+  .pylab-debug-code {
+    max-height: 150px;
+  }
+  .pylab-debug-vars {
+    max-height: 120px;
+  }
+  .pylab-debug-controls {
+    gap: 4px;
+    padding: 8px;
+  }
+  .pylab-dbg-btn {
+    padding: 5px 8px;
+    font-size: 0.72rem;
+  }
+  .pylab-debug-btn2 {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
 }
