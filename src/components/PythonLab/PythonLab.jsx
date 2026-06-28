@@ -351,14 +351,11 @@ __LOOP_LIMIT = 100000
 class __LoopGuardTransformer(ast.NodeTransformer):
     """Injects iteration counter into every loop to prevent infinite loops from freezing the browser."""
     def _make_guard(self):
-        return ast.parse(
-            "__loop_guard[0] += 1\n"
-            "if __loop_guard[0] > __LOOP_LIMIT:\n"
-            "    raise RuntimeError("
-            "'Loop limit exceeded (' + str(__LOOP_LIMIT) + ' iterations). "
-            "Your code may have an infinite loop. "
-            "Check if your loop condition will ever become False.')"
-        ).body
+        return ast.parse('''
+__loop_guard[0] += 1
+if __loop_guard[0] > __LOOP_LIMIT:
+    raise RuntimeError('Loop limit exceeded (' + str(__LOOP_LIMIT) + ' iterations). Your code may have an infinite loop. Check if your loop condition will ever become False.')
+''').body
     def visit_While(self, node):
         self.generic_visit(node)
         node.body = self._make_guard() + node.body
