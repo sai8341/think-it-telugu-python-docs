@@ -29,6 +29,56 @@ const config = {
     locales: ['en'],
   },
 
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Think IT Telugu - Python Course',
+        url: 'https://python.thinkittelugu.in',
+        description: 'Python for College Students in Telugu - Interactive coding playground and structured modules.',
+        publisher: {
+          '@type': 'Organization',
+          name: 'Think IT Telugu',
+          url: 'https://www.thinkittelugu.in',
+          sameAs: [
+            'https://www.thinkittelugu.in',
+            'https://www.youtube.com/@ThinkIT-Telugu',
+            'https://www.instagram.com/thinkittelugu',
+            'https://www.facebook.com/thinkit.telugu'
+          ],
+        },
+      }),
+    },
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        name: 'Complete Python Programming Course in Telugu',
+        description: 'Comprehensive Python programming tutorial series designed specifically for college students in Telugu.',
+        provider: {
+          '@type': 'Organization',
+          name: 'Think IT Telugu',
+          url: 'https://www.thinkittelugu.in',
+          sameAs: [
+            'https://www.thinkittelugu.in',
+            'https://www.youtube.com/@ThinkIT-Telugu',
+            'https://www.instagram.com/thinkittelugu',
+            'https://www.facebook.com/thinkit.telugu'
+          ],
+        },
+      }),
+    },
+  ],
+
   presets: [
     [
       'classic',
@@ -41,6 +91,13 @@ const config = {
         blog: false,
         theme: {
           customCss: './src/css/custom.css',
+        },
+        googleTagManager: {
+          containerId: 'GTM-PX58P696',
+        },
+        gtag: {
+          trackingID: 'G-DLFSRK6KB0',
+          anonymizeIP: true,
         },
       }),
     ],

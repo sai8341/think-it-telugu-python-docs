@@ -298,6 +298,17 @@ export default function PythonLab() {
     setOutput('');
     setActiveTab('output');
 
+    // Track Run Code custom event in GTM / GA4
+    if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'python_lab_run',
+        category: 'PythonLab',
+        action: 'Run Program',
+        label: examples[selectedExample]?.label || 'Custom Code'
+      });
+    }
+
     const startTime = performance.now();
 
     try {
@@ -541,6 +552,17 @@ async def __run_with_safe_input(code_str):
     setDebugError('');
     setIsRunning(true);
     setOutput('');
+
+    // Track Debug Code custom event in GTM / GA4
+    if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'python_lab_debug',
+        category: 'PythonLab',
+        action: 'Debug Program',
+        label: examples[selectedExample]?.label || 'Custom Code'
+      });
+    }
 
     // Let React render the "Running..." state before heavy work
     await new Promise(r => setTimeout(r, 50));
@@ -865,7 +887,13 @@ def __debug_trace_and_run(user_code, max_steps):
               disabled={!pyodideReady || isRunning}
               title="Run Program (Ctrl + Enter)"
             >
-              {isRunning ? '⏳ Running...' : '▶ Run'}
+              {isRunning ? (
+                <>
+                  <span className="pylab-btn-spinner"></span> Running...
+                </>
+              ) : (
+                '▶ Run'
+              )}
             </button>
           </div>
         </div>
@@ -888,7 +916,13 @@ def __debug_trace_and_run(user_code, max_steps):
           main.py
         </button>
         <button className={`pylab-mobtab pylab-mobrun`} onClick={runCode} disabled={!pyodideReady || isRunning} title="Run Program (Ctrl + Enter)">
-          {isRunning ? '⏳' : '▶ Run'}
+          {isRunning ? (
+            <>
+              <span className="pylab-btn-spinner"></span> Running...
+            </>
+          ) : (
+            '▶ Run'
+          )}
         </button>
         <button className={`pylab-mobtab ${activeTab === 'output' ? 'active' : ''}`} onClick={() => setActiveTab('output')}>
           Output
