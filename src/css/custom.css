@@ -2670,8 +2670,9 @@ body.pylab-active .thin-scrollbar {
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: calc(100vh - var(--ifm-navbar-height, 60px));
-  min-height: calc(100vh - var(--ifm-navbar-height, 60px));
+  height: calc(100vh - 65px);
+  max-height: calc(100vh - 65px);
+  overflow: hidden;
 }
 
 .pylab-root {
@@ -2679,12 +2680,55 @@ body.pylab-active .thin-scrollbar {
   flex-direction: column;
   flex: 1;
   height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
   background: #ffffff;
   font-family: var(--ifm-font-family-base);
   overflow: hidden;
 }
 [data-theme='dark'] .pylab-root {
-  background: #0F172A;
+  background: #0D1117;
+}
+
+/* Disable programming font ligatures so beginners see distinct characters like == and >= */
+code,
+pre,
+.pylab-root *,
+.ill-code,
+.responsive-visualizer * {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
+}
+
+/* --- Status Bar --- */
+.pylab-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  padding: 0 16px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.78rem;
+  color: #64748b;
+  font-family: var(--ifm-font-family-base);
+  flex-shrink: 0;
+  user-select: none;
+}
+[data-theme='dark'] .pylab-statusbar {
+  background: #161B22;
+  border-top-color: #30363D;
+  color: #8B949E;
+}
+.pylab-statusbar-left,
+.pylab-statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pylab-statusbar-sep {
+  opacity: 0.4;
 }
 
 /* Fullscreen Mode */
@@ -2701,13 +2745,13 @@ body.pylab-active .thin-scrollbar {
 /* --- Secondary Toolbar --- */
 .pylab-toolbar2 {
   display: flex;
-  height: 48px;
+  height: 54px;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
 }
 [data-theme='dark'] .pylab-toolbar2 {
-  background: #0f172a;
-  border-bottom-color: #1e293b;
+  background: #161B22;
+  border-bottom-color: #30363D;
 }
 
 .pylab-toolbar-editor {
@@ -2727,7 +2771,7 @@ body.pylab-active .thin-scrollbar {
   border-left: 1px solid #e5e7eb;
 }
 [data-theme='dark'] .pylab-toolbar-output {
-  border-left-color: #1e293b;
+  border-left-color: #30363D;
 }
 
 .pylab-toolbar-editor-left,
@@ -2791,15 +2835,18 @@ body.pylab-active .thin-scrollbar {
 
 /* Primary Run Button */
 .pylab-run-btn2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #2563eb;
   color: white;
   border: none;
-  padding: 6px 24px;
-  border-radius: 4px;
+  padding: 5px 14px;
+  border-radius: 6px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.18s ease;
 }
 .pylab-run-btn2:hover:not(:disabled) {
   background: #1d4ed8;
@@ -2847,7 +2894,8 @@ body.pylab-active .thin-scrollbar {
 .pylab-workspace2 {
   display: flex;
   flex: 1;
-  height: 100%;
+  min-width: 0;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -2855,7 +2903,8 @@ body.pylab-active .thin-scrollbar {
 .pylab-output2 {
   flex: 1;
   display: flex;
-  height: 100%;
+  min-width: 0;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -2864,12 +2913,13 @@ body.pylab-active .thin-scrollbar {
   background: #fafafa;
 }
 [data-theme='dark'] .pylab-editor2 {
-  background: #1e293b;
+  background: #0D1117;
 }
 
 /* Line Numbers */
 .pylab-linenum {
-  padding: 12px 8px;
+  padding: 12px 8px 40px 8px !important;
+  box-sizing: border-box;
   background: #f3f4f6;
   color: #9ca3af;
   font-family: var(--ifm-font-family-monospace);
@@ -2882,15 +2932,19 @@ body.pylab-active .thin-scrollbar {
   overflow: hidden;
 }
 [data-theme='dark'] .pylab-linenum {
-  background: #0f172a;
-  color: #475569;
-  border-color: #334155;
+  background: #0D1117;
+  color: #7D8590;
+  border-color: #30363D;
 }
 
 /* Editor Wrapper */
 .pylab-editor-inner {
   position: relative;
   flex: 1;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -2902,25 +2956,29 @@ body.pylab-active .thin-scrollbar {
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 12px 16px;
+  padding: 12px 16px 40px 16px !important;
+  box-sizing: border-box;
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.9rem;
   line-height: 1.5;
   margin: 0;
   border: none;
-  overflow: auto;
   white-space: pre;
   tab-size: 4;
 }
 
+.pylab-input {
+  overflow: auto;
+}
+
 .pylab-highlight {
+  overflow: hidden;
   pointer-events: none;
   color: #1f2937;
   z-index: 1;
-  background: transparent !important;
 }
 [data-theme='dark'] .pylab-highlight {
-  color: #e2e8f0;
+  color: #E6EDF3;
 }
 
 .pylab-active-line-overlay {
@@ -2937,12 +2995,16 @@ body.pylab-active .thin-scrollbar {
 }
 
 [data-theme='dark'] .pylab-active-line-overlay {
-  background-color: rgba(34, 197, 94, 0.25);
+  background-color: rgba(56, 139, 253, 0.12);
+  border-left-color: #58A6FF;
 }
 
 .pylab-active-num {
   color: #22c55e !important;
   font-weight: bold;
+}
+[data-theme='dark'] .pylab-active-num {
+  color: #58A6FF !important;
 }
 
 .pylab-input {
@@ -2954,7 +3016,7 @@ body.pylab-active .thin-scrollbar {
   resize: none;
 }
 [data-theme='dark'] .pylab-input {
-  caret-color: #fff;
+  caret-color: #58A6FF;
 }
 
 .pylab-input::selection {
@@ -2966,25 +3028,25 @@ body.pylab-active .thin-scrollbar {
 }
 
 /* --- Syntax Highlighting Tokens --- */
-.pyhl-keyword { color: #0000ff; font-weight: 600; }
-.pyhl-builtin { color: #008000; }
-.pyhl-string { color: #a31515; }
-.pyhl-number { color: #098658; }
-.pyhl-comment { color: #008000; font-style: italic; }
-.pyhl-func { color: #795e26; }
-.pyhl-self { color: #0000ff; }
-.pyhl-decorator { color: #267f99; }
-.pyhl-operator { color: #000000; }
+.pyhl-keyword { color: #7c3aed; font-weight: 600; } /* Purple */
+.pyhl-builtin { color: #2563eb; } /* Blue */
+.pyhl-func { color: #2563eb; } /* Blue */
+.pyhl-string { color: #16a34a; } /* Green */
+.pyhl-number { color: #ea580c; } /* Orange */
+.pyhl-comment { color: #5b7065; font-style: italic; opacity: 0.85; } /* Muted Gray-Green */
+.pyhl-self { color: #7c3aed; }
+.pyhl-decorator { color: #0891b2; }
+.pyhl-operator { color: #1e293b; }
 
-[data-theme='dark'] .pyhl-keyword { color: #569cd6; }
-[data-theme='dark'] .pyhl-builtin { color: #4ec9b0; }
-[data-theme='dark'] .pyhl-string { color: #ce9178; }
-[data-theme='dark'] .pyhl-number { color: #b5cea8; }
-[data-theme='dark'] .pyhl-comment { color: #6a9955; }
-[data-theme='dark'] .pyhl-func { color: #dcdcaa; }
-[data-theme='dark'] .pyhl-self { color: #569cd6; }
-[data-theme='dark'] .pyhl-decorator { color: #4ec9b0; }
-[data-theme='dark'] .pyhl-operator { color: #d4d4d4; }
+[data-theme='dark'] .pyhl-keyword { color: #c084fc; } /* Purple */
+[data-theme='dark'] .pyhl-builtin { color: #60a5fa; } /* Blue */
+[data-theme='dark'] .pyhl-func { color: #60a5fa; } /* Blue */
+[data-theme='dark'] .pyhl-string { color: #4ade80; } /* Green */
+[data-theme='dark'] .pyhl-number { color: #fb923c; } /* Orange */
+[data-theme='dark'] .pyhl-comment { color: #829c8d; font-style: italic; opacity: 0.85; } /* Muted Gray-Green */
+[data-theme='dark'] .pyhl-self { color: #c084fc; }
+[data-theme='dark'] .pyhl-decorator { color: #22d3ee; }
+[data-theme='dark'] .pyhl-operator { color: #e2e8f0; }
 
 /* --- Divider --- */
 .pylab-divider2 {
@@ -2993,7 +3055,7 @@ body.pylab-active .thin-scrollbar {
   cursor: col-resize; /* Can implement resizer later if needed */
 }
 [data-theme='dark'] .pylab-divider2 {
-  background: #334155;
+  background: #21262D;
 }
 
 /* --- Output Pane --- */
@@ -3004,7 +3066,7 @@ body.pylab-active .thin-scrollbar {
   overflow-y: auto;
 }
 [data-theme='dark'] .pylab-output2 {
-  background: #0f172a;
+  background: #0D1117;
 }
 
 .pylab-out-text {
@@ -3130,6 +3192,91 @@ body.pylab-active .thin-scrollbar {
   color: inherit;
 }
 
+/* --- Python Lab UI & UX Improvements --- */
+
+/* Reset Example Button */
+.pylab-reset-btn {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #4b5563;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+.pylab-reset-btn:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+  border-color: #9ca3af;
+}
+[data-theme='dark'] .pylab-reset-btn {
+  border-color: #475569;
+  color: #94a3b8;
+}
+[data-theme='dark'] .pylab-reset-btn:hover {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #64748b;
+}
+
+/* Empty Console / Placeholder State */
+.pylab-empty-console {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #6b7280;
+  padding: 24px;
+}
+[data-theme='dark'] .pylab-empty-console {
+  color: #94a3b8;
+}
+.pylab-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+.pylab-empty-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #374151;
+}
+[data-theme='dark'] .pylab-empty-title {
+  color: #f1f5f9;
+}
+.pylab-empty-hint {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+[data-theme='dark'] .pylab-empty-hint {
+  color: #64748b;
+}
+.pylab-empty-hint strong {
+  color: #6b7280;
+}
+[data-theme='dark'] .pylab-empty-hint strong {
+  color: #94a3b8;
+}
+
+/* Error Console State */
+.pylab-error-state {
+  color: #ef4444 !important; /* Soft Red */
+}
+[data-theme='dark'] .pylab-error-state {
+  color: #fca5a5 !important; /* Soft Red */
+}
+
+/* Small adjustments for output container height when showing empty */
+.pylab-output2 {
+  min-height: 150px;
+}
+
 /* ============================================
    PYTHON VISUAL DEBUGGER
    ============================================ */
@@ -3138,12 +3285,13 @@ body.pylab-active .thin-scrollbar {
 .pylab-debug-btn2 {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
-  padding: 7px 16px;
+  padding: 5px 14px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   background: linear-gradient(135deg, #F59E0B, #D97706);
   color: #FFFFFF;
