@@ -306,6 +306,8 @@ export default function PythonLab() {
 import sys
 import builtins
 import js
+import ast
+import inspect
 from io import StringIO
 
 sys.stdout = StringIO()
@@ -334,11 +336,53 @@ def fallback_input(prompt=""):
     return res
 
 builtins.input = fallback_input
+
+class __InputTransformer(ast.NodeTransformer):
+    """Safely transforms input() calls to await __custom_input() using AST."""
+    def visit_Call(self, node):
+        self.generic_visit(node)
+        if isinstance(node.func, ast.Name) and node.func.id == 'input':
+            node.func.id = '__custom_input'
+            return ast.Await(value=node)
+        return node
+
+__LOOP_LIMIT = 100000
+
+class __LoopGuardTransformer(ast.NodeTransformer):
+    """Injects iteration counter into every loop to prevent infinite loops from freezing the browser."""
+    def _make_guard(self):
+        return ast.parse('''
+__loop_guard[0] += 1
+if __loop_guard[0] > __LOOP_LIMIT:
+    raise RuntimeError('Loop limit exceeded (' + str(__LOOP_LIMIT) + ' iterations). Your code may have an infinite loop. Check if your loop condition will ever become False.')
+''').body
+    def visit_While(self, node):
+        self.generic_visit(node)
+        node.body = self._make_guard() + node.body
+        return node
+    def visit_For(self, node):
+        self.generic_visit(node)
+        node.body = self._make_guard() + node.body
+        return node
+
+async def __run_with_safe_input(code_str):
+    """Execute user code with safe AST-based input() and loop guard transformation."""
+    tree = ast.parse(code_str)
+    # Apply input transformation
+    tree = __InputTransformer().visit(tree)
+    # Apply loop guard injection
+    tree = __LoopGuardTransformer().visit(tree)
+    ast.fix_missing_locations(tree)
+    # Initialize loop guard counter
+    globals()['__loop_guard'] = [0]
+    compiled = compile(tree, '<user>', 'exec', ast.PyCF_ALLOW_TOP_LEVEL_AWAIT)
+    result = eval(compiled, globals())
+    if inspect.isawaitable(result):
+        await result
       `);
 
       try {
-        const asyncCode = code.replace(/(^|[^a-zA-Z0-9_.])input\s*\(/g, '$1await __custom_input(');
-        await pyodide.runPythonAsync(asyncCode);
+        await pyodide.runPythonAsync(`await __run_with_safe_input(${JSON.stringify(code)})`);
       } catch (pyErr) {
         setHasError(true);
         const stderr = pyodide.runPython('sys.stderr.getvalue()');
@@ -504,12 +548,13 @@ builtins.input = fallback_input
     try {
       const pyodide = pyodideRef.current;
 
-      // Define the AST-based instrumenter (much faster than sys.settrace in WASM)
+      // sys.settrace-based step recorder for educational debugging
       await pyodide.runPythonAsync(`
-import sys, json, copy, ast, inspect
+import sys, json, ast, builtins, traceback as _tb
 from io import StringIO
+import js
 
-async def __debug_trace_and_run(user_code, max_steps):
+def __debug_trace_and_run(user_code, max_steps):
     steps = []
     output_stream = StringIO()
     old_stdout = sys.stdout
@@ -517,37 +562,54 @@ async def __debug_trace_and_run(user_code, max_steps):
     sys.stdout = output_stream
     sys.stderr = output_stream
     step_count = [0]
-    
-    import builtins
-    import js
+    last_stdout_len = [0]
+    prev_vars = [{}]
+    last_line = [0]
+
+    # Cycle detection for infinite loops
+    recent_lines = []
+    CYCLE_WINDOW = 20
+    is_infinite_loop = [False]
+
     old_input = builtins.input
-    async def debug_input(prompt_text=""):
-        js.window.__append_output(output_stream.getvalue())
-        output_stream.truncate(0)
-        output_stream.seek(0)
-        
-        res = await js.window.__request_terminal_input(prompt_text)
-        if res is None:
-            raise EOFError("EOF")
-        js.window.__append_output(res + "\\n")
-        output_stream.write(prompt_text + res + "\\n")
-        return res
-    builtins.input = debug_input
-    global __custom_input
-    __custom_input = debug_input
-    
+
+    def debug_sync_input(prompt_text=""):
+        """Synchronous input handler for debug mode using browser prompt."""
+        output_stream.flush()
+        val = js.prompt(str(prompt_text) if prompt_text else "Enter input:")
+        if val is None:
+            raise EOFError("Input cancelled")
+        result = str(val)
+        output_stream.write(str(prompt_text) + result + "\\n")
+        return result
+
+    builtins.input = debug_sync_input
+
     class StepLimitExceeded(Exception):
         pass
-    
+
     def tracer(frame, event, arg):
         if frame.f_code.co_filename != '<debug>':
-            return None # CRITICAL FIX: Do not trace inside builtins like print(), which froze the browser!
-            
+            return None  # Only trace user code, not builtins
+
         if event == 'line':
             step_count[0] += 1
             if step_count[0] > max_steps:
                 raise StepLimitExceeded()
-                
+
+            # Cycle detection: if same few lines repeat, likely infinite loop
+            recent_lines.append(frame.f_lineno)
+            if len(recent_lines) > CYCLE_WINDOW:
+                recent_lines.pop(0)
+            if (len(recent_lines) == CYCLE_WINDOW and
+                len(set(recent_lines)) <= 3 and
+                step_count[0] > 10):
+                is_infinite_loop[0] = True
+                raise StepLimitExceeded()
+
+            last_line[0] = frame.f_lineno
+
+            # Collect user variables (skip private and callable)
             user_vars = {}
             for k, v in frame.f_locals.items():
                 if not k.startswith('_') and not callable(v):
@@ -555,63 +617,125 @@ async def __debug_trace_and_run(user_code, max_steps):
                         user_vars[k] = repr(v)
                     except:
                         user_vars[k] = '<unrepresentable>'
-                        
+
+            # Variable change detection
+            var_changes = {}
+            for k, v_repr in user_vars.items():
+                if k not in prev_vars[0]:
+                    var_changes[k] = 'created'
+                elif prev_vars[0][k] != v_repr:
+                    var_changes[k] = 'changed'
+            for k in prev_vars[0]:
+                if k not in user_vars:
+                    var_changes[k] = 'removed'
+            prev_vars[0] = dict(user_vars)
+
+            # Incremental stdout (delta only, not full copy)
+            full_output = output_stream.getvalue()
+            stdout_delta = full_output[last_stdout_len[0]:]
+            last_stdout_len[0] = len(full_output)
+
             steps.append({
                 'line': frame.f_lineno,
                 'vars': user_vars,
-                'stdout': output_stream.getvalue(),
+                'var_changes': var_changes,
+                'stdout_delta': stdout_delta,
                 'event': event
             })
         return tracer
-    
+
     sys.settrace(tracer)
     truncated = False
-    
+
     try:
-        compiled = compile(user_code, '<debug>', 'exec', ast.PyCF_ALLOW_TOP_LEVEL_AWAIT)
-        res = eval(compiled, {'__custom_input': debug_input})
-        if inspect.isawaitable(res):
-            await res
+        compiled = compile(user_code, '<debug>', 'exec')
+        exec_globals = {'__builtins__': __builtins__}
+        exec(compiled, exec_globals)
     except StepLimitExceeded:
         truncated = True
+        remaining_output = output_stream.getvalue()[last_stdout_len[0]:]
+        if is_infinite_loop[0]:
+            stop_reason = 'infinite_loop_suspected'
+            suggestion = f'Your code appears stuck in an infinite loop around line {last_line[0]}. Check if your loop condition ever becomes False.'
+        else:
+            stop_reason = 'step_limit_exceeded'
+            suggestion = f'Execution stopped after {step_count[0]} steps. Your program might have a very long loop near line {last_line[0]}.'
         steps.append({
-            'line': -1, 'vars': {},
-            'stdout': output_stream.getvalue(),
+            'line': last_line[0],
+            'vars': prev_vars[0],
+            'var_changes': {},
+            'stdout_delta': remaining_output,
             'event': 'truncated',
-            'error': f'Execution truncated at {max_steps} steps.'
+            'error': f'Execution stopped after {step_count[0]} steps.',
+            'stop_reason': stop_reason,
+            'last_line': last_line[0],
+            'total_steps': step_count[0],
+            'suggestion': suggestion
+        })
+    except SyntaxError as e:
+        remaining_output = output_stream.getvalue()[last_stdout_len[0]:]
+        steps.append({
+            'line': e.lineno or -1,
+            'vars': {},
+            'var_changes': {},
+            'stdout_delta': remaining_output,
+            'event': 'exception',
+            'error': f'SyntaxError: {e.msg} (line {e.lineno})',
+            'error_type': 'SyntaxError',
+            'error_line': e.lineno or -1
         })
     except Exception as e:
+        remaining_output = output_stream.getvalue()[last_stdout_len[0]:]
+        tb = _tb.extract_tb(e.__traceback__)
+        error_line = -1
+        for frame_info in reversed(tb):
+            if frame_info.filename == '<debug>':
+                error_line = frame_info.lineno
+                break
         steps.append({
-            'line': -1, 'vars': {},
-            'stdout': output_stream.getvalue(),
+            'line': error_line,
+            'vars': prev_vars[0],
+            'var_changes': {},
+            'stdout_delta': remaining_output,
             'event': 'exception',
-            'error': f'{type(e).__name__}: {e}'
+            'error': f'{type(e).__name__}: {e}',
+            'error_type': type(e).__name__,
+            'error_line': error_line
         })
     finally:
         sys.settrace(None)
         sys.stdout = old_stdout
         sys.stderr = old_stderr
         builtins.input = old_input
-    
+
     # Add final completed step
     if not truncated and len(steps) > 0 and steps[-1].get('event') != 'exception':
+        remaining = output_stream.getvalue()[last_stdout_len[0]:]
         steps.append({
             'line': -1,
             'vars': steps[-1]['vars'] if steps else {},
-            'stdout': output_stream.getvalue(),
+            'var_changes': {},
+            'stdout_delta': remaining,
             'event': 'finished'
         })
-    
+
     return json.dumps(steps)
       `);
 
-      // Run the instrumenter with the user's code
-      const asyncDebugCode = code.replace(/(^|[^a-zA-Z0-9_.])input\s*\(/g, '$1await __custom_input(');
+      // Execute trace on unmodified user code (no regex replacement)
       const result = await pyodide.runPythonAsync(
-        `await __debug_trace_and_run(${JSON.stringify(asyncDebugCode)}, ${MAX_DEBUG_STEPS})`
+        `__debug_trace_and_run(${JSON.stringify(code)}, ${MAX_DEBUG_STEPS})`
       );
 
       const steps = JSON.parse(result);
+
+      // Post-process: reconstruct cumulative stdout from deltas
+      let cumulativeStdout = '';
+      for (const step of steps) {
+        cumulativeStdout += (step.stdout_delta || '');
+        step.stdout = cumulativeStdout;
+        delete step.stdout_delta;
+      }
 
       if (steps.length === 0) {
         setDebugError('No executable steps found in the code.');

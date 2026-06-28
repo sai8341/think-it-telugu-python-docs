@@ -2976,7 +2976,6 @@ pre,
   pointer-events: none;
   color: #1f2937;
   z-index: 1;
-  background: transparent !important;
 }
 [data-theme='dark'] .pylab-highlight {
   color: #E6EDF3;
@@ -3006,28 +3005,6 @@ pre,
 }
 [data-theme='dark'] .pylab-active-num {
   color: #58A6FF !important;
-}
-
-.pylab-active-line-overlay {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 1.5em;
-  background-color: rgba(34, 197, 94, 0.2);
-  border-left: 3px solid #22c55e;
-  z-index: 1; /* Sit above pre background */
-  pointer-events: none;
-  transition: top 0.15s ease-out;
-  font-size: 0.9rem; /* Must match .pylab-input */
-}
-
-[data-theme='dark'] .pylab-active-line-overlay {
-  background-color: rgba(34, 197, 94, 0.25);
-}
-
-.pylab-active-num {
-  color: #22c55e !important;
-  font-weight: bold;
 }
 
 .pylab-input {
