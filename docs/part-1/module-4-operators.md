@@ -159,30 +159,46 @@ print(x is z) # Output: True  (They point to the exact same memory location)
 
 ---
 
-## 4.7 Operator Precedence & Associativity
+## 4.7 Operator Precedence & The BODMAS Rule (BODMAS నియమం)
 
-When you write expressions with multiple operators, Python evaluates them in a specific order (similar to mathematical rules like BODMAS or PEMDAS).
+When you write an expression with multiple operators (like `5 + 3 * 2`), how does Python decide which one to calculate first?
 
-### Order of Evaluation (Highest to Lowest Priority):
-1. **Parentheses `()`** (Used to group calculations and force evaluation first)
-2. **Exponentiation `**`** (Evaluates Right-to-Left!)
-3. **Multiplication `*`, Division `/`, Floor Division `//`, Modulus `%`** (Evaluates Left-to-Right)
-4. **Addition `+`, Subtraction `-`** (Evaluates Left-to-Right)
-5. **Comparisons (`==`, `!=`, `>`, `<`, etc.)**
-6. **Logical Operators (`not`, `and`, `or`)**
+To understand this easily, we can use the **BODMAS** rule that you learned in school! Python follows almost the exact same priority order:
 
+| BODMAS Letter | Math Meaning | Python Operator | Priority |
+| :--- | :--- | :--- | :--- |
+| **B** (Brackets) | Parentheses | **`()`** | **1st (Highest)** |
+| **O** (Order) | Powers / Exponents | **`**`** | **2nd** |
+| **D** / **M** | Division / Multiplication | **`/`, `//`, `%`, `*`** | **3rd** |
+| **A** / **S** | Addition / Subtraction | **`+`, `-`** | **4th** |
+
+> **Coding Rule Addition:** After solving all math operators, Python evaluates **Comparison Operators** (like `==`, `!=`, `>`) and finally **Logical Operators** (like `not`, `and`, `or`).
+
+---
+
+### Step-by-Step Tracing Example (BODMAS in action):
+
+Let's trace how Python solves this complex expression:
 ```python
-# Example 1: Multiplication evaluates before Addition
-result_1 = 5 + 3 * 2
-print(result_1) # Output: 11 (Since 3 * 2 is evaluated first)
-
-# Example 2: Parentheses override standard precedence
-result_2 = (5 + 3) * 2
-print(result_2) # Output: 16
+expression = (2 + 3) * 4 ** 2 // 8
 ```
 
-### Exponentiation Right-to-Left Trap:
-Normally, math is calculated left-to-right. But exponentiation (`**`) evaluates right-to-left!
+1. **Step 1: Solve Brackets `()`**
+   * `(2 + 3)` becomes `5`.
+   * Expression is now: `5 * 4 ** 2 // 8`
+2. **Step 2: Solve Exponents (Powers) `**`**
+   * `4 ** 2` (4 square) becomes `16`.
+   * Expression is now: `5 * 16 // 8`
+3. **Step 3: Solve Multiplication & Division (Left-to-Right)**
+   * Since `*` comes first from the left, solve `5 * 16` first = `80`.
+   * Expression is now: `80 // 8`
+   * Finally, solve the Floor Division `80 // 8` = `10`.
+4. **Final Result:** `10`
+
+---
+
+### The Exponentiation `**` Right-to-Left Trap:
+Normally, calculations happen from left to right. However, **Exponentiation (`**`) evaluates from right to left**!
 ```python
 # Calculating 2 ** 3 ** 2
 # Python evaluates 3 ** 2 first (9)
@@ -219,7 +235,8 @@ Try writing and running these programs in your Python Lab:
 **Answer:** `3`. Exponentiation (`**`) has higher precedence than multiplication (`*`). So `1 ** 3` is evaluated first (which is `1`), and then `3 * 1` is evaluated, resulting in `3`.
 
 **Q3. What is the difference between `==` and `is` operators?**  
-**Answer:** `==` is a value comparison operator. It checks if the values of two objects are equal. `is` is an identity comparison operator. It checks if both variables point to the exact same object in the memory (shares the same memory address).
+**Answer:** `==` is a value comparison operator. It checks if the values of two objects are equal. `is` is an identity comparison comparison operator. It checks if both variables point to the exact same object in the memory (shares the same memory address).
+
 
 ---
 
