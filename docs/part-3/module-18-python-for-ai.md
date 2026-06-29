@@ -87,20 +87,70 @@ print(response.text)
 
 ---
 
-## 18.6 Next Steps in Your Learning Journey
+## 18.6 Python Virtual Environments (venv)
 
-Congratulations! You have completed the foundational Python course. Here is what you can learn next depending on your goals:
+When working on professional Python projects, different projects might require different versions of libraries (e.g., Project A needs `requests` v2.20, but Project B needs `requests` v2.30). 
+To avoid conflicts, we use **Virtual Environments** (`venv`) to create isolated folders for each project.
 
-1. **AI & Machine Learning Path:**
-   * **NumPy:** For handling matrices and math calculations.
-   * **Pandas:** For loading and cleaning tabular data (Excel sheets, CSVs).
-   * **Scikit-Learn:** For training your first machine learning models.
-2. **AI Agents & Automation:**
-   * **CrewAI / LangChain:** For building autonomous AI agents.
-   * **Playwright:** For automating browser tasks.
-3. **Web Development:**
-   * **FastAPI:** For building your own APIs and backend servers.
+### 1. Creating a Virtual Environment:
+Open your terminal in your project directory and run:
+```bash
+# Windows / macOS / Linux
+python -m venv myenv
+```
+*(This creates a folder named `myenv` containing a copy of Python and pip).*
 
-:::tip Congratulations!
-You have successfully built a strong Python foundation. Remember the golden rule: **"Don't just read code, write it!"** Keep practicing!
-:::
+### 2. Activating the Environment:
+Before installing packages, you must activate it:
+*   **Windows (PowerShell):**
+    ```bash
+    .\myenv\Scripts\Activate.ps1
+    ```
+*   **Windows (Command Prompt):**
+    ```cmd
+    .\myenv\Scripts\activate.bat
+    ```
+*   **macOS / Linux (Terminal):**
+    ```bash
+    source myenv/bin/activate
+    ```
+*(Once activated, you will see `(myenv)` written in front of your terminal command prompt).*
+
+### 3. Deactivating:
+To exit the virtual environment and return to global Python, simply type:
+```bash
+deactivate
+```
+
+---
+
+## 18.7 Practice Exercises
+
+1. **Venv Setup Practice:**
+   Create a new directory locally, initialize a virtual environment named `venv-test`, activate it, and run `pip list` to verify it is completely empty of external packages.
+2. **Local JSON File parsing:**
+   Write a Python script that parses a mock JSON string representing a product catalog and prints the name and price of items costing more than $50.
+
+---
+
+## 18.8 Placement Q&A (Interview Prep)
+
+**Q1. What is a Virtual Environment in Python and why is it used?**  
+**Answer:** A virtual environment is an isolated directory tree that contains a specific Python installation and a set of additional packages. It is used to prevent dependency conflicts between different Python projects running on the same machine.
+
+**Q2. What is an API and how does Python interact with it?**  
+**Answer:** An API (Application Programming Interface) is a software intermediary that allows two applications to talk to each other. Python interacts with APIs by sending HTTP requests (GET, POST, etc.) using libraries like `requests` and parsing the returned JSON data.
+
+**Q3. How do you install third-party packages in Python?**  
+**Answer:** Using `pip` (Python package installer) by running `pip install package_name` in the terminal.
+
+---
+
+## 18.9 Module 18 Cheat Sheet
+
+* **Library:** Reusable code package written by others.
+* **API:** Bridge for software communication.
+* **requests:** `requests.get(url)` to fetch web data; `.json()` to parse JSON response.
+* **Virtual Environment:** `python -m venv env_name` (creation); `deactivate` (exit).
+* **Next Steps:** NumPy & Pandas (Data Science/AI), FastAPI (Web Backend), Playwright (Automation).
+

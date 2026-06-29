@@ -159,3 +159,86 @@ for i in range(1, 4):     # Outer loop (controls rows)
 :::tip Think About It
 Every time the outer loop runs once, the inner loop runs completely (3 times). Practicing nested loops is a great way to improve your logic skills!
 :::
+
+---
+
+## 6.8 Loop Else Blocks
+
+Python has a unique feature: you can write an `else` block after a `for` or `while` loop!
+*   **The Rule:** The `else` block runs **only if** the loop completes all its cycles naturally without hitting a `break` statement.
+*   **Real-World Use:** Checking if an item exists in a list. If the loop finished and we never stopped it, we know the item is not there!
+
+```python
+# Search for even numbers
+numbers = [1, 3, 5, 7]
+
+for num in numbers:
+    if num % 2 == 0:
+        print("Found an even number!")
+        break
+else:
+    # Runs only if the loop never hit "break"
+    print("No even numbers found in the list.")
+```
+
+---
+
+## 6.9 Pattern-Based Programming Problems
+
+Pattern printing is heavily asked in university labs and tech exams to test logic building:
+
+1. **Right-Angled Triangle of Stars:**
+   ```text
+   * 
+   * * 
+   * * * 
+   * * * * 
+   ```
+   *Hint: Row number `i` prints `i` stars.*
+   ```python
+   for i in range(1, 5):
+       for j in range(1, i + 1):
+           print("*", end=" ")
+       print()
+   ```
+
+2. **Inverted Triangle Pattern:**
+   ```text
+   * * * * 
+   * * * 
+   * * 
+   * 
+   ```
+
+3. **Number Pyramid:**
+   ```text
+   1 
+   2 2 
+   3 3 3 
+   ```
+
+---
+
+## 6.10 Placement Q&A (Interview Prep)
+
+**Q1. What is the difference between `break`, `continue`, and `pass` in Python?**  
+**Answer:** 
+* `break` stops the loop immediately and exits.
+* `continue` skips the rest of the current loop cycle and moves to the next iteration.
+* `pass` is a null statement (placeholder) that does nothing; it is used to avoid syntax errors in empty code blocks.
+
+**Q2. When does the `else` block of a Python loop execute?**  
+**Answer:** The `else` block of a loop executes when the loop terminates naturally (after iterating through all items or when the condition becomes False), but **not** if the loop is exited prematurely via a `break` statement.
+
+**Q3. How do you create an infinite loop using `while`?**  
+**Answer:** By setting the condition to always be `True` and not modifying the loop variable inside, e.g., `while True: print("running")`.
+
+---
+
+## 6.11 Module 6 Cheat Sheet
+
+* **for loop:** Best when you know the number of iterations beforehand.
+* **while loop:** Best when you repeat code until a specific condition changes.
+* **range(start, stop, step):** Generates number sequences. Stop value is **exclusive**.
+* **Loop Else:** Code in `else` only runs if no `break` occurred inside the loop.
+

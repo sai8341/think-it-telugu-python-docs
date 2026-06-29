@@ -181,3 +181,66 @@ print(num + 5) # Output: 50
 :::caution Warning
 If you try to convert a text string that is not a number (like `"hello"`) into an integer, Python will show a `ValueError`.
 :::
+
+---
+
+## 2.11 Operator Precedence & Associativity
+
+When you write expressions with multiple operators, Python needs to know which one to calculate first. This is decided by **Operator Precedence** (Priority).
+
+### Precedence Table (High to Low):
+1. **Parentheses `( )`** (Highest priority)
+2. **Exponentiation `**`** (Right-to-Left associativity!)
+3. **Multiplication `*`, Division `/`, Floor Division `//`, Modulus `%`** (Left-to-Right)
+4. **Addition `+`, Subtraction `-`** (Left-to-Right)
+
+### Exponentiation Right-to-Left Trap:
+Normally, math is calculated left-to-right. But `**` evaluates right-to-left!
+```python
+# Calculating 2 ** 3 ** 2
+# Python evaluates 3 ** 2 first (9)
+# Then it calculates 2 ** 9 = 512
+result = 2 ** 3 ** 2
+print(result) # Output: 512 (Not 64!)
+```
+
+### Floor Division vs. Float Division:
+- `/` always returns a **Float** (e.g., `5 / 2 = 2.5`).
+- `//` returns the **Floor integer** (truncates towards negative infinity, e.g., `5 // 2 = 2`, `-5 // 2 = -3`).
+
+---
+
+## 2.12 Practice Exercises
+
+Try writing and running these programs in your Python Lab:
+
+1. **Celsius to Fahrenheit Converter:**
+   Write a program that takes temperature in Celsius and converts it to Fahrenheit using the formula: `F = (C * 9/5) + 32`.
+2. **Leap Year Checker Concept:**
+   Determine whether a user-entered year is a leap year (divisible by 4, but not by 100 unless also divisible by 400).
+3. **Compound Interest:**
+   Calculate compound interest based on user inputs for Principal, Rate of interest, and Time.
+
+---
+
+## 2.13 Placement Q&A (Interview Prep)
+
+**Q1. What is the difference between `/` and `//` operators in Python?**  
+**Answer:** `/` is float division and always returns a decimal float value (e.g., `10 / 2` is `5.0`). `//` is floor division which rounds down the result to the nearest whole integer (e.g., `10 // 3` is `3`, `-10 // 3` is `-3` or `-4` depending on signs).
+
+**Q2. Is Python a statically typed or dynamically typed language?**  
+**Answer:** Python is dynamically typed. You do not need to declare a variable's data type when creating it; Python determines the type automatically at runtime based on the value assigned.
+
+**Q3. What will be the output of `print(3 * 1 ** 3)`?**  
+**Answer:** `3`. Exponentiation (`**`) has higher precedence than multiplication (`*`). So `1 ** 3` is evaluated first (which is `1`), and then `3 * 1` is evaluated, resulting in `3`.
+
+---
+
+## 2.14 Module 2 Cheat Sheet
+
+* **Variable Name Rules:** Must start with a letter/underscore; case-sensitive; no spaces/hyphens; no keywords.
+* **Core Types:** `int` (whole numbers), `float` (decimals), `str` (text in quotes), `bool` (`True`/`False`), `NoneType` (`None` placeholder).
+* **Built-in Functions:**
+  * `type(var)`: Check data type.
+  * `int()`, `float()`, `str()`: Type cast values.
+

@@ -213,3 +213,98 @@ print(matrix[2][2]) # Output: 9
 :::tip Real-World Analogy
 Nested lists are used to represent board games like Tic-Tac-Toe, Chess, or maps in gaming grids!
 :::
+
+---
+
+## 8.6 List Comprehensions
+
+**List Comprehension** is a concise, "Pythonic" way to create new lists based on existing sequences or loops. It allows you to write loops in a single line!
+
+### Syntax:
+```python
+new_list = [expression for item in iterable if condition]
+```
+
+### Traditional Loop vs. List Comprehension:
+```python
+# Traditional Loop (5 lines)
+squares = []
+for x in range(1, 6):
+    squares.append(x ** 2)
+print(squares) # Output: [1, 4, 9, 16, 25]
+
+# List Comprehension (1 line!)
+squares_short = [x ** 2 for x in range(1, 6)]
+print(squares_short) # Output: [1, 4, 9, 16, 25]
+```
+
+### List Comprehension with Condition (Filter):
+```python
+# Extract even numbers
+nums = [1, 2, 3, 4, 5, 6]
+evens = [x for x in nums if x % 2 == 0]
+print(evens) # Output: [2, 4, 6]
+```
+
+---
+
+## 8.7 Mutability Referencing & Copying Quirks
+
+Since lists are **Mutable** (modifiable), when you assign a list to a new variable, Python does **not** create a new list. It simply creates a reference (link) to the same memory location!
+
+```python
+list_a = [1, 2, 3]
+list_b = list_a # B points to the exact same list in memory!
+
+list_b.append(4)
+
+print("List A:", list_a) # Output: [1, 2, 3, 4] (A changed too!)
+print("List B:", list_b) # Output: [1, 2, 3, 4]
+```
+
+### How to create an independent copy:
+To avoid this side effect, always use the `.copy()` method or slicing `[:]`:
+```python
+list_a = [1, 2, 3]
+list_c = list_a.copy() # Creates a separate, independent copy
+
+list_c.append(4)
+
+print("List A:", list_a) # Output: [1, 2, 3] (Remains unchanged!)
+print("List C:", list_c) # Output: [1, 2, 3, 4]
+```
+
+---
+
+## 8.8 Practice Exercises
+
+1. **Find Duplicates:**
+   Write a program that takes a list of numbers with duplicates and prints a new list containing only the unique numbers.
+2. **Matrix Row Sum:**
+   Write a program that calculates the sum of each row in a nested list matrix `[[1, 2], [3, 4]]`.
+3. **List filter:**
+   Create a list of numbers from 1 to 20. Use list comprehension to create a list of numbers divisible by 3.
+
+---
+
+## 8.9 Placement Q&A (Interview Prep)
+
+**Q1. What is the difference between `list.append()` and `list.extend()`?**  
+**Answer:** `append()` adds its argument as a single element at the end of the list (e.g., `[1, 2].append([3, 4])` results in `[1, 2, [3, 4]]`). `extend()` iterates over its argument and adds each item, merging the sequences (e.g., `[1, 2].extend([3, 4])` results in `[1, 2, 3, 4]`).
+
+**Q2. Explain the mutability of lists and how it affects memory assignment.**  
+**Answer:** Lists in Python are mutable, meaning their values can be modified in place. When a list is assigned to another variable (e.g., `B = A`), both variables reference the same memory object. Modifying the list through one variable affects the other. To avoid this, an explicit copy must be created using `A.copy()` or `A[:]`.
+
+**Q3. What is the output of `[x for x in range(5) if x % 2 != 0]`?**  
+**Answer:** `[1, 3]`. This list comprehension filters odd numbers from 0 to 4.
+
+---
+
+## 8.10 Module 8 Cheat Sheet
+
+* **Creation:** `my_list = [1, "two", 3.0]`
+* **Mutability:** Elements can be accessed and modified via indexing (e.g., `my_list[0] = 10`).
+* **Slicing:** `list[start:stop:step]` (stop is exclusive).
+* **Key Methods:** `append()`, `insert()`, `remove()`, `pop()`, `sort()`, `copy()`, `len()`.
+* **List Comprehension:** `[expression for item in iterable if condition]`.
+

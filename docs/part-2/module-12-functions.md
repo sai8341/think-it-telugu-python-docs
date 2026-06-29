@@ -134,3 +134,116 @@ When learning functions, beginners frequently run into these common pitfalls:
 2. **Indentation Errors:** All code inside a function must be indented (4 spaces or 1 Tab). Forgetting to indent causes an `IndentationError`.
 3. **Writing Code After return:** Any code placed below a `return` statement inside a function is completely ignored and will never run.
 4. **Confusing print() with return:** Expecting a function that only uses `print()` to store data inside a variable (it returns `None` instead!).
+
+---
+
+## 12.8 Arbitrary Arguments (*args & **kwargs)
+
+Sometimes you do not know beforehand how many arguments a user will pass to your function. Python solves this using `*args` and `**kwargs`.
+
+### 1. *args (Arbitrary Positional Arguments):
+Accepts any number of positional arguments as a **Tuple**.
+```python
+def sum_numbers(*args):
+    # args behaves like a Tuple: (10, 20, 30)
+    return sum(args)
+
+print(sum_numbers(10, 20))         # Output: 30
+print(sum_numbers(10, 20, 30, 40)) # Output: 100
+```
+
+### 2. **kwargs (Arbitrary Keyword Arguments):
+Accepts any number of keyword arguments as a **Dictionary**.
+```python
+def print_info(**kwargs):
+    # kwargs behaves like a Dictionary
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(name="Sai", role="Instructor", topic="Python")
+# Output:
+# name: Sai
+# role: Instructor
+# topic: Python
+```
+
+---
+
+## 12.9 Lambda Functions (Anonymous Functions)
+
+A **Lambda Function** is a small, one-line anonymous function (a function without a name). It is created using the `lambda` keyword.
+
+### Syntax:
+```python
+lambda arguments: expression
+```
+
+### Example:
+```python
+# Traditional way
+def double(x):
+    return x * 2
+
+# Lambda way
+double_lambda = lambda x: x * 2
+
+print(double(5))        # Output: 10
+print(double_lambda(5)) # Output: 10
+```
+*Note: Lambdas are commonly used as quick callbacks or inside higher-order functions like `map()` and `filter()`.*
+
+---
+
+## 12.10 Recursion
+
+**Recursion** is a programming technique where a function calls itself to solve a smaller version of the same problem.
+*   **Base Case:** The condition that stops the recursion from running forever.
+*   **Recursive Case:** The part where the function calls itself.
+
+### Factorial Example (`5! = 5 * 4 * 3 * 2 * 1`):
+```python
+def factorial(n):
+    # Base Case: stop when n is 1
+    if n == 1:
+        return 1
+    # Recursive Case
+    return n * factorial(n - 1)
+
+print(factorial(5)) # Output: 120
+```
+
+---
+
+## 12.11 Practice Exercises
+
+1. **Check Prime:**
+   Write a function `is_prime(num)` that returns `True` if a number is prime, and `False` otherwise.
+2. **Reverse String via Recursion:**
+   Write a recursive function to reverse a string (e.g., `"abc"` becomes `"cba"`).
+3. **Keyword Arguments Calculator:**
+   Write a function `calculate(**kwargs)` that accepts operations like `add=True` or `multiply=True` along with a list of numbers and performs the math.
+
+---
+
+## 12.12 Placement Q&A (Interview Prep)
+
+**Q1. What is the difference between `*args` and `**kwargs`?**  
+**Answer:** `*args` allows a function to accept any number of positional arguments which are received inside a Tuple. `**kwargs` allows passing any number of keyword arguments (named parameters like `name="Sai"`) which are received inside a Dictionary.
+
+**Q2. What is a Lambda function and when should you use it?**  
+**Answer:** A Lambda function is a small, single-expression anonymous function. It is defined using the `lambda` keyword and can take any number of arguments but has only one expression. It is best used for short-lived, simple operations, such as passing a sorting key to `list.sort()`.
+
+**Q3. What is the risk of recursive functions in Python?**  
+**Answer:** If a recursive function does not have a correct base case, it will call itself infinitely until the maximum call stack depth is exceeded, throwing a `RecursionError` (Stack Overflow).
+
+---
+
+## 12.13 Module 12 Cheat Sheet
+
+* **Definition:** `def func(param): return value`
+* **Default Values:** `def greet(name="User"): ...`
+* **Scope:** Local variables exist inside the function; Global variables exist outside.
+* **args/kwargs:** `*args` collects positional arguments (Tuple); `**kwargs` collects keyword arguments (Dictionary).
+* **Lambda:** `lambda x, y: x + y`
+* **Recursion:** Function calling itself with a stopping condition (Base Case).
+

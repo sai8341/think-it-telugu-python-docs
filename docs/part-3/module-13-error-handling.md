@@ -93,3 +93,55 @@ Closing database connection... (Always Runs)
 :::tip Golden Rule
 Never trust user inputs. Always use **try-except** blocks to protect your programs from crashing due to unexpected input values!
 :::
+
+---
+
+## 13.6 Raising Exceptions (The raise keyword)
+
+Sometimes, you want to trigger an error manually when a specific condition is violated in your program (e.g., a user enters a negative value for age). We do this using the **`raise`** keyword.
+
+```python
+def check_age(age):
+    if age < 0:
+        # Manually throw an error
+        raise ValueError("Age cannot be negative!")
+    print(f"Age {age} is valid.")
+
+try:
+    check_age(-5)
+except ValueError as e:
+    print("Caught manual error:", e)
+# Output: Caught manual error: Age cannot be negative!
+```
+
+---
+
+## 13.7 Practice Exercises
+
+1. **Custom ValueError Checker:**
+   Write a function `validate_username(username)` that raises a `ValueError` if the username is less than 5 characters. Handle the exception using a `try-except` block.
+2. **Safe List Access:**
+   Write a program that prompts the user to enter an index, and prints the item from a list `my_list = [10, 20, 30]`. Use error handling to catch `IndexError` if the index is out of bounds, and `ValueError` if the user enters a non-numeric index.
+
+---
+
+## 13.8 Placement Q&A (Interview Prep)
+
+**Q1. What is the difference between Syntax Errors and Exceptions in Python?**  
+**Answer:** Syntax Errors are grammar mistakes in the code that prevent Python from compiling or running it (e.g., missing colons). Exceptions are runtime errors that occur during execution even though the syntax is valid (e.g., dividing by zero or converting a bad string to integer).
+
+**Q2. What is the purpose of the `finally` block?**  
+**Answer:** The `finally` block runs regardless of whether an exception was raised or handled. It is typically used to perform cleanup actions, such as closing file streams, sockets, or database connections.
+
+**Q3. How do you trigger an exception manually in Python?**  
+**Answer:** You use the `raise` keyword followed by the exception class and an optional error message, e.g., `raise ValueError("Invalid number")`.
+
+---
+
+## 13.9 Module 13 Cheat Sheet
+
+* **Syntax vs. Runtime:** Syntax errors prevent execution; Exceptions happen while running.
+* **try-except:** `try` runs risky code; `except` handles specific runtime errors.
+* **finally:** Code that is guaranteed to run after try/except.
+* **raise:** Triggers an exception manually (`raise TypeError("...")`).
+
