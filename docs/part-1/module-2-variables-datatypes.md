@@ -184,63 +184,38 @@ If you try to convert a text string that is not a number (like `"hello"`) into a
 
 ---
 
-## 2.11 Operator Precedence & Associativity
-
-When you write expressions with multiple operators, Python needs to know which one to calculate first. This is decided by **Operator Precedence** (Priority).
-
-### Precedence Table (High to Low):
-1. **Parentheses `( )`** (Highest priority)
-2. **Exponentiation `**`** (Right-to-Left associativity!)
-3. **Multiplication `*`, Division `/`, Floor Division `//`, Modulus `%`** (Left-to-Right)
-4. **Addition `+`, Subtraction `-`** (Left-to-Right)
-
-### Exponentiation Right-to-Left Trap:
-Normally, math is calculated left-to-right. But `**` evaluates right-to-left!
-```python
-# Calculating 2 ** 3 ** 2
-# Python evaluates 3 ** 2 first (9)
-# Then it calculates 2 ** 9 = 512
-result = 2 ** 3 ** 2
-print(result) # Output: 512 (Not 64!)
-```
-
-### Floor Division vs. Float Division:
-- `/` always returns a **Float** (e.g., `5 / 2 = 2.5`).
-- `//` returns the **Floor integer** (truncates towards negative infinity, e.g., `5 // 2 = 2`, `-5 // 2 = -3`).
-
----
-
-## 2.12 Practice Exercises
+## 2.11 Practice Exercises
 
 Try writing and running these programs in your Python Lab:
 
 1. **Celsius to Fahrenheit Converter:**
-   Write a program that takes temperature in Celsius and converts it to Fahrenheit using the formula: `F = (C * 9/5) + 32`.
-2. **Leap Year Checker Concept:**
-   Determine whether a user-entered year is a leap year (divisible by 4, but not by 100 unless also divisible by 400).
-3. **Compound Interest:**
-   Calculate compound interest based on user inputs for Principal, Rate of interest, and Time.
+   Write a program that takes temperature in Celsius, stores it in a variable, and converts it to Fahrenheit using the formula: `F = (C * 9/5) + 32`.
+2. **Variable Swapper:**
+   Write a program to swap the values of two variables `a = 10` and `b = 20` so that `a` becomes 20 and `b` becomes 10.
+3. **Simple Interest Calculator:**
+   Calculate simple interest based on variables for Principal, Rate of interest, and Time.
 
 ---
 
-## 2.13 Placement Q&A (Interview Prep)
+## 2.12 Placement Q&A (Interview Prep)
 
-**Q1. What is the difference between `/` and `//` operators in Python?**  
-**Answer:** `/` is float division and always returns a decimal float value (e.g., `10 / 2` is `5.0`). `//` is floor division which rounds down the result to the nearest whole integer (e.g., `10 // 3` is `3`, `-10 // 3` is `-3` or `-4` depending on signs).
-
-**Q2. Is Python a statically typed or dynamically typed language?**  
+**Q1. Is Python a statically typed or dynamically typed language?**  
 **Answer:** Python is dynamically typed. You do not need to declare a variable's data type when creating it; Python determines the type automatically at runtime based on the value assigned.
 
-**Q3. What will be the output of `print(3 * 1 ** 3)`?**  
-**Answer:** `3`. Exponentiation (`**`) has higher precedence than multiplication (`*`). So `1 ** 3` is evaluated first (which is `1`), and then `3 * 1` is evaluated, resulting in `3`.
+**Q2. What is the difference between dynamic typing and static typing?**  
+**Answer:** In static typing (like Java/C++), a variable's type is fixed at compile-time and cannot change. In dynamic typing (like Python), a variable is just a label pointing to an object, and it can be reassigned to point to an object of a completely different data type later in the code.
+
+**Q3. What is the purpose of the `None` type in Python?**  
+**Answer:** `None` represents the absence of a value or a null value. It is commonly used as a placeholder for variables that will receive data later in the program's execution.
 
 ---
 
-## 2.14 Module 2 Cheat Sheet
+## 2.13 Module 2 Cheat Sheet
 
 * **Variable Name Rules:** Must start with a letter/underscore; case-sensitive; no spaces/hyphens; no keywords.
 * **Core Types:** `int` (whole numbers), `float` (decimals), `str` (text in quotes), `bool` (`True`/`False`), `NoneType` (`None` placeholder).
 * **Built-in Functions:**
   * `type(var)`: Check data type.
   * `int()`, `float()`, `str()`: Type cast values.
+
 

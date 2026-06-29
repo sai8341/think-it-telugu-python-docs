@@ -159,16 +159,16 @@ print(x is z) # Output: True  (They point to the exact same memory location)
 
 ---
 
-## 4.7 Operator Precedence
+## 4.7 Operator Precedence & Associativity
 
 When you write expressions with multiple operators, Python evaluates them in a specific order (similar to mathematical rules like BODMAS or PEMDAS).
 
 ### Order of Evaluation (Highest to Lowest Priority):
 1. **Parentheses `()`** (Used to group calculations and force evaluation first)
-2. **Exponentiation `**`**
-3. **Multiplication `*`, Division `/`, Floor Division `//`, Modulus `%`**
-4. **Addition `+`, Subtraction `-`**
-5. **Comparisons (`==`, `>`, etc.)**
+2. **Exponentiation `**`** (Evaluates Right-to-Left!)
+3. **Multiplication `*`, Division `/`, Floor Division `//`, Modulus `%`** (Evaluates Left-to-Right)
+4. **Addition `+`, Subtraction `-`** (Evaluates Left-to-Right)
+5. **Comparisons (`==`, `!=`, `>`, `<`, etc.)**
 6. **Logical Operators (`not`, `and`, `or`)**
 
 ```python
@@ -180,3 +180,55 @@ print(result_1) # Output: 11 (Since 3 * 2 is evaluated first)
 result_2 = (5 + 3) * 2
 print(result_2) # Output: 16
 ```
+
+### Exponentiation Right-to-Left Trap:
+Normally, math is calculated left-to-right. But exponentiation (`**`) evaluates right-to-left!
+```python
+# Calculating 2 ** 3 ** 2
+# Python evaluates 3 ** 2 first (9)
+# Then it calculates 2 ** 9 = 512
+result = 2 ** 3 ** 2
+print(result) # Output: 512 (Not 64!)
+```
+
+### Floor Division vs. Float Division:
+- `/` always returns a **Float** (e.g., `5 / 2 = 2.5`).
+- `//` returns the **Floor integer** (truncates towards negative infinity, e.g., `5 // 2 = 2`, `-5 // 2 = -3`).
+
+---
+
+## 4.8 Practice Exercises
+
+Try writing and running these programs in your Python Lab:
+
+1. **Even or Odd Checker:**
+   Write a program that takes a user-entered number and checks if it is Even or Odd using the modulus operator (`%`).
+2. **Leap Year Checker Concept:**
+   Determine whether a user-entered year is a leap year (divisible by 4, but not by 100 unless also divisible by 400).
+3. **Precedence Testing:**
+   Write a Python program to evaluate the expression `10 + 20 * 30 // 5 ** 2` and print the output. Predict the mathematical steps before running!
+
+---
+
+## 4.9 Placement Q&A (Interview Prep)
+
+**Q1. What is the difference between `/` and `//` operators in Python?**  
+**Answer:** `/` is float division and always returns a decimal float value (e.g., `10 / 2` is `5.0`). `//` is floor division which rounds down the result to the nearest whole integer (e.g., `10 // 3` is `3`, `-10 // 3` is `-4`).
+
+**Q2. What will be the output of `print(3 * 1 ** 3)`?**  
+**Answer:** `3`. Exponentiation (`**`) has higher precedence than multiplication (`*`). So `1 ** 3` is evaluated first (which is `1`), and then `3 * 1` is evaluated, resulting in `3`.
+
+**Q3. What is the difference between `==` and `is` operators?**  
+**Answer:** `==` is a value comparison operator. It checks if the values of two objects are equal. `is` is an identity comparison operator. It checks if both variables point to the exact same object in the memory (shares the same memory address).
+
+---
+
+## 4.10 Module 4 Cheat Sheet
+
+* **Arithmetic:** `+`, `-`, `*`, `/` (float), `//` (floor), `%` (remainder), `**` (exponentiation).
+* **Assignment:** `=`, `+=`, `-=`, `*=`, `/=`.
+* **Comparison:** `==` (equals), `!=` (not equals), `>`, `<`, `>=`, `<=`.
+* **Logical:** `and` (both true), `or` (at least one true), `not` (reverses boolean).
+* **Membership & Identity:** `in` / `not in` (checks membership); `is` / `is not` (checks memory identity).
+* **Precedence:** Parentheses `()` > Exponent `**` > Mult/Div > Add/Sub.
+
