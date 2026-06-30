@@ -1,6 +1,6 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  part1Sidebar: [
+  introSidebar: [
     {
       type: 'html',
       value: '<a href="https://youtube.com/@ThinkIT-Telugu" target="_blank" class="sidebar-youtube-btn"><svg viewBox="0 0 24 24" class="sidebar-yt-icon"><path fill="currentColor" d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg> Watch on YouTube</a>',
@@ -9,8 +9,27 @@ const sidebars = {
     {
       type: 'doc',
       id: 'intro',
-      label: 'Welcome Cover',
+      label: 'Introduction',
       className: 'icon-home',
+    },
+    {
+      type: 'doc',
+      id: 'course-welcome',
+      label: 'Course Welcome',
+      className: 'icon-intro',
+    },
+    {
+      type: 'doc',
+      id: 'is-this-for-you',
+      label: 'Is this for you?',
+      className: 'icon-check',
+    },
+  ],
+  part1Sidebar: [
+    {
+      type: 'html',
+      value: '<a href="https://youtube.com/@ThinkIT-Telugu" target="_blank" class="sidebar-youtube-btn"><svg viewBox="0 0 24 24" class="sidebar-yt-icon"><path fill="currentColor" d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg> Watch on YouTube</a>',
+      defaultStyle: true,
     },
     {
       type: 'category',
@@ -64,9 +83,57 @@ const sidebars = {
         { type: 'doc', id: 'part-3/module-13-error-handling', label: 'Module 13: Error Handling', className: 'icon-edit' },
         { type: 'doc', id: 'part-3/module-14-file-handling', label: 'Module 14: File Handling', className: 'icon-file' },
         { type: 'doc', id: 'part-3/module-15-json', label: 'Module 15: JSON', className: 'icon-code' },
-        { type: 'doc', id: 'part-3/module-16-modules-packages', label: 'Module 16: Modules & Packages', className: 'icon-book' },
+        {
+          type: 'category',
+          label: 'Module 16: Modules & Packages',
+          className: 'icon-book',
+          collapsed: true,
+          items: [
+            'part-3/module-16-modules-packages/modules',
+            'part-3/module-16-modules-packages/virtual-environments',
+            'part-3/module-16-modules-packages/packages-uv',
+            'part-3/module-16-modules-packages/exercises-qa',
+          ],
+        },
         { type: 'doc', id: 'part-3/module-17-oop-basics', label: 'Module 17: OOP Basics', className: 'icon-box' },
-        { type: 'doc', id: 'part-3/module-18-python-for-ai', label: 'Module 18: Python for AI', className: 'icon-star' },
+        {
+          type: 'category',
+          label: 'Module 18: Git & Version Control',
+          className: 'icon-book',
+          collapsed: true,
+          items: [
+            'part-3/module-18-git-version-control/version-control-basics',
+            'part-3/module-18-git-version-control/core-git-workflow',
+            'part-3/module-18-git-version-control/github-gitignore',
+            'part-3/module-18-git-version-control/exercises-qa',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Module 19: Python for Data Science',
+          className: 'icon-data',
+          collapsed: true,
+          items: [
+            'part-3/module-19-python-for-data-science/data-science-intro',
+            'part-3/module-19-python-for-data-science/pandas-dataframes',
+            'part-3/module-19-python-for-data-science/matplotlib-visualization',
+            'part-3/module-19-python-for-data-science/weather-app-project',
+            'part-3/module-19-python-for-data-science/exercises-qa',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Module 20: Python for AI Engineering',
+          className: 'icon-star',
+          collapsed: true,
+          items: [
+            'part-3/module-20-python-for-ai-engineering/ai-engineering-apis',
+            'part-3/module-20-python-for-ai-engineering/dotenv-secrets',
+            'part-3/module-20-python-for-ai-engineering/chatbot-memory-project',
+            'part-3/module-20-python-for-ai-engineering/rag-embeddings',
+            'part-3/module-20-python-for-ai-engineering/exercises-qa',
+          ],
+        },
       ],
     },
   ],

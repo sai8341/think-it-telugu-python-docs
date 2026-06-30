@@ -92,13 +92,15 @@ const config = {
         theme: {
           customCss: './src/css/custom.css',
         },
-        googleTagManager: {
-          containerId: 'GTM-PX58P696',
-        },
-        gtag: {
-          trackingID: 'G-DLFSRK6KB0',
-          anonymizeIP: true,
-        },
+        ...(process.env.NODE_ENV === 'production' ? {
+          googleTagManager: {
+            containerId: 'GTM-PX58P696',
+          },
+          gtag: {
+            trackingID: 'G-DLFSRK6KB0',
+            anonymizeIP: true,
+          },
+        } : {}),
       }),
     ],
   ],

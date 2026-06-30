@@ -10,10 +10,14 @@ export default function NavbarWrapper(props) {
 
   // Determine active part based on the current URL path
   let activePart = 'part1';
-  if (pathname.includes('/part-2/')) {
+  if (pathname === '/' || pathname === '/course-welcome' || pathname === '/is-this-for-you') {
+    activePart = 'intro';
+  } else if (pathname.includes('/part-2/')) {
     activePart = 'part2';
   } else if (pathname.includes('/part-3/')) {
     activePart = 'part3';
+  } else if (pathname.includes('/part-1/')) {
+    activePart = 'part1';
   }
 
   return (
@@ -21,6 +25,12 @@ export default function NavbarWrapper(props) {
       <Navbar {...props} />
       <div className="sub-navbar">
         <div className="sub-navbar-container">
+          <Link
+            to="/"
+            className={clsx('sub-navbar-item', activePart === 'intro' && 'sub-navbar-item--active')}
+          >
+            Introduction
+          </Link>
           <Link
             to="/part-1/module-0-before-python"
             className={clsx('sub-navbar-item', activePart === 'part1' && 'sub-navbar-item--active')}

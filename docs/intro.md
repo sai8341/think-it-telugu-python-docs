@@ -1,52 +1,47 @@
 ---
-sidebar_position: 0
+sidebar_position: 1
 slug: /
-title: Welcome to Think IT Telugu
+title: "Introduction"
+sidebar_label: "Introduction"
 ---
 
-# Welcome to Think IT Telugu - Python Course!
+# Introduction 🚀
 
-**Hello there! I am your Python mentor.** In this course, we will learn Python programming from scratch. We will use simple explanations and write real-world code step-by-step. You do not need to memorize syntax. We will learn by coding!
+### Complete beginner course for Python and AI development
 
----
+Learn Python from scratch and start building real AI applications. This is the fastest, beginner-friendly course for Python and AI development, explained in Telugu with professional English documentation.
 
-## Who is this course for?
+Whether you’ve never written a line of code or you’re switching from another programming language, this course takes you from zero to confidently building Python projects for AI. No prior experience is required.
 
-- **College students** - B.Tech, BCA, BSc Computer Science, MCA, or any other stream.
-- **Complete beginners** - Even if you have never written a single line of code, you are welcome!
-- **Placement preparation** - Students who want to build a strong foundation in coding.
-- **Self-learners** - Anyone who wants to learn coding at home.
-
----
-
-## Course Roadmap
-
-We have divided this course into **3 Parts** to make learning and recording easier:
-
-| Category | Modules | Covered Topics |
-| :--- | :--- | :--- |
-| **Part 1: Programming & Python Basics** | Modules 0 → 6 | Programming Basics, Variables, Datatypes, Operators, Input/Output, Conditionals, Loops. |
-| **Part 2: Data Structures & Functions** | Modules 7 → 12 | Strings, Lists, Tuples, Sets, Dictionaries, Functions & Scope. |
-| **Part 3: Advanced Basics & AI Foundation** | Modules 13 → 18 | Error Handling, File Handling, JSON, Modules & Packages, OOP Basics, Python for AI. |
+This handbook accompanies the **Complete Python for AI Course** on the [Think IT Telugu YouTube Channel](https://youtube.com/@ThinkIT-Telugu), giving you everything in written form with extra details, copy-pasteable code snippets, and structured reference materials to come back to.
 
 ---
 
-## How to get the most out of this course?
+## Why this Course?
 
-1. **Follow the order** - Start from Module 0 and go step-by-step. Do not skip topics!
-2. **Type the code** - Do not copy-paste. Type the code yourself to build muscle memory.
-3. **Learn from errors** - Getting errors is normal. Reading error messages makes you a better coder.
+*   **Complete Beginner-Friendly:** No prior programming or computer science experience is required.
+*   **AI & Logic Focused:** Learn Python specifically tailored for Artificial Intelligence, APIs, and modern software development.
+*   **Hands-on Workflow:** Practice with real-world developer tools and code examples from day one.
 
-:::tip Golden Rule
-**"Don't just read code, write it!"** - Reading is not enough. You must write and run code to learn programming.
-:::
+---
+
+## What you’ll learn
+
+Master the Python fundamentals essential for modern AI engineering:
+
+### ⚙️ Setup Like a Pro
+Master VS Code, terminals, environment variables, Git, and the exact workspace setups used in real IT companies.
+
+### 🐍 Learn Python Fast
+Master variables, lists, dictionaries, conditionals, loops, functions, and packages needed to process data for AI.
+
+### 🤖 Build AI Agents
+Apply what you learn to integrate APIs, process JSON data, and call large language models (like Gemini AI) to build real AI-powered applications.
 
 ---
 
 ## Ready to Start?
 
-Let us begin our coding journey! Go to the first module:
+Head over to the next page to meet your instructor and get a course overview!
 
-**[Module 0: Before Python →](./part-1/module-0-before-python.mdx)**
-
-> *"A journey of a thousand miles begins with a single step."* - Your coding journey starts right here!
+👉 **[Course Welcome](./course-welcome.md)**

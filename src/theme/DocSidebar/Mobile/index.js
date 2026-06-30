@@ -17,10 +17,14 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
 
   // Determine active part based on current URL path
   let activePart = 'part1';
-  if (pathname.includes('/part-2/')) {
+  if (pathname === '/' || pathname === '/course-welcome' || pathname === '/is-this-for-you') {
+    activePart = 'intro';
+  } else if (pathname.includes('/part-2/')) {
     activePart = 'part2';
   } else if (pathname.includes('/part-3/')) {
     activePart = 'part3';
+  } else if (pathname.includes('/part-1/')) {
+    activePart = 'part1';
   }
 
   const handleChange = (e) => {
@@ -29,7 +33,9 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
     if (mobileSidebar.shown) {
       mobileSidebar.toggle();
     }
-    if (val === 'part1') {
+    if (val === 'intro') {
+      history.push('/');
+    } else if (val === 'part1') {
       history.push('/part-1/module-0-before-python');
     } else if (val === 'part2') {
       history.push('/part-2/module-7-strings');
@@ -46,6 +52,7 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
           onChange={handleChange}
           className="mobile-sidebar-select"
         >
+          <option value="intro">Introduction</option>
           <option value="part1">Part 1: Programming & Basics</option>
           <option value="part2">Part 2: Data Structures & Funcs</option>
           <option value="part3">Part 3: Advanced & AI Foundation</option>
