@@ -1,0 +1,100 @@
+---
+title: "Indexing & Slicing"
+sidebar_label: "Indexing & Slicing"
+---
+
+# Grab Characters from Strings
+
+Every character in a Python string sits at a specific numbered position called an **index**. You can grab a single character using brackets `[]` or cut out a section of text using slicing `[:]`.
+
+## Index Positions (Start at 0)
+
+Python counts positions starting from `0` from left to right. You can also count backward from `-1` starting from the right end:
+
+```
+Character:   P   Y   T   H   O   N
+Positive:    0   1   2   3   4   5
+Negative:   -6  -5  -4  -3  -2  -1
+```
+
+```python
+word = "PYTHON"
+
+# Grab the first character
+print(word[0])   # Output: P
+
+# Grab the second character
+print(word[1])   # Output: Y
+
+# Grab the last character using negative indexing
+print(word[-1])  # Output: N
+```
+
+## Slicing Text (`[start:stop]`)
+
+To extract a substring (a smaller piece of the text), use a colon `:` inside the brackets. Python starts taking characters at `start` and stops just before reaching `stop`:
+
+```python
+language = "PYTHON"
+
+# Grab characters from index 0 up to index 3 (gets index 0, 1, 2)
+print(language[0:3])  # Output: PYT
+
+# Leave out the start index to begin from the very first letter
+print(language[:4])   # Output: PYTH
+
+# Leave out the stop index to go all the way to the end
+print(language[2:])   # Output: THON
+```
+
+## Step Slicing (`[start:stop:step]`)
+
+You can add a third number called the **step** to jump over characters or even reverse the text:
+
+```python
+alphabet = "ABCDEFGH"
+
+# Jump every 2 letters
+print(alphabet[0:8:2])  # Output: ACEG
+
+# Reverse the entire string with step -1
+print(alphabet[::-1])   # Output: HGFEDCBA
+```
+
+## Strings Cannot Be Changed (Immutability)
+
+Once a string is created, you cannot swap or replace an individual letter inside it using index numbers. If you need modified text, you create a new string variable:
+
+```python
+text = "Cat"
+# text[0] = "B"  # TypeError! Python strings cannot be modified in place.
+
+# Right way: create a new string
+new_text = "B" + text[1:]
+print(new_text)  # Output: Bat
+```
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Index out of range">
+    ```python
+    # Wrong - trying to grab index 10 when word only has 5 letters
+    word = "Hello"
+    print(word[10])  # IndexError: string index out of range
+    
+    # Right - remember valid indices go from 0 up to len(word) - 1
+    print(word[len(word) - 1])  # Last letter: o
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Let's explore built-in string methods to easily uppercase text, find words, replace letters, and strip extra spaces.
+
+<CardGroup cols={1}>
+  <Card title="String Methods" icon="arrow-right" href="/part-2/module-7-strings/string-methods">
+    Discover upper(), lower(), replace(), find(), strip(), and split()
+  </Card>
+</CardGroup>

@@ -2624,7 +2624,7 @@ blockquote p {
 }
 
 /* ============================================
-   🐍 Python Lab — Programiz-Style Playground
+   🐍 Python Lab - Programiz-Style Playground
    Clean, Full-Screen, Side-by-Side Layout
    ============================================ */
 
@@ -3132,7 +3132,7 @@ pre,
 .pyhl-func { color: #2563eb; } /* Blue */
 .pyhl-string { color: #16a34a; } /* Green */
 .pyhl-number { color: #ea580c; } /* Orange */
-.pyhl-comment { color: #5b7065; font-style: italic; opacity: 0.85; } /* Muted Gray-Green */
+.pyhl-comment { color: #5b7065; font-style: normal; opacity: 0.85; } /* Muted Gray-Green */
 .pyhl-self { color: #7c3aed; }
 .pyhl-decorator { color: #0891b2; }
 .pyhl-operator { color: #1e293b; }
@@ -3142,7 +3142,8 @@ pre,
 [data-theme='dark'] .pyhl-func { color: #60a5fa; } /* Blue */
 [data-theme='dark'] .pyhl-string { color: #4ade80; } /* Green */
 [data-theme='dark'] .pyhl-number { color: #fb923c; } /* Orange */
-[data-theme='dark'] .pyhl-comment { color: #829c8d; font-style: italic; opacity: 0.85; } /* Muted Gray-Green */
+[data-theme='dark'] .pyhl-comment { color: #829c8d; font-style: normal; opacity: 0.85; } /* Muted Gray-Green */
+.token.comment, .token.prolog, .token.doctype, .token.cdata { font-style: normal !important; }
 [data-theme='dark'] .pyhl-self { color: #c084fc; }
 [data-theme='dark'] .pyhl-decorator { color: #22d3ee; }
 [data-theme='dark'] .pyhl-operator { color: #e2e8f0; }

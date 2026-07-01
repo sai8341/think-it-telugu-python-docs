@@ -1,0 +1,90 @@
+---
+title: "Modern String Formatting & Lab"
+sidebar_label: "Formatting & Exercises"
+---
+
+# Dynamic String Interpolation
+
+Combining static text templates with dynamic runtime variables using commas or string concatenation (`+`) quickly becomes unreadable and fragile in complex applications.
+
+## Formatted String Literals (f-strings)
+
+Introduced in Python 3.6, **f-strings** represent the clean, modern standard for string interpolation. Prefixing a string literal with the letter `f` permits embedding Python variables and expressions directly inside curly braces `{}`:
+
+```python
+developer = "Sai Kumar"
+experience_years = 5
+role = "AI Architect"
+
+# Modern f-string approach
+profile = f"{developer} has {experience_years} years of experience as an {role}."
+print(profile)
+```
+
+You can even execute inline operations and formatting instructions directly within the curly brackets:
+
+```python
+unit_cost = 19.995
+quantity = 3
+
+# Format to exactly 2 decimal places using :.2f
+summary = f"Total charge for {quantity} units: ${unit_cost * quantity:.2f}"
+print(summary)  # Total charge for 3 units: $59.98
+```
+
+## Hands-On Lab Exercises
+
+Test these programs inside your IDE or local script files:
+
+```python
+# Exercise 1: Interactive Billing Receipt Generator
+customer_name = input("Customer Name: ")
+item_name = input("Purchased Item: ")
+price = float(input("Unit Price ($): "))
+
+receipt = f"""
+=============================
+       OFFICIAL RECEIPT      
+=============================
+Customer: {customer_name}
+Item:     {item_name}
+Total:    ${price:.2f}
+=============================
+"""
+print(receipt)
+```
+
+```python
+# Exercise 2: Custom Separator Pipeline
+# Print network configuration details cleanly
+host = "192.168.1.100"
+port = "8080"
+protocol = "https"
+
+print(protocol, "://", host, ":", port, sep="")
+# Output: https://192.168.1.100:8080
+```
+
+## Technical Interview Preparation
+
+### Q1: Why should developers prefer f-strings over older `.format()` or `%s` interpolation?
+**Answer:** F-strings evaluate expressions at runtime inside the execution context, making them significantly faster in execution speed and vastly cleaner to read and maintain than older formatting syntax.
+
+### Q2: What happens if you forget to cast `input()` when collecting numeric IDs?
+**Answer:** The identifier remains stored as a string (`str`). If downstream database querying or numerical validation checks expect an integer classification, the application will raise type mismatches or logical evaluation failures.
+
+## Module Summary
+
+- **`print()` Operations:** Outputs data; customize formatting via `sep` and `end`.
+- **`input()` Capture:** Pauses CLI execution to receive user responses; always returns `str`.
+- **F-Strings:** Modern syntax (`f"Hello {name}"`) for clean, high-performance variable interpolation.
+
+## What's Next?
+
+Advance to Module 4 to master arithmetic, relational, logical, and membership operators.
+
+<CardGroup cols={1}>
+  <Card title="Module 4: Operators" icon="arrow-right" href="/part-1/module-4-operators/arithmetic-assignment">
+    Explore mathematical computations, compound assignments, and logical evaluation
+  </Card>
+</CardGroup>

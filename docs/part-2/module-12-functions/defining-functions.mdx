@@ -1,0 +1,104 @@
+---
+title: "What are Functions?"
+sidebar_label: "Functions & Return Values"
+---
+
+# What are Functions?
+
+A **Function** is a reusable block of code designed to perform a specific job. Instead of copying and pasting the exact same lines of code over and over again, you package them into a function and call it whenever you need it.
+
+Think of a function like a coffee machine:
+- You give it inputs (water and coffee powder)
+- It performs a job inside (brewing)
+- It hands you back an output (hot coffee)
+
+## Defining and Calling a Function (`def`)
+
+You define a function using the keyword `def`, followed by the function name, parentheses `()`, and a colon `:`:
+
+```python
+# 1. Defining the function
+def greet_user():
+    print("Welcome to Python Lab!")
+    print("Let's write some code.")
+
+# 2. Calling (running) the function
+greet_user()
+```
+
+## Passing Inputs (Parameters & Arguments)
+
+You can pass information inside parentheses so the function can use it. 
+
+- **Parameter:** The variable name inside the function definition waiting to receive data.
+- **Argument:** The actual value you pass when calling the function.
+
+```python
+# 'name' is the parameter
+def greet(name):
+    print(f"Hello, {name}!")
+
+# 'Alice' is the argument
+greet("Alice")
+greet("Bob")
+```
+
+## `return` vs. `print()`
+
+A very important concept for beginners is the difference between `print()` and `return`:
+
+- **`print()` is only for your eyes:** It shows text on the screen, but Python immediately forgets the value. You cannot save it into a variable or use it later in math.
+- **`return` hands data back to Python:** It sends the computed output back to your program so you can store it inside a variable and use it downstream.
+
+```python
+def add_numbers(a, b):
+    # Return sends the result back to whoever called the function
+    return a + b
+
+# Store the returned result inside a variable
+total = add_numbers(10, 15)
+print(f"The total is: {total}")  # Output: The total is: 25
+```
+
+:::warning Return stops the function
+As soon as Python runs a `return` statement, it exits the function immediately. Any lines of code written below the `return` statement will never run!
+:::
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Forgetting parentheses when calling a function">
+    ```python
+    # Wrong - typing just the name without () does not run the function
+    greet_user
+    
+    # Right - parentheses tell Python to actually execute it
+    greet_user()
+    ```
+  </Accordion>
+
+  <Accordion title="Confusing print with return">
+    ```python
+    # Wrong - print does not send data back to a variable
+    def add(x, y):
+        print(x + y)
+    
+    result = add(5, 5)
+    print(result)  # Outputs None!
+    
+    # Right - use return to give the value back
+    def add(x, y):
+        return x + y
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Let's learn how to set default values for function inputs and understand how variable scope works inside and outside functions.
+
+<CardGroup cols={1}>
+  <Card title="Default Parameters & Scope Rules" icon="arrow-right" href="/part-2/module-12-functions/default-args-scope">
+    Learn optional arguments and why variables created inside functions stay private
+  </Card>
+</CardGroup>

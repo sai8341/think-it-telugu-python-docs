@@ -1,0 +1,96 @@
+---
+title: "What are Dictionaries?"
+sidebar_label: "Dictionary Basics"
+---
+
+# What are Dictionaries?
+
+A **Dictionary** lets you store information in **key-value pairs**. Instead of finding items by numbered positions like `0` or `1`, you look up values using unique labels called **keys**.
+
+Think of a dictionary like:
+- A contact book (Name -> Phone Number)
+- A restaurant menu (Dish Name -> Price)
+- A user profile (Username -> Email Address)
+
+## Creating a Dictionary
+
+You create a dictionary using curly braces `{}` with a colon `:` separating each key from its value:
+
+```python
+user = {
+    "name": "Alice",
+    "age": 25,
+    "is_admin": True
+}
+```
+
+## Accessing Values by Key
+
+To read a value, write the dictionary name followed by the key label inside square brackets `[]`:
+
+```python
+user = {"name": "Alice", "age": 25}
+
+print(user["name"])  # Output: Alice
+print(user["age"])   # Output: 25
+```
+
+## Adding and Updating Values
+
+If you assign a value to a key that already exists, Python updates the value. If the key does not exist yet, Python creates a brand new key-value pair:
+
+```python
+user = {"name": "Alice"}
+
+# Update existing key
+user["name"] = "Alice Smith"
+
+# Add a brand new key
+user["email"] = "alice@example.com"
+
+print(user)
+# Output: {'name': 'Alice Smith', 'email': 'alice@example.com'}
+```
+
+## Removing Key-Value Pairs (`del`, `pop`)
+
+- `del my_dict["key"]` deletes the key and value completely.
+- `.pop("key")` deletes the key and returns the value so you can store or inspect it.
+
+```python
+user = {"name": "Alice", "role": "editor", "points": 100}
+
+# Delete points
+del user["points"]
+
+# Pop out role
+user_role = user.pop("role")
+print(f"Removed role: {user_role}")
+print(user)  # Output: {'name': 'Alice'}
+```
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="KeyError when accessing missing keys">
+    ```python
+    # Wrong - looking up a key that does not exist crashes Python
+    user = {"name": "Alice"}
+    print(user["phone"])  # KeyError: 'phone'
+    
+    # Right - check if the key exists first using 'in', or use .get()
+    if "phone" in user:
+        print(user["phone"])
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Let's explore dictionary inspection methods like `.get()`, `.keys()`, `.values()`, and `.items()`.
+
+<CardGroup cols={1}>
+  <Card title="Dictionary Methods" icon="arrow-right" href="/part-2/module-11-dictionaries/dict-methods">
+    Master safe key lookups with .get() and inspecting keys and values
+  </Card>
+</CardGroup>

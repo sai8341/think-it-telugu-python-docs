@@ -1,0 +1,94 @@
+---
+title: "Default Parameters & Scope"
+sidebar_label: "Defaults & Scope Rules"
+---
+
+# Default Parameters & Variable Scope
+
+Sometimes you want a function parameter to be optional. You can give it a default fallback value inside the definition.
+
+## Default Parameter Values
+
+If whoever calls the function does not provide an argument, Python automatically uses the default value:
+
+```python
+def greet(name="Guest"):
+    print(f"Welcome, {name}!")
+
+greet()         # Uses default: Welcome, Guest!
+greet("Alice")  # Uses argument: Welcome, Alice!
+```
+
+:::danger Never Use Lists as Default Parameters
+When creating optional arguments, **never put an empty list `[]` or dictionary `{}` as a default parameter!** Python creates default parameters only once when reading the program. If you modify that list, every subsequent function call shares the exact same modified list:
+
+```python
+# Wrong - shares the same list across all calls
+def add_item(item, box=[]):
+    box.append(item)
+    return box
+
+# Right - use None as a placeholder
+def add_item_safe(item, box=None):
+    if box is None:
+        box = []
+    box.append(item)
+    return box
+```
+:::
+
+## Local vs. Global Variables (Scope)
+
+**Scope** determines where variables can be seen and used in your program.
+
+### 1. Local Variables (Private to the Function)
+Any variable created inside a function only exists inside that function. As soon as the function finishes running, Python destroys the local variable:
+
+```python
+def calculate():
+    secret = "hidden_code"
+
+# print(secret)  # NameError: name 'secret' is not defined outside the function!
+```
+
+### 2. Global Variables (Visible Everywhere)
+Variables created outside at the top level of your script are global. Functions inside the script can read them:
+
+```python
+APP_NAME = "Python Lab"
+
+def show_banner():
+    print(f"Running on {APP_NAME}")
+```
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Trying to read a local variable from outside the function">
+    ```python
+    # Wrong - total_score only exists inside calculate()
+    def calculate():
+        total_score = 100
+    
+    calculate()
+    print(total_score)  # NameError!
+    
+    # Right - return the value so outside code can save it
+    def calculate():
+        return 100
+    
+    total_score = calculate()
+    print(total_score)
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Let's explore how to write functions that accept any number of inputs using `*args` and `**kwargs`.
+
+<CardGroup cols={1}>
+  <Card title="Flexible Inputs (*args & **kwargs)" icon="arrow-right" href="/part-2/module-12-functions/args-kwargs">
+    Learn how to pass unlimited numbers of arguments cleanly
+  </Card>
+</CardGroup>

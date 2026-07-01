@@ -1,0 +1,88 @@
+---
+title: "Lambdas & Recursion"
+sidebar_label: "Lambdas & Recursion"
+---
+
+# Lambdas & Recursion
+
+Beyond defining standard multi-line functions with `def`, Python allows quick one-line shortcut functions called lambdas, as well as functions that call themselves to solve repeating problems.
+
+## What is a Lambda Function?
+
+A **Lambda Function** (`lambda`) is a small, anonymous function written on a single line without using `def` or `return`:
+
+```python
+# Standard function
+def double(number):
+    return number * 2
+
+# Exact same function written as a one-line lambda
+double_lambda = lambda number: number * 2
+
+print(double_lambda(10))  # Output: 20
+```
+
+### Where are Lambdas Actually Used?
+Lambdas are most frequently used as quick sorting shortcuts when sorting complex lists like lists of tuples:
+
+```python
+students = [("Alice", 88), ("Bob", 95), ("Charlie", 72)]
+
+# Sort students by their score (the second item at index 1)
+students.sort(key=lambda item: item[1])
+print(students)  # Output: [('Charlie', 72), ('Alice', 88), ('Bob', 95)]
+```
+
+## What is Recursion?
+
+**Recursion** happens when a function calls itself inside its own body. To stop the function from repeating forever and crashing your computer, every recursive function must have two rules:
+
+1. **Base Case:** The stopping condition where the function stops calling itself.
+2. **Recursive Step:** The step where the function calls itself with a smaller problem.
+
+```python
+def countdown(number):
+    # 1. Base Case (Stop condition)
+    if number <= 0:
+        print("Blast off!")
+        return
+    
+    # Print number and repeat with smaller number
+    print(number)
+    countdown(number - 1)
+
+countdown(3)
+# Output:
+# 3
+# 2
+# 1
+# Blast off!
+```
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Forgetting the base case in recursion">
+    ```python
+    # Wrong - calling itself forever without checking when to stop
+    def repeat_forever(n):
+        return repeat_forever(n + 1)
+    
+    # This crashes Python with: RecursionError: maximum recursion depth exceeded
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Part 2 Summary
+
+Congratulations on completing **Part 2: Data Structures & Functions**! You have mastered strings, lists, tuples, sets, dictionaries, and functions in simple, practical Python.
+
+## What's Next?
+
+Advance to **Part 3: Production & Advanced Engineering** to master handling errors safely using try-except blocks, working with files, and building Object-Oriented programs.
+
+<CardGroup cols={1}>
+  <Card title="Part 3 Module 13: Error Handling & Exceptions" icon="arrow-right" href="/part-3/module-13-error-handling">
+    Learn how to stop your code from crashing when something unexpected happens
+  </Card>
+</CardGroup>

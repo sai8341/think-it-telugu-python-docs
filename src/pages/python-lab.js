@@ -5,7 +5,7 @@ import PythonLab from '@site/src/components/PythonLab/PythonLab';
 export default function PythonLabPage() {
   return (
     <Layout
-      title="Python Lab — Online Python Compiler"
+      title="Python Lab | Online Python Compiler"
       description="Write and run Python code instantly in your browser. No installation needed."
       wrapperClassName="pylab-page"
       noFooter

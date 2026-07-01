@@ -1,0 +1,118 @@
+---
+title: "Identity, Membership & Precedence"
+sidebar_label: "Identity & Precedence"
+---
+
+# Advanced Operators & Execution Priority
+
+Beyond numerical math and comparisons, Python includes specialized operators to inspect memory allocation structures (`is`) and search inside collections (`in`).
+
+## Identity Operators (`is`, `is not`)
+
+Identity operators do not compare variable values; they check whether two variables point to the exact same **object in computer memory** (RAM address).
+
+- `is`: Returns `True` if operands reference identical memory objects.
+- `is not`: Returns `True` if operands reference different memory locations.
+
+```python
+list_a = [1, 2, 3]
+list_b = [1, 2, 3]
+list_c = list_a
+
+# Value equality check (==) evaluates contents
+print(list_a == list_b)  # True (Contents match)
+
+# Identity check (is) evaluates memory address pointer
+print(list_a is list_b)  # False (Two separate lists created in RAM)
+print(list_a is list_c)  # True (Both variables point to the same memory address)
+```
+
+:::tip Verifying Memory Addresses
+You can inspect an object's exact integer memory address using the built-in `id()` function:
+
+```python
+print(id(list_a))
+print(id(list_c))  # Identical to id(list_a)
+```
+:::
+
+## Membership Operators (`in`, `not in`)
+
+Membership operators evaluate whether a target value or substring exists within a sequence (such as strings, lists, tuples, or sets):
+
+```python
+ai_tools = ["PyTorch", "TensorFlow", "LangChain"]
+
+print("PyTorch" in ai_tools)      # True
+print("Keras" not in ai_tools)    # True
+```
+
+```python
+course_title = "Python for AI Engineering"
+print("AI" in course_title)       # True
+```
+
+## Operator Precedence (Execution Order)
+
+When an expression combines multiple operator types, Python resolves calculations strictly following established precedence hierarchy (similar to BODMAS/PEDMAS in mathematics):
+
+| Precedence Rank | Operator | Description |
+| :---: | :---: | :--- |
+| **1 (Highest)** | `()` | Parentheses (Explicit grouping) |
+| **2** | `**` | Exponentiation |
+| **3** | `+x`, `-x` | Unary positive / negative signs |
+| **4** | `*`, `/`, `//`, `%` | Multiplication, Division, Modulus |
+| **5** | `+`, `-` | Addition and Subtraction |
+| **6** | `==`, `!=`, `>`, `<`, `>=`, `<=` | Comparison evaluation |
+| **7** | `not`, `and`, `or` | Logical Boolean evaluations |
+
+```python
+# Multiplied first (5 * 2 = 10), then added (10 + 10 = 20)
+result_a = 10 + 5 * 2
+print(result_a)  # 20
+
+# Parentheses force addition first (10 + 5 = 15), then multiplication (15 * 2 = 30)
+result_b = (10 + 5) * 2
+print(result_b)  # 30
+```
+
+## Hands-On Lab Exercises
+
+Test your understanding by executing these programs:
+
+```python
+# Exercise 1: Compound Financial Calculator
+principal = 1000.0
+rate = 0.08
+
+# Apply compound interest over 3 years
+principal *= (1 + rate) ** 3
+print(f"Investment Balance after 3 years: ${principal:.2f}")
+```
+
+```python
+# Exercise 2: Secure Access Gate
+username = "saikumar"
+active_users = ["saikumar", "admin", "dev_team"]
+is_banned = False
+
+can_login = (username in active_users) and not is_banned
+print(f"Login Allowed: {can_login}")
+```
+
+## Module Summary
+
+- **Arithmetic & Assignment:** Execute math (`+`, `/`, `%`) and compound updates (`+=`).
+- **Comparison & Logic:** Evaluate equality (`==`), inequality (`!=`), and chain Booleans (`and`, `or`).
+- **Identity & Membership:** Inspect memory addresses (`is`) and sequence presence (`in`).
+- **Precedence:** Use explicit parentheses `()` to guarantee unambiguous evaluation order.
+
+## What's Next?
+
+Advance to Module 5 to construct decision logic using conditional `if`, `elif`, and `else` control flow statements.
+
+<CardGroup cols={1}>
+  <Card title="Module 5: Conditional Statements" icon="arrow-right" href="/part-1/module-5-conditional-statements/if-else-logic">
+    Learn how to build branching code paths and evaluate complex runtime conditions
+  </Card>
+</CardGroup>

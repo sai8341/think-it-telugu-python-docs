@@ -1,0 +1,110 @@
+---
+title: "What are Lists?"
+sidebar_label: "List Basics"
+---
+
+# What are Lists?
+
+Lists are Python's most versatile data container. They let you store multiple items together inside square brackets `[]` in a specific order.
+
+Think of a list like:
+- A shopping list (milk, eggs, bread)
+- A to-do list (tasks in order)
+- A playlist (songs in sequence)
+
+## Creating Lists
+
+You create a list by placing items separated by commas inside square brackets `[]`:
+
+```python
+# An empty list
+shopping_cart = []
+
+# A list of text strings
+fruits = ["apple", "banana", "orange"]
+
+# A list of numbers
+scores = [95, 88, 72, 100]
+
+# You can even mix different data types in the same list!
+mixed_item = ["Alice", 25, True, 3.14]
+```
+
+## Accessing Items by Index
+
+Just like strings, every item in a list has a numbered position starting from `0`:
+
+```python
+fruits = ["apple", "banana", "orange"]
+
+# Grab the first item
+print(fruits[0])   # Output: apple
+
+# Grab the second item
+print(fruits[1])   # Output: banana
+
+# Grab the last item using negative indexing
+print(fruits[-1])  # Output: orange
+```
+
+## Changing Items inside a List (Mutability)
+
+Unlike strings, lists can be changed after you create them! You can replace any item by assigning a new value to its index position:
+
+```python
+fruits = ["apple", "banana", "orange"]
+
+# Replace "apple" with "mango"
+fruits[0] = "mango"
+print(fruits)  # Output: ['mango', 'banana', 'orange']
+```
+
+## Slicing a List
+
+You can extract a smaller sub-list using a colon `[start:stop]`:
+
+```python
+numbers = [10, 20, 30, 40, 50]
+
+# Grab items from index 1 up to index 3
+print(numbers[1:4])  # Output: [20, 30, 40]
+```
+
+## Checking if an Item Exists (`in`)
+
+You can easily check if a specific item is inside your list using the `in` keyword:
+
+```python
+fruits = ["apple", "banana", "orange"]
+
+if "banana" in fruits:
+    print("Yes, banana is in the shopping list!")
+```
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Index out of range">
+    ```python
+    # Wrong - list only has 3 items (indices 0, 1, 2)
+    fruits = ["apple", "banana", "orange"]
+    print(fruits[3])  # IndexError: list index out of range
+    
+    # Right - check how many items are in the list first using len()
+    if len(fruits) > 3:
+        print(fruits[3])
+    else:
+        print(fruits[-1])  # Print the last item instead
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Now let's explore all the essential list methods for adding, removing, counting, searching, and sorting items.
+
+<CardGroup cols={1}>
+  <Card title="List Methods & Operations" icon="arrow-right" href="/part-2/module-8-lists/list-methods">
+    Master append(), insert(), remove(), pop(), sort(), count(), and copy()
+  </Card>
+</CardGroup>

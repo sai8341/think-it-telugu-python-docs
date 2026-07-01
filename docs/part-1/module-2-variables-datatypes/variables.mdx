@@ -1,0 +1,92 @@
+---
+title: "Variables & Naming Rules"
+sidebar_label: "Variables & Naming"
+---
+
+# Storing Data with Variables
+
+A **Variable** is simply a labeled storage box inside your computer's memory. When writing code, your program needs to save information (like a username, a score, or a price) so it can use it later.
+
+Think of a variable like a storage box with a label sticker on it:
+- The sticker on the outside is the **Variable Name**
+- The item placed inside the box is the **Value**
+
+## Creating a Variable
+
+In Python, you create a variable by typing a name, adding an equals sign `=`, and assigning a value:
+
+```python
+# Create variables
+user_name = "Alice"
+player_score = 100
+tax_rate = 0.18
+```
+
+## Why Do We Need Variables?
+
+Imagine your website calculates tax across 50 different customer orders. If the tax rate changes next year, changing a hardcoded number 50 times takes forever and leads to mistakes. With variables, you change it in just ONE place:
+
+```python
+tax_rate = 0.18
+subtotal = 1000
+
+total_tax = subtotal * tax_rate
+print(total_tax)  # Output: 180.0
+```
+
+## Changing Variable Values
+
+Variables can change over time! You can update what is inside the storage box whenever you want:
+
+```python
+score = 0
+print(score)  # Output: 0
+
+# Update the score
+score = 10
+print(score)  # Output: 10
+```
+
+## Variable Naming Rules
+
+Python has 5 strict rules for naming your variables:
+
+1. Must start with a letter (`a-z`) or an underscore (`_`).
+2. Cannot start with a number (`1score` will crash).
+3. Can only contain letters, numbers, and underscores (`user name` with spaces is invalid).
+4. Case-sensitive (`price`, `Price`, and `PRICE` are three completely different boxes).
+5. Cannot use Python reserved words (like `if`, `while`, `class`, or `return`).
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Using spaces in variable names">
+    ```python
+    # Wrong - spaces are not allowed inside names
+    user age = 25  # SyntaxError!
+    
+    # Right - use underscores instead (called snake_case)
+    user_age = 25
+    ```
+  </Accordion>
+
+  <Accordion title="Starting a name with a number">
+    ```python
+    # Wrong - names cannot start with numbers
+    1st_player = "Alice"  # SyntaxError!
+    
+    # Right - put numbers at the end
+    player_1 = "Alice"
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Let's explore the basic types of data you can store inside these variables: integers, decimal numbers, and truth values (booleans).
+
+<CardGroup cols={1}>
+  <Card title="Numbers & Booleans" icon="arrow-right" href="/part-1/module-2-variables-datatypes/numbers-booleans">
+    Learn how Python handles numbers, True/False values, and empty states
+  </Card>
+</CardGroup>

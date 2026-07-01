@@ -1,0 +1,54 @@
+---
+title: "Installing Python"
+sidebar_label: "Installing Python"
+---
+
+# Setting Up Your Core Environment
+
+To execute Python code locally, your operating system requires the official Python runtime engine. We strongly recommend installing Python 3.11 or newer to ensure compatibility with modern AI and data engineering libraries.
+
+## Installation on Windows
+
+1. Navigate to the official download portal at [python.org/downloads](https://www.python.org/downloads/).
+2. Download the latest stable Windows installer executable.
+3. Launch the downloaded installer.
+4. **CRITICAL STEP:** At the bottom of the first setup window, check the box labeled **"Add python.exe to PATH"**. Without checking this setting, command-line terminal execution will fail.
+5. Click **"Install Now"** and allow the installer to register core system binaries.
+
+## Installation on macOS
+
+1. Navigate to [python.org/downloads](https://www.python.org/downloads/) and download the macOS installer package (`.pkg`).
+2. Run the installer wizard through standard prompts.
+3. Alternatively, if you utilize Homebrew package management, open your terminal and run:
+
+```bash
+brew install python
+```
+
+## Verifying Your Installation
+
+Once installation completes, open your system terminal (Command Prompt or PowerShell on Windows; Terminal on macOS/Linux) and verify runtime registration:
+
+```bash
+python --version
+```
+
+If your installation succeeded, your terminal will output the registered semantic version string:
+
+```text
+Python 3.12.3
+```
+
+:::warning Troubleshooting PATH Issues
+If your terminal outputs an error stating `'python' is not recognized as an internal or external command`, the runtime binary path was not injected into your system variables. Re-launch the Windows installer executable, select **Modify**, and ensure **Add Python to system PATH** is checked.
+:::
+
+## What's Next?
+
+With the runtime engine installed, let's configure an industrial-grade integrated development environment (IDE) to write and debug professional code.
+
+<CardGroup cols={1}>
+  <Card title="VS Code Setup & Configuration" icon="arrow-right" href="/part-1/module-1-getting-started/vscode-setup">
+    Install Visual Studio Code and essential extensions for Python architecture
+  </Card>
+</CardGroup>

@@ -1,0 +1,77 @@
+---
+title: "Dictionary Methods"
+sidebar_label: "Dictionary Methods"
+---
+
+# Dictionary Inspection Methods
+
+Python dictionaries provide essential built-in methods to safely look up values without crashing, and to grab lists of all keys or values.
+
+## Safe Lookups with `.get()`
+
+When you use square brackets `[]` to grab a missing key, Python crashes with a `KeyError`. Using `.get("key")` is much safer because it returns `None` (or a default fallback value you choose) if the key is missing:
+
+```python
+settings = {"theme": "dark", "notifications": True}
+
+# Safe lookup
+font_size = settings.get("font_size")
+print(font_size)  # Output: None (no crash!)
+
+# Provide a default fallback if key is missing
+volume = settings.get("volume", 50)
+print(volume)     # Output: 50
+```
+
+## Grabbing Keys, Values, and Items
+
+- `.keys()` gives you a view of every key inside the dictionary.
+- `.values()` gives you a view of every stored value.
+- `.items()` gives you pairs of `(key, value)` tuples.
+
+```python
+profile = {"user": "alice", "score": 98}
+
+print(profile.keys())    # dict_keys(['user', 'score'])
+print(profile.values())  # dict_values(['alice', 98])
+print(profile.items())   # dict_items([('user', 'alice'), ('score', 98)])
+```
+
+## Updating Multiple Keys at Once (`.update()`)
+
+You can merge two dictionaries or update multiple values in one shot using `.update()`:
+
+```python
+config = {"host": "localhost", "port": 8080}
+new_settings = {"port": 9000, "debug": True}
+
+config.update(new_settings)
+print(config)
+# Output: {'host': 'localhost', 'port': 9000, 'debug': True}
+```
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Forgetting to convert dictionary views into a standard list">
+    ```python
+    # Note: .keys() returns a special dict_keys view object
+    user = {"name": "Alice"}
+    keys_view = user.keys()
+    
+    # If you need standard list methods like indexing or sorting, convert it:
+    keys_list = list(user.keys())
+    print(keys_list[0])  # Output: name
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Let's explore how to loop through dictionaries and how to organize complex nested structures like dictionaries containing lists.
+
+<CardGroup cols={1}>
+  <Card title="Looping & Nested Dictionaries" icon="arrow-right" href="/part-2/module-11-dictionaries/nested-dicts-iteration">
+    Master for-loops on key-value pairs and building realistic JSON-like profiles
+  </Card>
+</CardGroup>

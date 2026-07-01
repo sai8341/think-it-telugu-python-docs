@@ -1,0 +1,70 @@
+---
+title: "Ingesting Interactive User Input"
+sidebar_label: "User Input"
+---
+
+# Capturing Live Terminal Data
+
+To make software dynamic, programs must respond to live user interactions. In standard Python scripts, the `input()` function suspends program execution and pauses until the user types a response into the terminal and presses **Enter**.
+
+## The input() Workflow
+
+You can pass a prompt string directly into `input()` to display instructions before pausing:
+
+```python
+user_name = input("Enter your full name: ")
+print("Welcome aboard,", user_name)
+```
+
+When execution hits line 1, the terminal prints `Enter your full name: ` and halts. Once the user types their text and presses Enter, that exact string gets assigned to `user_name`.
+
+## The Universal String Return Rule
+
+A critical rule in Python engine architecture is that **`input()` always returns data as a String (`str`)**, regardless of what characters the user typed into the console.
+
+Even if a user types numeric digits like `25`, the runtime captures them as raw text characters (`"25"`):
+
+```python
+raw_age = input("Enter your age: ")
+print(type(raw_age))  # <class 'str'>
+```
+
+:::warning Arithmetic Pitfall
+Attempting mathematical addition on raw `input()` values causes unintended string concatenation or type errors:
+
+```python
+# If user types 10 and 20:
+num1 = input("First number: ")
+num2 = input("Second number: ")
+
+print(num1 + num2)  # Output: 1020 (String Concatenation!)
+```
+:::
+
+## Immediate Type Casting
+
+To perform arithmetic or numerical logic on terminal input, wrap the `input()` call immediately within explicit type casting constructors (`int()` or `float()`):
+
+```python
+# Capture and cast integer input immediately
+user_age = int(input("Enter your age: "))
+next_year_age = user_age + 1
+
+print("Next year you will be:", next_year_age)
+```
+
+```python
+# Capture decimal measurement input
+sensor_voltage = float(input("Enter voltage reading: "))
+print("Adjusted voltage:", sensor_voltage * 1.05)
+```
+
+## What's Next?
+
+Discover how modern Python engineers construct dynamic, multi-variable strings effortlessly using f-strings.
+
+<CardGroup cols={1}>
+  <Card title="Modern String Formatting" icon="arrow-right" href="/part-1/module-3-input-output/string-formatting">
+    Master f-strings, string interpolation, and interactive lab exercises
+  </Card>
+</CardGroup>

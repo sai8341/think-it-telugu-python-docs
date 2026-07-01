@@ -1,0 +1,66 @@
+---
+title: "Conditional Iteration with while Loops"
+sidebar_label: "while Loops"
+---
+
+# Dynamic State-Driven Iteration
+
+While `for` loops iterate over known, finite sequences, **`while` loops** continuously execute an indented block of code as long as a runtime boolean expression evaluates to `True`.
+
+## Structure of a `while` Loop
+
+A `while` loop checks its condition at the start of every iteration cycle. If `True`, the suite runs. If `False`, the loop terminates immediately:
+
+```python
+retry_count = 0
+max_retries = 3
+
+while retry_count < max_retries:
+    print(f"Attempting API connection (Attempt {retry_count + 1})...")
+    retry_count += 1
+
+print("Connection pipeline concluded.")
+```
+
+## Manual Counter Updates
+
+Unlike `for` loops that automatically update variables, **`while` loops require explicit state manipulation inside the loop suite**. Notice line 6 above (`retry_count += 1`). Without manually advancing the state toward termination, the condition never becomes `False`.
+
+## Preventing Infinite Loops
+
+If a `while` loop's evaluation condition never turns `False`, the application locks up in an **infinite loop**, consuming 100% CPU thread resources until killed by the operating system:
+
+```python
+# DANGER: Infinite Loop Pitfall!
+# counter = 1
+# while counter <= 5:
+#     print("Stuck in loop forever!")
+#     # Notice: counter is never incremented!
+```
+
+:::danger Breaking Out of Infinite Loops
+If you accidentally execute an infinite loop in your terminal console, press **`Ctrl + C`** immediately to trigger a `KeyboardInterrupt` and kill the running process.
+:::
+
+## Interactive Loop Visualizer
+
+Test runtime state transitions and watch loop counters increment live in our interactive laboratory:
+
+<div className="lab-cta lab-cta--loops">
+  <div className="lab-cta__content">
+    <span className="lab-cta__eyebrow">Interactive lab</span>
+    <h3>Python Loop Visualizer</h3>
+    <p>Experiment with while loops and observe condition evaluations step-by-step.</p>
+  </div>
+  <a className="lab-cta__button" href="/loop-visualizer">Open Lab</a>
+</div>
+
+## What's Next?
+
+Discover how to interrupt active loops prematurely or skip individual execution cycles using `break` and `continue` keywords.
+
+<CardGroup cols={1}>
+  <Card title="Loop Control Statements & Lab" icon="arrow-right" href="/part-1/module-6-loops/loop-control-lab">
+    Master break, continue, else blocks on loops, nested loops, and exercises
+  </Card>
+</CardGroup>

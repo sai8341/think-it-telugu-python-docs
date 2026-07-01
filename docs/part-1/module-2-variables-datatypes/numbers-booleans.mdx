@@ -1,0 +1,65 @@
+---
+title: "Numbers, Booleans & None"
+sidebar_label: "Numbers & Booleans"
+---
+
+# Fundamental Data Types
+
+Every value stored in computer memory has a specific type. Knowing the type tells Python what operations are permitted: for example, you can perform mathematical addition on numbers, but concatenation on strings.
+
+## Integers (int)
+
+Integers represent whole numbers without fractional or decimal components. They can be positive, negative, or zero:
+
+```python
+retry_count = 5
+temperature_offset = -12
+zero_index = 0
+```
+
+Python integers have arbitrary precision, meaning they can grow as large as your system's memory allows without overflowing.
+
+## Floating-Point Numbers (float)
+
+Floats represent decimal numbers. Whenever an operation requires fractional precision or standard division, Python utilizes floats:
+
+```python
+item_price = 49.99
+sensor_reading = -0.0045
+approximate_pi = 3.14159
+```
+
+:::info Division Behavior
+In Python 3, regular division (`/`) always returns a float even if two integers divide cleanly (`10 / 2` evaluates to `5.0`). If you require whole-number integer division, use the floor division operator (`//`).
+:::
+
+## Booleans (bool)
+
+Booleans represent logical binary states: exactly `True` or `False`. They serve as the foundation for conditional statements, loops, and decision-making logic:
+
+```python
+is_server_online = True
+has_admin_privileges = False
+```
+
+Note that Python requires capitalization for boolean literals (`True` and `False`, not `true` or `false`).
+
+## The NoneType Placeholder (None)
+
+`None` is a special built-in constant indicating the intentional absence of a value. It is frequently used to initialize variables or indicate missing results:
+
+```python
+user_profile_image = None  # Will be populated after user upload
+```
+
+Unlike null concepts in other languages that might point to invalid memory addresses, Python's `None` is a first-class object representing clean, safe absence of data.
+
+## What's Next?
+
+Let's explore how Python detects these types dynamically at runtime and how to safely convert values between formats.
+
+<CardGroup cols={1}>
+  <Card title="Type Checking & Casting" icon="arrow-right" href="/part-1/module-2-variables-datatypes/type-casting">
+    Master runtime type inspection with type() and explicit conversion functions
+  </Card>
+</CardGroup>

@@ -1,0 +1,122 @@
+---
+title: "What are Strings?"
+sidebar_label: "String Basics"
+---
+
+# What are Strings?
+
+Strings are simply text - any characters enclosed inside quotes. Python does not care if you use single quotes or double quotes, as long as you match the starting and ending quotes.
+
+```python
+name = "Alice"
+message = 'Hello, World!'
+```
+
+## Three Ways to Create Strings
+
+You can create strings in Python using single quotes, double quotes, or triple quotes for multi-line paragraphs:
+
+```python
+# 1. Single quotes
+first = 'Python'
+
+# 2. Double quotes
+second = "Python"
+
+# 3. Triple quotes for multiple lines
+paragraph = """This is
+a multi-line
+text paragraph."""
+```
+
+:::tip Apostrophes inside text
+Use double quotes when your text contains apostrophes so Python does not get confused by the single quote inside: `"It's Python time!"`
+:::
+
+## Combining Strings
+
+You can join strings together using the `+` operator (called concatenation), or repeat them using `*`:
+
+```python
+first_name = "John"
+last_name = "Doe"
+
+# Join two strings with a space in the middle
+full_name = first_name + " " + last_name
+print(full_name)  # Output: John Doe
+
+# Repeat a string 5 times
+stars = "*" * 5
+print(stars)  # Output: *****
+```
+
+## String Length
+
+Use `len()` to count how many total characters (including spaces and punctuation) are inside a string:
+
+```python
+message = "Hello"
+print(len(message))  # Output: 5
+
+empty_string = ""
+print(len(empty_string))  # Output: 0
+```
+
+## Converting Numbers to Strings
+
+If you want to join text with numbers, you must first convert the number into a string using `str()`:
+
+```python
+age = 25
+message = "I am " + str(age) + " years old"
+print(message)  # Output: I am 25 years old
+
+# Or use f-strings (formatted strings)
+message_f = f"I am {age} years old"
+print(message_f)
+```
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Mismatched quotes">
+    ```python
+    # Wrong - opening with double quote and closing with single quote
+    text = "Hello'
+    
+    # Right - matching quotes on both sides
+    text = "Hello"
+    text = 'Hello'
+    ```
+  </Accordion>
+
+  <Accordion title="Adding strings and numbers directly">
+    ```python
+    # Wrong - Python cannot add text and numbers together
+    result = "Age: " + 25  # TypeError!
+    
+    # Right - convert the number first using str()
+    result = "Age: " + str(25)
+    ```
+  </Accordion>
+
+  <Accordion title="Forgetting quotes around words">
+    ```python
+    # Wrong - Python thinks Alice is a variable name
+    name = Alice
+    
+    # Right - quotes tell Python this is text
+    name = "Alice"
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Let's learn how to grab individual characters or cut out pieces of text using indexing and slicing.
+
+<CardGroup cols={1}>
+  <Card title="Indexing & Slicing" icon="arrow-right" href="/part-2/module-7-strings/string-slicing">
+    Learn how index numbers work from left to right and right to left
+  </Card>
+</CardGroup>

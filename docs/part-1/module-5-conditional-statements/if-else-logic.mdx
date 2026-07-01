@@ -1,0 +1,70 @@
+---
+title: "Decision Logic & The if-else Structure"
+sidebar_label: "if & if-else Statements"
+---
+
+# Runtime Decision Making
+
+In deterministic linear execution, code runs top-to-bottom sequentially without skipping lines. However, intelligent applications require branching paths that react dynamically to runtime inputs, user permissions, and sensor states.
+
+## Decision Architecture Flow
+
+Conditional statements evaluate boolean expressions (`True` or `False`) to decide which branch of code gets executed:
+
+```text
+               [ Execution Start ]
+                        |
+              Does condition == True?
+                /              \
+             (Yes)             (No)
+              /                  \
+   [ Execute if-block ]   [ Execute else-block ]
+              \                  /
+               \                /
+             [ Continue Pipeline ]
+```
+
+## The Single `if` Statement
+
+An `if` statement evaluates a conditional test. If the test passes (`True`), the indented code block directly beneath it executes. If the test fails (`False`), the Python runtime skips the block entirely:
+
+```python
+user_age = 21
+
+if user_age >= 18:
+    print("Access verification passed.")
+    print("Welcome to the AI Dashboard.")
+```
+
+:::important Indentation Rules
+Unlike languages such as C++ or Java that enclose blocks within braces `{}` , Python enforces structural hierarchy through **whitespace indentation** (strictly 4 spaces per nesting level). Omitting indentation raises an `IndentationError`.
+:::
+
+:::danger The Mandatory Colon (`:`)
+Every control flow header line (`if`, `elif`, `else`) must end with a colon (`:`). The colon instructs the Python compiler that an indented code suite immediately follows.
+:::
+
+## The Two-Branch `if-else` Structure
+
+When code requires handling both positive and negative evaluation outcomes explicitly, append an `else` suite:
+
+```python
+account_balance = 450.00
+withdrawal_amount = 600.00
+
+if account_balance >= withdrawal_amount:
+    account_balance -= withdrawal_amount
+    print("Transaction approved. Dispensing cash.")
+else:
+    print("Transaction declined: Insufficient funds.")
+```
+
+## What's Next?
+
+When algorithms must evaluate multiple mutually exclusive scenarios beyond simple binary choices, developers use multi-branch `elif` chains.
+
+<CardGroup cols={1}>
+  <Card title="Multi-Branch Logic with elif" icon="arrow-right" href="/part-1/module-5-conditional-statements/elif-chains">
+    Build multi-tiered grading systems and nested conditional hierarchies
+  </Card>
+</CardGroup>

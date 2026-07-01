@@ -164,7 +164,7 @@ print(account.get_balance()) # Output: 1500
 
 ### 4. Abstraction
 **Abstraction** means hiding complex execution details and only showing the essential features to the user. 
-*   In Python, we achieve abstraction by creating **Abstract Classes** using the built-in `abc` module. An abstract class cannot be instantiated directly—it serves as a strict rulebook for child classes.
+*   In Python, we achieve abstraction by creating **Abstract Classes** using the built-in `abc` module. An abstract class cannot be instantiated directly; it serves as a strict rulebook for child classes.
 
 ```python
 from abc import ABC, abstractmethod

@@ -1,0 +1,72 @@
+---
+title: "Type Checking & Casting"
+sidebar_label: "Type Casting"
+---
+
+# Dynamic Typing and Conversion
+
+Unlike languages such as Java or C++ where variable types must be declared upfront during compilation, Python relies on dynamic typing. The runtime automatically infers and assigns the object type based on the stored value.
+
+## Inspecting Types at Runtime
+
+You can verify the exact data type of any object using the built-in `type()` function:
+
+```python
+x = 100
+y = 10.5
+z = "Think IT Telugu"
+is_active = True
+
+print(type(x))         # <class 'int'>
+print(type(y))         # <class 'float'>
+print(type(z))         # <class 'str'>
+print(type(is_active)) # <class 'bool'>
+```
+
+## Explicit Type Conversion (Casting)
+
+Frequently, applications ingest data in one format (such as text input from a web form) and need to transform it into another format (such as a number for computation). This explicit transformation is called type casting.
+
+### Common Conversion Functions
+
+```python
+# Convert float to integer (truncates decimal values)
+raw_price = 49.99
+rounded_price = int(raw_price)
+print(rounded_price)  # 49
+
+# Convert integer to float
+base_score = 10
+precise_score = float(base_score)
+print(precise_score)  # 10.0
+
+# Convert string digits to integer
+quantity_input = "25"
+quantity = int(quantity_input)
+print(quantity * 2)   # 50
+
+# Convert numeric value to string for text display
+total = 150
+display_text = "Your total is: " + str(total)
+print(display_text)
+```
+
+:::caution Safe Casting
+Passing non-numeric text strings into numeric conversion functions raises an immediate runtime error:
+
+```python
+# This raises ValueError: invalid literal for int()
+invalid_num = int("abc")
+```
+Always validate user or external input before performing explicit conversions.
+:::
+
+## What's Next?
+
+Put your knowledge of variables, core data types, and type casting into practice with hands-on lab exercises and technical interview questions.
+
+<CardGroup cols={1}>
+  <Card title="Lab Exercises & Q&A" icon="arrow-right" href="/part-1/module-2-variables-datatypes/exercises-qa">
+    Test your understanding with real code problems and interview preparation
+  </Card>
+</CardGroup>

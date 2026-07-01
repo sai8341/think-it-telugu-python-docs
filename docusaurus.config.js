@@ -113,6 +113,7 @@ const config = {
         hashed: true,
         indexBlog: false,
         docsRouteBasePath: '/',
+        ignoreCssSelectors: ['pre', 'code'],
       },
     ],
   ],

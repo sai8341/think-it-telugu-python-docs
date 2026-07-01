@@ -1,48 +1,41 @@
 ---
-title: "Is this for you?"
-sidebar_label: "Is this for you?"
+title: "Who Should Take This Course?"
+sidebar_label: "Who Should Take This?"
 ---
 
-# Is This For You?
+# Who Should Take This Course?
 
-Find out if this course matches your career and engineering goals
+Whether you are looking to build your very first project, prepare for tech job placements, or transition into artificial intelligence from a non-technical background, this course is designed to guide you step-by-step.
 
-This curriculum is structured to work whether you have never written a line of code or you are coming from another programming background. We begin from absolute zero and build up systematically, moving at a practical pace that keeps learners actively challenged and engaged.
-
-The primary differentiator of Think IT Telugu: **You will learn Python with professional engineering workflows from day one.** We do not use watered-down beginner versions that you have to unlearn later. You will operate the same workspace configurations used in production tech environments.
-
-## Who This Course Is For
+## This Course is Perfect For You If:
 
 <CardGroup cols={2}>
-  <Card title="Aspiring AI Engineers" icon="robot">
-    You want to build AI applications, integrate large language models, and need robust Python fundamentals to turn your ideas into software.
+  <Card title="Complete Beginners" icon="user-check">
+    You have never written a line of code before and want a clear, friendly roadmap starting from absolute zero without overwhelming jargon.
   </Card>
-  <Card title="Hands-On Builders" icon="code">
-    You prefer learning by actively writing code, debugging programs, and executing terminal commands rather than listening to passive theory.
+  <Card title="Students & Job Seekers" icon="star">
+    You are preparing for software engineering or data science interviews and want to build practical projects that make your resume stand out.
   </Card>
-  <Card title="Career & Placement Seekers" icon="user-check">
-    You are preparing for software engineering placements or technical transitions and need strong logic, algorithmic thinking, and workflow mastery.
+  <Card title="Non-IT Professionals" icon="layers">
+    You work in another field (commerce, science, support, management) and want to automate daily tasks or pivot your career into AI engineering.
   </Card>
-  <Card title="Systematic Learners" icon="layers">
-    You want clean, structured documentation with copy-pasteable snippets and live execution tools that reinforce every concept.
+  <Card title="Hands-On Learners" icon="code">
+    You learn best by actively typing code, fixing real errors, and building working applications rather than sitting through hours of boring lecture slides.
   </Card>
 </CardGroup>
 
-## Who This Course Is NOT For
+## How to Get the Most Out of This Handbook
 
-<CardGroup cols={2}>
-  <Card title="Exhaustive Reference Seekers" icon="book">
-    If you want a slow academic encyclopedia covering every obsolete feature of Python from the 1990s, this course is not for you. We focus strictly on what modern AI and software engineering demand.
-  </Card>
-  <Card title="Passive Observers" icon="target">
-    If you are looking for casual, passive video watching without installing tooling, writing code, or solving exercises, this curriculum will feel more rigorous than intended.
-  </Card>
-</CardGroup>
+1. **Keep Your Code Editor Open:** Whenever you see a code block in this handbook, type it out yourself in VS Code or test it directly in our online Python Lab.
+2. **Make Mistakes on Purpose:** Try changing numbers, deleting quotes, or altering variable names just to see what errors appear. Understanding errors is the fastest way to learn!
+3. **Use the Accordions:** Check the `# Wrong` vs `# Right` accordion boxes at the bottom of each lesson to see the most common traps before you fall into them.
 
-## Ready to Start?
+## Ready to Dive In?
+
+Let's begin your journey with **Module 0**, where we demystify how computers think and set up your machine like a professional software engineer.
 
 <CardGroup cols={1}>
-  <Card title="Module 0: Before Python" icon="arrow-right" href="/part-1/module-0-before-python">
-    Set up your local developer environment, VS Code, and workspace tools to begin writing code
+  <Card title="Module 0: Before Python" icon="arrow-right" href="/part-1/module-0-before-python/computer-basics">
+    Understand computer hardware, software, and how Python runs under the hood
   </Card>
 </CardGroup>

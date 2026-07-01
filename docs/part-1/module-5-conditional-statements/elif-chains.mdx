@@ -1,0 +1,62 @@
+---
+title: "Multi-Branch Logic with elif"
+sidebar_label: "elif Chains & Nesting"
+---
+
+# Multi-Tiered Condition Evaluation
+
+When applications face more than two mutually exclusive outcomes (such as categorization tiers, HTTP status code handlers, or grading scales), chaining multiple `elif` (short for *else if*) blocks ensures clean, sequential evaluation.
+
+## The `if-elif-else` Pipeline
+
+In an `elif` ladder, Python evaluates each condition top-to-bottom. The moment a condition evaluates to `True`, its corresponding suite runs, and the runtime immediately exits the entire conditional ladder without checking subsequent branches:
+
+```python
+exam_score = 84
+
+if exam_score >= 90:
+    grade = "A (Distinction)"
+elif exam_score >= 80:
+    grade = "B (Honors)"
+elif exam_score >= 70:
+    grade = "C (Pass)"
+else:
+    grade = "F (Remedial Required)"
+
+print(f"Assigned Classification: {grade}")
+# Output: Assigned Classification: B (Honors)
+```
+
+:::warning Condition Ordering Matters
+Always place the most restrictive or specific checks at the **top** of your `elif` chain. If we placed `if exam_score >= 70:` at the top, a student scoring 95 would trigger the 70+ branch and be mislabeled as "C (Pass)".
+:::
+
+## Nested Conditional Hierarchies
+
+For complex decision matrices, you can nest inner `if-else` blocks inside outer branches:
+
+```python
+user_authenticated = True
+admin_role = False
+
+if user_authenticated:
+    print("Welcome back, user.")
+    if admin_role:
+        print("Redirecting to System Control Center...")
+    else:
+        print("Redirecting to Standard User Feed...")
+else:
+    print("Error: Authentication required.")
+```
+
+While nesting is powerful, deep indentation beyond three levels harms readability. In professional architecture, deep nesting is frequently refactored into guard clauses or structural pattern matching.
+
+## What's Next?
+
+Explore modern Python 3.10+ structural pattern matching (`match-case`), inline ternary operators, and interactive coding labs.
+
+<CardGroup cols={1}>
+  <Card title="Pattern Matching & Lab" icon="arrow-right" href="/part-1/module-5-conditional-statements/match-case-lab">
+    Master Python 3.10+ match-case syntax, ternary operations, and technical exercises
+  </Card>
+</CardGroup>

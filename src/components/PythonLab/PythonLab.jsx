@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import examples from './examples';
 
 /**
- * PythonLab — Programiz-style Python playground with syntax highlighting.
+ * PythonLab - Programiz-style Python playground with syntax highlighting.
  * Full-screen, side-by-side, distraction-free.
  */
 
@@ -466,7 +466,7 @@ async def __run_with_safe_input(code_str):
       let finalOutput = (stdout || '') + (stderr || '');
       setOutput(prev => {
         let result = prev + finalOutput;
-        if (!result.trim()) result = '(No output — add a print() statement)\n';
+        if (!result.trim()) result = '(No output: add a print() statement)\n';
         return result + `\n\n[Finished in ${duration}s]`;
       });
     } catch (err) {

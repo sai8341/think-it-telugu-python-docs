@@ -36,9 +36,9 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
     if (val === 'intro') {
       history.push('/');
     } else if (val === 'part1') {
-      history.push('/part-1/module-0-before-python');
+      history.push('/part-1/module-0-before-python/computer-basics');
     } else if (val === 'part2') {
-      history.push('/part-2/module-7-strings');
+      history.push('/part-2/module-7-strings/string-basics');
     } else if (val === 'part3') {
       history.push('/part-3/module-13-error-handling');
     }

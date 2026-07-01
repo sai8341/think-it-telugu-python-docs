@@ -1,0 +1,61 @@
+---
+title: "Lab Exercises & Interview Q&A"
+sidebar_label: "Exercises & Q&A"
+---
+
+# Practice Lab & Assessment
+
+Verify your understanding of memory allocation, dynamic typing, and runtime casting by writing code directly in your local environment.
+
+## Hands-On Lab Exercises
+
+Test these programs inside your IDE or interactive Python environment:
+
+```python
+# Exercise 1: Temperature Unit Conversion
+# Convert 37 degrees Celsius into Fahrenheit using F = (C * 9/5) + 32
+celsius = 37
+fahrenheit = (celsius * 9/5) + 32
+print("Temperature in Fahrenheit:", fahrenheit)
+print("Resulting data type:", type(fahrenheit))
+```
+
+```python
+# Exercise 2: Variable Reassignment and Swapping
+# Swap values between two variables without hardcoding replacement numbers
+a = 100
+b = 250
+
+# Using standard Python tuple unpacking
+a, b = b, a
+print("After swap -> a:", a, "| b:", b)
+```
+
+```python
+# Exercise 3: Safe Type Casting Pipeline
+# Parse string input, perform arithmetic, and format output
+raw_quantity = "15"
+unit_price = 12.50
+
+total_cost = int(raw_quantity) * unit_price
+print("Total Cost: $" + str(total_cost))
+```
+
+## Technical Interview Preparation
+
+### Q1: What is the exact difference between dynamic typing and static typing?
+**Answer:** In statically typed languages (such as C++, Java, or Rust), variable types are locked at compile time during declaration and cannot change. In Python (dynamically typed), variables act as reference labels pointing to objects in memory. A variable name itself carries no strict type constraint and can point to an integer at line 10 and a string at line 20.
+
+### Q2: Why does `int(49.99)` return `49` instead of rounding to `50`?
+**Answer:** Python's `int()` constructor performs truncation (chopping off the fractional component entirely) rather than mathematical rounding. If standard rounding behavior is required, use the built-in `round(49.99)` function instead.
+
+### Q3: How does Python represent null or uninitialized state?
+**Answer:** Python utilizes the singleton object `None` (of type `NoneType`). It represents clean absence of value rather than an undefined pointer or zero.
+
+## Module Summary
+
+- **Variables:** Human-readable reference labels pointing to memory objects.
+- **Naming Constraints:** Alphanumeric and underscores only; cannot start with numbers.
+- **Core Primitive Types:** `int`, `float`, `bool`, `str`, and `NoneType`.
+- **Runtime Inspection:** Use `type(object)` to verify classifications.
+- **Type Casting:** Use `int()`, `float()`, and `str()` for explicit transformations.

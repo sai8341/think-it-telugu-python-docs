@@ -1,0 +1,82 @@
+---
+title: "Running Your First Program"
+sidebar_label: "First Program & Lab"
+---
+
+# Writing and Executing Source Code
+
+With your local Python engine and VS Code workspace operational, you are ready to construct and execute your first software script.
+
+## Creating Your First Script
+
+1. Inside your VS Code workspace explorer, click the **New File** icon next to your directory name.
+2. Name the file `hello.py`. The `.py` extension explicitly instructs the operating system and IDE to treat the contents as Python source code.
+3. Add the following lines to your script:
+
+```python
+# My first Python script
+print("Hello, World!")
+print("Welcome to Think IT Telugu AI Engineering!")
+```
+
+## Executing via the Integrated Terminal
+
+Professional software engineers run and test applications directly through command-line terminals:
+
+1. Open the integrated terminal inside VS Code by selecting **Terminal -> New Terminal** from the top menu bar (or pressing ``Ctrl+` ``).
+2. Type the execution command followed by your script file name:
+
+```bash
+python hello.py
+```
+
+3. Press **Enter**. The Python interpreter will process your file line-by-line and output:
+
+```text
+Hello, World!
+Welcome to Think IT Telugu AI Engineering!
+```
+
+## Understanding print()
+
+The `print()` built-in function is your primary mechanism for displaying output data in terminal consoles. Whatever expression you place inside the parentheses gets evaluated and rendered to standard output.
+
+## Practice Exercises
+
+Execute these tasks inside your `hello.py` file to verify terminal mastery:
+
+```python
+# Exercise 1: Multi-line output
+print("System Status: Online")
+print("Python Engine: Active")
+```
+
+```python
+# Exercise 2: Mathematical computation output
+print("25 multiplied by 4 equals:")
+print(25 * 4)
+```
+
+## Technical Interview Q&A
+
+### Q1: What is the exact purpose of the `.py` file extension?
+**Answer:** It serves as a standard naming convention informing file explorers, IDEs, and build pipelines that the file contains Python script text. While the Python interpreter can technically parse raw files without extensions, `.py` triggers syntax highlighting, extension linting, and correct module imports.
+
+### Q2: Why do engineers execute scripts via terminal commands instead of clicking UI play buttons?
+**Answer:** Production applications run on cloud servers, containers (Docker), and remote Linux clusters where visual desktop interfaces do not exist. Mastering command-line execution ensures your workflows translate directly into cloud deployment pipelines.
+
+## Module Summary
+
+- **Python Runtime:** Installed locally with system PATH registration verified via `python --version`.
+- **VS Code:** Configured with isolated workspace directories and official language tooling.
+- **CLI Execution:** Scripts run via terminal command invocation (`python filename.py`).
+
+## What's Next?
+
+Advance to Module 2 to explore memory management, variables, naming conventions, and fundamental data types.
+
+<CardGroup cols={1}>
+  <Card title="Module 2: Variables & Data Types" icon="arrow-right" href="/part-1/module-2-variables-datatypes/variables">
+    Dive into memory containers, naming rules, integers, floats, and booleans
+  </Card>
+</CardGroup>

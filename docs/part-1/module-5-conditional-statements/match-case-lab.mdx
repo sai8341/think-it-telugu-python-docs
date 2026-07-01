@@ -1,0 +1,95 @@
+---
+title: "Pattern Matching & Conditional Lab"
+sidebar_label: "match-case & Exercises"
+---
+
+# Modern Pattern Matching & Concise Syntax
+
+Python 3.10 introduced **Structural Pattern Matching** (`match-case`), bringing clean, declarative dispatch routing to Python developers, replacing cumbersome multi-branch `elif` chains when inspecting discrete states or command structures.
+
+## Structural Pattern Matching (`match-case`)
+
+Instead of writing repetitive `elif status == ...` checks, match a target variable against structural patterns:
+
+```python
+http_status = 404
+
+match http_status:
+    case 200:
+        print("Success: Resource retrieved.")
+    case 401 | 403:
+        print("Security Error: Unauthorized access.")
+    case 404:
+        print("Routing Error: Endpoint not found.")
+    case 500:
+        print("Server Error: Internal pipeline breakdown.")
+    case _:
+        print(f"Unknown Status Code: {http_status}")
+```
+
+The underscore pattern (`case _:`) acts as the universal wildcard fallback, identical to a trailing `else` statement.
+
+## Inline Conditional Expressions (Ternary Operator)
+
+When assigning variable values based on a simple boolean condition, inline conditional expressions compress four lines of code into a single, readable statement:
+
+```python
+# Syntax: <value_if_true> if <condition> else <value_if_false>
+temperature = 38.5
+health_state = "Fever Detected" if temperature > 37.5 else "Normal Temperature"
+
+print(health_state)  # Output: Fever Detected
+```
+
+## Hands-On Lab Exercises
+
+Verify your control flow mastery by running these scripts:
+
+```python
+# Exercise 1: AI Access Classifier
+model_tier = input("Enter AI Model Tier (Free/Pro/Enterprise): ").lower()
+
+match model_tier:
+    case "free":
+        print("Rate Limit: 15 requests/minute. Standard LLM active.")
+    case "pro":
+        print("Rate Limit: 100 requests/minute. Advanced reasoning active.")
+    case "enterprise":
+        print("Rate Limit: Unlimited. Dedicated GPU instance active.")
+    case _:
+        print("Invalid tier specified.")
+```
+
+```python
+# Exercise 2: Leap Year Verification Engine
+year = int(input("Enter target calendar year: "))
+
+if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+    print(f"{year} is a verified Leap Year.")
+else:
+    print(f"{year} is a Standard Year (365 days).")
+```
+
+## Technical Interview Preparation
+
+### Q1: Why is structural pattern matching preferred over extensive `elif` ladders for state machines?
+**Answer:** `match-case` statements compile to highly optimized dispatch tables in Python 3.10+, eliminating repetitive variable lookups and dramatically improving code scannability when inspecting discrete constants or structured payloads.
+
+### Q2: What happens if none of the `case` patterns match and no wildcard `case _:` is provided?
+**Answer:** The runtime silently performs a no-op (no operation) and continues execution after the match block without throwing an exception or changing variable states.
+
+## Module Summary
+
+- **`if` & `if-else`:** Core branching based on boolean evaluation with strict 4-space indentation.
+- **`elif` Chains:** Handle multi-tiered classifications top-to-bottom.
+- **`match-case` & Ternaries:** Modern declarative routing and concise inline assignments.
+
+## What's Next?
+
+Advance to Module 6 to master iterative automation using `while` loops, `for` loops, `range()`, and execution breakers (`break`/`continue`).
+
+<CardGroup cols={1}>
+  <Card title="Module 6: Loops & Iteration" icon="arrow-right" href="/part-1/module-6-loops/for-loops-range">
+    Automate repetitive processing, traverse collections, and control iteration pipelines
+  </Card>
+</CardGroup>

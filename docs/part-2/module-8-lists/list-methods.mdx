@@ -1,0 +1,133 @@
+---
+title: "List Methods & Operations"
+sidebar_label: "List Methods"
+---
+
+# List Methods & Operations
+
+Python provides powerful built-in methods to add, remove, search, and organize items inside a list.
+
+## Adding Items (`append`, `insert`, `extend`)
+
+- `.append(item)` adds one item to the very end of the list.
+- `.insert(index, item)` inserts an item at a specific position, shifting the rest to the right.
+- `.extend(another_list)` combines two lists into one.
+
+```python
+fruits = ["apple", "banana"]
+
+# Add to the end
+fruits.append("orange")
+print(fruits)  # Output: ['apple', 'banana', 'orange']
+
+# Insert at the beginning (index 0)
+fruits.insert(0, "mango")
+print(fruits)  # Output: ['mango', 'apple', 'banana', 'orange']
+```
+
+## Removing Items (`remove`, `pop`, `clear`)
+
+- `.remove(value)` deletes the **first matching item** by its name/value.
+- `.pop(index)` removes and returns the item at that position. If you leave out the index, `.pop()` removes the very last item.
+- `.clear()` empties the entire list.
+
+```python
+fruits = ["apple", "banana", "orange", "banana"]
+
+# Remove the first "banana"
+fruits.remove("banana")
+print(fruits)  # Output: ['apple', 'orange', 'banana']
+
+# Pop the last item
+last_fruit = fruits.pop()
+print(f"Removed: {last_fruit}")  # Output: Removed: banana
+print(fruits)                    # Output: ['apple', 'orange']
+```
+
+## Searching and Counting (`index`, `count`, `len`)
+
+- `len(my_list)` tells you the total number of items.
+- `.count(value)` counts how many times a value appears in the list.
+- `.index(value)` finds the index position of the first matching item.
+
+```python
+scores = [10, 20, 30, 20, 10, 20]
+
+print(len(scores))        # Total items: 6
+print(scores.count(20))   # How many times 20 appears: 3
+print(scores.index(30))   # Position of 30: index 2
+```
+
+## Sorting and Reversing (`sort`, `reverse`)
+
+- `.sort()` sorts items alphabetically or from lowest to highest number.
+- `.reverse()` flips the list order from back to front.
+
+```python
+numbers = [5, 1, 4, 2, 3]
+
+# Sort from smallest to largest
+numbers.sort()
+print(numbers)  # Output: [1, 2, 3, 4, 5]
+
+# Sort from largest to smallest
+numbers.sort(reverse=True)
+print(numbers)  # Output: [5, 4, 3, 2, 1]
+```
+
+## Copying a List (`copy`)
+
+If you want to make a backup copy of a list before changing it, use `.copy()`:
+
+```python
+original = ["red", "blue", "green"]
+backup = original.copy()
+
+backup.append("yellow")
+print(original)  # Output: ['red', 'blue', 'green'] (unchanged!)
+print(backup)    # Output: ['red', 'blue', 'green', 'yellow']
+```
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Assigning the result of .append() or .sort() to a variable">
+    ```python
+    # Wrong - .append() and .sort() modify the list directly and return None
+    numbers = [3, 1, 2]
+    numbers = numbers.sort()
+    print(numbers)  # Outputs None!
+    
+    # Right - call the method on a separate line
+    numbers = [3, 1, 2]
+    numbers.sort()
+    print(numbers)  # Outputs [1, 2, 3]
+    ```
+  </Accordion>
+
+  <Accordion title="Forgetting to copy when duplicating lists">
+    ```python
+    # Wrong - both variables point to the exact same list in memory
+    list1 = [1, 2, 3]
+    list2 = list1
+    list2.append(4)
+    print(list1)  # Outputs [1, 2, 3, 4]!
+    
+    # Right - use .copy() to create a true separate copy
+    list1 = [1, 2, 3]
+    list2 = list1.copy()
+    list2.append(4)
+    print(list1)  # Outputs [1, 2, 3]
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Let's learn how to process list items cleanly using loops and shortcuts called list comprehensions.
+
+<CardGroup cols={1}>
+  <Card title="Iterating & List Comprehensions" icon="arrow-right" href="/part-2/module-8-lists/list-comprehensions">
+    Learn how to loop through lists and write concise one-line list builders
+  </Card>
+</CardGroup>

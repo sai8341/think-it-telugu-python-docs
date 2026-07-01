@@ -1,0 +1,73 @@
+---
+title: "Flexible Inputs (*args & **kwargs)"
+sidebar_label: "*args & **kwargs"
+---
+
+# Accepting Unlimited Arguments
+
+Sometimes you don't know ahead of time how many items a user will pass into your function. For example, Python's built-in `print()` function can take 1 item, 5 items, or 100 items! You can create your own flexible functions using `*args` and `**kwargs`.
+
+## Positional Arguments (`*args`)
+
+Adding an asterisk `*` before a parameter name gathers extra items into a **Tuple**:
+
+```python
+def add_all(*numbers):
+    # 'numbers' becomes a tuple of whatever items were passed
+    return sum(numbers)
+
+print(add_all(10, 20))          # Output: 30
+print(add_all(5, 10, 15, 20))   # Output: 50
+```
+
+## Keyword Arguments (`**kwargs`)
+
+Adding two asterisks `**` before a parameter name gathers named keyword items into a **Dictionary**:
+
+```python
+def print_profile(**user_data):
+    for key, value in user_data.items():
+        print(f"{key}: {value}")
+
+print_profile(name="Alice", role="Admin", country="India")
+```
+
+## The Correct Order of Parameters
+
+If your function uses regular inputs, default inputs, `*args`, and `**kwargs` all together, you must write them in this specific order:
+
+```python
+def setup_user(standard_arg, default_arg="OK", *args, **kwargs):
+    pass
+```
+
+1. **Standard inputs** (`standard_arg`)
+2. **Default inputs** (`default_arg="OK"`)
+3. **`*args`**
+4. **`**kwargs`**
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Putting *args after **kwargs in the definition">
+    ```python
+    # Wrong - **kwargs must always come at the very end
+    def my_func(**kwargs, *args):
+        pass
+    
+    # Right - *args comes before **kwargs
+    def my_func(*args, **kwargs):
+        pass
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Let's explore one-line shortcut functions called lambdas and how functions can call themselves (recursion).
+
+<CardGroup cols={1}>
+  <Card title="Lambdas & Recursion" icon="arrow-right" href="/part-2/module-12-functions/lambda-recursion">
+    Learn concise one-line functions and self-referencing loops
+  </Card>
+</CardGroup>

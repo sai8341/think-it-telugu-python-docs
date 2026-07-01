@@ -1,0 +1,113 @@
+---
+title: "How Computers Execute Code"
+sidebar_label: "How Code Runs"
+---
+
+# How Computers Execute Code
+
+Computers do not speak human languages. Inside their chips, they only understand electrical pulses represented as ones and zeros (`1` and `0`).
+
+Because typing millions of ones and zeros by hand is nearly impossible, we write code in human-friendly languages like Python. We then rely on special software called **Translators** to convert our words into computer numbers.
+
+## 1. The Live Translation Flow
+
+When you write Python code and click Run, here is exactly what happens behind the scenes:
+
+<div className="ill-wrapper">
+  <div className="ill-card">
+    <span className="ill-badge badge-python">1. Your Code</span>
+    <pre className="ill-code"><code>{`print("Hello")`}</code></pre>
+  </div>
+  <div className="ill-arrow-flow">
+    <span>Translate</span>
+    <svg className="ill-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </div>
+  <div className="ill-card">
+    <span className="ill-badge badge-translator">2. Translator</span>
+    <div className="ill-desc">Converts English to 1s & 0s</div>
+  </div>
+  <div className="ill-arrow-flow">
+    <span>Execute</span>
+    <svg className="ill-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </div>
+  <div className="ill-card">
+    <span className="ill-badge badge-cpu">3. Screen Output</span>
+    <div className="ill-desc" style={{fontWeight: 'bold', color: '#10B981'}}>Hello</div>
+  </div>
+</div>
+
+---
+
+## 2. Compilers vs. Interpreters
+
+Translators come in two types: **Compilers** and **Interpreters**. 
+
+Think of the difference like translating an English book into Telugu:
+* A **Compiler** translates the *entire 200-page book all at once* before handing it to the reader.
+* An **Interpreter** translates the book *live, sentence by sentence*, reading and speaking out loud simultaneously.
+
+Here is how both approaches compare:
+
+<div className="ill-compare">
+  <div className="ill-compare-column">
+    <div className="ill-compare-title">Compiler (e.g., C++, Rust)</div>
+    <p style={{fontSize: '0.85rem', color: '#6B7280', marginBottom: '0.8rem'}}>Best for high-speed game engines and operating systems.</p>
+    <div className="ill-step-list">
+      <div className="ill-step">
+        <span className="ill-step-num">1</span>
+        <span>Reads all lines of code at once</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">2</span>
+        <span>Builds a standalone app (.exe)</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">3</span>
+        <span>Stops if even one typo exists</span>
+      </div>
+    </div>
+  </div>
+  <div className="ill-compare-column">
+    <div className="ill-compare-title">Interpreter (e.g., Python, JS)</div>
+    <p style={{fontSize: '0.85rem', color: '#6B7280', marginBottom: '0.8rem'}}>Best for beginners, AI models, and automation scripts.</p>
+    <div className="ill-step-list">
+      <div className="ill-step">
+        <span className="ill-step-num">1</span>
+        <span>Reads Line 1 &rarr; Runs immediately</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">2</span>
+        <span>Reads Line 2 &rarr; Runs immediately</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">3</span>
+        <span>Instant testing without waiting!</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+
+## 3. Why Python Uses an Interpreter
+
+Because Python translates and executes code line by line, it gives two massive advantages to beginners and software builders:
+
+* **No Waiting for Builds:** You do not need complex build steps. You simply save your script and click Run to see immediate results.
+* **Pinpoint Error Reporting:** If you make a mistake on line 10, Python executes lines 1 to 9 successfully, stops exactly at line 10, and tells you the exact problem so you can fix it quickly.
+
+## What's Next?
+
+Now let's see why Python became the most popular language in the world for web development and artificial intelligence.
+
+<CardGroup cols={1}>
+  <Card title="Why Choose Python?" icon="arrow-right" href="/part-1/module-0-before-python/why-python">
+    Discover what makes Python so popular and powerful
+  </Card>
+</CardGroup>

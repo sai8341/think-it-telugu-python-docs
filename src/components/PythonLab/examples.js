@@ -12,7 +12,7 @@ const examples = [
 
 print("Hello, World!")
 print("Welcome to Python! 🐍")
-print("You are learning to code — let's go!")
+print("You are learning to code - let's go!")
 `,
   },
   {
@@ -115,12 +115,12 @@ else:
     module: 'Module 6',
     code: `# Module 6: Loops
 
-# For Loop — print numbers 1 to 5
+# For Loop - print numbers 1 to 5
 print("Counting with for loop:")
 for i in range(1, 6):
     print(f"  Count: {i}")
 
-# While Loop — countdown
+# While Loop - countdown
 print("\\nCountdown with while loop:")
 count = 5
 while count > 0:

@@ -1,0 +1,87 @@
+---
+title: "Iterating & List Comprehensions"
+sidebar_label: "Looping & Comprehensions"
+---
+
+# Looping Through Lists
+
+When working with lists, you will frequently need to loop through every item one by one to print, inspect, or transform data.
+
+## Using a `for` Loop
+
+The easiest way to go through a list is a standard `for` loop:
+
+```python
+fruits = ["apple", "banana", "orange"]
+
+for fruit in fruits:
+    print(f"I love eating {fruit}s!")
+```
+
+## Getting Both Index and Item (`enumerate`)
+
+If you need both the position number (index) and the item value at the same time, use Python's built-in `enumerate()` function:
+
+```python
+tasks = ["Write code", "Review pull request", "Deploy to server"]
+
+for index, task in enumerate(tasks):
+    print(f"Task #{index + 1}: {task}")
+```
+
+## What is a List Comprehension?
+
+A **List Comprehension** is a neat Python shortcut that lets you build a new list in just one single line of code instead of writing a multi-line loop.
+
+### Standard Loop vs. List Comprehension
+
+```python
+# Standard way using a loop
+squares = []
+for x in range(1, 6):
+    squares.append(x * x)
+print(squares)  # Output: [1, 4, 9, 16, 25]
+
+# The exact same result in ONE line using List Comprehension
+squares_short = [x * x for x in range(1, 6)]
+print(squares_short)  # Output: [1, 4, 9, 16, 25]
+```
+
+## Filtering Items with `if`
+
+You can also add an `if` condition at the end of a list comprehension to filter out items you don't want:
+
+```python
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Grab only even numbers
+evens = [num for num in numbers if num % 2 == 0]
+print(evens)  # Output: [2, 4, 6, 8, 10]
+```
+
+## Common Beginner Mistakes
+
+<AccordionGroup>
+  <Accordion title="Modifying a list while looping through it">
+    ```python
+    # Wrong - removing items while looping messes up index positions!
+    numbers = [1, 2, 3, 4]
+    for num in numbers:
+        if num == 2:
+            numbers.remove(num)
+    
+    # Right - create a new clean list using a list comprehension
+    numbers = [num for num in numbers if num != 2]
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Now that you have mastered lists, let's explore **Tuples** - Python's read-only lists that keep fixed data safe from accidental changes.
+
+<CardGroup cols={1}>
+  <Card title="Module 9: Tuples" icon="arrow-right" href="/part-2/module-9-tuples/tuple-basics">
+    Learn when and why to use parentheses instead of square brackets
+  </Card>
+</CardGroup>
