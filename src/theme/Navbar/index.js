@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@theme-original/Navbar';
 import { useLocation } from '@docusaurus/router';
 import Link from '@docusaurus/Link';
 import clsx from 'clsx';
+import { initGlobalPyodidePreloader } from '@site/src/utils/pyodidePreloader';
 
 export default function NavbarWrapper(props) {
+  useEffect(() => {
+    initGlobalPyodidePreloader();
+  }, []);
+
   const location = useLocation();
   const pathname = location.pathname;
 

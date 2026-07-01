@@ -25,7 +25,21 @@ Practice your data science skills and check typical interview questions regardin
 
 ## 19.5.2 Placement Q&A (Interview Prep)
 
-Click on the questions below to reveal the answers:
+Test your knowledge with this quick interactive quiz:
+
+<Quiz
+  question="Why are NumPy arrays faster than standard Python lists?"
+  options={[
+    "Because they use multiple processor cores automatically",
+    "Because they allocate contiguous memory for homogeneous data types and support vectorization",
+    "Because they convert Python code into native Java code",
+    "Because they can store different data types inside the same array block"
+  ]}
+  correctIndex={1}
+  explanation="NumPy arrays are stored in contiguous memory blocks and enforce a single homogeneous data type (e.g., all integers or all floats). This allows vectorized operations without the overhead of Python's dynamic type checking and slow item loops."
+/>
+
+Click on the questions below to reveal more answers:
 
 <details>
 <summary>Q1. Why are NumPy arrays faster than normal Python lists?</summary>

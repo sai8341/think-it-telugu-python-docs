@@ -185,14 +185,20 @@ export default function PythonLab() {
 
   // Load from local storage on mount
   useEffect(() => {
-    const savedCode = localStorage.getItem('pylab_saved_code');
-    const savedExampleIdx = localStorage.getItem('pylab_selected_example_idx');
-    
-    if (savedCode !== null) {
-      setCode(savedCode);
-    }
-    if (savedExampleIdx !== null) {
-      setSelectedExample(parseInt(savedExampleIdx, 10));
+    const preloadedCode = localStorage.getItem('pylab_preloaded_code');
+    if (preloadedCode !== null) {
+      setCode(preloadedCode);
+      localStorage.removeItem('pylab_preloaded_code');
+    } else {
+      const savedCode = localStorage.getItem('pylab_saved_code');
+      const savedExampleIdx = localStorage.getItem('pylab_selected_example_idx');
+      
+      if (savedCode !== null) {
+        setCode(savedCode);
+      }
+      if (savedExampleIdx !== null) {
+        setSelectedExample(parseInt(savedExampleIdx, 10));
+      }
     }
   }, []);
 
@@ -240,30 +246,60 @@ export default function PythonLab() {
     }
   };
 
-  // Load Pyodide
+  // Load Pyodide (with global singleton caching for instant subsequent loading)
   useEffect(() => {
     let cancelled = false;
     async function loadPyodide() {
       try {
-        setLoadingProgress('Downloading Python runtime...');
-        if (!window.loadPyodide) {
-          const script = document.createElement('script');
-          script.src = `${PYODIDE_CDN}pyodide.js`;
-          script.async = true;
-          await new Promise((resolve, reject) => {
-            script.onload = resolve;
-            script.onerror = reject;
-            document.head.appendChild(script);
-          });
+        if (window.__pyodide_global_instance) {
+          pyodideRef.current = window.__pyodide_global_instance;
+          setPyodideReady(true);
+          return;
         }
-        if (cancelled) return;
+
+        setLoadingProgress('Downloading Python runtime...');
+        if (window.__pyodide_global_promise) {
+          setLoadingProgress('Initializing Python 3.11...');
+          const pyodide = await window.__pyodide_global_promise;
+          if (cancelled) return;
+          if (pyodide) {
+            pyodideRef.current = pyodide;
+            window.__pyodide_global_instance = pyodide;
+            setPyodideReady(true);
+            return;
+          }
+        }
+
+        // Fallback if background preloader hasn't started yet
+        window.__pyodide_global_promise = (async () => {
+          if (!window.loadPyodide) {
+            const script = document.createElement('script');
+            script.src = `${PYODIDE_CDN}pyodide.js`;
+            script.async = true;
+            await new Promise((resolve, reject) => {
+              script.onload = resolve;
+              script.onerror = reject;
+              document.head.appendChild(script);
+            });
+          }
+          const pyodide = await window.loadPyodide({ indexURL: PYODIDE_CDN });
+          window.__pyodide_global_instance = pyodide;
+          return pyodide;
+        })();
+
         setLoadingProgress('Initializing Python 3.11...');
-        const pyodide = await window.loadPyodide({ indexURL: PYODIDE_CDN });
+        const pyodide = await window.__pyodide_global_promise;
         if (cancelled) return;
-        pyodideRef.current = pyodide;
-        setPyodideReady(true);
+        if (pyodide) {
+          pyodideRef.current = pyodide;
+          setPyodideReady(true);
+        } else {
+          setLoadingProgress('Failed to load Python. Please refresh.');
+        }
       } catch (err) {
-        setLoadingProgress('Failed to load Python. Please refresh.');
+        if (!cancelled) {
+          setLoadingProgress('Failed to load Python. Please refresh.');
+        }
       }
     }
     loadPyodide();
@@ -399,6 +435,11 @@ async def __run_with_safe_input(code_str):
         const stderr = pyodide.runPython('sys.stderr.getvalue()');
         const stdout = pyodide.runPython('sys.stdout.getvalue()');
         let err = (stdout || '') + (stderr || pyErr.message || 'An error occurred.');
+        const endTime = performance.now();
+        const elapsed = endTime - startTime;
+        if (elapsed < 380) {
+          await new Promise(resolve => setTimeout(resolve, 380 - elapsed));
+        }
         setOutput(prev => prev + err);
         setIsRunning(false);
         pyodide.runPython('sys.stdout = sys.__stdout__\nsys.stderr = sys.__stderr__');
@@ -414,7 +455,13 @@ async def __run_with_safe_input(code_str):
       }
 
       const endTime = performance.now();
-      const duration = ((endTime - startTime) / 1000).toFixed(2);
+      const elapsed = endTime - startTime;
+      const duration = (elapsed / 1000).toFixed(2);
+
+      // Guarantee minimum satisfying visual feedback (380ms) for ultra-fast executions
+      if (elapsed < 380) {
+        await new Promise(resolve => setTimeout(resolve, 380 - elapsed));
+      }
 
       let finalOutput = (stdout || '') + (stderr || '');
       setOutput(prev => {
@@ -423,6 +470,11 @@ async def __run_with_safe_input(code_str):
         return result + `\n\n[Finished in ${duration}s]`;
       });
     } catch (err) {
+      const endTime = performance.now();
+      const elapsed = endTime - startTime;
+      if (elapsed < 380) {
+        await new Promise(resolve => setTimeout(resolve, 380 - elapsed));
+      }
       setHasError(true);
       setOutput(prev => prev + `\nError: ${err.message}`);
     }
@@ -888,9 +940,7 @@ def __debug_trace_and_run(user_code, max_steps):
               title="Run Program (Ctrl + Enter)"
             >
               {isRunning ? (
-                <>
-                  <span className="pylab-btn-spinner"></span> Running...
-                </>
+                <span className="pylab-btn-spinner"></span>
               ) : (
                 '▶ Run'
               )}
@@ -917,9 +967,7 @@ def __debug_trace_and_run(user_code, max_steps):
         </button>
         <button className={`pylab-mobtab pylab-mobrun`} onClick={runCode} disabled={!pyodideReady || isRunning} title="Run Program (Ctrl + Enter)">
           {isRunning ? (
-            <>
-              <span className="pylab-btn-spinner"></span> Running...
-            </>
+            <span className="pylab-btn-spinner"></span>
           ) : (
             '▶ Run'
           )}

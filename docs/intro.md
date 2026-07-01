@@ -5,43 +5,51 @@ title: "Introduction"
 sidebar_label: "Introduction"
 ---
 
-# Introduction 🚀
+# Introduction
 
-### Complete beginner course for Python and AI development
+Complete beginner course for Python and AI development
 
-Learn Python from scratch and start building real AI applications. This is the fastest, beginner-friendly course for Python and AI development, explained in Telugu with professional English documentation.
+Learn Python from scratch and start building real AI applications. This is the fastest, beginner-friendly course for Python and AI development, explained in clear Telugu with professional English documentation.
 
-Whether you’ve never written a line of code or you’re switching from another programming language, this course takes you from zero to confidently building Python projects for AI. No prior experience is required.
+Whether you have never written a line of code or you are transitioning from another programming language, this course takes you from zero to confidently building software projects for AI engineering. No prior programming experience is required.
 
-This handbook accompanies the **Complete Python for AI Course** on the [Think IT Telugu YouTube Channel](https://youtube.com/@ThinkIT-Telugu), giving you everything in written form with extra details, copy-pasteable code snippets, and structured reference materials to come back to.
+This handbook accompanies the **Complete Python for AI Course** on the [Think IT Telugu YouTube Channel](https://youtube.com/@ThinkIT-Telugu), providing you with structured documentation, copy-pasteable code snippets, interactive labs, and comprehensive reference materials.
 
----
+<CardGroup cols={3}>
+  <Card title="Beginner Friendly" icon="user-graduate">
+    No computer science degree or prior coding experience required
+  </Card>
+  <Card title="AI Focused" icon="robot">
+    Tailored specifically for modern AI engineering and API integrations
+  </Card>
+  <Card title="Hands-On Practice" icon="code">
+    Interactive exercises, live Python execution, and real-world projects
+  </Card>
+</CardGroup>
 
-## Why this Course?
+## What You Will Learn
 
-*   **Complete Beginner-Friendly:** No prior programming or computer science experience is required.
-*   **AI & Logic Focused:** Learn Python specifically tailored for Artificial Intelligence, APIs, and modern software development.
-*   **Hands-on Workflow:** Practice with real-world developer tools and code examples from day one.
+Master the core Python and software engineering fundamentals required for modern AI development:
 
----
+<CardGroup cols={3}>
+  <Card title="Set Up Like a Pro" icon="toolbox">
+    Master VS Code, virtual environments, Git, and professional development workflows
+  </Card>
+  <Card title="Learn Python Fast" icon="python">
+    Variables, data structures, logic, functions, and packages to process real data
+  </Card>
+  <Card title="Build AI Agents" icon="target">
+    Integrate APIs, process JSON schemas, and connect large language models to build applications
+  </Card>
+</CardGroup>
 
-## What you’ll learn
+## Start Learning
 
-Master the Python fundamentals essential for modern AI engineering:
-
-### ⚙️ Setup Like a Pro
-Master VS Code, terminals, environment variables, Git, and the exact workspace setups used in real IT companies.
-
-### 🐍 Learn Python Fast
-Master variables, lists, dictionaries, conditionals, loops, functions, and packages needed to process data for AI.
-
-### 🤖 Build AI Agents
-Apply what you learn to integrate APIs, process JSON data, and call large language models (like Gemini AI) to build real AI-powered applications.
-
----
-
-## Ready to Start?
-
-Head over to the next page to meet your instructor and get a course overview!
-
-👉 **[Course Welcome](./course-welcome.md)**
+<CardGroup cols={2}>
+  <Card title="Begin the Course" icon="arrow-right" href="/course-welcome">
+    Meet your instructor and explore the complete curriculum overview
+  </Card>
+  <Card title="Watch on YouTube" icon="youtube" href="https://youtube.com/@ThinkIT-Telugu">
+    Follow along with step-by-step video lessons on Think IT Telugu
+  </Card>
+</CardGroup>
