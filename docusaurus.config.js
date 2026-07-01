@@ -9,6 +9,7 @@ const config = {
 
   future: {
     v4: true,
+    faster: true,
   },
 
   url: 'https://python.thinkittelugu.in',
