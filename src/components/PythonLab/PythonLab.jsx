@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import examples from './examples';
 import FeedbackWidget from './FeedbackWidget';
+import FullscreenToggle from '@site/src/theme/NavbarItem/FullscreenToggle';
 import CodeEditor from './CodeEditor';
 
 /**
@@ -1106,12 +1107,10 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
         </div>
         <div className="pylab-statusbar-right">
           <span>{lineCount} {lineCount === 1 ? 'line' : 'lines'}</span>
-          <span className="pylab-statusbar-sep">•</span>
-          <span>UTF-8</span>
-        </div>
       </div>
 
       <FeedbackWidget />
+      <FullscreenToggle />
     </div>
   );
 }

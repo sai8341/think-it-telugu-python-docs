@@ -161,10 +161,6 @@ const config = {
             position: 'right',
             className: 'navbar-start-btn',
           },
-          {
-            type: 'custom-fullscreenToggle',
-            position: 'right',
-          },
         ],
       },
       // Footer removed to achieve Mintlify-style independent scrolling

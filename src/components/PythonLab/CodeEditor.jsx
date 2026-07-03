@@ -71,6 +71,78 @@ export default function CodeEditor({
       }
       return;
     }
+
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const before = code.substring(0, start);
+      const after = code.substring(end);
+      const lineStart = before.lastIndexOf('\n') + 1;
+      const currentLine = before.substring(lineStart);
+      const indent = currentLine.match(/^(\s*)/)[1];
+      const trimmed = currentLine.trimEnd();
+      let newIndent = indent;
+      if (trimmed.endsWith(':')) newIndent = indent + '    ';
+
+      // Smart bracket splitting behavior
+      const lastChar = before.slice(-1);
+      const nextChar = after.charAt(0);
+      const bracketPairs = { '{': '}', '[': ']', '(': ')' };
+
+      if (bracketPairs[lastChar] && bracketPairs[lastChar] === nextChar) {
+        const innerIndent = indent + '    ';
+        const insertion = '\n' + innerIndent + '\n' + indent;
+        setCode(before + insertion + after);
+        requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start + innerIndent.length + 1; });
+        return;
+      }
+
+      const insertion = '\n' + newIndent;
+      setCode(before + insertion + after);
+      requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start + insertion.length; });
+      return;
+    }
+
+    const pairs = { '(': ')', '[': ']', '{': '}', "'": "'", '"': '"' };
+
+    // Step over if typing a closing character that is already right after cursor
+    if (Object.values(pairs).includes(e.key) && code[start] === e.key) {
+      e.preventDefault();
+      ta.selectionStart = ta.selectionEnd = start + 1;
+      return;
+    }
+
+    // Auto-insert pair
+    if (pairs[e.key]) {
+      e.preventDefault();
+      const before = code.substring(0, start);
+      const after = code.substring(end);
+      const insertion = e.key + pairs[e.key];
+      setCode(before + insertion + after);
+      requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start + 1; });
+      return;
+    }
+
+    if (e.key === 'Backspace' && start === end && start > 0) {
+      // Delete empty pairs
+      const prevChar = code[start - 1];
+      const nextChar = code[start];
+      if (pairs[prevChar] && pairs[prevChar] === nextChar) {
+        e.preventDefault();
+        setCode(code.substring(0, start - 1) + code.substring(end + 1));
+        requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start - 1; });
+        return;
+      }
+
+      // Existing backspace logic for unindenting
+      const lineStart = code.lastIndexOf('\n', start - 1) + 1;
+      const beforeCursor = code.substring(lineStart, start);
+      if (beforeCursor.length > 0 && beforeCursor.trim() === '' && beforeCursor.length % 4 === 0) {
+        e.preventDefault();
+        setCode(code.substring(0, start - 4) + code.substring(end));
+        requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start - 4; });
+        return;
+      }
+    }
   };
 
   return (
