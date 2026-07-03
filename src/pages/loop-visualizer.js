@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Layout from '@theme/Layout';
-import ResponsiveLoopVisualizer from '@site/src/components/Visualizers/ResponsiveLoopVisualizer';
+import LoopVisualizer from '@site/src/components/Visualizers/LoopVisualizer';
 
 export default function LoopVisualizerPage() {
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function LoopVisualizerPage() {
           <p>Step through loop flow, variable changes, conditions, and console output.</p>
         </div>
 
-        <ResponsiveLoopVisualizer />
+        <LoopVisualizer />
       </main>
     </Layout>
   );

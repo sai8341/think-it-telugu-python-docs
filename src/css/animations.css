@@ -1,0 +1,36 @@
+/* ======= ANIMATIONS ======= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======= SELECTION ======= */
+::selection {
+  background: rgba(255, 193, 7, 0.3);
+  color: var(--brand-dark);
+}
+
+/* ======= BLOCKQUOTES (Content Cards) ======= */
+blockquote {
+  border-left: 4px solid var(--brand-gold);
+  background: rgba(255, 193, 7, 0.04);
+  border-radius: 0 12px 12px 0;
+  padding: 1.25rem 1.5rem;
+  font-style: normal !important;
+  margin: 1.8rem 0;
+}
+
+blockquote p {
+  margin-bottom: 0 !important;
+}
+
+[data-theme='dark'] blockquote {
+  background: rgba(255, 193, 7, 0.02);
+}

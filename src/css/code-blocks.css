@@ -1,0 +1,28 @@
+/* ======= CODE BLOCKS ======= */
+.prism-code {
+  border-radius: 10px !important;
+  border: 1px solid #e5e7eb;
+  box-shadow: none;
+  margin: 1.5rem 0;
+  padding: 1.25rem !important;
+}
+
+[data-theme='dark'] .prism-code {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+:not(pre) > code {
+  border-radius: 6px;
+  padding: 3px 6px;
+  background: #E8F5E9;
+  color: #00703A;
+  font-weight: 600;
+  font-size: 90%;
+  border: 1px solid rgba(0, 168, 89, 0.15);
+}
+
+[data-theme='dark'] :not(pre) > code {
+  background: rgba(0, 200, 106, 0.12);
+  color: #1BFF94;
+  border-color: rgba(0, 200, 106, 0.2);
+}

@@ -7,6 +7,7 @@ import {
 import {useNavbarMobileSidebar} from '@docusaurus/theme-common/internal';
 import DocSidebarItems from '@theme/DocSidebarItems';
 import { useLocation, useHistory } from '@docusaurus/router';
+import { getActivePart } from '@site/src/utils/navigation';
 
 // The custom secondary menu filler component that renders inside the mobile drawer
 const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
@@ -16,16 +17,7 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
   const pathname = location.pathname;
 
   // Determine active part based on current URL path
-  let activePart = 'part1';
-  if (pathname === '/' || pathname === '/course-welcome' || pathname === '/is-this-for-you') {
-    activePart = 'intro';
-  } else if (pathname.includes('/part-2/')) {
-    activePart = 'part2';
-  } else if (pathname.includes('/part-3/')) {
-    activePart = 'part3';
-  } else if (pathname.includes('/part-1/')) {
-    activePart = 'part1';
-  }
+  const activePart = getActivePart(pathname);
 
   const handleChange = (e) => {
     const val = e.target.value;

@@ -1,0 +1,782 @@
+/* ============================================
+   🐍 Python Lab - Programiz-Style Playground
+   Clean, Full-Screen, Side-by-Side Layout
+   ============================================ */
+
+/* Hide navbar completely in fullscreen mode */
+body.pylab-fullscreen-active .navbar,
+body.pylab-fullscreen-active footer {
+  display: none !important;
+}
+
+/* Hide docs sub-navbar and sidebar on Python Lab page */
+body.pylab-active .tabs-container,
+body.pylab-active [class*='docVersionBanner'],
+body.pylab-active .navbar__items--right + .navbar__items,
+body.pylab-active [class*='docsWrapper'],
+body.pylab-active .docs-version-tabs,
+body.pylab-active .navbar-sidebar,
+body.pylab-active .sub-navbar,
+body.pylab-active .thin-scrollbar {
+  display: none !important;
+}
+
+/* Page Container */
+.pylab-page {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+}
+
+/* --- Navbar Badge --- */
+.navbar-python-lab {
+  background: linear-gradient(135deg, #059669, #10B981) !important;
+  color: #fff !important;
+  padding: 6px 16px !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+}
+.navbar-python-lab:hover {
+  background: linear-gradient(135deg, #047857, #059669) !important;
+  transform: translateY(-1px) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* --- Root Layout --- */
+.pylab-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: calc(100vh - 65px);
+  max-height: calc(100vh - 65px);
+  overflow: hidden;
+}
+
+.pylab-root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: #ffffff;
+  font-family: var(--ifm-font-family-base);
+  overflow: hidden;
+}
+[data-theme='dark'] .pylab-root {
+  background: #0D1117;
+}
+
+/* Disable programming font ligatures so beginners see distinct characters like == and >= */
+code,
+pre,
+.pylab-root *,
+.ill-code,
+.responsive-visualizer * {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
+}
+
+/* --- Status Bar --- */
+.pylab-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  padding: 0 16px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.78rem;
+  color: #64748b;
+  font-family: var(--ifm-font-family-base);
+  flex-shrink: 0;
+  user-select: none;
+}
+[data-theme='dark'] .pylab-statusbar {
+  background: #161B22;
+  border-top-color: #30363D;
+  color: #8B949E;
+}
+.pylab-statusbar-left,
+.pylab-statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pylab-statusbar-sep {
+  opacity: 0.4;
+}
+
+/* Fullscreen Mode */
+.pylab-root.pylab-fs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: 9999;
+}
+
+/* --- Secondary Toolbar --- */
+.pylab-toolbar2 {
+  display: flex;
+  height: 54px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+[data-theme='dark'] .pylab-toolbar2 {
+  background: #161B22;
+  border-bottom-color: #30363D;
+}
+
+.pylab-toolbar-editor {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.pylab-toolbar-output {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-left: 1px solid #e5e7eb;
+}
+[data-theme='dark'] .pylab-toolbar-output {
+  border-left-color: #30363D;
+}
+
+.pylab-toolbar-editor-left,
+.pylab-toolbar-editor-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pylab-fs-btn2 {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  border-radius: 2px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #4b5563;
+  transition: all 0.18s ease;
+  font-size: 1.1rem;
+}
+.pylab-fs-btn2:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+[data-theme='dark'] .pylab-fs-btn2 {
+  border-color: #475569;
+  color: #94a3b8;
+}
+[data-theme='dark'] .pylab-fs-btn2:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+.pylab-file-tab2 {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #111827;
+}
+[data-theme='dark'] .pylab-file-tab2 {
+  color: #f8fafc;
+}
+
+/* Example Selector Dropdown */
+.pylab-example-sel {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 2px;
+  background: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #1e293b;
+  max-width: 200px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.pylab-example-sel:hover, .pylab-example-sel:focus {
+  border-color: #94a3b8;
+}
+[data-theme='dark'] .pylab-example-sel {
+  background: #1e293b;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+
+/* Primary Run Button */
+.pylab-run-btn2 {
+  height: 32px;
+  min-width: 76px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0 16px;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.pylab-run-btn2:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+.pylab-run-btn2:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Debug Button */
+.pylab-debug-btn2 {
+  height: 32px;
+  min-width: 76px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white;
+  border: none;
+  padding: 0 16px;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.pylab-debug-btn2:hover:not(:disabled) {
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+}
+.pylab-debug-btn2:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Reset Example Button */
+.pylab-reset-btn {
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 0 12px;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.pylab-reset-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+[data-theme='dark'] .pylab-reset-btn {
+  background: #1e293b;
+  border-color: #475569;
+  color: #cbd5e1;
+}
+[data-theme='dark'] .pylab-reset-btn:hover {
+  background: #334155;
+  color: #f8fafc;
+  border-color: #64748b;
+}
+
+
+.pylab-output-tab {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #374151;
+}
+[data-theme='dark'] .pylab-output-tab {
+  color: #94a3b8;
+}
+
+/* Clear Output Button */
+.pylab-clear-btn2 {
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 0 14px;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.pylab-clear-btn2:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+[data-theme='dark'] .pylab-clear-btn2 {
+  background: #1e293b;
+  border-color: #475569;
+  color: #cbd5e1;
+  box-shadow: none;
+}
+[data-theme='dark'] .pylab-clear-btn2:hover {
+  background: #450a0a;
+  color: #f87171;
+  border-color: #ef4444;
+}
+
+/* --- Mobile Tabs --- */
+.pylab-mobtabs {
+  display: none;
+}
+
+/* --- Workspace Split --- */
+.pylab-workspace2 {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.pylab-editor2,
+.pylab-output2 {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* --- Editor Pane --- */
+.pylab-editor2 {
+  background: #fafafa;
+}
+[data-theme='dark'] .pylab-editor2 {
+  background: #0D1117;
+}
+
+/* Line Numbers */
+.pylab-linenum {
+  padding: 12px 8px 40px 8px !important;
+  box-sizing: border-box;
+  background: #f3f4f6;
+  color: #9ca3af;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-align: right;
+  min-width: 40px;
+  user-select: none;
+  border-right: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+[data-theme='dark'] .pylab-linenum {
+  background: #0D1117;
+  color: #7D8590;
+  border-color: #30363D;
+}
+
+/* Editor Wrapper */
+.pylab-editor-inner {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Syntax Highlight Overlay & Input Textarea */
+.pylab-highlight,
+.pylab-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 12px 16px 40px 16px !important;
+  box-sizing: border-box;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  border: none;
+  white-space: pre;
+  tab-size: 4;
+}
+
+.pylab-input {
+  overflow: auto;
+}
+
+.pylab-highlight {
+  overflow: hidden;
+  pointer-events: none;
+  color: #1f2937;
+  z-index: 1;
+}
+[data-theme='dark'] .pylab-highlight {
+  color: #E6EDF3;
+}
+
+.pylab-active-line-overlay {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5em;
+  background-color: rgba(34, 197, 94, 0.2);
+  border-left: 3px solid #22c55e;
+  z-index: 1; /* Sit above pre background */
+  pointer-events: none;
+  transition: top 0.15s ease-out;
+  font-size: 0.9rem; /* Must match .pylab-input */
+}
+
+[data-theme='dark'] .pylab-active-line-overlay {
+  background-color: rgba(56, 139, 253, 0.12);
+  border-left-color: #58A6FF;
+}
+
+.pylab-active-num {
+  color: #22c55e !important;
+  font-weight: bold;
+}
+[data-theme='dark'] .pylab-active-num {
+  color: #58A6FF !important;
+}
+
+.pylab-input {
+  color: transparent !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  caret-color: #000;
+  z-index: 2;
+  outline: none;
+  resize: none;
+}
+[data-theme='dark'] .pylab-input {
+  caret-color: #58A6FF;
+}
+
+.pylab-input::selection {
+  background: rgba(37, 99, 235, 0.2);
+  color: transparent;
+}
+[data-theme='dark'] .pylab-input::selection {
+  background: rgba(56, 189, 248, 0.3);
+}
+
+/* --- Syntax Highlighting Tokens --- */
+.pyhl-keyword { color: #7c3aed; font-weight: 600; } /* Purple */
+.pyhl-builtin { color: #2563eb; } /* Blue */
+.pyhl-func { color: #2563eb; } /* Blue */
+.pyhl-string { color: #16a34a; } /* Green */
+.pyhl-number { color: #ea580c; } /* Orange */
+.pyhl-comment { color: #5b7065; font-style: normal; opacity: 0.85; } /* Muted Gray-Green */
+.pyhl-self { color: #7c3aed; }
+.pyhl-decorator { color: #0891b2; }
+.pyhl-operator { color: #1e293b; }
+
+[data-theme='dark'] .pyhl-keyword { color: #c084fc; } /* Purple */
+[data-theme='dark'] .pyhl-builtin { color: #60a5fa; } /* Blue */
+[data-theme='dark'] .pyhl-func { color: #60a5fa; } /* Blue */
+[data-theme='dark'] .pyhl-string { color: #4ade80; } /* Green */
+[data-theme='dark'] .pyhl-number { color: #fb923c; } /* Orange */
+[data-theme='dark'] .pyhl-comment { color: #829c8d; font-style: normal; opacity: 0.85; } /* Muted Gray-Green */
+.token.comment, .token.prolog, .token.doctype, .token.cdata { font-style: normal !important; }
+[data-theme='dark'] .pyhl-self { color: #c084fc; }
+[data-theme='dark'] .pyhl-decorator { color: #22d3ee; }
+[data-theme='dark'] .pyhl-operator { color: #e2e8f0; }
+
+/* --- Divider --- */
+.pylab-divider2 {
+  width: 4px;
+  background: #e5e7eb;
+  cursor: col-resize; /* Can implement resizer later if needed */
+}
+[data-theme='dark'] .pylab-divider2 {
+  background: #21262D;
+}
+
+/* --- Output Pane --- */
+.pylab-output2 {
+  background: #ffffff;
+  padding: 16px;
+  flex-direction: column;
+  overflow-y: auto;
+}
+[data-theme='dark'] .pylab-output2 {
+  background: #0D1117;
+}
+
+.pylab-out-text {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #111827;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+[data-theme='dark'] .pylab-out-text {
+  color: #e2e8f0;
+}
+
+/* Loaders */
+.pylab-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #6b7280;
+  font-size: 0.9rem;
+  height: 100%;
+}
+[data-theme='dark'] .pylab-loader {
+  color: #94a3b8;
+}
+
+.pylab-idle {
+  color: #9ca3af;
+}
+
+.pylab-spin {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(37, 99, 235, 0.2);
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: pylab-spin 0.8s linear infinite;
+}
+.pylab-btn-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: pylab-spin 0.8s linear infinite;
+  display: inline-block;
+}
+@keyframes pylab-spin { to { transform: rotate(360deg); } }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .pylab-topbar {
+    display: none;
+  }
+  
+  .pylab-toolbar2 {
+    display: none;
+  }
+
+  .pylab-mobtabs {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  [data-theme='dark'] .pylab-mobtabs {
+    background: #1e293b;
+    border-color: #334155;
+  }
+
+  .pylab-mobtab {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #6b7280;
+    font-weight: 600;
+  }
+  .pylab-mobtab.active {
+    color: #2563eb;
+    border-color: #2563eb;
+  }
+  .pylab-mobrun {
+    background: #2563eb;
+    color: white !important;
+    border: none !important;
+  }
+
+  .pylab-workspace2 {
+    flex-direction: column;
+  }
+
+  .pylab-editor2,
+  .pylab-output2 {
+    display: none;
+    flex: 1;
+  }
+
+  .pylab-vis {
+    display: flex !important;
+  }
+
+  .pylab-divider2 {
+    display: none;
+  }
+
+  .pylab-highlight {
+    display: none !important;
+  }
+
+  .pylab-input {
+    color: #1f2937 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    opacity: 1 !important;
+    z-index: 5 !important;
+  }
+
+  [data-theme='dark'] .pylab-input {
+    color: #e6edf3 !important;
+  }
+
+  .pylab-input,
+  .pylab-linenum {
+    font-size: 16px !important; /* Prevents iOS zoom */
+    line-height: 1.5 !important;
+    font-family: var(--ifm-font-family-monospace) !important;
+  }
+}
+
+
+/* --- Terminal Input --- */
+.pylab-term-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  width: 50%;
+}
+[data-theme='dark'] .pylab-term-input {
+  color: inherit;
+}
+
+/* --- Python Lab UI & UX Improvements --- */
+
+/* Reset Example Button */
+.pylab-reset-btn {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #4b5563;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+.pylab-reset-btn:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+  border-color: #9ca3af;
+}
+[data-theme='dark'] .pylab-reset-btn {
+  border-color: #475569;
+  color: #94a3b8;
+}
+[data-theme='dark'] .pylab-reset-btn:hover {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: #64748b;
+}
+
+/* Empty Console / Placeholder State */
+.pylab-empty-console {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #6b7280;
+  padding: 24px;
+}
+[data-theme='dark'] .pylab-empty-console {
+  color: #94a3b8;
+}
+.pylab-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+.pylab-empty-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #374151;
+}
+[data-theme='dark'] .pylab-empty-title {
+  color: #f1f5f9;
+}
+.pylab-empty-hint {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+[data-theme='dark'] .pylab-empty-hint {
+  color: #64748b;
+}
+.pylab-empty-hint strong {
+  color: #6b7280;
+}
+[data-theme='dark'] .pylab-empty-hint strong {
+  color: #94a3b8;
+}
+
+/* Error Console State */
+.pylab-error-state {
+  color: #ef4444 !important; /* Soft Red */
+}
+[data-theme='dark'] .pylab-error-state {
+  color: #fca5a5 !important; /* Soft Red */
+}
+
+/* Small adjustments for output container height when showing empty */
+.pylab-output2 {
+  min-height: 150px;
+}

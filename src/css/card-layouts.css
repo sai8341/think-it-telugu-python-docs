@@ -1,0 +1,56 @@
+/* ========================================================
+   Try in PythonLab Action Button Styling
+   ======================================================== */
+
+.custom-code-block-wrapper:hover .try-in-python-lab-btn {
+  opacity: 1;
+}
+
+.try-in-python-lab-btn {
+  position: absolute;
+  top: 8px;
+  right: 48px; /* sits to the left of the copy button */
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #059669;
+  background-color: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+  user-select: none;
+  height: 24px;
+}
+
+[data-theme='dark'] .try-in-python-lab-btn {
+  color: #34d399;
+  background-color: rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.15);
+}
+
+.try-in-python-lab-btn:hover {
+  opacity: 1 !important;
+  background-color: #059669;
+  color: #ffffff;
+  border-color: #059669;
+  box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
+}
+
+[data-theme='dark'] .try-in-python-lab-btn:hover {
+  background-color: #34d399;
+  color: #064e3b;
+  border-color: #34d399;
+  box-shadow: 0 2px 4px rgba(52, 211, 153, 0.2);
+}
+
+.try-in-pylab-icon {
+  width: 8px;
+  height: 8px;
+  fill: currentColor;
+}

@@ -18,6 +18,10 @@ const config = {
   organizationName: 'thinkittelugu',
   projectName: 'python-course',
 
+  customFields: {
+    feedbackWebhookUrl: process.env.FEEDBACK_WEBHOOK_URL || '',
+  },
+
   onBrokenLinks: 'warn',
   markdown: {
     hooks: {
@@ -135,9 +139,10 @@ const config = {
         items: [
           {
             to: '/python-lab',
-            label: '🐍 Python Lab',
+            label: 'Python Lab',
             position: 'right',
             className: 'navbar-python-lab',
+            target: '_blank',
           },
           {
             href: 'https://youtube.com/@ThinkIT-Telugu',
@@ -155,6 +160,10 @@ const config = {
             label: 'Start Learning ',
             position: 'right',
             className: 'navbar-start-btn',
+          },
+          {
+            type: 'custom-fullscreenToggle',
+            position: 'right',
           },
         ],
       },

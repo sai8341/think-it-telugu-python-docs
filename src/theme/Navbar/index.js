@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from '@theme-original/Navbar';
 import { useLocation } from '@docusaurus/router';
+import { getActivePart } from '@site/src/utils/navigation';
 import Link from '@docusaurus/Link';
 import clsx from 'clsx';
 import { initGlobalPyodidePreloader } from '@site/src/utils/pyodidePreloader';
@@ -14,16 +15,7 @@ export default function NavbarWrapper(props) {
   const pathname = location.pathname;
 
   // Determine active part based on the current URL path
-  let activePart = 'part1';
-  if (pathname === '/' || pathname === '/course-welcome' || pathname === '/is-this-for-you') {
-    activePart = 'intro';
-  } else if (pathname.includes('/part-2/')) {
-    activePart = 'part2';
-  } else if (pathname.includes('/part-3/')) {
-    activePart = 'part3';
-  } else if (pathname.includes('/part-1/')) {
-    activePart = 'part1';
-  }
+  const activePart = getActivePart(location.pathname);
 
   return (
     <>

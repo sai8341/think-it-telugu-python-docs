@@ -1,0 +1,101 @@
+.theme-admonition {
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  border-left: 4px solid var(--admonition-color) !important;
+  padding: 1rem 1.25rem !important;
+  margin-bottom: 1.5rem !important;
+  background-color: var(--admonition-bg) !important;
+  color: var(--ifm-font-color-base) !important;
+  box-shadow: none !important;
+}
+
+.theme-admonition-info {
+  --admonition-color: #3b82f6 !important;
+  --admonition-bg: rgba(59, 130, 246, 0.05) !important;
+}
+[data-theme='dark'] .theme-admonition-info {
+  --admonition-bg: rgba(59, 130, 246, 0.1) !important;
+}
+
+.theme-admonition-tip {
+  --admonition-color: #10b981 !important;
+  --admonition-bg: rgba(16, 185, 129, 0.05) !important;
+}
+[data-theme='dark'] .theme-admonition-tip {
+  --admonition-bg: rgba(16, 185, 129, 0.1) !important;
+}
+
+.theme-admonition-warning {
+  --admonition-color: #f59e0b !important;
+  --admonition-bg: rgba(245, 158, 11, 0.05) !important;
+}
+[data-theme='dark'] .theme-admonition-warning {
+  --admonition-bg: rgba(245, 158, 11, 0.1) !important;
+}
+
+.theme-admonition-danger {
+  --admonition-color: #ef4444 !important;
+  --admonition-bg: rgba(239, 68, 68, 0.05) !important;
+}
+[data-theme='dark'] .theme-admonition-danger {
+  --admonition-bg: rgba(239, 68, 68, 0.1) !important;
+}
+
+.theme-admonition .admonition-heading {
+  font-size: 0.95rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 700 !important;
+  color: var(--admonition-color) !important;
+}
+
+.theme-admonition .admonition-heading svg {
+  fill: currentColor !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin-right: 6px !important;
+}
+
+/* Collapsible Details/Accordions */
+details {
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background-color: #F9FAFB;
+  transition: all 0.2s ease;
+}
+[data-theme='dark'] details {
+  border-color: rgba(255, 255, 255, 0.08);
+  background-color: #12121E;
+}
+details[open] {
+  background-color: #FFFFFF;
+  border-color: #E5E7EB;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+[data-theme='dark'] details[open] {
+  background-color: #1A1A2E;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+summary {
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  color: var(--ifm-font-color-base);
+}
+summary:hover {
+  color: var(--ifm-color-primary);
+}
+
+/* Premium heading letter-spacing */
+.markdown h1, .markdown h2, .markdown h3, .markdown h4 {
+  letter-spacing: -0.02em;
+}
+
+/* ========================================================
+   Try in PythonLab Action Button Styling
+   ======================================================== */
+

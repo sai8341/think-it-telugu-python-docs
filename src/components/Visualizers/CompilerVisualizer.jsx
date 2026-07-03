@@ -44,7 +44,7 @@ function getLogClassName(log) {
   return 'terminal-line';
 }
 
-export default function ResponsiveCompilerVisualizer() {
+export default function CompilerVisualizer() {
   const [mode, setMode] = useState('interpreter');
   const [hasError, setHasError] = useState(true);
   const [step, setStep] = useState(-1);

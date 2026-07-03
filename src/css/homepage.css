@@ -1,0 +1,39 @@
+/* ======= HERO HOMEPAGE ======= */
+.hero--primary {
+  background: linear-gradient(135deg, #1E1E1E 0%, #2D2D2D 50%, #1E1E1E 100%);
+  color: #FFFFFF;
+}
+
+.hero__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3.8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFC107, #FFD54F, #FFC107);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero__subtitle {
+  color: #e0e0e0;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.button--primary {
+  background: linear-gradient(135deg, #FFC107 0%, #E5A100 100%);
+  color: #1E1E1E;
+  border: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(255, 193, 7, 0.3);
+}
+
+.button--primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 24px rgba(255, 193, 7, 0.45);
+  color: #1E1E1E;
+}

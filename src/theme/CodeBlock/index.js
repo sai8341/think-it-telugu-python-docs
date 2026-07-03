@@ -15,11 +15,11 @@ export default function CodeBlockWrapper(props) {
     codeText = props.value;
   }
 
-  // Handle click: copy code and redirect to /python-lab
+  // Handle click: copy code and open /python-lab in a new tab
   const handleTryInPythonLab = () => {
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('pylab_preloaded_code', codeText.trim());
-      window.location.href = '/python-lab';
+      window.open('/python-lab', '_blank');
     }
   };
 

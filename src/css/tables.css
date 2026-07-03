@@ -1,0 +1,42 @@
+/* ======= TABLES ======= */
+table {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  box-shadow: none;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+table thead {
+  background: #F9FAFB;
+}
+
+table thead th {
+  color: #374151 !important;
+  font-weight: 700;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+table tbody tr:nth-child(even) {
+  background: #FAFAFA;
+}
+
+[data-theme='dark'] table thead {
+  background: #1A1A2E;
+}
+
+[data-theme='dark'] table thead th {
+  color: #E0E7FF !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme='dark'] table tbody tr:nth-child(even) {
+  background: rgba(99, 102, 241, 0.03);
+}
+
+table td {
+  padding: 0.8rem 1.25rem;
+  line-height: 1.6;
+}

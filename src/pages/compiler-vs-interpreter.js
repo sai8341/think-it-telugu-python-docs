@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Layout from '@theme/Layout';
-import ResponsiveCompilerVisualizer from '@site/src/components/Visualizers/ResponsiveCompilerVisualizer';
+import CompilerVisualizer from '@site/src/components/Visualizers/CompilerVisualizer';
 
 export default function CompilerVsInterpreterPage() {
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function CompilerVsInterpreterPage() {
           <p>Compare Python line-by-line execution with a C++ compile-and-run flow.</p>
         </div>
 
-        <ResponsiveCompilerVisualizer />
+        <CompilerVisualizer />
       </main>
     </Layout>
   );

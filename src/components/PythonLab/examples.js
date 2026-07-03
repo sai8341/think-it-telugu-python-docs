@@ -11,7 +11,7 @@ const examples = [
 # Try clicking "Run" to see the output!
 
 print("Hello, World!")
-print("Welcome to Python! 🐍")
+print("Welcome to Python!")
 print("You are learning to code - let's go!")
 `,
   },

@@ -1,4 +1,4 @@
-const PYODIDE_CDN = 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/';
+import { PYODIDE_CDN } from './constants';
 
 /**
  * Global cache objects on window to survive component remounts and SPA page navigation.

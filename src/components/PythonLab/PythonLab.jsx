@@ -1,151 +1,19 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import examples from './examples';
+import FeedbackWidget from './FeedbackWidget';
+import CodeEditor from './CodeEditor';
 
 /**
  * PythonLab - Programiz-style Python playground with syntax highlighting.
  * Full-screen, side-by-side, distraction-free.
  */
 
-const PYODIDE_CDN = 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/';
+import { PYODIDE_CDN } from '@site/src/utils/constants';
 
-// Python syntax highlighting tokens
-const PYTHON_KEYWORDS = new Set([
-  'False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await',
-  'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except',
-  'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is',
-  'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try',
-  'while', 'with', 'yield',
-]);
-
-const PYTHON_BUILTINS = new Set([
-  'print', 'range', 'len', 'type', 'int', 'float', 'str', 'bool',
-  'list', 'dict', 'set', 'tuple', 'input', 'abs', 'max', 'min',
-  'sum', 'sorted', 'enumerate', 'zip', 'map', 'filter', 'open',
-  'super', 'isinstance', 'issubclass', 'hasattr', 'getattr', 'setattr',
-  'round', 'format', 'repr', 'hex', 'oct', 'bin', 'ord', 'chr',
-]);
-
-/**
- * Simple Python syntax highlighter.
- * Returns HTML string with <span> tags for colored tokens.
- */
-function highlightPython(code) {
-  const lines = code.split('\n');
-  return lines.map(line => highlightLine(line)).join('\n');
-}
-
-function escapeHtml(text) {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
-
-function highlightLine(line) {
-  let result = '';
-  let i = 0;
-
-  while (i < line.length) {
-    // Comments
-    if (line[i] === '#') {
-      result += `<span class="pyhl-comment">${escapeHtml(line.slice(i))}</span>`;
-      break;
-    }
-
-    // Strings (double or single quotes, including triple quotes)
-    if (line[i] === '"' || line[i] === "'") {
-      const quote = line[i];
-      let end = i + 1;
-      // Check for triple quotes
-      if (line.slice(i, i + 3) === quote.repeat(3)) {
-        end = i + 3;
-        while (end < line.length && line.slice(end, end + 3) !== quote.repeat(3)) {
-          if (line[end] === '\\') end++;
-          end++;
-        }
-        end = Math.min(end + 3, line.length);
-      } else {
-        while (end < line.length && line[end] !== quote) {
-          if (line[end] === '\\') end++;
-          end++;
-        }
-        if (end < line.length) end++;
-      }
-      result += `<span class="pyhl-string">${escapeHtml(line.slice(i, end))}</span>`;
-      i = end;
-      continue;
-    }
-
-    // f-strings
-    if ((line[i] === 'f' || line[i] === 'F') && i + 1 < line.length && (line[i + 1] === '"' || line[i + 1] === "'")) {
-      const quote = line[i + 1];
-      let end = i + 2;
-      while (end < line.length && line[end] !== quote) {
-        if (line[end] === '\\') end++;
-        end++;
-      }
-      if (end < line.length) end++;
-      result += `<span class="pyhl-string">${escapeHtml(line.slice(i, end))}</span>`;
-      i = end;
-      continue;
-    }
-
-    // Numbers
-    if (/[0-9]/.test(line[i]) && (i === 0 || /[\s(,=+\-*/%<>:[\]!&|^~]/.test(line[i - 1]))) {
-      let end = i;
-      while (end < line.length && /[0-9.xXoObBeE_]/.test(line[end])) end++;
-      result += `<span class="pyhl-number">${escapeHtml(line.slice(i, end))}</span>`;
-      i = end;
-      continue;
-    }
-
-    // Words (identifiers, keywords, builtins)
-    if (/[a-zA-Z_]/.test(line[i])) {
-      let end = i;
-      while (end < line.length && /[a-zA-Z0-9_]/.test(line[end])) end++;
-      const word = line.slice(i, end);
-
-      if (PYTHON_KEYWORDS.has(word)) {
-        result += `<span class="pyhl-keyword">${escapeHtml(word)}</span>`;
-      } else if (PYTHON_BUILTINS.has(word)) {
-        result += `<span class="pyhl-builtin">${escapeHtml(word)}</span>`;
-      } else if (end < line.length && line[end] === '(') {
-        result += `<span class="pyhl-func">${escapeHtml(word)}</span>`;
-      } else if (word === 'self') {
-        result += `<span class="pyhl-self">${escapeHtml(word)}</span>`;
-      } else {
-        result += escapeHtml(word);
-      }
-      i = end;
-      continue;
-    }
-
-    // Decorators
-    if (line[i] === '@') {
-      let end = i + 1;
-      while (end < line.length && /[a-zA-Z0-9_.]/.test(line[end])) end++;
-      result += `<span class="pyhl-decorator">${escapeHtml(line.slice(i, end))}</span>`;
-      i = end;
-      continue;
-    }
-
-    // Operators
-    if ('=+-*/<>!&|^~%'.includes(line[i])) {
-      result += `<span class="pyhl-operator">${escapeHtml(line[i])}</span>`;
-      i++;
-      continue;
-    }
-
-    // Everything else
-    result += escapeHtml(line[i]);
-    i++;
-  }
-
-  // Ensure empty lines still have height
-  return result || ' ';
-}
-
+import { PYTHON_KEYWORDS, PYTHON_BUILTINS, highlightPython, findInputsInCode, highlightLine, escapeHtml } from '@site/src/utils/pythonHighlighter';
 export default function PythonLab() {
+  const { siteConfig } = useDocusaurusContext();
   const [code, setCode] = useState(examples[0].code);
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
@@ -156,11 +24,17 @@ export default function PythonLab() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeTab, setActiveTab] = useState('editor');
   
+  // Custom Debug Inputs Modal State
+  const [showDebugInputsModal, setShowDebugInputsModal] = useState(false);
+  const [debugPrompts, setDebugPrompts] = useState([]);
+  const [debugInputs, setDebugInputs] = useState([]);
+  
   // Terminal UI State
   const [terminalInput, setTerminalInput] = useState('');
   const [isWaitingForInput, setIsWaitingForInput] = useState(false);
   const resolveInputRef = useRef(null);
   const terminalInputRef = useRef(null);
+  const isCancelledRef = useRef(false);
 
   // Debug State
   const [isDebugging, setIsDebugging] = useState(false);
@@ -169,6 +43,8 @@ export default function PythonLab() {
   const [isDebugPlaying, setIsDebugPlaying] = useState(false);
   const [debugError, setDebugError] = useState('');
   const MAX_DEBUG_STEPS = 500;
+
+  // Feedback Widget State
 
   const textareaRef = useRef(null);
   const highlightRef = useRef(null);
@@ -329,6 +205,7 @@ export default function PythonLab() {
   // Run code
   const runCode = useCallback(async () => {
     if (!pyodideRef.current || isRunning) return;
+    isCancelledRef.current = false;
     setIsRunning(true);
     setHasError(false);
     setOutput('');
@@ -431,6 +308,10 @@ async def __run_with_safe_input(code_str):
       try {
         await pyodide.runPythonAsync(`await __run_with_safe_input(${JSON.stringify(code)})`);
       } catch (pyErr) {
+        if (isCancelledRef.current) {
+          setIsRunning(false);
+          return;
+        }
         setHasError(true);
         const stderr = pyodide.runPython('sys.stderr.getvalue()');
         const stdout = pyodide.runPython('sys.stdout.getvalue()');
@@ -470,6 +351,10 @@ async def __run_with_safe_input(code_str):
         return result + `\n\n[Finished in ${duration}s]`;
       });
     } catch (err) {
+      if (isCancelledRef.current) {
+        setIsRunning(false);
+        return;
+      }
       const endTime = performance.now();
       const elapsed = endTime - startTime;
       if (elapsed < 380) {
@@ -482,98 +367,13 @@ async def __run_with_safe_input(code_str):
   }, [code, isRunning]);
 
   // Keyboard handling with proper indentation and auto-closing brackets
-  const handleKeyDown = (e) => {
-    const ta = e.target;
-    const start = ta.selectionStart;
-    const end = ta.selectionEnd;
-
-    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-      e.preventDefault();
-      runCode();
-      return;
+const handleExampleChange = (e) => {
+    if (isRunning) {
+      isCancelledRef.current = true;
+      if (resolveInputRef.current) resolveInputRef.current(null);
+      setIsRunning(false);
+      setIsWaitingForInput(false);
     }
-
-    if (e.key === 'Tab' && !e.shiftKey) {
-      e.preventDefault();
-      const newCode = code.substring(0, start) + '    ' + code.substring(end);
-      setCode(newCode);
-      requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start + 4; });
-      return;
-    }
-
-    if (e.key === 'Tab' && e.shiftKey) {
-      e.preventDefault();
-      const lineStart = code.lastIndexOf('\n', start - 1) + 1;
-      const linePrefix = code.substring(lineStart, start);
-      const spaces = Math.min(4, linePrefix.length - linePrefix.trimStart().length);
-      if (spaces > 0) {
-        const newCode = code.substring(0, lineStart) + code.substring(lineStart + spaces);
-        setCode(newCode);
-        requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = Math.max(lineStart, start - spaces); });
-      }
-      return;
-    }
-
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const before = code.substring(0, start);
-      const after = code.substring(end);
-      const lineStart = before.lastIndexOf('\n') + 1;
-      const currentLine = before.substring(lineStart);
-      const indent = currentLine.match(/^(\s*)/)[1];
-      const trimmed = currentLine.trimEnd();
-      let newIndent = indent;
-      if (trimmed.endsWith(':')) newIndent = indent + '    ';
-      const insertion = '\n' + newIndent;
-      setCode(before + insertion + after);
-      requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start + insertion.length; });
-      return;
-    }
-
-    const pairs = { '(': ')', '[': ']', '{': '}', "'": "'", '"': '"' };
-
-    // Step over if typing a closing character that is already right after cursor
-    if (Object.values(pairs).includes(e.key) && code[start] === e.key) {
-      e.preventDefault();
-      ta.selectionStart = ta.selectionEnd = start + 1;
-      return;
-    }
-
-    // Auto-insert pair
-    if (pairs[e.key]) {
-      e.preventDefault();
-      const before = code.substring(0, start);
-      const after = code.substring(end);
-      const insertion = e.key + pairs[e.key];
-      setCode(before + insertion + after);
-      requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start + 1; });
-      return;
-    }
-
-    if (e.key === 'Backspace' && start === end && start > 0) {
-      // Delete empty pairs
-      const prevChar = code[start - 1];
-      const nextChar = code[start];
-      if (pairs[prevChar] && pairs[prevChar] === nextChar) {
-        e.preventDefault();
-        setCode(code.substring(0, start - 1) + code.substring(end + 1));
-        requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start - 1; });
-        return;
-      }
-
-      // Existing backspace logic for unindenting
-      const lineStart = code.lastIndexOf('\n', start - 1) + 1;
-      const beforeCursor = code.substring(lineStart, start);
-      if (beforeCursor.length > 0 && beforeCursor.trim() === '' && beforeCursor.length % 4 === 0) {
-        e.preventDefault();
-        setCode(code.substring(0, start - 4) + code.substring(end));
-        requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start - 4; });
-        return;
-      }
-    }
-  };
-
-  const handleExampleChange = (e) => {
     const idx = parseInt(e.target.value, 10);
     setSelectedExample(idx);
     setCode(examples[idx].code);
@@ -584,6 +384,12 @@ async def __run_with_safe_input(code_str):
   };
 
   const handleResetExample = () => {
+    if (isRunning) {
+      isCancelledRef.current = true;
+      if (resolveInputRef.current) resolveInputRef.current(null);
+      setIsRunning(false);
+      setIsWaitingForInput(false);
+    }
     const originalCode = examples[selectedExample].code;
     setCode(originalCode);
     setOutput('');
@@ -596,11 +402,57 @@ async def __run_with_safe_input(code_str):
     document.body.classList.toggle('pylab-fullscreen-active');
   };
 
+  const handleFeedbackSubmit = async () => {
+    if (!feedbackRating) return;
+
+    const payload = {
+      event: 'python_lab_feedback',
+      category: 'Feedback',
+      action: 'Submit Feedback',
+      label: feedbackRating, // 'like' or 'dislike'
+      value: feedbackComment,
+      pagePath: typeof window !== 'undefined' ? window.location.pathname : '',
+      timestamp: new Date().toISOString()
+    };
+
+    // Track in Google Analytics dataLayer
+    if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(payload);
+    }
+
+    // Call Webhook if configured in docusaurus.config.js customFields
+    const webhookUrl = siteConfig.customFields?.feedbackWebhookUrl;
+    if (webhookUrl) {
+      try {
+        fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }).catch(err => console.error('Feedback webhook fetch error:', err));
+      } catch (e) {
+        console.error('Feedback webhook setup error:', e);
+      }
+    }
+
+    setFeedbackSubmitted(true);
+
+    // Auto-close feedback card after 2.5 seconds and reset form
+    setTimeout(() => {
+      setShowFeedbackCard(false);
+      setTimeout(() => {
+        setFeedbackSubmitted(false);
+        setFeedbackRating(null);
+        setFeedbackComment('');
+      }, 300);
+    }, 2500);
+  };
+
   // ========== DEBUGGER LOGIC ==========
 
-  const debugCode = useCallback(async () => {
-    if (!pyodideRef.current || isRunning || isDebugging) return;
-
+  const runDebugTracer = useCallback(async (predefinedInputs) => {
     setDebugError('');
     setIsRunning(true);
     setOutput('');
@@ -628,7 +480,7 @@ import sys, json, ast, builtins, traceback as _tb
 from io import StringIO
 import js
 
-def __debug_trace_and_run(user_code, max_steps):
+def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
     steps = []
     output_stream = StringIO()
     old_stdout = sys.stdout
@@ -640,6 +492,10 @@ def __debug_trace_and_run(user_code, max_steps):
     prev_vars = [{}]
     last_line = [0]
 
+    # Pre-collected inputs
+    predefined_inputs = json.loads(predefined_inputs_json)
+    input_index = [0]
+
     # Cycle detection for infinite loops
     recent_lines = []
     CYCLE_WINDOW = 20
@@ -648,11 +504,16 @@ def __debug_trace_and_run(user_code, max_steps):
     old_input = builtins.input
 
     def debug_sync_input(prompt_text=""):
-        """Synchronous input handler for debug mode using browser prompt."""
+        """Synchronous input handler for debug mode using pre-collected inputs."""
         output_stream.flush()
-        val = js.prompt(str(prompt_text) if prompt_text else "Enter input:")
-        if val is None:
-            raise EOFError("Input cancelled")
+        
+        idx = input_index[0]
+        if idx < len(predefined_inputs):
+            val = predefined_inputs[idx]
+            input_index[0] += 1
+        else:
+            val = ""
+            
         result = str(val)
         output_stream.write(str(prompt_text) + result + "\\n")
         return result
@@ -798,7 +659,7 @@ def __debug_trace_and_run(user_code, max_steps):
 
       // Execute trace on unmodified user code (no regex replacement)
       const result = await pyodide.runPythonAsync(
-        `__debug_trace_and_run(${JSON.stringify(code)}, ${MAX_DEBUG_STEPS})`
+        `__debug_trace_and_run(${JSON.stringify(code)}, ${MAX_DEBUG_STEPS}, ${JSON.stringify(JSON.stringify(predefinedInputs))})`
       );
 
       const steps = JSON.parse(result);
@@ -825,7 +686,21 @@ def __debug_trace_and_run(user_code, max_steps):
       setDebugError(`Debug failed: ${err.message}`);
     }
     setIsRunning(false);
-  }, [code, isRunning, isDebugging]);
+  }, [code, selectedExample, pyodideRef]);
+
+  const debugCode = useCallback(async () => {
+    if (!pyodideRef.current || isRunning || isDebugging) return;
+
+    // Scan code for input() prompts
+    const prompts = findInputsInCode(code);
+    if (prompts.length > 0) {
+      setDebugPrompts(prompts);
+      setDebugInputs(prompts.map(() => '')); // Initialize with empty strings
+      setShowDebugInputsModal(true);
+    } else {
+      await runDebugTracer([]);
+    }
+  }, [code, isRunning, isDebugging, pyodideRef, runDebugTracer]);
 
   const nextDebugStep = () => {
     setDebugStepIndex(prev => Math.min(prev + 1, debugSteps.length - 1));
@@ -893,6 +768,57 @@ def __debug_trace_and_run(user_code, max_steps):
 
   return (
     <div className={`pylab-root ${isFullscreen ? 'pylab-fs' : ''}`}>
+      {showDebugInputsModal && (
+        <div className="pylab-modal-overlay">
+          <div className="pylab-modal-content">
+            <h3>📋 Debug Inputs Required</h3>
+            <p>This code uses <code>input()</code>. Please enter the values to use during debugging:</p>
+            
+            <div className="pylab-modal-inputs">
+              {debugPrompts.map((promptText, idx) => (
+                <div key={idx} className="pylab-modal-field">
+                  <label>{promptText}</label>
+                  <input
+                    type="text"
+                    value={debugInputs[idx] || ''}
+                    onChange={(e) => {
+                      const newVal = e.target.value;
+                      setDebugInputs(prev => {
+                        const updated = [...prev];
+                        updated[idx] = newVal;
+                        return updated;
+                      });
+                    }}
+                    placeholder={`Enter value for: ${promptText}`}
+                    autoFocus={idx === 0}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="pylab-modal-actions">
+              <button
+                className="pylab-modal-cancel"
+                onClick={() => {
+                  setShowDebugInputsModal(false);
+                  setIsRunning(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className="pylab-modal-submit"
+                onClick={async () => {
+                  setShowDebugInputsModal(false);
+                  await runDebugTracer(debugInputs);
+                }}
+              >
+                Start Debugging
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Toolbar Row */}
       <div className="pylab-toolbar2">
         {/* Editor Toolbar */}
@@ -952,7 +878,23 @@ def __debug_trace_and_run(user_code, max_steps):
         <div className="pylab-toolbar-output">
           <span className="pylab-output-tab">{isDebugging ? 'Debugger' : 'Output'}</span>
           {!isDebugging && (
-            <button className="pylab-clear-btn2" onClick={() => { setOutput(''); setHasError(false); }}>Clear</button>
+            <button
+              className="pylab-clear-btn2"
+              onClick={() => {
+                setOutput('');
+                setHasError(false);
+                if (isRunning) {
+                  isCancelledRef.current = true;
+                  if (resolveInputRef.current) {
+                    resolveInputRef.current(null);
+                  }
+                  setIsRunning(false);
+                  setIsWaitingForInput(false);
+                }
+              }}
+            >
+              Clear
+            </button>
           )}
           {isDebugging && (
             <span className="pylab-debug-step-counter">Step {debugStepIndex + 1} of {debugSteps.length}</span>
@@ -981,43 +923,18 @@ def __debug_trace_and_run(user_code, max_steps):
       <div className="pylab-workspace2">
         {/* Editor */}
         <div className={`pylab-editor2 ${activeTab === 'editor' ? 'pylab-vis' : ''}`}>
-          <div className="pylab-linenum" ref={lineNumbersRef}>
-            {Array.from({ length: lineCount }, (_, i) => (
-              <div key={i} className={isDebugging && currentDebugStep?.line === i + 1 ? 'pylab-active-num' : ''}>{i + 1}</div>
-            ))}
-          </div>
-          <div className="pylab-editor-inner">
-            {/* Syntax-highlighted overlay */}
-            <pre
-              className="pylab-highlight"
-              ref={highlightRef}
-              aria-hidden="true"
-              dangerouslySetInnerHTML={{ __html: highlightedCode + '\n' }}
-            />
-            {/* Active Line Overlay */}
-            {isDebugging && currentDebugStep && currentDebugStep.line > 0 && (
-              <div 
-                className="pylab-active-line-overlay"
-                style={{ top: `calc(12px + ${(currentDebugStep.line - 1) * 1.5}em)` }}
-              />
-            )}
-            {/* Invisible textarea for input */}
-            <textarea
-              ref={textareaRef}
-              className="pylab-input"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              onKeyDown={handleKeyDown}
-              onScroll={syncScroll}
-              readOnly={isDebugging || isRunning}
-              style={{ pointerEvents: isDebugging ? 'none' : 'auto' }}
-              spellCheck={false}
-              autoCapitalize="off"
-              autoCorrect="off"
-              autoComplete="off"
-              wrap="off"
-            />
-          </div>
+          <CodeEditor
+            code={code}
+            setCode={setCode}
+            runCode={runCode}
+            isDebugging={isDebugging}
+            currentDebugStep={currentDebugStep}
+            isRunning={isRunning}
+            textareaRef={textareaRef}
+            syncScrollExternal={syncScroll}
+            lineNumbersRef={lineNumbersRef}
+            highlightRef={highlightRef}
+          />
         </div>
 
         {/* Divider */}
@@ -1036,7 +953,12 @@ def __debug_trace_and_run(user_code, max_steps):
               )}
               {pyodideReady && !output && !isRunning && (
                 <div className="pylab-empty-console">
-                  <span className="pylab-empty-icon">🐍</span>
+                  <span className="pylab-empty-icon">
+                    <svg viewBox="0 0 24 24" width="42" height="42" stroke="currentColor" strokeWidth="1.5" fill="none" style={{ opacity: 0.45, margin: '0 auto 12px' }}>
+                      <polyline points="4 17 10 11 4 5"></polyline>
+                      <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                  </span>
                   <p className="pylab-empty-title">Program output will appear here.</p>
                   <span className="pylab-empty-hint">
                     Click <strong>▶ Run</strong> or press <strong>Ctrl + Enter</strong> to execute your Python program.
@@ -1178,7 +1100,7 @@ def __debug_trace_and_run(user_code, max_steps):
       {/* Footer Status Bar */}
       <div className="pylab-statusbar">
         <div className="pylab-statusbar-left">
-          <span>🐍 Python 3.11</span>
+          <span>Python 3.11</span>
           <span className="pylab-statusbar-sep">•</span>
           <span>⚡ Pyodide Powered</span>
         </div>
@@ -1188,6 +1110,10 @@ def __debug_trace_and_run(user_code, max_steps):
           <span>UTF-8</span>
         </div>
       </div>
+
+      <FeedbackWidget />
     </div>
   );
 }
+
+

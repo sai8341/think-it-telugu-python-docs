@@ -1,0 +1,52 @@
+/* ======= MOBILE SIDEBAR CUSTOM PART DROPDOWN ======= */
+.mobile-sidebar-dropdown-wrapper {
+  position: relative;
+  margin: 0.5rem 0.5rem 1rem 0.5rem;
+}
+
+.mobile-sidebar-select {
+  width: 100%;
+  padding: 0.6rem 2.5rem 0.6rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #374151;
+  background-color: #F3F4F6;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+[data-theme='dark'] .mobile-sidebar-select {
+  color: #E5E7EB;
+  background-color: #1F1F30;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.mobile-sidebar-select:focus {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 168, 89, 0.15);
+  background-color: #FFFFFF;
+}
+
+[data-theme='dark'] .mobile-sidebar-select:focus {
+  background-color: #151522;
+}
+
+.mobile-sidebar-select-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #4B5563;
+  display: flex;
+  align-items: center;
+}
+
+[data-theme='dark'] .mobile-sidebar-select-icon {
+  color: #9CA3AF;
+}
