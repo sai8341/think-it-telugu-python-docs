@@ -665,6 +665,10 @@ pre,
     appearance: none !important;
     opacity: 1 !important;
     z-index: 5 !important;
+    position: relative !important;
+    user-select: auto !important;
+    -webkit-user-select: auto !important;
+    pointer-events: auto !important;
   }
 
   [data-theme='dark'] .pylab-input {
