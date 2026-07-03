@@ -24,12 +24,12 @@ export default function PythonLab() {
   const [selectedExample, setSelectedExample] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeTab, setActiveTab] = useState('editor');
-  
+
   // Custom Debug Inputs Modal State
   const [showDebugInputsModal, setShowDebugInputsModal] = useState(false);
   const [debugPrompts, setDebugPrompts] = useState([]);
   const [debugInputs, setDebugInputs] = useState([]);
-  
+
   // Terminal UI State
   const [terminalInput, setTerminalInput] = useState('');
   const [isWaitingForInput, setIsWaitingForInput] = useState(false);
@@ -69,7 +69,7 @@ export default function PythonLab() {
     } else {
       const savedCode = localStorage.getItem('pylab_saved_code');
       const savedExampleIdx = localStorage.getItem('pylab_selected_example_idx');
-      
+
       if (savedCode !== null) {
         setCode(savedCode);
       }
@@ -368,7 +368,7 @@ async def __run_with_safe_input(code_str):
   }, [code, isRunning]);
 
   // Keyboard handling with proper indentation and auto-closing brackets
-const handleExampleChange = (e) => {
+  const handleExampleChange = (e) => {
     if (isRunning) {
       isCancelledRef.current = true;
       if (resolveInputRef.current) resolveInputRef.current(null);
@@ -774,7 +774,7 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
           <div className="pylab-modal-content">
             <h3>📋 Debug Inputs Required</h3>
             <p>This code uses <code>input()</code>. Please enter the values to use during debugging:</p>
-            
+
             <div className="pylab-modal-inputs">
               {debugPrompts.map((promptText, idx) => (
                 <div key={idx} className="pylab-modal-field">
@@ -1103,10 +1103,13 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
         <div className="pylab-statusbar-left">
           <span>Python 3.11</span>
           <span className="pylab-statusbar-sep">•</span>
-          <span>⚡ Pyodide Powered</span>
+          <span>⚡ Powered by Think IT Telugu</span>
         </div>
         <div className="pylab-statusbar-right">
           <span>{lineCount} {lineCount === 1 ? 'line' : 'lines'}</span>
+          <span className="pylab-statusbar-sep">•</span>
+          <span>UTF-8</span>
+        </div>
       </div>
 
       <FeedbackWidget />
