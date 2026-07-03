@@ -1113,7 +1113,6 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
       </div>
 
       <FeedbackWidget />
-      <FullscreenToggle />
     </div>
   );
 }

@@ -70,7 +70,7 @@ export default function FeedbackWidget() {
             <div className="pylab-feedback-form">
               <h4>Help us improve! 📝</h4>
               <p>Did you like this Python Lab?</p>
-              
+
               <div className="pylab-feedback-rating">
                 <button
                   className={`pylab-rating-btn pylab-rating-like ${feedbackRating === 'like' ? 'active' : ''}`}
