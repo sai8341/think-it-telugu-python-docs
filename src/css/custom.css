@@ -13,30 +13,6 @@
 @import './tables.css';
 @import './layout-elements.css';
 @import './animations.css';
-@import './homepage.css';
-@import './feature-cards.css';
-@import './mobile-sidebar.css';
-@import './custom-illustrations.css';
-@import './lab-cta.css';
-@import './lab-pages.css';
-@import './visualizers.css';
-@import './python-lab.css';
-@import './python-debugger.css';
-/* ============================================
-   Think IT Telugu - Modular CSS
-   ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-@import './variables.css';
-@import './navbar.css';
-@import './sub-navbar.css';
-@import './sidebar.css';
-@import './content.css';
-@import './code-blocks.css';
-@import './admonitions.css';
-@import './tables.css';
-@import './layout-elements.css';
-@import './animations.css';
 @import './feature-cards.css';
 @import './mobile-sidebar.css';
 @import './custom-illustrations.css';
