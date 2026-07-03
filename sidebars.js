@@ -226,7 +226,19 @@ const sidebars = {
             'part-3/module-16-modules-packages/exercises-qa',
           ],
         },
-        { type: 'doc', id: 'part-3/module-17-oop-basics', label: 'Module 17: OOP Basics', className: 'icon-box' },
+        {
+          type: 'category',
+          label: 'Module 17: Object-Oriented Programming',
+          className: 'icon-box',
+          collapsed: true,
+          items: [
+            'part-3/module-17-oop-basics/why-oop',
+            'part-3/module-17-oop-basics/constructors-init',
+            'part-3/module-17-oop-basics/four-pillars',
+            'part-3/module-17-oop-basics/dunder-methods',
+            'part-3/module-17-oop-basics/exercises-qa',
+          ],
+        },
         {
           type: 'category',
           label: 'Module 18: Git & Version Control',
