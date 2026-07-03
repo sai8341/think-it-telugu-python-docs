@@ -1,0 +1,113 @@
+---
+title: "Generators & Decorators"
+sidebar_label: "12.5 Generators & Decorators"
+---
+
+# Advanced Functions: Generators & Decorators
+
+As you advance from writing basic Python scripts to building **Data Science pipelines** and **AI applications**, you will frequently encounter two powerful function concepts: **Generators (`yield`)** and **Decorators (`@`)**.
+
+Let's explore what they are, why they are essential, and how they work using simple real-life analogies!
+
+---
+
+## 1. What is a Generator? (`yield` vs `return`)
+
+When a normal function finishes its work, it uses `return` to send back all the data at once and then completely forgets everything.
+
+If you ask a normal function to generate **1 million numbers**, it will create all 1 million numbers inside your computer's RAM (memory) at the exact same time before returning them. If your dataset is huge (like a 10 GB file), your computer will crash or freeze!
+
+A **Generator** solves this problem using the `yield` keyword. Instead of generating all items at once, it produces **one item at a time**, pauses its execution, and waits until you ask for the next item.
+
+### Real-Life Analogy: Water Tank vs. Water Tap 🚰
+
+* **Normal Function (`return`):** Imagine ordering water and someone dumps a **1,000-liter water tank** onto your head all at once. You get drowned in data!
+* **Generator (`yield`):** Imagine opening a **water tap**. You fill one glass of water (`yield`), drink it, and whenever you are ready, you turn the tap on for the next glass. You only consume memory for one glass at a time!
+
+### Code Comparison
+
+```python
+# Normal Function: Loads everything into memory at once
+def get_numbers_list():
+    numbers = []
+    for i in range(1, 6):
+        numbers.append(i)
+    return numbers  # Returns entire list: [1, 2, 3, 4, 5]
+
+print("Normal List:", get_numbers_list())
+
+
+# Generator Function: Yields one item at a time
+def get_numbers_generator():
+    for i in range(1, 6):
+        yield i  # Pauses here and sends one number
+
+# Using the generator inside a loop
+print("Generator Streaming:")
+for num in get_numbers_generator():
+    print("Received:", num)
+```
+
+### Why is this vital for AI & Data Science?
+* **Streaming LLM Tokens:** When ChatGPT or Gemini generates text word-by-word on your screen, it uses generator streaming (`yield`) instead of waiting for the entire essay to finish.
+* **Processing Massive Datasets:** Data engineers use generators to read multi-gigabyte CSV or JSON files line-by-line without exhausting system memory.
+
+---
+
+## 2. What is a Decorator? (`@` Syntax)
+
+A **Decorator** is a design pattern that allows you to add extra superpowers (new behavior) to an existing function **without modifying the original function's code**.
+
+In Python, decorators are prefixed with the `@` symbol right above a function definition.
+
+### Real-Life Analogy: Gift Wrapping 🎁 or Security VIP Check 🛡️
+
+Imagine you buy a plain coffee mug (your function). 
+* You could take it apart to paint it, but you might break it.
+* Instead, you place it inside a beautiful **Gift Box** with ribbon (the Decorator). The mug inside is untouched, but now it looks premium and has extra value!
+
+Similarly, think of airport security checking your passport before letting you board a flight. The flight function stays the same, but the security check wraps around it.
+
+### Practical Example: Execution Timer Decorator
+
+Let's write a decorator that measures how long a function takes to run:
+
+```python
+import time
+
+# 1. Defining the Decorator Wrapper
+def timer_decorator(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        
+        # Run the actual original function
+        result = func(*args, **kwargs)
+        
+        end_time = time.time()
+        print(f"⏱️ Function '{func.__name__}' took {end_time - start_time:.4f} seconds to complete.")
+        return result
+    return wrapper
+
+
+# 2. Applying the Decorator using @
+@timer_decorator
+def process_data():
+    print("Processing heavy data...")
+    time.sleep(1.5)  # Simulating heavy work
+    print("Data processing finished!")
+
+# 3. Calling the function
+process_data()
+```
+
+### Where are Decorators used in Modern Python?
+* **FastAPI & Flask Web Servers:** `@app.get("/users")` turns a simple function into a live web endpoint.
+* **Authentication & Permissions:** `@login_required` checks if a user is logged in before running private code.
+* **Logging & Monitoring:** Automatically logging every time an AI model or database function is triggered.
+
+---
+
+## Key Takeaways
+
+1. Use **`yield` (Generators)** whenever you need to stream data or handle large datasets efficiently without crashing your RAM.
+2. Use **`@decorators`** whenever you want to wrap clean, reusable functionality (like timers, logging, or security checks) around your core functions.
