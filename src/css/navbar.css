@@ -1,9 +1,8 @@
 /* ======= NAVBAR — Modern Dev Portal ======= */
 .navbar {
   height: 60px;
-  background: var(--tit-navbar-bg);
-  border-bottom: 1px solid var(--tit-border);
-  backdrop-filter: saturate(160%) blur(14px);
+  background: var(--ifm-navbar-background-color);
+  border-bottom: 1px solid var(--ifm-border-color, #e3e3e3);
   box-shadow: none;
 }
 
@@ -24,7 +23,11 @@
 }
 
 .navbar__brand:hover {
-  background: var(--brand-light);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .navbar__brand:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .navbar__logo {
@@ -33,7 +36,7 @@
 }
 
 .navbar__title {
-  color: var(--tit-text);
+  color: var(--ifm-navbar-link-color);
   font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -49,16 +52,20 @@
   align-items: center;
   font-size: 0.84rem !important;
   font-weight: 600 !important;
-  color: var(--tit-muted) !important;
+  color: var(--ifm-navbar-link-color) !important;
   padding: 0.45rem 0.65rem !important;
   border-radius: 8px;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .navbar-nav-link:hover {
-  color: var(--tit-text) !important;
-  background: var(--tit-surface-subtle);
+  color: var(--ifm-navbar-link-hover-color) !important;
+  background: rgba(0, 0, 0, 0.05);
   text-decoration: none;
+}
+
+[data-theme='dark'] .navbar-nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* ---- Right-side items ---- */
@@ -116,18 +123,22 @@
   justify-content: center;
   width: 34px;
   height: 34px;
-  color: var(--tit-muted);
+  color: var(--ifm-navbar-link-color);
   background: transparent;
-  border: 1px solid var(--tit-border);
+  border: 1px solid var(--ifm-border-color, #e3e3e3);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .navbar-fullscreen-btn:hover {
-  color: var(--brand-primary);
-  background: var(--brand-light);
-  border-color: var(--tit-border-strong);
+  color: var(--ifm-navbar-link-hover-color);
+  background: rgba(0, 0, 0, 0.05);
+  border-color: var(--ifm-border-color, #e3e3e3);
+}
+
+[data-theme='dark'] .navbar-fullscreen-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* ---- Desktop search bar ---- */
@@ -157,9 +168,9 @@
   .navbar__search-input {
     width: 100% !important;
     height: 36px;
-    color: var(--tit-text);
-    background-color: var(--tit-surface-subtle) !important;
-    border: 1px solid var(--tit-border) !important;
+    color: var(--ifm-font-color-base);
+    background-color: var(--ifm-background-color) !important;
+    border: 1px solid var(--ifm-border-color, #e3e3e3) !important;
     border-radius: 8px !important;
     box-shadow: none !important;
     font-size: 0.84rem;
@@ -167,7 +178,7 @@
   }
 
   .navbar__search-input:focus {
-    background-color: var(--tit-surface) !important;
+    background-color: var(--ifm-background-color) !important;
     border-color: var(--brand-primary) !important;
     box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1) !important;
   }
@@ -203,13 +214,13 @@
     white-space: nowrap;
   }
 
-  /* Hide left-side links on mobile (they go into sidebar drawer) */
-  .navbar__items:not(.navbar__items--right) .navbar-nav-link {
+  /* Hide left-side links in top navbar on mobile (they go into sidebar drawer) */
+  .navbar .navbar__items:not(.navbar__items--right) .navbar-nav-link {
     display: none;
   }
 
-  /* Hide right-side items except search on mobile */
-  .navbar__items--right .navbar__item:not(.navbar__search) {
+  /* Hide right-side items except search in top navbar on mobile */
+  .navbar .navbar__items--right .navbar__item:not(.navbar__search) {
     display: none;
   }
 
@@ -255,8 +266,8 @@
     height: 36px !important;
     padding: 0 !important;
     color: transparent !important;
-    background-color: var(--tit-surface) !important;
-    border: 1px solid var(--tit-border) !important;
+    background-color: var(--ifm-background-color) !important;
+    border: 1px solid var(--ifm-border-color, #e3e3e3) !important;
     border-radius: 8px !important;
     box-shadow: none !important;
     font-size: 0 !important;
@@ -266,7 +277,7 @@
   .navbar__search:focus-within .navbar__search-input:focus {
     width: min(65vw, 280px) !important;
     padding-left: 2.4rem !important;
-    color: var(--tit-text) !important;
+    color: var(--ifm-font-color-base) !important;
     border-color: var(--brand-primary) !important;
     box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1) !important;
     font-size: 0.88rem !important;
@@ -281,11 +292,11 @@
 
 /* ---- Mobile sidebar drawer ---- */
 .navbar-sidebar {
-  background: var(--tit-surface);
+  background: var(--ifm-navbar-background-color);
 }
 
 .navbar-sidebar__brand {
-  border-bottom: 1px solid var(--tit-border);
+  border-bottom: 1px solid var(--ifm-border-color, #e3e3e3);
 }
 
 .navbar-sidebar .menu__link {

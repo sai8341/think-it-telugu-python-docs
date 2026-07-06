@@ -4,14 +4,15 @@ import {
   NavbarSecondaryMenuFiller,
   ThemeClassNames,
 } from '@docusaurus/theme-common';
-import {useNavbarMobileSidebar} from '@docusaurus/theme-common/internal';
 import DocSidebarItems from '@theme/DocSidebarItems';
 import { useLocation, useHistory } from '@docusaurus/router';
 import { getActivePart } from '@site/src/utils/navigation';
 
-// The custom secondary menu filler component that renders inside the mobile drawer
+// The custom secondary menu filler component that renders inside the mobile drawer.
+// In Docusaurus 3, we avoid using useNavbarMobileSidebar here as it may return undefined
+// outside of the Navbar context, and we let Docusaurus automatically handle closing
+// the mobile drawer on page navigation.
 const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
-  const mobileSidebar = useNavbarMobileSidebar();
   const location = useLocation();
   const history = useHistory();
   const pathname = location.pathname;
@@ -21,10 +22,6 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
 
   const handleChange = (e) => {
     const val = e.target.value;
-    // Hide mobile sidebar when changing part so it transitions cleanly
-    if (mobileSidebar.shown) {
-      mobileSidebar.toggle();
-    }
     if (val === 'intro') {
       history.push('/');
     } else if (val === 'part1') {
@@ -60,13 +57,7 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
           items={sidebar}
           activePath={path}
           onItemClick={(item) => {
-            // Mobile sidebar should only be closed if the category has a link
-            if (item.type === 'category' && item.href) {
-              mobileSidebar.toggle();
-            }
-            if (item.type === 'link') {
-              mobileSidebar.toggle();
-            }
+            // Let Docusaurus's router handle closing the sidebar drawer
           }}
           level={1}
         />
