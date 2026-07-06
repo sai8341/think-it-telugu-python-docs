@@ -38,13 +38,13 @@
 
 /* Sidebar background - LIGHT in light mode */
 .theme-doc-sidebar-container {
-  background-color: #FFFFFF !important;
-  border-right: 1px solid #e8e8e8 !important;
+  background-color: #F8FAFC !important;
+  border-right: none !important;
 }
 
 [data-theme='dark'] .theme-doc-sidebar-container {
-  background-color: #0F0F1A !important;
-  border-right-color: rgba(255, 255, 255, 0.06) !important;
+  background-color: #0F172A !important;
+  border-right: none !important;
 }
 
 /* ====== SIDEBAR ICONS ====== */
