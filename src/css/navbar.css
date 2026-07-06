@@ -184,7 +184,7 @@
 /* ---- Mobile navbar ---- */
 @media (max-width: 996px) {
   .navbar {
-    height: 56px;
+    height: 60px;
   }
 
   .navbar__inner {
