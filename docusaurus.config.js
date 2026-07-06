@@ -138,26 +138,27 @@ const config = {
         },
         items: [
           {
-            to: '/python-lab',
-            label: 'Python Lab',
-            position: 'right',
-            className: 'navbar-python-lab',
-            target: '_blank',
-          },
-          {
             href: 'https://youtube.com/@ThinkIT-Telugu',
             label: 'YouTube',
-            position: 'right',
+            position: 'left',
+            className: 'navbar-nav-link',
           },
           {
-            href: 'https://github.com/thinkittelugu',
+            href: 'https://resources.thinkittelugu.in',
             label: 'Resources',
+            position: 'left',
+            className: 'navbar-nav-link',
+          },
+          {
+            to: '/python-lab',
+            label: '⚡ Python Lab',
             position: 'right',
+            className: 'navbar-python-lab',
           },
           {
             type: 'doc',
             docId: 'intro',
-            label: 'Start Learning ',
+            label: 'Start Learning →',
             position: 'right',
             className: 'navbar-start-btn',
           },
@@ -167,8 +168,6 @@ const config = {
           },
         ],
       },
-      // Footer removed to achieve Mintlify-style independent scrolling
-      // where the sidebar is 100% height and never scrolls up.
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,

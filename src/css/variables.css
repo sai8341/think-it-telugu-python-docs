@@ -1,24 +1,18 @@
 /* ============================================
-   Think IT Telugu - Custom Theme Styling
-   Color Palette: Emerald Green
-   - Primary: #10B981 (Emerald)
-   - Primary Dark: #059669
-   - Primary Light: #34D399
-   - Accent: #0D9488 (Teal)
-   - Background: #FFFFFF
+   Think IT Telugu - Theme Tokens
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ---- Root / Light Mode ---- */
 :root {
-  --ifm-color-primary: #10B981;
-  --ifm-color-primary-dark: #059669;
-  --ifm-color-primary-darker: #047857;
-  --ifm-color-primary-darkest: #065f46;
-  --ifm-color-primary-light: #34D399;
-  --ifm-color-primary-lighter: #6EE7B7;
-  --ifm-color-primary-lightest: #A7F3D0;
+  --ifm-color-primary: #059669;
+  --ifm-color-primary-dark: #047857;
+  --ifm-color-primary-darker: #065f46;
+  --ifm-color-primary-darkest: #064e3b;
+  --ifm-color-primary-light: #10b981;
+  --ifm-color-primary-lighter: #34d399;
+  --ifm-color-primary-lightest: #a7f3d0;
 
   --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
@@ -27,37 +21,51 @@
   --ifm-font-weight-bold: 600;
 
   --ifm-line-height-base: 1.8;
-  --ifm-font-color-base: #374151;
+  --ifm-font-color-base: #273341;
   --ifm-paragraph-margin-bottom: 1.6rem;
   --ifm-code-font-size: 88%;
-  --ifm-global-radius: 0.75rem;
+  --ifm-global-radius: 0.5rem;
 
-  --brand-primary: #10B981;
-  --brand-dark: #1E1E2E;
-  --brand-accent: #0D9488;
-  --brand-light: #ECFDF5;
-  --brand-lighter: #F0FDF4;
-  --brand-gold: #F59E0B;
+  --brand-primary: #059669;
+  --brand-primary-soft: #d1fae5;
+  --brand-dark: #111827;
+  --brand-accent: #0f766e;
+  --brand-light: #ecfdf5;
+  --brand-lighter: #f7fcf9;
+  --brand-gold: #d97706;
+  --brand-sky: #0284c7;
 
-  --ifm-background-color: #FFFFFF;
-  --ifm-navbar-background-color: #FFFFFF;
-  --ifm-navbar-link-color: #374151;
-  --ifm-navbar-link-hover-color: #10B981;
+  --tit-canvas: #f5f7f5;
+  --tit-surface: #ffffff;
+  --tit-surface-subtle: #f8faf9;
+  --tit-border: #dde5df;
+  --tit-border-strong: #c8d5cd;
+  --tit-muted: #667085;
+  --tit-text: #172033;
+  --tit-sidebar-bg: #fbfcfb;
+  --tit-navbar-bg: rgba(255, 255, 255, 0.9);
+  --tit-shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.06);
+  --tit-shadow-md: 0 12px 30px rgba(15, 23, 42, 0.08);
 
-  --ifm-footer-background-color: #FFFFFF;
-  --ifm-footer-color: #6B7280;
-  --ifm-footer-link-color: #10B981;
-  --ifm-footer-title-color: #1F2937;
+  --ifm-background-color: var(--tit-canvas);
+  --ifm-background-surface-color: var(--tit-surface);
+  --ifm-navbar-background-color: var(--tit-navbar-bg);
+  --ifm-navbar-link-color: #344054;
+  --ifm-navbar-link-hover-color: var(--brand-primary);
 
-  --ifm-link-color: #10B981;
-  --ifm-link-hover-color: #059669;
+  --ifm-footer-background-color: var(--tit-surface);
+  --ifm-footer-color: var(--tit-muted);
+  --ifm-footer-link-color: var(--brand-primary);
+  --ifm-footer-title-color: var(--brand-dark);
 
-  --ifm-menu-color-active: #10B981;
-  --ifm-menu-color-background-active: rgba(16, 185, 129, 0.08);
+  --ifm-link-color: var(--brand-primary);
+  --ifm-link-hover-color: #047857;
 
-  --docusaurus-highlighted-code-line-bg: #ECFDF5;
+  --ifm-menu-color-active: var(--brand-primary);
+  --ifm-menu-color-background-active: rgba(5, 150, 105, 0.09);
 
-  /* Reset navbar offset for main navbar (60px) */
+  --docusaurus-highlighted-code-line-bg: #ecfdf5;
+
   --ifm-navbar-height: 60px;
 
   /* Premium Responsive Heading Scale Variables */
@@ -95,35 +103,55 @@
 
 @media (min-width: 997px) {
   :root {
-    --ifm-navbar-height: 110px;
-    /* Desktop with sub-navbar */
+    --ifm-navbar-height: 116px;
   }
 }
 
 /* ---- Dark Mode ---- */
 [data-theme='dark'] {
-  --ifm-color-primary: #34D399;
-  --ifm-color-primary-dark: #10B981;
+  --ifm-color-primary: #34d399;
+  --ifm-color-primary-dark: #10b981;
   --ifm-color-primary-darker: #059669;
   --ifm-color-primary-darkest: #047857;
-  --ifm-color-primary-light: #6EE7B7;
-  --ifm-color-primary-lighter: #A7F3D0;
-  --ifm-color-primary-lightest: #D1FAE5;
+  --ifm-color-primary-light: #6ee7b7;
+  --ifm-color-primary-lighter: #a7f3d0;
+  --ifm-color-primary-lightest: #d1fae5;
 
-  --ifm-font-color-base: #E5E7EB;
-  --ifm-background-color: #0F0F1A;
-  --ifm-background-surface-color: #1A1A2E;
+  --brand-primary: #34d399;
+  --brand-primary-soft: rgba(52, 211, 153, 0.14);
+  --brand-dark: #f8fafc;
+  --brand-accent: #5eead4;
+  --brand-light: rgba(52, 211, 153, 0.12);
+  --brand-lighter: #111827;
+  --brand-gold: #fbbf24;
+  --brand-sky: #38bdf8;
 
-  --ifm-navbar-background-color: #0A0A14;
-  --ifm-navbar-link-color: #D1D5DB;
-  --ifm-navbar-link-hover-color: #34D399;
+  --tit-canvas: #0e141b;
+  --tit-surface: #141b24;
+  --tit-surface-subtle: #111821;
+  --tit-border: rgba(148, 163, 184, 0.18);
+  --tit-border-strong: rgba(148, 163, 184, 0.28);
+  --tit-muted: #a3adba;
+  --tit-text: #e8edf3;
+  --tit-sidebar-bg: #101720;
+  --tit-navbar-bg: rgba(14, 20, 27, 0.92);
+  --tit-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --tit-shadow-md: 0 16px 36px rgba(0, 0, 0, 0.32);
 
-  --ifm-footer-background-color: #0A0A14;
+  --ifm-font-color-base: var(--tit-text);
+  --ifm-background-color: var(--tit-canvas);
+  --ifm-background-surface-color: var(--tit-surface);
 
-  --ifm-link-color: #34D399;
-  --ifm-link-hover-color: #6EE7B7;
+  --ifm-navbar-background-color: var(--tit-navbar-bg);
+  --ifm-navbar-link-color: #d8dee7;
+  --ifm-navbar-link-hover-color: var(--brand-primary);
 
-  --ifm-menu-color-active: #34D399;
+  --ifm-footer-background-color: var(--tit-surface);
+
+  --ifm-link-color: var(--brand-primary);
+  --ifm-link-hover-color: #6ee7b7;
+
+  --ifm-menu-color-active: var(--brand-primary);
   --ifm-menu-color-background-active: rgba(52, 211, 153, 0.12);
 
   --docusaurus-highlighted-code-line-bg: rgba(52, 211, 153, 0.15);

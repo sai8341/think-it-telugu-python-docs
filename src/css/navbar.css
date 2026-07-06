@@ -1,6 +1,285 @@
-/* ======= NAVBAR ======= */
+/* ======= NAVBAR — Modern Dev Portal ======= */
 .navbar {
-  border-bottom: none;
-  box-shadow: none;
   height: 60px;
+  background: var(--tit-navbar-bg);
+  border-bottom: 1px solid var(--tit-border);
+  backdrop-filter: saturate(160%) blur(14px);
+  box-shadow: none;
+}
+
+.navbar__inner {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: 0;
+}
+
+/* ---- Brand ---- */
+.navbar__brand {
+  min-width: 0;
+  margin-right: 0.5rem;
+  padding: 0.35rem 0.55rem 0.35rem 0.35rem;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.navbar__brand:hover {
+  background: var(--brand-light);
+}
+
+.navbar__logo {
+  height: 32px;
+  margin-right: 0.55rem;
+}
+
+.navbar__title {
+  color: var(--tit-text);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Left-side nav links (YouTube, Resources) ---- */
+.navbar__items {
+  gap: 0.15rem;
+}
+
+.navbar-nav-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  color: var(--tit-muted) !important;
+  padding: 0.45rem 0.65rem !important;
+  border-radius: 8px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.navbar-nav-link:hover {
+  color: var(--tit-text) !important;
+  background: var(--tit-surface-subtle);
+  text-decoration: none;
+}
+
+/* ---- Right-side items ---- */
+.navbar__items--right {
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.navbar__item {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+/* ---- Python Lab button (distinctive sky-blue accent) ---- */
+.navbar-python-lab {
+  color: var(--brand-sky) !important;
+  background: rgba(2, 132, 199, 0.07);
+  border: 1px solid rgba(2, 132, 199, 0.15);
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  font-size: 0.84rem !important;
+  padding: 0.5rem 0.75rem !important;
+  transition: all 0.2s ease;
+}
+
+[data-theme='dark'] .navbar-python-lab {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.18);
+}
+
+.navbar-python-lab:hover {
+  color: #075985 !important;
+  background: rgba(2, 132, 199, 0.13) !important;
+  border-color: rgba(2, 132, 199, 0.28);
+  transform: translateY(-1px);
+}
+
+[data-theme='dark'] .navbar-python-lab:hover {
+  color: #7dd3fc !important;
+  background: rgba(56, 189, 248, 0.16) !important;
+}
+
+/* ---- Fullscreen button ---- */
+.navbar-fullscreen-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: var(--tit-muted);
+  background: transparent;
+  border: 1px solid var(--tit-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar-fullscreen-btn:hover {
+  color: var(--brand-primary);
+  background: var(--brand-light);
+  border-color: var(--tit-border-strong);
+}
+
+/* ---- Desktop search bar ---- */
+@media (min-width: 997px) {
+  .navbar {
+    height: 64px;
+  }
+
+  .navbar__inner {
+    padding: 0 1rem;
+  }
+
+  [class*="navbarSearchContainer_"] {
+    position: static !important;
+    width: min(280px, 22vw) !important;
+    max-width: none;
+    margin: 0 0.5rem;
+    transform: none !important;
+  }
+
+  .navbar__search {
+    width: 100% !important;
+    background: transparent !important;
+    border: 0 !important;
+  }
+
+  .navbar__search-input {
+    width: 100% !important;
+    height: 36px;
+    color: var(--tit-text);
+    background-color: var(--tit-surface-subtle) !important;
+    border: 1px solid var(--tit-border) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    font-size: 0.84rem;
+  }
+
+  .navbar__search-input:focus {
+    background-color: var(--tit-surface) !important;
+    border-color: var(--brand-primary) !important;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1) !important;
+  }
+}
+
+/* ---- Mobile navbar ---- */
+@media (max-width: 996px) {
+  .navbar {
+    height: 56px;
+  }
+
+  .navbar__inner {
+    padding: 0 0.5rem;
+  }
+
+  .navbar__brand {
+    max-width: 55vw;
+    margin-right: 0;
+  }
+
+  .navbar__title {
+    overflow: hidden;
+    font-size: 0.88rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Hide left-side links on mobile (they go into sidebar drawer) */
+  .navbar__items:not(.navbar__items--right) .navbar-nav-link {
+    display: none;
+  }
+
+  /* Hide right-side items except search on mobile */
+  .navbar__items--right .navbar__item:not(.navbar__search) {
+    display: none;
+  }
+
+  /* Mobile search: compact icon that expands */
+  .navbar__search {
+    position: static !important;
+    display: flex !important;
+    flex-direction: row !important;
+    width: auto !important;
+    height: auto !important;
+    margin-left: auto;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .navbar__search::before,
+  .navbar__search:focus-within::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  .navbar__search:focus-within {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .navbar__search-input,
+  .navbar__search:focus-within .navbar__search-input,
+  [data-theme='dark'] .navbar__search-input,
+  [data-theme='dark'] .navbar__search:focus-within .navbar__search-input {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    color: transparent !important;
+    background-color: var(--tit-surface) !important;
+    border: 1px solid var(--tit-border) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    font-size: 0 !important;
+  }
+
+  .navbar__search-input:focus,
+  .navbar__search:focus-within .navbar__search-input:focus {
+    width: min(65vw, 280px) !important;
+    padding-left: 2.4rem !important;
+    color: var(--tit-text) !important;
+    border-color: var(--brand-primary) !important;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1) !important;
+    font-size: 0.88rem !important;
+  }
+}
+
+/* ---- External link icon hide ---- */
+.navbar__link[target="_blank"] svg,
+[class*="iconExternalLink_"] {
+  display: none !important;
+}
+
+/* ---- Mobile sidebar drawer ---- */
+.navbar-sidebar {
+  background: var(--tit-surface);
+}
+
+.navbar-sidebar__brand {
+  border-bottom: 1px solid var(--tit-border);
+}
+
+.navbar-sidebar .menu__link {
+  border-radius: 8px;
+}
+
+/* Show nav links and action buttons in mobile sidebar */
+.navbar-sidebar .navbar-nav-link,
+.navbar-sidebar .navbar-python-lab {
+  display: flex !important;
+  margin: 0.25rem 0.5rem;
 }
