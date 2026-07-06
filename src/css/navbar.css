@@ -127,7 +127,7 @@
 /* ---- Desktop search bar ---- */
 @media (min-width: 997px) {
   .navbar {
-    height: 64px;
+    height: 60px;
   }
 
   .navbar__inner {
