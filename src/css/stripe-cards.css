@@ -18,18 +18,18 @@
 .doc-card {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: #F8FAFC;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 20px 22px;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s ease;
   text-decoration: none !important;
   color: inherit !important;
   height: 100%;
 }
 [data-theme='dark'] .doc-card {
-  background: #0f172a;
-  border-color: #1e293b;
+  background: #1E293B;
+  border-color: #334155;
 }
 
 .doc-card--link {
@@ -37,13 +37,11 @@
 }
 .doc-card--link:hover {
   border-color: #10b981;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.12);
+  background: #F1F5F9;
 }
 [data-theme='dark'] .doc-card--link:hover {
   border-color: #10b981;
-  background: #111c30;
-  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.18);
+  background: #334155;
 }
 
 .doc-card-top {
