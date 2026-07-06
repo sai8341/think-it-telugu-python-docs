@@ -5,7 +5,7 @@ title: "Start Here"
 sidebar_label: "Start Here"
 ---
 
-# Start Here: Your Journey into Python & AI
+# Start Here: Your Journey into Python & AI, ML
 
 Welcome to **Think IT Telugu**! If you have ever opened a programming tutorial and felt completely overwhelmed by complex words, confusing diagrams, or fast-talking instructors, you are in the right place.
 
