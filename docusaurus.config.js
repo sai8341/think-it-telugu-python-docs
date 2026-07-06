@@ -118,6 +118,8 @@ const config = {
         indexBlog: false,
         docsRouteBasePath: '/',
         ignoreCssSelectors: ['pre', 'code'],
+        searchBarShortcut: false,
+        searchBarShortcutHint: false,
       },
     ],
   ],
@@ -154,13 +156,6 @@ const config = {
             label: '⚡ Python Lab',
             position: 'right',
             className: 'navbar-python-lab',
-          },
-          {
-            type: 'doc',
-            docId: 'intro',
-            label: 'Start Learning →',
-            position: 'right',
-            className: 'navbar-start-btn',
           },
           {
             type: 'custom-fullscreenToggle',

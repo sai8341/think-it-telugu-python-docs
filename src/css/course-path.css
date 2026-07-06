@@ -8,8 +8,12 @@
   display: none;
   height: 50px;
   background: var(--tit-navbar-bg);
-  border-bottom: 1px solid var(--tit-border);
+  border-bottom: 1px solid rgba(23, 28, 45, 0.07); /* Very light bottom border */
   backdrop-filter: saturate(150%) blur(14px);
+}
+
+[data-theme='dark'] .sub-navbar {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
 @media (min-width: 997px) {
@@ -24,10 +28,10 @@
   max-width: 1440px;
   height: 100%;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 1.5rem;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -36,77 +40,44 @@
   display: none;
 }
 
-.sub-navbar-container::before {
-  content: 'Course Path';
-  flex: 0 0 auto;
-  margin-right: 0.5rem;
-  color: var(--tit-muted);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Redesigned pill-style sub-navbar item to differ from Mintlify's flat underline layout */
+/* Redesigned sub-navbar item to use clean text links with an active bottom line, no background/border-radius */
 .sub-navbar-item {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  min-width: max-content;
-  height: 32px;
-  padding: 0 0.85rem;
+  height: 100%;
   color: var(--tit-muted);
   background: transparent;
-  border: 1px solid transparent;
-  border-radius: 20px; /* Modern rounded chip/pill style */
+  border-bottom: 2px solid transparent; /* Bottom indicator line */
   text-decoration: none !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.15s ease;
+  padding: 0 0.1rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .sub-navbar-item:hover {
-  color: var(--tit-text);
-  background: var(--tit-surface-subtle);
-  border-color: var(--tit-border);
+  color: var(--brand-primary);
+  background: transparent;
 }
 
-/* Active State as a sleek pill chip with a green dot */
+/* Active State: Clean text with bottom line, no background box, no radius, no green dot */
 .sub-navbar-item--active {
   color: var(--brand-primary) !important;
-  background: var(--brand-primary-soft) !important;
-  border-color: rgba(5, 150, 105, 0.24);
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.06);
-}
-
-[data-theme='dark'] .sub-navbar-item--active {
-  background: rgba(52, 211, 153, 0.1) !important;
-  border-color: rgba(52, 211, 153, 0.2);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Glowing green dot active indicator */
-.sub-navbar-item--active::before {
-  content: '';
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--brand-primary);
-  box-shadow: 0 0 6px var(--brand-primary);
-  flex-shrink: 0;
+  border-bottom-color: var(--brand-primary) !important;
+  font-weight: 700;
 }
 
 .sub-navbar-kicker {
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  opacity: 0.75;
+  font-size: 0.84rem;
+  font-weight: inherit;
+  margin-right: 0.25rem;
 }
 
 .sub-navbar-title {
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: 0.84rem;
+  font-weight: inherit;
   white-space: nowrap;
 }
 

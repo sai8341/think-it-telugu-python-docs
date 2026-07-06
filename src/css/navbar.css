@@ -74,33 +74,39 @@
   font-weight: 650;
 }
 
-/* ---- Python Lab button (distinctive sky-blue accent) ---- */
+/* ---- Python Lab button (redesigned with primary CTA styles) ---- */
 .navbar-python-lab {
-  color: var(--brand-sky) !important;
-  background: rgba(2, 132, 199, 0.07);
-  border: 1px solid rgba(2, 132, 199, 0.15);
+  color: #ffffff !important;
+  background: #0f172a !important; /* Dark Slate in Light Mode */
+  border: 1px solid #0f172a !important;
   border-radius: 8px !important;
-  font-weight: 700 !important;
+  font-weight: 750 !important;
   font-size: 0.84rem !important;
-  padding: 0.5rem 0.75rem !important;
-  transition: all 0.2s ease;
+  padding: 0.52rem 0.85rem !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
 }
 
 [data-theme='dark'] .navbar-python-lab {
-  background: rgba(56, 189, 248, 0.1);
-  border-color: rgba(56, 189, 248, 0.18);
+  color: var(--brand-primary) !important;
+  background: rgba(52, 211, 153, 0.06) !important;
+  border: 1px solid rgba(52, 211, 153, 0.35) !important;
+  box-shadow: 0 4px 12px rgba(52, 211, 153, 0.05);
 }
 
 .navbar-python-lab:hover {
-  color: #075985 !important;
-  background: rgba(2, 132, 199, 0.13) !important;
-  border-color: rgba(2, 132, 199, 0.28);
+  color: #ffffff !important;
+  background: #1e293b !important;
+  border-color: #1e293b !important;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.16);
   transform: translateY(-1px);
 }
 
 [data-theme='dark'] .navbar-python-lab:hover {
-  color: #7dd3fc !important;
-  background: rgba(56, 189, 248, 0.16) !important;
+  color: #0e141b !important;
+  background: var(--brand-primary) !important;
+  border-color: var(--brand-primary) !important;
+  box-shadow: 0 6px 18px rgba(52, 211, 153, 0.2);
 }
 
 /* ---- Fullscreen button ---- */
@@ -131,7 +137,7 @@
   }
 
   .navbar__inner {
-    padding: 0 1rem;
+    padding: 0 1rem 0 0.35rem; /* Reduced left padding to move logo to the left */
   }
 
   [class*="navbarSearchContainer_"] {
@@ -157,12 +163,21 @@
     border-radius: 8px !important;
     box-shadow: none !important;
     font-size: 0.84rem;
+    padding-right: 0.75rem !important; /* Hide padding for shortcut */
   }
 
   .navbar__search-input:focus {
     background-color: var(--tit-surface) !important;
     border-color: var(--brand-primary) !important;
     box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1) !important;
+  }
+
+  /* Failsafe to hide shortcut keys */
+  [class*="searchBarShortcut"],
+  kbd,
+  .search-input-key,
+  .search-input-keyboard-shortcut {
+    display: none !important;
   }
 }
 
