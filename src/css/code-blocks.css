@@ -1,14 +1,59 @@
 /* ======= CODE BLOCKS ======= */
 .prism-code {
-  border-radius: 10px !important;
-  border: 1px solid #e5e7eb;
+  border-radius: 12px !important;
+  border: 1px solid rgba(0,0,0,0.05);
   box-shadow: none;
   margin: 1.5rem 0;
   padding: 1.25rem !important;
+  background-color: #1E293B !important; /* Soft Slate for less intimidation */
 }
 
 [data-theme='dark'] .prism-code {
-  border-color: rgba(255, 255, 255, 0.08);
+  background-color: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Make Copy Button Blindingly Obvious */
+.theme-code-block button.clean-btn {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  font-weight: 500 !important;
+  opacity: 1 !important; 
+  transition: all 0.2s ease;
+}
+
+.theme-code-block button.clean-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #34D399 !important; /* Soft Emerald on hover */
+  border-color: #34D399 !important;
+}
+
+/* Friendly Language Tag / Title Bar */
+.theme-code-block-title {
+  background-color: #334155 !important;
+  color: #F8FAFC !important;
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+  padding: 0.6rem 1rem !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase;
+}
+
+[data-theme='dark'] .theme-code-block-title {
+  background-color: #1E293B !important;
+}
+
+/* Remove top radius of code block if title exists */
+.theme-code-block-title + div > .prism-code {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  margin-top: 0 !important;
 }
 
 :not(pre) > code {
