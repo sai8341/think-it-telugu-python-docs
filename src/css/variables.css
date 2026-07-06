@@ -11,10 +11,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ---- Root / Light Mode ---- */
-html {
-  font-size: 17px;
-}
-
 :root {
   --ifm-color-primary: #10B981;
   --ifm-color-primary-dark: #059669;
@@ -31,7 +27,7 @@ html {
   --ifm-font-weight-bold: 600;
 
   --ifm-line-height-base: 1.8;
-  --ifm-font-color-base: #334155;
+  --ifm-font-color-base: #374151;
   --ifm-paragraph-margin-bottom: 1.6rem;
   --ifm-code-font-size: 88%;
   --ifm-global-radius: 0.75rem;
@@ -114,9 +110,9 @@ html {
   --ifm-color-primary-lighter: #A7F3D0;
   --ifm-color-primary-lightest: #D1FAE5;
 
-  --ifm-font-color-base: #F8FAFC;
-  --ifm-background-color: #0F172A;
-  --ifm-background-surface-color: #1E293B;
+  --ifm-font-color-base: #E5E7EB;
+  --ifm-background-color: #0F0F1A;
+  --ifm-background-surface-color: #1A1A2E;
 
   --ifm-navbar-background-color: #0A0A14;
   --ifm-navbar-link-color: #D1D5DB;
