@@ -1,0 +1,57 @@
+---
+sidebar_position: 2
+title: "Strings (Text)"
+sidebar_label: "Strings (Text)"
+---
+
+# Working with Text
+
+In programming, we don't call text "text" or "words"—we call it a **String**. 
+
+A String is simply a sequence of characters (letters, numbers, or symbols) strung together. In Python, you tell the computer that something is a String by wrapping it in quotation marks.
+
+## 1. Creating Strings
+
+You can use either single quotes (`'`) or double quotes (`"`) to create a string. Both work exactly the same way in Python!
+
+```python
+first_name = "Rahul"
+last_name = 'Sharma'
+
+print(first_name)
+```
+
+## 2. The Golden Rule of Strings
+
+Without quotation marks, Python thinks you are typing a variable name or a command. With quotation marks, Python knows you are just typing raw text.
+
+```python
+# Correct! Python sees text.
+fruit = "Apple"
+
+# ERROR! Python looks for a variable called Apple and crashes.
+fruit = Apple 
+```
+
+## 3. Combining Strings (Concatenation)
+
+You can easily join two strings together using the `+` sign. This is called **concatenation**.
+
+```python
+greeting = "Hello"
+name = "Priya"
+
+message = greeting + " " + name
+print(message)  # Output: Hello Priya
+```
+Notice how we added a string with just a space `" "` in the middle so the words wouldn't squish together!
+
+## What's Next?
+
+We know how to store text. But what if we want to do some math? Let's learn about numbers.
+
+<CardGroup cols={1}>
+  <Card title="Numbers (Integers & Floats)" icon="arrow-right" href="/part-1/module-2-variables-datatypes/numbers">
+    Learn how to store whole numbers and decimals
+  </Card>
+</CardGroup>

@@ -1,92 +1,128 @@
 ---
-title: "Variables & Naming Rules"
-sidebar_label: "Variables & Naming"
+sidebar_position: 1
+title: "Variables"
+sidebar_label: "Variables"
 ---
 
-# Storing Data with Variables
+# Variables
 
-A **Variable** is simply a labeled storage box inside your computer's memory. When writing code, your program needs to save information (like a username, a score, or a price) so it can use it later.
+## 1. Why Programs Need Variables
 
-Think of a variable like a storage box with a label sticker on it:
-- The sticker on the outside is the **Variable Name**
-- The item placed inside the box is the **Value**
+Imagine you are playing a video game. The game needs to remember your name, your score, and how many lives you have left. 
 
-## Creating a Variable
+If the game cannot remember anything, it cannot work. 
 
-In Python, you create a variable by typing a name, adding an equals sign `=`, and assigning a value:
+In programming, we need a way to tell the computer to remember information so we can use it later. This is why we use variables.
+
+## 2. What is a Variable?
+
+A variable is a name used to store a value.
+
+You give the information a simple name. When you need that information again, you just call its name.
+
+### The Storage Box Analogy
+
+Think of a variable like a storage box.
+- The **name** is the label sticker on the outside of the box.
+- The **value** is what you put inside the box.
+
+## 3. Creating a Variable
+
+Let's create our very first variable. We want to store a person's name.
 
 ```python
-# Create variables
-user_name = "Alice"
-player_score = 100
-tax_rate = 0.18
+name = "Alice"
 ```
 
-## Why Do We Need Variables?
+Let's understand exactly what this line does:
+1. `name` is the label we chose for our variable.
+2. `=` tells the computer: "The value on the right is stored inside the variable on the left."
+3. `"Alice"` is the information we are putting inside the variable.
 
-Imagine your website calculates tax across 50 different customer orders. If the tax rate changes next year, changing a hardcoded number 50 times takes forever and leads to mistakes. With variables, you change it in just ONE place:
+*(Note: We put words inside quotes `""`. We will learn more about this in the next lesson!)*
+
+## 4. Using a Variable
+
+To use a variable, we can simply print it out using `print()`.
 
 ```python
-tax_rate = 0.18
-subtotal = 1000
+name = "Alice"
 
-total_tax = subtotal * tax_rate
-print(total_tax)  # Output: 180.0
+print(name)
 ```
 
-## Changing Variable Values
+**Output:**
+```
+Alice
+```
 
-Variables can change over time! You can update what is inside the storage box whenever you want:
+Why did this happen? 
+When Python sees `print(name)`, it does not print the word "name". It opens the variable named `name`, finds `"Alice"` inside, and prints that value!
+
+## 5. Changing a Variable
+
+Variables are called "variables" because they can vary (change). You can put a new value into the same variable whenever you want.
 
 ```python
 score = 0
-print(score)  # Output: 0
+print(score)
 
-# Update the score
 score = 10
-print(score)  # Output: 10
+print(score)
 ```
 
-## Variable Naming Rules
+**Output:**
+```
+0
+10
+```
 
-Python has 5 strict rules for naming your variables:
+When we write `score = 10`, the computer removes the old value `0` and stores the new value `10` in its place.
 
-1. Must start with a letter (`a-z`) or an underscore (`_`).
-2. Cannot start with a number (`1score` will crash).
-3. Can only contain letters, numbers, and underscores (`user name` with spaces is invalid).
-4. Case-sensitive (`price`, `Price`, and `PRICE` are three completely different boxes).
-5. Cannot use Python reserved words (like `if`, `while`, `class`, or `return`).
+## 6. The Assignment Operator
 
-## Common Beginner Mistakes
+Now that you know how it works, it is time to learn the official programming term.
 
-<AccordionGroup>
-  <Accordion title="Using spaces in variable names">
-    ```python
-    # Wrong - spaces are not allowed inside names
-    user age = 25  # SyntaxError!
-    
-    # Right - use underscores instead (called snake_case)
-    user_age = 25
-    ```
-  </Accordion>
+In programming, the equals sign `=` is called the **assignment operator**. 
 
-  <Accordion title="Starting a name with a number">
-    ```python
-    # Wrong - names cannot start with numbers
-    1st_player = "Alice"  # SyntaxError!
-    
-    # Right - put numbers at the end
-    player_1 = "Alice"
-    ```
-  </Accordion>
-</AccordionGroup>
+It assigns the value on the right to the variable on the left. It does NOT mean "equal to" like in math class.
+
+## 7. Naming Rules
+
+When you create a variable name, Python has a few simple rules you must follow:
+
+1. **Only use letters, numbers, and underscores (`_`).**
+2. **Do not start with a number.** (`1score` is not allowed)
+3. **Do not use spaces.** (`user name` is not allowed)
+
+## 8. Python Naming Convention (snake_case)
+
+Sometimes, you need to use two words for a variable, like "player score". Since spaces are not allowed, how do we write it?
+
+In Python, the standard way is to use all lowercase letters and separate words with an underscore (`_`). 
+
+This is called **snake_case**. 
+
+```python
+player_score = 100
+user_age = 25
+```
+
+Why does Python use snake_case? Because `player_score` is much easier to read than `playerscore`. It makes your code clean and simple!
+
+## 9. Short Recap
+
+- A **variable** is a name used to store a value.
+- Use `=` to assign a value to a variable.
+- Variables can change their values over time.
+- Always use `snake_case` for multi-word variables in Python.
 
 ## What's Next?
 
-Let's explore the basic types of data you can store inside these variables: integers, decimal numbers, and truth values (booleans).
+Now that you know how to store information, let's look at the different *types* of information we can store!
 
 <CardGroup cols={1}>
-  <Card title="Numbers & Booleans" icon="arrow-right" href="/part-1/module-2-variables-datatypes/numbers-booleans">
-    Learn how Python handles numbers, True/False values, and empty states
+  <Card title="Strings (Text)" icon="arrow-right" href="/part-1/module-2-variables-datatypes/strings">
+    Learn how to store and print text
   </Card>
 </CardGroup>

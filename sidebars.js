@@ -66,8 +66,9 @@ const sidebars = {
           collapsed: true,
           items: [
             'part-1/module-2-variables-datatypes/variables',
-            'part-1/module-2-variables-datatypes/numbers-booleans',
-            'part-1/module-2-variables-datatypes/type-casting',
+            'part-1/module-2-variables-datatypes/strings',
+            'part-1/module-2-variables-datatypes/numbers',
+            'part-1/module-2-variables-datatypes/booleans',
             'part-1/module-2-variables-datatypes/exercises-qa',
           ],
         },

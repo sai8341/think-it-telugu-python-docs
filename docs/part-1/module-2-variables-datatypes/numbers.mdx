@@ -1,0 +1,73 @@
+---
+sidebar_position: 3
+title: "Numbers (Integers & Floats)"
+sidebar_label: "Numbers"
+---
+
+# Doing Math with Numbers
+
+Python has two different ways to store numbers. They might sound technical, but you already use them in real life every day!
+
+## 1. Integers (Whole Numbers)
+
+An integer (or `int`) is just a standard whole number. It can be positive or negative, but it never has a decimal point. You use integers when counting things.
+
+```python
+# Think of this like counting apples or followers
+apples_count = 5
+temperature = -12
+score = 100
+```
+
+## 2. Floats (Decimal Numbers)
+
+A float is any number that has a decimal point. Whenever you are dealing with money, weight, or exact measurements, you will use floats.
+
+```python
+# Think of this like a price tag or weight
+coffee_price = 49.99
+weight = 2.5
+```
+
+> [!NOTE]
+> Even if a decimal ends in zero (like `10.0`), Python still considers it a float!
+
+### Why two different types?
+Computers handle whole numbers much faster than decimals. But don't worry—Python is smart enough to handle conversions behind the scenes for you most of the time!
+
+## 3. Basic Math
+
+Python can do all standard math operations effortlessly. You don't need quotation marks for numbers.
+
+```python
+# Addition and Subtraction
+total = 10 + 5     # 15
+change = 20 - 7    # 13
+
+# Multiplication and Division
+area = 6 * 4       # 24
+half = 10 / 2      # 5.0 (Division always gives a float!)
+```
+
+<AccordionGroup>
+  <Accordion title="Common Mistake: Quotation marks around numbers">
+    If you put quotation marks around a number, it becomes a **String (Text)**, not a number! You cannot do math with text.
+    ```python
+    # This is math
+    print(5 + 5)     # Output: 10
+    
+    # This is just joining text together!
+    print("5" + "5") # Output: 55
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+Sometimes you don't need a number or a word. You just need a simple "Yes" or "No". Let's look at Booleans.
+
+<CardGroup cols={1}>
+  <Card title="Booleans (True/False)" icon="arrow-right" href="/part-1/module-2-variables-datatypes/booleans">
+    Learn how to store Yes/No values
+  </Card>
+</CardGroup>

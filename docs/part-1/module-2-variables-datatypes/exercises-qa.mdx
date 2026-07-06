@@ -1,61 +1,70 @@
 ---
-title: "Lab Exercises & Interview Q&A"
+sidebar_position: 5
+title: "Practice Exercises & Q&A"
 sidebar_label: "Exercises & Q&A"
 ---
 
-# Practice Lab & Assessment
+# Practice Makes Perfect
 
-Verify your understanding of memory allocation, dynamic typing, and runtime casting by writing code directly in your local environment.
+Reading about Python is easy, but actually writing it builds your muscle memory! Try typing these exercises into your `hello.py` file and running them.
 
-## Hands-On Lab Exercises
+## Hands-On Practice
 
-Test these programs inside your IDE or interactive Python environment:
-
-```python
-# Exercise 1: Temperature Unit Conversion
-# Convert 37 degrees Celsius into Fahrenheit using F = (C * 9/5) + 32
-celsius = 37
-fahrenheit = (celsius * 9/5) + 32
-print("Temperature in Fahrenheit:", fahrenheit)
-print("Resulting data type:", type(fahrenheit))
-```
+### Exercise 1: The Swapping Trick
+Imagine you have two glasses. Glass A has Apple Juice, and Glass B has Mango Juice. How do you swap them? In Python, it is incredibly easy!
 
 ```python
-# Exercise 2: Variable Reassignment and Swapping
-# Swap values between two variables without hardcoding replacement numbers
-a = 100
-b = 250
+a = 10
+b = 99
 
-# Using standard Python tuple unpacking
+# The magic Python swap trick!
 a, b = b, a
-print("After swap -> a:", a, "| b:", b)
+
+print("A is now:")
+print(a) # Output: 99
+
+print("B is now:")
+print(b) # Output: 10
 ```
+
+### Exercise 2: Building a Profile
+Let's use all three data types we learned (Strings, Numbers, and Booleans) to create a user profile!
 
 ```python
-# Exercise 3: Safe Type Casting Pipeline
-# Parse string input, perform arithmetic, and format output
-raw_quantity = "15"
-unit_price = 12.50
+# A String (Text)
+player_name = "Rahul"
 
-total_cost = int(raw_quantity) * unit_price
-print("Total Cost: $" + str(total_cost))
+# An Integer (Whole Number)
+level = 5
+
+# A Boolean (True/False)
+is_vip = True
+
+print("Player Name:")
+print(player_name)
 ```
 
-## Technical Interview Preparation
+## Common Beginner Questions (Q&A)
 
-### Q1: What is the exact difference between dynamic typing and static typing?
-**Answer:** In statically typed languages (such as C++, Java, or Rust), variable types are locked at compile time during declaration and cannot change. In Python (dynamically typed), variables act as reference labels pointing to objects in memory. A variable name itself carries no strict type constraint and can point to an integer at line 10 and a string at line 20.
+### Q1: Can I change a variable's type later?
+**Answer:** Yes! In Python, a variable is just a box. You can put a number (`10`) in it today, and put a word (`"Hello"`) in it tomorrow. Python doesn't mind at all!
 
-### Q2: Why does `int(49.99)` return `49` instead of rounding to `50`?
-**Answer:** Python's `int()` constructor performs truncation (chopping off the fractional component entirely) rather than mathematical rounding. If standard rounding behavior is required, use the built-in `round(49.99)` function instead.
+```python
+my_box = 100
+my_box = "Now I am text!" # This is perfectly fine in Python
+```
 
-### Q3: How does Python represent null or uninitialized state?
-**Answer:** Python utilizes the singleton object `None` (of type `NoneType`). It represents clean absence of value rather than an undefined pointer or zero.
+### Q2: What happens if I write `True` with a lowercase `t`?
+**Answer:** Python will crash! Python is very strict about capital letters. `True` and `False` must always have capital first letters, otherwise Python thinks you are trying to use a variable name that doesn't exist.
+
+### Q3: Why does dividing two integers give me a float?
+**Answer:** If you divide `10 / 2`, the answer in Python is `5.0` (a float), not `5`. Python does this automatically to make sure it doesn't lose any decimal points if the division isn't perfectly even!
 
 ## Module Summary
 
-- **Variables:** Human-readable reference labels pointing to memory objects.
-- **Naming Constraints:** Alphanumeric and underscores only; cannot start with numbers.
-- **Core Primitive Types:** `int`, `float`, `bool`, `str`, and `NoneType`.
-- **Runtime Inspection:** Use `type(object)` to verify classifications.
-- **Type Casting:** Use `int()`, `float()`, and `str()` for explicit transformations.
+- **Variables:** Storage boxes for your data (e.g., `score = 10`).
+- **Strings:** Raw text wrapped in quotation marks (`"Hello"`).
+- **Numbers:** Integers are whole numbers (`5`), Floats are decimals (`5.5`).
+- **Booleans:** Simple Yes/No switches (`True` or `False`).
+
+🎉 **You have completed Module 2!** 🎉
