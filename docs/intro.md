@@ -1,11 +1,11 @@
 ---
 sidebar_position: 1
 slug: /
-title: "Start Here"
+title: "Python for AI & ML Beginners"
 sidebar_label: "Start Here"
 ---
 
-# Start Here: Your Journey into Python & AI, ML
+# Python for AI & ML Beginners
 
 Welcome to **Think IT Telugu**! If you have ever opened a programming tutorial and felt completely overwhelmed by complex words, confusing diagrams, or fast-talking instructors, you are in the right place.
 

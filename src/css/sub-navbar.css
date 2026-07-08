@@ -29,6 +29,8 @@
 .sub-navbar-container {
   height: 100%;
   width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
   display: flex;
   gap: 2rem;
   overflow-x: auto;
@@ -120,8 +122,8 @@
   }
 
   .navbar__search:focus-within {
-    border-color: #10B981 !important;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+    border-color: var(--ifm-color-primary) !important;
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15) !important;
   }
 
   .navbar__search-input {

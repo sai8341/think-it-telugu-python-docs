@@ -203,3 +203,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(5, 150, 105, 0.58);
 }
+
+/* Align entire docs page (sidebar + content area) with navbar inner (max-width: 1440px and centered) */
+div[class*="docPage_"] {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}

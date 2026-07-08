@@ -12,13 +12,13 @@
 
 /* ---- Root / Light Mode ---- */
 :root {
-  --ifm-color-primary: #10B981;
-  --ifm-color-primary-dark: #059669;
-  --ifm-color-primary-darker: #047857;
-  --ifm-color-primary-darkest: #065f46;
-  --ifm-color-primary-light: #34D399;
-  --ifm-color-primary-lighter: #6EE7B7;
-  --ifm-color-primary-lightest: #A7F3D0;
+  --ifm-color-primary: #0d9488;
+  --ifm-color-primary-dark: #0f766e;
+  --ifm-color-primary-darker: #115e59;
+  --ifm-color-primary-darkest: #134e4a;
+  --ifm-color-primary-light: #14b8a6;
+  --ifm-color-primary-lighter: #2dd4bf;
+  --ifm-color-primary-lightest: #f0fdfa;
 
   --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
@@ -32,30 +32,30 @@
   --ifm-code-font-size: 88%;
   --ifm-global-radius: 0.75rem;
 
-  --brand-primary: #10B981;
+  --brand-primary: #0d9488;
   --brand-dark: #1E1E2E;
-  --brand-accent: #0D9488;
-  --brand-light: #ECFDF5;
-  --brand-lighter: #F0FDF4;
+  --brand-accent: #0f766e;
+  --brand-light: #f0fdfa;
+  --brand-lighter: #f0fdfa;
   --brand-gold: #F59E0B;
 
   --ifm-background-color: #FFFFFF;
   --ifm-navbar-background-color: #FFFFFF;
   --ifm-navbar-link-color: #374151;
-  --ifm-navbar-link-hover-color: #10B981;
+  --ifm-navbar-link-hover-color: #0d9488;
 
   --ifm-footer-background-color: #FFFFFF;
   --ifm-footer-color: #6B7280;
-  --ifm-footer-link-color: #10B981;
+  --ifm-footer-link-color: #0d9488;
   --ifm-footer-title-color: #1F2937;
 
-  --ifm-link-color: #10B981;
-  --ifm-link-hover-color: #059669;
+  --ifm-link-color: #0d9488;
+  --ifm-link-hover-color: #0f766e;
 
-  --ifm-menu-color-active: #10B981;
-  --ifm-menu-color-background-active: rgba(16, 185, 129, 0.08);
+  --ifm-menu-color-active: #0d9488;
+  --ifm-menu-color-background-active: rgba(13, 148, 136, 0.08);
 
-  --docusaurus-highlighted-code-line-bg: #ECFDF5;
+  --docusaurus-highlighted-code-line-bg: #f0fdfa;
 
   /* Reset navbar offset for main navbar (60px) */
   --ifm-navbar-height: 60px;
@@ -102,13 +102,13 @@
 
 /* ---- Dark Mode ---- */
 [data-theme='dark'] {
-  --ifm-color-primary: #34D399;
-  --ifm-color-primary-dark: #10B981;
-  --ifm-color-primary-darker: #059669;
-  --ifm-color-primary-darkest: #047857;
-  --ifm-color-primary-light: #6EE7B7;
-  --ifm-color-primary-lighter: #A7F3D0;
-  --ifm-color-primary-lightest: #D1FAE5;
+  --ifm-color-primary: #2dd4bf;
+  --ifm-color-primary-dark: #14b8a6;
+  --ifm-color-primary-darker: #0d9488;
+  --ifm-color-primary-darkest: #0f766e;
+  --ifm-color-primary-light: #5eead4;
+  --ifm-color-primary-lighter: #99f6e4;
+  --ifm-color-primary-lightest: #ccfbf1;
 
   --ifm-font-color-base: #E5E7EB;
   --ifm-background-color: #0F0F1A;
@@ -116,16 +116,16 @@
 
   --ifm-navbar-background-color: #0A0A14;
   --ifm-navbar-link-color: #D1D5DB;
-  --ifm-navbar-link-hover-color: #34D399;
+  --ifm-navbar-link-hover-color: #2dd4bf;
 
   --ifm-footer-background-color: #0A0A14;
 
-  --ifm-link-color: #34D399;
-  --ifm-link-hover-color: #6EE7B7;
+  --ifm-link-color: #2dd4bf;
+  --ifm-link-hover-color: #5eead4;
 
-  --ifm-menu-color-active: #34D399;
-  --ifm-menu-color-background-active: rgba(52, 211, 153, 0.12);
+  --ifm-menu-color-active: #2dd4bf;
+  --ifm-menu-color-background-active: rgba(45, 212, 191, 0.12);
 
-  --docusaurus-highlighted-code-line-bg: rgba(52, 211, 153, 0.15);
+  --docusaurus-highlighted-code-line-bg: rgba(45, 212, 191, 0.15);
 }
 

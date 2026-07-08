@@ -141,7 +141,7 @@ const config = {
         items: [
           {
             href: 'https://youtube.com/@ThinkIT-Telugu',
-            label: 'YouTube',
+            label: 'Watch on YouTube',
             position: 'left',
             className: 'navbar-nav-link',
           },

@@ -42,6 +42,12 @@
   border-right: 1px solid #e8e8e8 !important;
 }
 
+@media (min-width: 997px) {
+  .theme-doc-sidebar-container {
+    padding-left: calc(var(--ifm-navbar-padding-horizontal, 2rem) - 0.75rem) !important;
+  }
+}
+
 [data-theme='dark'] .theme-doc-sidebar-container {
   background-color: #0F0F1A !important;
   border-right-color: rgba(255, 255, 255, 0.06) !important;
@@ -180,16 +186,16 @@
 }
 
 .theme-doc-sidebar-container .menu__link--active {
-  background: #E8F5E9 !important;
-  color: #059669 !important;
+  background: var(--ifm-menu-color-background-active) !important;
+  color: var(--ifm-color-primary) !important;
   font-weight: 600;
   border-left: none;
   border-radius: 8px;
 }
 
 [data-theme='dark'] .theme-doc-sidebar-container .menu__link--active {
-  background: rgba(16, 185, 129, 0.15) !important;
-  color: #34D399 !important;
+  background: var(--ifm-menu-color-background-active) !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 /* Sidebar custom buttons */
