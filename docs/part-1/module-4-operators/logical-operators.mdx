@@ -1,0 +1,98 @@
+---
+sidebar_position: 4
+title: "Logical Operators"
+sidebar_label: "Logical Operators"
+---
+
+# Logical Operators
+
+In programming, we often need to check more than one rule at a time to make a decision. 
+
+For example, to write an exam, you need a **pen** AND you need a **hall ticket**. If you are missing either one, you cannot write the exam.
+
+To combine multiple rules like this, Python provides three **Logical Operators**:
+1. **`and`** (All rules must be true)
+2. **`or`** (At least one rule must be true)
+3. **`not`** (Reverse the answer)
+
+---
+
+## 1. The `and` Operator
+
+The `and` operator only gives a `True` result if **every single condition** is true. If even one check is `False`, the whole result becomes `False`.
+
+### Real-Time Example: Writing an Exam
+Let's check if a student has both a pen and a hall ticket:
+
+```python
+has_pen = True
+has_hall_ticket = True
+
+# You can write the exam only if you have BOTH a pen AND a hall ticket
+can_write_exam = has_pen and has_hall_ticket
+print(can_write_exam)  # Output: True
+```
+
+### What happens if one is missing?
+```python
+has_pen = True
+has_hall_ticket = False  # Student forgot the hall ticket!
+
+can_write_exam = has_pen and has_hall_ticket
+print(can_write_exam)  # Output: False
+```
+*Since one of the conditions is `False`, the `and` operator makes the final answer `False`.*
+
+---
+
+## 2. The `or` Operator
+
+The `or` operator is much friendlier. It gives a `True` result if **at least one condition** is true. It only returns `False` if all checks are false.
+
+### Real-Time Example: Getting a School Holiday
+Imagine you get a holiday from school or college if it is either the **weekend** OR if it is a **festival day**:
+
+```python
+is_weekend = True
+is_festival = False
+
+# You get a holiday if it is the weekend OR if it is a festival day
+is_holiday = is_weekend or is_festival
+print(is_holiday)  # Output: True
+```
+*Even though it is not a festival day (`False`), it is the weekend (`True`), so you still get a holiday!*
+
+### What if both are false?
+```python
+is_weekend = False
+is_festival = False
+
+# A normal weekday with no festival means no holiday!
+is_holiday = is_weekend or is_festival
+print(is_holiday)  # Output: False
+```
+*Since both options are `False`, the result is `False`.*
+
+---
+
+## 3. The `not` Operator
+
+The `not` operator is a simple reverser. It takes a Boolean value and flips it to its **opposite** (`True` becomes `False`; `False` becomes `True`).
+
+### Real-Time Example: Going Outside
+Let's check if it is safe to go outside based on whether it is raining:
+
+```python
+is_raining = False
+
+# "not is_raining" means the opposite of False (which is True!)
+go_outside = not is_raining
+print(go_outside)  # Output: True
+```
+*Since it is NOT raining (`is_raining = False`), the opposite is `True`, so it is safe to go outside.*
+
+---
+
+## What's Next?
+
+Now that we can combine multiple conditions, let's look at the last type of operator in this module: **Membership Operators** (to check if an item is inside a group).

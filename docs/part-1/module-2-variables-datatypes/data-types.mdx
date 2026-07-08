@@ -1,0 +1,83 @@
+---
+sidebar_position: 2
+title: "What are Data Types?"
+sidebar_label: "Data Types"
+---
+
+# What are Data Types?
+
+In the previous lesson, you learned how to store information inside variables. But have you noticed that not all information is the same?
+
+Look at these three examples from real life:
+- Your **name** is text (e.g., "Rahul").
+- Your **age** is a number (e.g., 21).
+- Whether you **passed an exam** is either Yes or No (e.g., True).
+
+These are three completely different **kinds** of information. The computer needs to know exactly what kind of information you are giving it, so it can handle it correctly.
+
+The "kind" of information stored inside a variable is called its **Data Type**.
+
+---
+
+## The 3 Basic Data Types in Python
+
+For now, you only need to know three types. We will explore each one in detail in the next few lessons:
+
+| Data Type | What it stores | Example |
+| :--- | :--- | :--- |
+| **String** (`str`) | Text, words, sentences | `"Rahul"`, `"Hello World"` |
+| **Integer** (`int`) | Whole numbers (no decimals) | `25`, `100`, `-5` |
+| **Float** (`float`) | Decimal numbers | `19.99`, `3.14`, `-2.5` |
+| **Boolean** (`bool`) | True or False | `True`, `False` |
+
+---
+
+## Why Do Data Types Matter?
+
+Because the computer treats different types differently!
+
+For example, the `+` sign behaves differently depending on the data type:
+
+```python
+# With numbers, + does math (addition)
+print(5 + 3)         # Output: 8
+
+# With text, + joins the text together
+print("Hello" + "World")  # Output: HelloWorld
+```
+
+If you try to mix types without converting them, Python will crash:
+
+```python
+# This will cause an ERROR!
+# You cannot add a number to text directly.
+print("My age is " + 25)
+```
+
+We will learn how to handle this properly in upcoming lessons.
+
+---
+
+## Checking the Data Type of a Variable
+
+Python has a built-in command called `type()` that tells you exactly what kind of data a variable is holding:
+
+```python
+name = "Rahul"
+age = 21
+price = 99.5
+passed = True
+
+print(type(name))    # <class 'str'>
+print(type(age))     # <class 'int'>
+print(type(price))   # <class 'float'>
+print(type(passed))  # <class 'bool'>
+```
+
+Don't worry about the `<class '...'>` part for now. Just look at the word inside the quotes — it tells you the data type (`str`, `int`, `float`, or `bool`).
+
+---
+
+## What's Next?
+
+Let's start exploring the first data type — **Strings (Text)** in the next lesson!

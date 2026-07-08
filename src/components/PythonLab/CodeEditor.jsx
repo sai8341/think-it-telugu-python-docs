@@ -40,6 +40,21 @@ export default function CodeEditor({
     }
   }, [taRef, hlRef, lnRef, syncScrollExternal]);
 
+  const insertText = useCallback((text) => {
+    const ta = taRef.current;
+    if (!ta) return;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const currentCode = ta.value;
+    const newCode = currentCode.substring(0, start) + text + currentCode.substring(end);
+    setCode(newCode);
+    
+    requestAnimationFrame(() => {
+      ta.focus();
+      ta.selectionStart = ta.selectionEnd = start + text.length;
+    });
+  }, [taRef, setCode]);
+
   const handleKeyDown = (e) => {
     const ta = e.target;
     const start = ta.selectionStart;
@@ -183,6 +198,23 @@ export default function CodeEditor({
           autoComplete="off"
           wrap="off"
         />
+        
+        {/* Mobile keyboard helpers (only visible on mobile via CSS) */}
+        <div className="pylab-mobile-helpers">
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('    ')}>Tab</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText(':')}>:</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('(')}>(</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText(')')}>)</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('"')}>"</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText("'")}>'</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('=')}>=</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('+')}>+</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('-')}>-</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('*')}>*</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('/')}>/</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('_')}>_</button>
+          <button type="button" className="pylab-mobile-helper-btn" onClick={() => insertText('#')}>#</button>
+        </div>
       </div>
     </>
   );

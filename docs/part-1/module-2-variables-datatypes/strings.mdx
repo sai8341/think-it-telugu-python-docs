@@ -1,25 +1,30 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: "Strings (Text)"
 sidebar_label: "Strings (Text)"
 ---
 
-# Working with Text
+# What is a String?
 
 In programming, we don't call text "text" or "words"—we call it a **String**. 
 
 A String is simply a sequence of characters (letters, numbers, or symbols) strung together. In Python, you tell the computer that something is a String by wrapping it in quotation marks.
+
+---
 
 ## 1. Creating Strings
 
 You can use either single quotes (`'`) or double quotes (`"`) to create a string. Both work exactly the same way in Python!
 
 ```python
-first_name = "Rahul"
-last_name = 'Sharma'
+name = "Rahul"
+city = 'Hyderabad'
 
-print(first_name)
+print(name)
+print(city)
 ```
+
+---
 
 ## 2. The Golden Rule of Strings
 
@@ -33,25 +38,53 @@ fruit = "Apple"
 fruit = Apple 
 ```
 
-## 3. Combining Strings (Concatenation)
+---
 
-You can easily join two strings together using the `+` sign. This is called **concatenation**.
+## 3. Multiline Strings (Triple Quotes)
+
+Normally, a string must start and end on the same line. If you try to press Enter and write a string on multiple lines using single or double quotes, Python will crash.
+
+If you want to write a long paragraph or message that spans across multiple lines, you must wrap it in **triple quotes** (`"""` or `'''`):
 
 ```python
-greeting = "Hello"
-name = "Priya"
+address = """Flat No: 104,
+Sri Sai Residency,
+Hyderabad, India."""
 
-message = greeting + " " + name
-print(message)  # Output: Hello Priya
+print(address)
 ```
-Notice how we added a string with just a space `" "` in the middle so the words wouldn't squish together!
+
+**Output:**
+```
+Flat No: 104,
+Sri Sai Residency,
+Hyderabad, India.
+```
+
+---
+
+## 4. Finding the Length of a String
+
+Every string has a **length** — the total number of characters inside it (including spaces and symbols).
+
+You can find the length of any string using the `len()` command:
+
+```python
+message = "Hello"
+print(len(message))   # Output: 5
+
+city = "Hyderabad"
+print(len(city))      # Output: 9
+
+empty = ""
+print(len(empty))     # Output: 0 (nothing inside!)
+```
+
+> **Why is this useful?**
+> Imagine you are building a sign-up form. You want to make sure the user's password is at least 8 characters long. You can use `len()` to check!
+
+---
 
 ## What's Next?
 
-We know how to store text. But what if we want to do some math? Let's learn about numbers.
-
-<CardGroup cols={1}>
-  <Card title="Numbers (Integers & Floats)" icon="arrow-right" href="/part-1/module-2-variables-datatypes/numbers">
-    Learn how to store whole numbers and decimals
-  </Card>
-</CardGroup>
+We know how to store text. But what if we want to do some math? Let's learn about numbers in the next lesson!

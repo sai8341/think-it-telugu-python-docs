@@ -156,6 +156,7 @@ const config = {
             label: '⚡ Python Lab',
             position: 'right',
             className: 'navbar-python-lab',
+            target: '_blank',
           },
           {
             type: 'custom-fullscreenToggle',

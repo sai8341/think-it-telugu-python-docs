@@ -1,62 +1,80 @@
 ---
-title: "Multi-Branch Logic with elif"
+title: "Checking Multiple Conditions (elif)"
 sidebar_label: "elif Chains & Nesting"
 ---
 
-# Multi-Tiered Condition Evaluation
+# Checking Multiple Conditions (elif)
 
-When applications face more than two mutually exclusive outcomes (such as categorization tiers, HTTP status code handlers, or grading scales), chaining multiple `elif` (short for *else if*) blocks ensures clean, sequential evaluation.
+Sometimes you have more than two choices. For example, if you want to assign a grade to a student based on their marks:
+- Marks 90 or above &rarr; **Grade A**
+- Marks 75 or above &rarr; **Grade B**
+- Marks 50 or above &rarr; **Grade C**
+- Anything below 50 &rarr; **Grade F (Fail)**
 
-## The `if-elif-else` Pipeline
+To check multiple conditions one after the other, Python uses **`elif`** (which is short for "else if").
 
-In an `elif` ladder, Python evaluates each condition top-to-bottom. The moment a condition evaluates to `True`, its corresponding suite runs, and the runtime immediately exits the entire conditional ladder without checking subsequent branches:
+---
+
+## 1. The `if-elif-else` Chain
+
+Python checks each condition from top to bottom. The moment it finds a condition that is `True`, it runs that block of code and ignores all other options below it.
 
 ```python
-exam_score = 84
+marks = 82
 
-if exam_score >= 90:
-    grade = "A (Distinction)"
-elif exam_score >= 80:
-    grade = "B (Honors)"
-elif exam_score >= 70:
-    grade = "C (Pass)"
+if marks >= 90:
+    print("Grade: A")
+elif marks >= 75:
+    print("Grade: B")
+elif marks >= 50:
+    print("Grade: C")
 else:
-    grade = "F (Remedial Required)"
+    print("Grade: F (Fail)")
 
-print(f"Assigned Classification: {grade}")
-# Output: Assigned Classification: B (Honors)
+# Output: Grade: B
 ```
 
-:::warning Condition Ordering Matters
-Always place the most restrictive or specific checks at the **top** of your `elif` chain. If we placed `if exam_score >= 70:` at the top, a student scoring 95 would trigger the 70+ branch and be mislabeled as "C (Pass)".
-:::
+### ⚠️ Golden Rule: The Order Matters!
+Always place your checks starting with the most restrictive or highest value at the **top**. 
 
-## Nested Conditional Hierarchies
+If we wrote `if marks >= 50:` at the very top, a student with `95` marks would trigger that first condition and get a "Grade C" immediately, and Python would skip the rest of the checks!
 
-For complex decision matrices, you can nest inner `if-else` blocks inside outer branches:
+---
+
+## 2. Nested Conditions (Choices Inside Choices)
+
+Sometimes, you need to check a condition only after another condition has passed. This is called **nesting** (putting one `if-else` statement inside another one).
+
+### Real-Time Example: Blood Donation Eligibility
+To donate blood, you must meet two rules:
+1. You must be **18 years or older**.
+2. If you are old enough, you must weigh **50 kg or more**.
+
+Let's see how this works in Python:
 
 ```python
-user_authenticated = True
-admin_role = False
+age = 20
+weight = 55
 
-if user_authenticated:
-    print("Welcome back, user.")
-    if admin_role:
-        print("Redirecting to System Control Center...")
+# Outer Check: Age
+if age >= 18:
+    print("Age check passed.")
+    
+    # Inner (Nested) Check: Weight
+    if weight >= 50:
+        print("You are eligible to donate blood!")
     else:
-        print("Redirecting to Standard User Feed...")
+        print("Sorry, you must weigh 50 kg or more to donate.")
+        
 else:
-    print("Error: Authentication required.")
+    print("Sorry, you must be 18 or older to donate blood.")
 ```
 
-While nesting is powerful, deep indentation beyond three levels harms readability. In professional architecture, deep nesting is frequently refactored into guard clauses or structural pattern matching.
+### Note on Nesting:
+Notice the indentation! The inner `if-else` block is pushed even further to the right (8 spaces) because it belongs inside the outer `if` statement block. While nesting is very useful, try to keep it simple — deep nesting can make your code hard to read!
+
+---
 
 ## What's Next?
 
-Explore modern Python 3.10+ structural pattern matching (`match-case`), inline ternary operators, and interactive coding labs.
-
-<CardGroup cols={1}>
-  <Card title="Pattern Matching & Lab" icon="arrow-right" href="/part-1/module-5-conditional-statements/match-case-lab">
-    Master Python 3.10+ match-case syntax, ternary operations, and technical exercises
-  </Card>
-</CardGroup>
+If you have many exact options to match, writing multiple `elif` blocks can become tedious. Let's learn about Python's modern **`match-case`** statement and try some exercises in the next lesson!

@@ -1,0 +1,103 @@
+---
+sidebar_position: 1
+title: "Arithmetic Operators"
+sidebar_label: "Arithmetic Operators"
+---
+
+# Arithmetic Operators
+
+Arithmetic operators are used to perform basic math calculations in Python, just like on a calculator!
+
+Instead of using raw numbers directly, programmers store numbers in **variables** first and then perform math on them.
+
+Here is each arithmetic operator explained with a simple example:
+
+---
+
+## The Basic Four Math Operators
+
+### 1. Addition (`+`)
+Adds two numbers.
+```python
+num1 = 10
+num2 = 5
+result = num1 + num2
+
+print(result)  # Output: 15
+```
+
+### 2. Subtraction (`-`)
+Subtracts one number from another.
+```python
+num1 = 10
+num2 = 3
+result = num1 - num2
+
+print(result)  # Output: 7
+```
+
+### 3. Multiplication (`*`)
+Multiplies two numbers.
+```python
+num1 = 6
+num2 = 4
+result = num1 * num2
+
+print(result)  # Output: 24
+```
+
+### 4. Division (`/`)
+Divides the first number by the second.
+> **Golden Rule:** In Python, division **always** returns a decimal number (a Float), even if it divides perfectly.
+```python
+num1 = 10
+num2 = 2
+result = num1 / num2
+
+print(result)  # Output: 5.0
+```
+
+---
+
+## The Special Three Math Operators
+
+### 5. Floor Division (`//`)
+Divides two numbers and rounds the result **down** to the nearest whole number, throwing away any decimals.
+```python
+num1 = 10
+num2 = 3
+result = num1 // num2
+
+print(result)  # Output: 3
+```
+*Think of sharing 10 chocolates among 3 friends. Each friend gets 3 whole chocolates.*
+
+### 6. Modulus (`%`)
+Divides two numbers and returns **only the leftover remainder**.
+```python
+num1 = 10
+num2 = 3
+result = num1 % num2
+
+print(result)  # Output: 1
+```
+*Using the same chocolate example: sharing 10 chocolates among 3 friends leaves 1 chocolate left over.*
+
+> **Useful Trick: Checking Even or Odd Numbers**
+> If you divide a number by 2 and the remainder (`%`) is `0`, it is an **Even** number. If the remainder is `1`, it is an **Odd** number.
+> ```python
+> number = 15
+> remainder = number % 2
+> 
+> print(remainder)  # Output: 1 (15 is Odd!)
+> ```
+
+### 7. Exponentiation (Power) (`**`)
+Calculates powers (raises the first number to the power of the second).
+```python
+base = 2
+power = 3
+result = base ** power
+
+print(result)  # Output: 8  (Which is 2 * 2 * 2)
+```

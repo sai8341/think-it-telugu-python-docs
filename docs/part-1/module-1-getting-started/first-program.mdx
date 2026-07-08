@@ -7,14 +7,18 @@ sidebar_label: "First Program & Lab"
 
 This is it. You have installed Python and set up your smart notebook (VS Code). Now it is time to write your first line of code and give your computer its first instruction.
 
+---
+
 ## 1. Create a Python File
 
 1. In VS Code, look at your `Python_Learning` folder on the left side.
 2. Click the **New File** icon (it looks like a piece of paper with a `+` symbol).
-3. Name your file `hello.py` and press Enter.
+3. Name your file `hello.py` and press **Enter**.
 
-> [!NOTE] 
-> The `.py` at the end is very important! Just like a photo ends in `.jpg` and music ends in `.mp3`, putting `.py` tells your computer "Hey, this is a Python file!"
+> **Why the `.py`?**
+> The `.py` at the end is very important! Just like a photo ends in `.jpg` and music ends in `.mp3`, putting `.py` tells your computer: *"Hey, this is a Python file!"*
+
+---
 
 ## 2. Write Your Code
 
@@ -24,15 +28,17 @@ Click inside your empty `hello.py` file and type exactly this:
 print("Hello, World!")
 ```
 
-**What does this mean?**
-The `print()` instruction tells the computer to take whatever is inside the quotation marks and show it on the screen. It is your way of making the computer talk back to you!
+**What does this line mean?**
+The `print()` instruction tells the computer to take whatever is inside the quotation marks `""` and show it on the screen. It is your way of making the computer talk to you!
+
+---
 
 ## 3. Run Your Code
 
-Now we need to tell Python to read the file and follow the instruction.
+Now we need to tell Python to read our file and run our instruction.
 
 1. At the very top of VS Code, click **Terminal -> New Terminal**. A small black box will appear at the bottom of your screen.
-2. Click inside that black box, type this command, and press **Enter**:
+2. Click inside that black box, type this command exactly, and press **Enter**:
 
 ```bash
 python hello.py
@@ -40,8 +46,11 @@ python hello.py
 
 ### 🎉 CONGRATULATIONS! 🎉
 
-Look at the terminal. Did it print `Hello, World!`? 
-If yes, you just successfully wrote and executed your first piece of software. You are officially coding!
+Look at the black box (terminal) at the bottom. Did it print `Hello, World!`? 
+
+If yes, you just successfully wrote and executed your first piece of software. You are officially a programmer!
+
+---
 
 ## Common Mistakes
 
@@ -49,19 +58,21 @@ If it did not work, don't panic! Making mistakes is 90% of a programmer's job. C
 
 <AccordionGroup>
   <Accordion title="Did you use a capital P?">
-    Python is case-sensitive! `Print("Hello")` with a capital P will fail. It must be a lowercase `print`.
+    Python is very sensitive! `Print("Hello")` with a capital P will fail. It must be a lowercase `print`.
   </Accordion>
   <Accordion title="Did you forget the quotation marks?">
-    `print(Hello, World!)` will fail. You must wrap the text in quotes so Python knows it is a sentence.
+    `print(Hello, World!)` will fail. You must wrap the text in quotes `""` so Python knows it is text.
   </Accordion>
-  <Accordion title="Did you save the file?">
-    If you see a white dot next to your file name `hello.py`, it means you forgot to save! Press `Ctrl + S` (or `Cmd + S` on Mac) to save the file, then try running the command again.
+  <Accordion title="Did you forget to save the file?">
+    If you see a white dot next to your file name `hello.py` at the top of VS Code, it means you forgot to save! Press `Ctrl + S` (or `Cmd + S` on Mac) to save the file, then try running the command again.
   </Accordion>
 </AccordionGroup>
 
+---
+
 ## Practice Exercises
 
-Try changing the code in your file to complete these tasks. Don't forget to save (`Ctrl + S`) and run the `python hello.py` command again to see your changes!
+Try changing the code in your file to complete these small tasks. Don't forget to save (`Ctrl + S`) and run the `python hello.py` command in the terminal to see your changes!
 
 ```python
 # Task 1: Make the computer print your own name
@@ -71,12 +82,8 @@ print("My name is Rahul")
 print(10 + 5)
 ```
 
+---
+
 ## What's Next?
 
-Now that you know how to give the computer basic instructions, let's learn how to make the computer remember things using Variables.
-
-<CardGroup cols={1}>
-  <Card title="Module 2: Variables & Data Types" icon="arrow-right" href="/part-1/module-2-variables-datatypes/variables">
-    Learn how to store data in the computer's memory using variables
-  </Card>
-</CardGroup>
+Now that you know how to give the computer basic instructions, let's learn how to make the computer remember things using **Variables** in the next module!

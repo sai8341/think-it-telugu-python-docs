@@ -1,0 +1,48 @@
+---
+sidebar_position: 5
+title: "Membership Operators"
+sidebar_label: "Membership Operators"
+---
+
+# Membership Operators
+
+Membership operators are used to check if a value exists inside a sequence (like a sentence of text or a list of items). 
+
+Think of it as searching for something inside a container.
+
+Python has two membership keywords: `in` and `not in`.
+
+---
+
+## 1. The `in` Operator
+Returns `True` if the value is **found** inside the container.
+
+### Searching inside text (Strings):
+```python
+sentence = "Python is the future of AI"
+
+# Check if the word "AI" is inside the sentence
+print("AI" in sentence)      # Output: True
+print("Java" in sentence)    # Output: False
+```
+
+### Searching inside lists:
+```python
+# A list of names (we will learn more about lists later!)
+names = ["Rahul", "Sai", "Priya"]
+
+print("Sai" in names)    # Output: True
+print("John" in names)   # Output: False
+```
+
+---
+
+## 2. The `not in` Operator
+Returns `True` if the value is **not found** inside the container (returns the opposite of `in`).
+
+```python
+sentence = "Python is the future of AI"
+
+print("Java" not in sentence)  # Output: True (Java is indeed not there!)
+print("AI" not in sentence)    # Output: False (Because AI is there!)
+```

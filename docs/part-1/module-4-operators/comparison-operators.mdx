@@ -1,0 +1,90 @@
+---
+sidebar_position: 3
+title: "Comparison Operators"
+sidebar_label: "Comparison Operators"
+---
+
+# Comparison Operators
+
+Comparison operators are used to compare two values. They act like a question and **always** answer with a simple Boolean value: **`True`** or **`False`**.
+
+---
+
+## The Six Comparison Operators
+
+Here is each comparison operator explained with a simple example:
+
+### 1. Equal to (`==`)
+Checks if two values are exactly the same.
+```python
+# Comparing Numbers
+print(10 == 10)  # Output: True
+print(10 == 5)   # Output: False
+
+# Comparing Text (Strings)
+print("Apple" == "Apple")  # Output: True
+print("Apple" == "Mango")  # Output: False
+```
+
+### 2. Not Equal to (`!=`)
+Checks if two values are different.
+```python
+# Comparing Numbers
+print(10 != 5)   # Output: True
+print(10 != 10)  # Output: False
+
+# Comparing Text (Strings)
+print("Apple" != "Mango")  # Output: True
+print("Apple" != "Apple")  # Output: False
+```
+
+### 3. Greater than (`>`)
+Checks if the number on the left is bigger than the number on the right.
+```python
+print(15 > 10)  # Output: True
+print(5 > 10)   # Output: False
+```
+
+### 4. Less than (`<`)
+Checks if the number on the left is smaller than the number on the right.
+```python
+print(5 < 10)   # Output: True
+print(15 < 10)  # Output: False
+```
+
+### 5. Greater than or Equal to (`>=`)
+Checks if the number on the left is either bigger or exactly equal to the number on the right.
+```python
+print(10 >= 10)  # Output: True
+print(15 >= 10)  # Output: True
+print(5 >= 10)   # Output: False
+```
+
+### 6. Less than or Equal to (`<=`)
+Checks if the number on the left is either smaller or exactly equal to the number on the right.
+```python
+print(10 <= 10)  # Output: True
+print(5 <= 10)   # Output: True
+print(15 <= 10)  # Output: False
+```
+
+---
+
+## ⚠️ The Most Common Mistake: `=` vs `==`
+
+Confusing these two is the number one source of bugs for beginners!
+
+*   **`=` (Single Equals):** Used to **store** a value in a variable (Assign).
+    ```python
+    age = 20  # Storing the number 20 inside age
+    ```
+*   **`==` (Double Equals):** Used to **check** if two things are equal (Compare).
+    ```python
+    print(age == 20)  # Asking: "Is age equal to 20?" (Prints: True)
+    ```
+
+---
+
+## What's Next?
+
+Now that you can compare values, let's learn how to combine multiple conditions together using **Logical Operators**.

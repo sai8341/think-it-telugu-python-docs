@@ -3,70 +3,84 @@ title: "Console Output & Formatting"
 sidebar_label: "Print Output"
 ---
 
-# Controlling Terminal Output
+# Showing Messages on the Screen
 
-Every interactive software application requires a mechanism to communicate state, logs, and computation results back to the user or system monitor. In Python, the standard console output engine is the `print()` built-in function.
+Every app needs a way to talk to the user. In Python, we use the `print()` command to show text, numbers, or results on the screen.
 
-## Printing Single and Multiple Expressions
+---
 
-At its simplest, `print()` evaluates the object passed to it and writes its string representation to standard output:
+## 1. Printing One or More Things
+
+At its simplest, you can pass a single piece of text to `print()`:
 
 ```python
 print("Welcome to Think IT Telugu")
 ```
 
-You can pass multiple comma-separated objects into a single `print()` call. Python will evaluate each expression and insert a single space between them automatically:
+You can also print multiple things at the same time by separating them with commas. Python will automatically put a single space between them:
 
 ```python
 user_name = "Sai"
-account_tier = "Pro"
 active_sessions = 3
 
-print("User:", user_name, "| Tier:", account_tier, "| Sessions:", active_sessions)
-# Output: User: Sai | Tier: Pro | Sessions: 3
+print("User:", user_name, "Sessions:", active_sessions)
+# Output: User: Sai Sessions: 3
 ```
 
-## Special Escape Characters
+---
 
-When constructing text strings, certain character sequences triggered by a backslash (`\`) tell the console interpreter to perform structural formatting actions rather than printing literal characters:
+## 2. Special Characters (\n and \t)
+
+Sometimes you want to format your text—like starting a new line or adding a big space. You can do this using special combinations called **escape characters**:
+
+*   **`\n` (New Line):** Acts like pressing the "Enter" key on your keyboard. It moves the text after it to a new line.
+    ```python
+    print("First Line\nSecond Line")
+    # Output:
+    # First Line
+    # Second Line
+    ```
+*   **`\t` (Tab Space):** Acts like pressing the "Tab" key. It inserts a big blank space (usually 4 spaces).
+    ```python
+    print("Name:\tSai\nAge:\t25")
+    # Output:
+    # Name:   Sai
+    # Age:    25
+    ```
+
+---
+
+## 3. Customizing print() with `sep` and `end`
+
+By default, when you separate items with a comma, Python puts a space between them. Also, every time a `print()` command finishes, it automatically goes to a new line. 
+
+You can change this behavior using two special controls:
+
+### Custom Separator (`sep`)
+By default, the separator between items is a space. You can change it to whatever you want using `sep=`:
 
 ```python
-# \n inserts a newline break
-print("First Line\nSecond Line")
-
-# \t inserts a structured horizontal tab
-print("ID:\t1042\nStatus:\tActive")
-```
-
-## Customizing Separators and Line Endings
-
-By default, `print()` places a space between comma-separated items and appends a newline character (`\n`) at the end of execution. You can override these defaults explicitly using keyword parameters:
-
-### The `sep` Parameter
-Controls the exact string inserted between multiple items:
-
-```python
-# Format a date string using hyphen separators
+# Format a date using hyphens instead of spaces
 print("2026", "07", "01", sep="-")
 # Output: 2026-07-01
+
+# Print website domain
+print("www", "google", "com", sep=".")
+# Output: www.google.com
 ```
 
-### The `end` Parameter
-Controls the trailing character appended at the conclusion of the statement:
+### Custom Line Ending (`end`)
+By default, Python moves to a new line at the end of a `print()` command. You can keep it on the same line using `end=`:
 
 ```python
-# Prevent automatic line breaking
-print("Processing data...", end=" ")
+# Keep the next print on the same line by ending with a space instead of a new line
+print("Loading data...", end=" ")
 print("Done!")
-# Output: Processing data... Done!
+# Output: Loading data... Done!
 ```
+
+---
 
 ## What's Next?
 
-Now that you can send structured messages out to the console, let's explore how to ingest live keyboard input from users at runtime.
-
-<CardGroup cols={1}>
-  <Card title="Ingesting Interactive User Input" icon="arrow-right" href="/part-1/module-3-input-output/user-input">
-    Learn how to capture terminal prompts with input() and safely convert data types
-  </Card>
-</CardGroup>
+Now that you know how to make Python talk to the user, let's learn how to ask the user questions and get their answers in the next lesson!

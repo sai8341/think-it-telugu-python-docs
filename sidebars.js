@@ -66,6 +66,7 @@ const sidebars = {
           collapsed: true,
           items: [
             'part-1/module-2-variables-datatypes/variables',
+            'part-1/module-2-variables-datatypes/data-types',
             'part-1/module-2-variables-datatypes/strings',
             'part-1/module-2-variables-datatypes/numbers',
             'part-1/module-2-variables-datatypes/booleans',
@@ -89,9 +90,11 @@ const sidebars = {
           className: 'icon-logic',
           collapsed: true,
           items: [
-            'part-1/module-4-operators/arithmetic-assignment',
-            'part-1/module-4-operators/comparison-logical',
-            'part-1/module-4-operators/identity-membership',
+            'part-1/module-4-operators/arithmetic-operators',
+            'part-1/module-4-operators/assignment-operators',
+            'part-1/module-4-operators/comparison-operators',
+            'part-1/module-4-operators/logical-operators',
+            'part-1/module-4-operators/membership-operators',
           ],
         },
         {

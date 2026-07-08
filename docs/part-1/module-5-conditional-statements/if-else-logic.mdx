@@ -1,70 +1,88 @@
 ---
-title: "Decision Logic & The if-else Structure"
+title: "If-Else Conditions"
 sidebar_label: "if & if-else Statements"
 ---
 
-# Runtime Decision Making
+# If-Else Conditions
 
-In deterministic linear execution, code runs top-to-bottom sequentially without skipping lines. However, intelligent applications require branching paths that react dynamically to runtime inputs, user permissions, and sensor states.
+Normally, Python runs your code line-by-line from top to bottom. But what if you want your program to make choices? 
 
-## Decision Architecture Flow
+For example:
+- **If** a student gets 35 marks or more, they **Pass**.
+- **Else** (otherwise), they **Fail**.
 
-Conditional statements evaluate boolean expressions (`True` or `False`) to decide which branch of code gets executed:
+To do this, we use conditional statements. They evaluate a condition (which returns `True` or `False`) to decide which path of code to run:
 
 ```text
-               [ Execution Start ]
-                        |
-              Does condition == True?
-                /              \
-             (Yes)             (No)
-              /                  \
-   [ Execute if-block ]   [ Execute else-block ]
-              \                  /
-               \                /
-             [ Continue Pipeline ]
+               [ Start of Code ]
+                       |
+             Is marks >= 35? (True/False)
+               /                  \
+            (True)              (False)
+             /                      \
+   [ Print "Pass" ]            [ Print "Fail" ]
+             \                      /
+              \                    /
+               [ Continue Program ]
 ```
 
-## The Single `if` Statement
+---
 
-An `if` statement evaluates a conditional test. If the test passes (`True`), the indented code block directly beneath it executes. If the test fails (`False`), the Python runtime skips the block entirely:
+## 1. The Simple `if` Statement
+
+The `if` statement checks a condition. If the condition is **`True`**, the code directly inside it runs. If it is **`False`**, Python completely skips it.
 
 ```python
-user_age = 21
+marks = 75
 
-if user_age >= 18:
-    print("Access verification passed.")
-    print("Welcome to the AI Dashboard.")
+# The colon (:) tells Python a check is starting
+if marks >= 35:
+    print("Congratulations!")
+    print("You passed the exam.")
 ```
 
-:::important Indentation Rules
-Unlike languages such as C++ or Java that enclose blocks within braces `{}` , Python enforces structural hierarchy through **whitespace indentation** (strictly 4 spaces per nesting level). Omitting indentation raises an `IndentationError`.
-:::
+---
 
-:::danger The Mandatory Colon (`:`)
-Every control flow header line (`if`, `elif`, `else`) must end with a colon (`:`). The colon instructs the Python compiler that an indented code suite immediately follows.
-:::
+## 2. What is Indentation & Why is it Important?
 
-## The Two-Branch `if-else` Structure
+In languages like C, Java, or JavaScript, programmers use curly braces `{ }` to group lines of code together. 
 
-When code requires handling both positive and negative evaluation outcomes explicitly, append an `else` suite:
+But **Python does not use curly braces**. Instead, Python uses **Indentation** (blank spaces at the start of a line) to group code blocks!
 
 ```python
-account_balance = 450.00
-withdrawal_amount = 600.00
+if marks >= 35:
+    print("Congratulations!")  # Indented by 4 spaces
+    print("You passed.")       # Indented by 4 spaces
+    
+print("Thank you!")            # NOT indented (runs normally outside the check)
+```
 
-if account_balance >= withdrawal_amount:
-    account_balance -= withdrawal_amount
-    print("Transaction approved. Dispensing cash.")
+### Key Rules of Indentation:
+*   **The Standard:** The standard way is to use **4 spaces** (or press the **Tab** key once) to indent your code.
+*   **The Container:** Every line that is indented under the `if` statement is considered to be "inside" that check.
+*   **The Danger (IndentationError):** If you forget to indent, or mix spaces and tabs, Python will get confused and crash with an `IndentationError`. 
+
+> **Python's Superpower:** Indentation makes Python code incredibly clean, neat, and easy for everyone to read, because it forces all programmers to align their code properly!
+
+---
+
+## 3. The `if-else` Structure (Two Choices)
+
+What if you want to run one check when the condition is true, and a different check when it is false? We add an `else` block:
+
+```python
+marks = 28
+
+if marks >= 35:
+    print("Congratulations! You passed.")
 else:
-    print("Transaction declined: Insufficient funds.")
+    print("Sorry, you did not pass. Keep studying and try again!")
 ```
+
+If `marks` is 35 or more, only the code under `if` runs. If `marks` is less than 35, only the code under `else` runs. Note that both `if` and `else` end with a colon (`:`), and their blocks are indented!
+
+---
 
 ## What's Next?
 
-When algorithms must evaluate multiple mutually exclusive scenarios beyond simple binary choices, developers use multi-branch `elif` chains.
-
-<CardGroup cols={1}>
-  <Card title="Multi-Branch Logic with elif" icon="arrow-right" href="/part-1/module-5-conditional-statements/elif-chains">
-    Build multi-tiered grading systems and nested conditional hierarchies
-  </Card>
-</CardGroup>
+What if you have more than two choices? For example, grading a student (A, B, C, or Fail). Let's learn how to handle multiple checks using **`elif` chains** in the next lesson!

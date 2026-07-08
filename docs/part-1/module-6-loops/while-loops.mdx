@@ -1,66 +1,65 @@
 ---
-title: "Conditional Iteration with while Loops"
+title: "Repeating Code with while Loops"
 sidebar_label: "while Loops"
 ---
 
-# Dynamic State-Driven Iteration
+# Repeating Code with while Loops
 
-While `for` loops iterate over known, finite sequences, **`while` loops** continuously execute an indented block of code as long as a runtime boolean expression evaluates to `True`.
+A `for` loop is great when you know in advance how many times to repeat your code. 
 
-## Structure of a `while` Loop
+But what if you don't know how many repetitions you need? For example:
+- Keep asking a user for their password **until** they type it correctly.
+- Keep running a video game **while** the player still has lives left.
 
-A `while` loop checks its condition at the start of every iteration cycle. If `True`, the suite runs. If `False`, the loop terminates immediately:
+To repeat actions based on a rule (condition), Python provides the **`while` loop**.
+
+---
+
+## 1. Structure of a `while` Loop
+
+A `while` loop checks a condition. If the condition is `True`, it runs the code inside it. Then it checks the condition again, and runs it again. This repeats **while** the condition remains `True`.
+
+### Real-Time Example: Video Game Lives
+Let's simulate a player playing a game as long as they have lives left:
 
 ```python
-retry_count = 0
-max_retries = 3
+lives = 3
 
-while retry_count < max_retries:
-    print(f"Attempting API connection (Attempt {retry_count + 1})...")
-    retry_count += 1
+while lives > 0:
+    print(f"Playing game... Lives remaining: {lives}")
+    # Reduce lives by 1 after each round
+    lives = lives - 1
 
-print("Connection pipeline concluded.")
+print("Game Over!")
 ```
 
-## Manual Counter Updates
+**How it works:**
+1. At first, `lives` is `3`. Since `3 > 0` is `True`, the loop runs and subtracts `1` from lives.
+2. Next round, `lives` is `2`. Since `2 > 0` is `True`, it runs again and subtracts `1`.
+3. Next round, `lives` is `1`. Since `1 > 0` is `True`, it runs and subtracts `1`.
+4. Next round, `lives` is `0`. Since `0 > 0` is **`False`**, Python exits the loop and prints "Game Over!".
 
-Unlike `for` loops that automatically update variables, **`while` loops require explicit state manipulation inside the loop suite**. Notice line 6 above (`retry_count += 1`). Without manually advancing the state toward termination, the condition never becomes `False`.
+---
 
-## Preventing Infinite Loops
+## 2. ⚠️ Warning: Infinite Loops (DANGER!)
 
-If a `while` loop's evaluation condition never turns `False`, the application locks up in an **infinite loop**, consuming 100% CPU thread resources until killed by the operating system:
+Since a `while` loop runs as long as the condition is `True`, you must make sure that the condition will eventually become `False`.
+
+If the condition never becomes `False`, the loop will run forever! This is called an **Infinite Loop**, and it can lock up or freeze your computer.
 
 ```python
-# DANGER: Infinite Loop Pitfall!
+# DANGER: This loop will run forever!
 # counter = 1
 # while counter <= 5:
-#     print("Stuck in loop forever!")
-#     # Notice: counter is never incremented!
+#     print("Stuck inside this loop!")
+#     # We forgot to add: counter += 1
 ```
 
-:::danger Breaking Out of Infinite Loops
-If you accidentally execute an infinite loop in your terminal console, press **`Ctrl + C`** immediately to trigger a `KeyboardInterrupt` and kill the running process.
-:::
+### How to Stop an Infinite Loop:
+If your terminal gets stuck in an infinite loop, don't panic! Press **`Ctrl + C`** on your keyboard to instantly force the program to stop.
 
-## Interactive Loop Visualizer
-
-Test runtime state transitions and watch loop counters increment live in our interactive laboratory:
-
-<div className="lab-cta lab-cta--loops">
-  <div className="lab-cta__content">
-    <span className="lab-cta__eyebrow">Interactive lab</span>
-    <h3>Python Loop Visualizer</h3>
-    <p>Experiment with while loops and observe condition evaluations step-by-step.</p>
-  </div>
-  <a className="lab-cta__button" href="/loop-visualizer">Open Lab</a>
-</div>
+---
 
 ## What's Next?
 
-Discover how to interrupt active loops prematurely or skip individual execution cycles using `break` and `continue` keywords.
-
-<CardGroup cols={1}>
-  <Card title="Loop Control Statements & Lab" icon="arrow-right" href="/part-1/module-6-loops/loop-control-lab">
-    Master break, continue, else blocks on loops, nested loops, and exercises
-  </Card>
-</CardGroup>
+Now that we know both types of loops, what if we want to stop a loop early (like stopping a search once we find the item), or skip a specific round? Let's learn about **`break`** and **`continue`** in the next lesson!

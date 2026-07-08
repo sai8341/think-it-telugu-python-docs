@@ -1,0 +1,74 @@
+---
+sidebar_position: 2
+title: "Assignment Operators"
+sidebar_label: "Assignment Operators"
+---
+
+# Assignment Operators
+
+Assignment operators are used to store values in variables or update them.
+
+---
+
+## 1. Store Value (`=`)
+The single equals sign (`=`) is the most basic assignment operator. It stores the value on the right inside the variable on the left.
+```python
+score = 100
+name = "Rahul"
+```
+
+---
+
+## 2. Shortcut Operators (Compound Assignment)
+
+Sometimes you want to update the value of an existing variable. For example, if you are building a game and the player scores, you want to add `5` to their current score:
+
+```python
+score = 100
+# The long way:
+score = score + 5
+```
+
+Python gives you shortcut operators to update a variable in place:
+
+### Add and Assign (`+=`)
+Adds a number to a variable and updates it.
+```python
+score = 100
+score += 5  # Same as: score = score + 5 (score is now 105)
+```
+
+### Subtract and Assign (`-=`)
+Subtracts a number from a variable and updates it.
+```python
+score = 100
+score -= 10  # Same as: score = score - 10 (score is now 90)
+```
+
+### Multiply and Assign (`*=`)
+Multiplies the variable and updates it.
+```python
+score = 10
+score *= 3  # Same as: score = score * 3 (score is now 30)
+```
+
+### Divide and Assign (`/=`)
+Divides the variable and updates it.
+```python
+score = 10
+score /= 2  # Same as: score = score / 2 (score is now 5.0)
+```
+
+### Floor Divide and Assign (`//=`)
+Floor divides the variable and updates it.
+```python
+score = 10
+score //= 3  # Same as: score = score // 3 (score is now 3)
+```
+
+### Modulus and Assign (`%=`)
+Updates the variable with the leftover remainder.
+```python
+score = 10
+score %= 3  # Same as: score = score % 3 (score is now 1)
+```
