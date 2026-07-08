@@ -153,7 +153,7 @@ const config = {
           },
           {
             to: '/python-lab',
-            label: '⚡ Python Lab',
+            label: 'Python Lab',
             position: 'right',
             className: 'navbar-python-lab',
             target: '_blank',

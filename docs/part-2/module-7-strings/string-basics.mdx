@@ -1,122 +1,24 @@
 ---
-title: "What are Strings?"
+title: "Strings as Data Structures"
 sidebar_label: "String Basics"
 ---
 
-# What are Strings?
+# Strings as Data Structures
 
-Strings are simply text - any characters enclosed inside quotes. Python does not care if you use single quotes or double quotes, as long as you match the starting and ending quotes.
+We already learned the basic concepts of strings in **Part 1 (Module 2: Variables & Data Types)**. We know how to create them using quotes, calculate their length with `len()`, combine them with `+`, and convert other types into strings.
 
-```python
-name = "Alice"
-message = 'Hello, World!'
-```
+Now in Part 2, we will look at how to work with strings at an advanced level. In Python, a string is not just a single value; it is treated as a **Sequence / Collection of characters** (a data structure).
 
-## Three Ways to Create Strings
+---
 
-You can create strings in Python using single quotes, double quotes, or triple quotes for multi-line paragraphs:
+## The Power of String Manipulation
 
-```python
-# 1. Single quotes
-first = 'Python'
+Because strings are structured sequences of characters, Python lets us manipulate them in incredibly powerful ways:
 
-# 2. Double quotes
-second = "Python"
+1. **Grab individual letters (Indexing):** Get any specific character using its position number. For example, grabbing `"P"` from `"Python"` using `word[0]`.
+2. **Cut out sections of text (Slicing):** Extract a whole slice of a string. For example, grabbing `"Py"` from `"Python"` using `word[0:2]`.
+3. **Clean up messy input (Stripping):** Instantly remove accidental spaces typed by users at the beginning or end of text.
+4. **Search and Replace:** Find out if a word exists inside a long paragraph, or replace specific words automatically.
+5. **Split and Join:** Break a sentence into separate words, or glue separate words back together into a single string.
 
-# 3. Triple quotes for multiple lines
-paragraph = """This is
-a multi-line
-text paragraph."""
-```
-
-:::tip Apostrophes inside text
-Use double quotes when your text contains apostrophes so Python does not get confused by the single quote inside: `"It's Python time!"`
-:::
-
-## Combining Strings
-
-You can join strings together using the `+` operator (called concatenation), or repeat them using `*`:
-
-```python
-first_name = "John"
-last_name = "Doe"
-
-# Join two strings with a space in the middle
-full_name = first_name + " " + last_name
-print(full_name)  # Output: John Doe
-
-# Repeat a string 5 times
-stars = "*" * 5
-print(stars)  # Output: *****
-```
-
-## String Length
-
-Use `len()` to count how many total characters (including spaces and punctuation) are inside a string:
-
-```python
-message = "Hello"
-print(len(message))  # Output: 5
-
-empty_string = ""
-print(len(empty_string))  # Output: 0
-```
-
-## Converting Numbers to Strings
-
-If you want to join text with numbers, you must first convert the number into a string using `str()`:
-
-```python
-age = 25
-message = "I am " + str(age) + " years old"
-print(message)  # Output: I am 25 years old
-
-# Or use f-strings (formatted strings)
-message_f = f"I am {age} years old"
-print(message_f)
-```
-
-## Common Beginner Mistakes
-
-<AccordionGroup>
-  <Accordion title="Mismatched quotes">
-    ```python
-    # Wrong - opening with double quote and closing with single quote
-    text = "Hello'
-    
-    # Right - matching quotes on both sides
-    text = "Hello"
-    text = 'Hello'
-    ```
-  </Accordion>
-
-  <Accordion title="Adding strings and numbers directly">
-    ```python
-    # Wrong - Python cannot add text and numbers together
-    result = "Age: " + 25  # TypeError!
-    
-    # Right - convert the number first using str()
-    result = "Age: " + str(25)
-    ```
-  </Accordion>
-
-  <Accordion title="Forgetting quotes around words">
-    ```python
-    # Wrong - Python thinks Alice is a variable name
-    name = Alice
-    
-    # Right - quotes tell Python this is text
-    name = "Alice"
-    ```
-  </Accordion>
-</AccordionGroup>
-
-## What's Next?
-
-Let's learn how to grab individual characters or cut out pieces of text using indexing and slicing.
-
-<CardGroup cols={1}>
-  <Card title="Indexing & Slicing" icon="arrow-right" href="/part-2/module-7-strings/string-slicing">
-    Learn how index numbers work from left to right and right to left
-  </Card>
-</CardGroup>
+In the next two lessons, we will learn how to use these features step-by-step!

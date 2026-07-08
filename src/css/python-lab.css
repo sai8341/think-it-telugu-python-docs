@@ -30,20 +30,20 @@ body.pylab-active .thin-scrollbar {
 
 /* --- Navbar Badge --- */
 .navbar-python-lab {
-  background: linear-gradient(135deg, #059669, #10B981) !important;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a) !important;
   color: #fff !important;
   padding: 6px 16px !important;
   border-radius: 20px !important;
   font-weight: 600 !important;
   font-size: 0.85rem !important;
   transition: all 0.3s ease !important;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25) !important;
 }
 .navbar-python-lab:hover {
-  background: linear-gradient(135deg, #047857, #059669) !important;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb) !important;
   transform: translateY(-1px) !important;
   color: #fff !important;
-  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4) !important;
+  box-shadow: 0 6px 16px rgba(30, 58, 138, 0.35) !important;
 }
 
 /* --- Root Layout --- */

@@ -1,10 +1,10 @@
 ---
 sidebar_position: 3
-title: "Strings (Text)"
-sidebar_label: "Strings (Text)"
+title: "Strings"
+sidebar_label: "Strings"
 ---
 
-# What is a String?
+# Strings
 
 In programming, we don't call text "text" or "words"—we call it a **String**. 
 
@@ -12,79 +12,107 @@ A String is simply a sequence of characters (letters, numbers, or symbols) strun
 
 ---
 
-## 1. Creating Strings
+## 1. Three Ways to Create Strings
 
-You can use either single quotes (`'`) or double quotes (`"`) to create a string. Both work exactly the same way in Python!
+You can create strings in Python using single quotes, double quotes, or triple quotes for multi-line paragraphs:
 
 ```python
-name = "Rahul"
-city = 'Hyderabad'
+# 1. Single quotes
+first = 'Python'
 
-print(name)
-print(city)
+# 2. Double quotes
+second = "Python"
+
+# 3. Triple quotes for multiple lines
+paragraph = """This is
+a multi-line
+text paragraph."""
+```
+
+:::tip Apostrophes inside text
+Use double quotes when your text contains apostrophes so Python does not get confused by the single quote inside: `"It's Python time!"`
+:::
+
+---
+
+## 2. Combining Strings
+
+You can join strings together using the `+` operator (called **concatenation**), or repeat them using `*`:
+
+```python
+first_name = "John"
+last_name = "Doe"
+
+# Join two strings with a space in the middle
+full_name = first_name + " " + last_name
+print(full_name)  # Output: John Doe
+
+# Repeat a string 5 times
+stars = "*" * 5
+print(stars)  # Output: *****
 ```
 
 ---
 
-## 2. The Golden Rule of Strings
+## 3. String Length
 
-Without quotation marks, Python thinks you are typing a variable name or a command. With quotation marks, Python knows you are just typing raw text.
-
-```python
-# Correct! Python sees text.
-fruit = "Apple"
-
-# ERROR! Python looks for a variable called Apple and crashes.
-fruit = Apple 
-```
-
----
-
-## 3. Multiline Strings (Triple Quotes)
-
-Normally, a string must start and end on the same line. If you try to press Enter and write a string on multiple lines using single or double quotes, Python will crash.
-
-If you want to write a long paragraph or message that spans across multiple lines, you must wrap it in **triple quotes** (`"""` or `'''`):
-
-```python
-address = """Flat No: 104,
-Sri Sai Residency,
-Hyderabad, India."""
-
-print(address)
-```
-
-**Output:**
-```
-Flat No: 104,
-Sri Sai Residency,
-Hyderabad, India.
-```
-
----
-
-## 4. Finding the Length of a String
-
-Every string has a **length** — the total number of characters inside it (including spaces and symbols).
-
-You can find the length of any string using the `len()` command:
+Use `len()` to count how many total characters (including spaces and punctuation) are inside a string:
 
 ```python
 message = "Hello"
-print(len(message))   # Output: 5
+print(len(message))  # Output: 5
 
-city = "Hyderabad"
-print(len(city))      # Output: 9
-
-empty = ""
-print(len(empty))     # Output: 0 (nothing inside!)
+empty_string = ""
+print(len(empty_string))  # Output: 0
 ```
-
-> **Why is this useful?**
-> Imagine you are building a sign-up form. You want to make sure the user's password is at least 8 characters long. You can use `len()` to check!
 
 ---
 
-## What's Next?
+## 4. Converting Numbers to Strings
 
-We know how to store text. But what if we want to do some math? Let's learn about numbers in the next lesson!
+If you want to join text with numbers, you must first convert the number into a string using `str()`, or use **f-strings** (formatted strings):
+
+```python
+age = 25
+message = "I am " + str(age) + " years old"
+print(message)  # Output: I am 25 years old
+
+# Or use f-strings (much cleaner!)
+message_f = f"I am {age} years old"
+print(message_f)  # Output: I am 25 years old
+```
+
+---
+
+## 5. Common Mistakes to Avoid
+
+### Mistake 1: Mismatched Quotes
+Always match your opening and closing quotes.
+```python
+# Wrong - opening with double quote and closing with single quote
+text = "Hello'
+
+# Right - matching quotes on both sides
+text = "Hello"
+text = 'Hello'
+```
+
+### Mistake 2: Adding Strings and Numbers Directly
+Python cannot add raw numbers and text together directly.
+```python
+# Wrong - raises TypeError
+result = "Age: " + 25
+
+# Right - convert the number first using str()
+result = "Age: " + str(25)
+```
+
+### Mistake 3: Forgetting Quotes Around Words
+Without quotes, Python thinks a word is a variable name.
+```python
+# Wrong - Python searches for a variable named Alice
+name = Alice
+
+# Right - quotes tell Python this is text
+name = "Alice"
+```
