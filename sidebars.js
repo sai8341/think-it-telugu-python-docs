@@ -36,7 +36,6 @@ const sidebars = {
           collapsed: true,
           items: [
             'part-1/module-0-before-python/computer-basics',
-            'part-1/module-0-before-python/how-code-runs',
             'part-1/module-0-before-python/why-python',
           ],
         },
@@ -49,6 +48,7 @@ const sidebars = {
             'part-1/module-1-getting-started/installing-python',
             'part-1/module-1-getting-started/vscode-setup',
             'part-1/module-1-getting-started/first-program',
+            'part-1/module-1-getting-started/how-code-runs',
           ],
         },
         {
