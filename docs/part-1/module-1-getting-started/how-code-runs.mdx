@@ -5,15 +5,103 @@ sidebar_label: "How Code Runs"
 
 # How Computers Run Code
 
-Computers do not understand human languages like Telugu or English. Inside their chips, they only understand electrical signals, which we represent as ones and zeros (`1` and `0`).
+## What is Python?
 
-Since writing millions of ones and zeros by hand is impossible, we write code in human-friendly languages like Python. We then use a special program called a **Translator** to convert our code into computer numbers.
+Python is a **general-purpose**, **high-level**, **interpreted** programming language used to write instructions for computers in a simple and readable way.
+
+Let's break down what **"general-purpose"** means:
+* **General-purpose:** Python is not limited to one specific task. We can use it for many different applications like:
+  * Web Development
+  * Automation
+  * Data Science
+  * Artificial Intelligence and Machine Learning
+
+But how does a computer actually run the Python code we write? Let's break down how programming languages work.
 
 ---
 
-## 1. The Live Translation Flow
+## How Programming Languages Work: From Code to Execution
 
-When you write Python code and click **Run**, this is exactly what happens behind the scenes:
+### 1. Machine Language (Binary)
+* **What it is:** The only language a computer's CPU can actually understand.
+* **Format:** It is made up entirely of electrical signals, which we represent as ones and zeros (`1` and `0`).
+* **Difficulty:** It is extremely difficult for humans to read or write directly.
+
+For example, look at how the word **"HELLO"** would appear in machine language:
+
+| High-Level Language (Human) | Machine Language (Computer Binary) |
+| :--- | :--- |
+| **H** | `01001000` |
+| **E** | `01100101` |
+| **L** | `01101100` |
+| **L** | `01101100` |
+| **O** | `01101111` |
+
+---
+
+### 2. High-Level Language (Python, Java, etc.)
+* **What it is:** Programming languages designed to be easy for humans to read and write.
+* **Format:** Uses simple English-like words (for example: `print("Hello")`).
+* **Limitation:** It cannot be understood directly by the computer. It must be translated.
+
+Because the computer only understands binary, we need a **Translator** to convert our high-level code into machine language.
+
+---
+
+## 1. Compilers vs. Interpreters
+
+Translators are mainly of two types: **Compilers** and **Interpreters**.
+
+Think of the difference like translating a book from English to Telugu:
+* **Compiler:** Translates the *entire book all at once* before handing it to the reader. (If there is even one typo on page 50, it stops the whole translation).
+* **Interpreter:** Translates *live, sentence by sentence* out loud. It reads one sentence, translates it, and speaks it immediately.
+
+Here is a quick comparison:
+
+<div className="ill-compare">
+  <div className="ill-compare-column">
+    <div className="ill-compare-title">Compiler (e.g., C, C++, Rust, Go)</div>
+    <p style={{fontSize: '0.85rem', color: '#6B7280', marginBottom: '0.8rem'}}>Like translating a whole book at once before reading.</p>
+    <div className="ill-step-list">
+      <div className="ill-step">
+        <span className="ill-step-num">1</span>
+        <span>Translates the complete program before execution</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">2</span>
+        <span>Creates a separate compiled file to run</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">3</span>
+        <span>Crashes the whole process if there is a mistake</span>
+      </div>
+    </div>
+  </div>
+  <div className="ill-compare-column">
+    <div className="ill-compare-title">Interpreter (e.g., Python, JavaScript, Ruby)</div>
+    <p style={{fontSize: '0.85rem', color: '#6B7280', marginBottom: '0.8rem'}}>Like translating live, sentence-by-sentence.</p>
+    <div className="ill-step-list">
+      <div className="ill-step">
+        <span className="ill-step-num">1</span>
+        <span>Reads and executes code step-by-step (line-by-line)</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">2</span>
+        <span>Runs the code immediately without creating a separate file</span>
+      </div>
+      <div className="ill-step">
+        <span className="ill-step-num">3</span>
+        <span>Stops exactly at the line where a mistake is found</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+
+## 2. The Live Translation Flow
+
+When you write Python code and click **Run**, a special translator called the **Python Interpreter** converts and executes your code step-by-step:
 
 <div className="ill-wrapper">
   <div className="ill-card">
@@ -28,8 +116,8 @@ When you write Python code and click **Run**, this is exactly what happens behin
     </svg>
   </div>
   <div className="ill-card">
-    <span className="ill-badge badge-translator">2. Translator</span>
-    <div className="ill-desc">Converts English to 1s & 0s</div>
+    <span className="ill-badge badge-translator">2. Python Interpreter</span>
+    <div className="ill-desc">Translates code step-by-step</div>
   </div>
   <div className="ill-arrow-flow">
     <span>Execute</span>
@@ -46,57 +134,6 @@ When you write Python code and click **Run**, this is exactly what happens behin
 
 ---
 
-## 2. Compilers vs. Interpreters
-
-Translators are mainly of two types: **Compilers** and **Interpreters**.
-
-Think of the difference like translating a book from English to Telugu:
-* **Compiler:** Translates the *entire book all at once* before handing it to the reader. (If there is even one typo on page 50, it stops the whole translation).
-* **Interpreter:** Translates *live, sentence by sentence* out loud. It reads one sentence, translates it, and speaks it immediately.
-
-Here is a quick comparison:
-
-<div className="ill-compare">
-  <div className="ill-compare-column">
-    <div className="ill-compare-title">Compiler (e.g., C, C++, Java)</div>
-    <p style={{fontSize: '0.85rem', color: '#6B7280', marginBottom: '0.8rem'}}>Like translating a whole book at once.</p>
-    <div className="ill-step-list">
-      <div className="ill-step">
-        <span className="ill-step-num">1</span>
-        <span>Reads all lines of code together</span>
-      </div>
-      <div className="ill-step">
-        <span className="ill-step-num">2</span>
-        <span>Creates a separate app file (like `.exe`)</span>
-      </div>
-      <div className="ill-step">
-        <span className="ill-step-num">3</span>
-        <span>Crashes the whole process if there is a mistake</span>
-      </div>
-    </div>
-  </div>
-  <div className="ill-compare-column">
-    <div className="ill-compare-title">Interpreter (e.g., Python, JS)</div>
-    <p style={{fontSize: '0.85rem', color: '#6B7280', marginBottom: '0.8rem'}}>Like translating live, line-by-line.</p>
-    <div className="ill-step-list">
-      <div className="ill-step">
-        <span className="ill-step-num">1</span>
-        <span>Reads Line 1 &rarr; Runs it immediately</span>
-      </div>
-      <div className="ill-step">
-        <span className="ill-step-num">2</span>
-        <span>Reads Line 2 &rarr; Runs it immediately</span>
-      </div>
-      <div className="ill-step">
-        <span className="ill-step-num">3</span>
-        <span>Stops exactly at the line where a mistake is found</span>
-      </div>
-    </div>
-  </div>
-</div>
-
----
-
 ## 3. Why Python Uses an Interpreter
 
 Since Python translates and runs code line-by-line, it gives two big advantages for beginners:
@@ -108,4 +145,4 @@ Since Python translates and runs code line-by-line, it gives two big advantages 
 
 ## What's Next?
 
-Let's see why Python is the most loved language in the world and why it's the number one choice for AI and ML in the next lesson!
+Now that we understand how Python code runs behind the scenes, let's learn how Python stores and manages information using Variables in the next module.
