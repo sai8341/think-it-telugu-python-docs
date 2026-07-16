@@ -1,6 +1,8 @@
 ---
-title: "Virtual Environments"
-sidebar_label: "16.2 Virtual Environments"
+title: "Virtual Environments (venv) - Python in Telugu | Think IT Telugu"
+sidebar_label: "Virtual Environments (venv)"
+description: "Learn about Virtual Environments (venv) in Python with real-world examples. This Think IT Telugu tutorial explains Virtual Environments (venv) easily for AI and Data Science beginners."
+keywords: ["Python", "Virtual Environments (venv)", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Virtual Environments (venv)

@@ -1,0 +1,37 @@
+---
+title: "Practice Exercises - Python in Telugu | Think IT Telugu"
+sidebar_label: "Practice Exercises"
+description: "Learn about Practice Exercises in Python with real-world examples. This Think IT Telugu tutorial explains Practice Exercises easily for AI and Data Science beginners."
+keywords: ["Python", "Practice Exercises", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# Practice Exercises
+
+1. **Custom ValueError Checker:**
+   Write a function `validate_username(username)` that raises a `ValueError` if the username is less than 5 characters. Handle the exception using a `try-except` block.
+2. **Safe List Access:**
+   Write a program that prompts the user to enter an index, and prints the item from a list `my_list = [10, 20, 30]`. Use error handling to catch `IndexError` if the index is out of bounds, and `ValueError` if the user enters a non-numeric index.
+
+---
+
+
+## 13.8 Placement Q&A (Interview Prep)
+
+**Q1. What is the difference between Syntax Errors and Exceptions in Python?**  
+**Answer:** Syntax Errors are grammar mistakes in the code that prevent Python from compiling or running it (e.g., missing colons). Exceptions are runtime errors that occur during execution even though the syntax is valid (e.g., dividing by zero or converting a bad string to integer).
+
+**Q2. What is the purpose of the `finally` block?**  
+**Answer:** The `finally` block runs regardless of whether an exception was raised or handled. It is typically used to perform cleanup actions, such as closing file streams, sockets, or database connections.
+
+**Q3. How do you trigger an exception manually in Python?**  
+**Answer:** You use the `raise` keyword followed by the exception class and an optional error message, e.g., `raise ValueError("Invalid number")`.
+
+---
+
+
+## 13.9 Module 13 Cheat Sheet
+
+* **Syntax vs. Runtime:** Syntax errors prevent execution; Exceptions happen while running.
+* **try-except:** `try` runs risky code; `except` handles specific runtime errors.
+* **finally:** Code that is guaranteed to run after try/except.
+* **raise:** Triggers an exception manually (`raise TypeError("...")`).

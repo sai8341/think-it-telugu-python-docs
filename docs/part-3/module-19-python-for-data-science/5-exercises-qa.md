@@ -1,6 +1,8 @@
 ---
-title: "Practice & Interview Q&A"
-sidebar_label: "19.5 Exercises & Q&A"
+title: "Module 19: Practice & Interview Q&A - Python in Telugu | Think IT Telugu"
+sidebar_label: "Module 19: Practice & Interview Q&A"
+description: "Learn about Practice & Interview Q&A in Python with real-world examples. This Think IT Telugu tutorial explains Practice & Interview Q&A easily for AI and Data Science beginners."
+keywords: ["Python", "Module 19: Practice & Interview Q&A", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Module 19: Practice & Interview Q&A

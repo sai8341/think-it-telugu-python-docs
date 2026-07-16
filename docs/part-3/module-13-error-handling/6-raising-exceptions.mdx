@@ -1,0 +1,26 @@
+---
+title: "Raising Exceptions (The raise keyword) - Python in Telugu | Think IT Telugu"
+sidebar_label: "Raising Exceptions (The raise keyword)"
+description: "Learn about Raising Exceptions (The raise keyword) in Python with real-world examples. This Think IT Telugu tutorial explains Raising Exceptions (The raise keyword) easily for AI and Data Science beginners."
+keywords: ["Python", "Raising Exceptions (The raise keyword)", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# Raising Exceptions (The raise keyword)
+
+Sometimes, you want to trigger an error manually when a specific condition is violated in your program (e.g., a user enters a negative value for age). We do this using the **`raise`** keyword.
+
+```python
+def check_age(age):
+    if age < 0:
+        # Manually throw an error
+        raise ValueError("Age cannot be negative!")
+    print(f"Age {age} is valid.")
+
+try:
+    check_age(-5)
+except ValueError as e:
+    print("Caught manual error:", e)
+# Output: Caught manual error: Age cannot be negative!
+```
+
+---

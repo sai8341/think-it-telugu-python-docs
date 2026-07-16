@@ -1,6 +1,8 @@
 ---
-title: "Project: Chatbot with Memory"
-sidebar_label: "20.3 AI Chatbot Project"
+title: "Project: Interactive Chatbot with Memory - Python in Telugu | Think IT Telugu"
+sidebar_label: "Project: Interactive Chatbot with Memory"
+description: "Learn about Interactive Chatbot with Memory in Python with real-world examples. This Think IT Telugu tutorial explains Interactive Chatbot with Memory easily for AI and Data Science beginners."
+keywords: ["Python", "Project: Interactive Chatbot with Memory", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Project: Interactive Chatbot with Memory

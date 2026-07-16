@@ -1,6 +1,8 @@
 ---
-title: "Magic & Dunder Methods"
-sidebar_label: "17.4 Dunder Methods (__str__, __repr__)"
+title: "Magic & Dunder Methods (`__str__`, `__repr__`) - Python in Telugu | Think IT Telugu"
+sidebar_label: "Magic & Dunder Methods (`__str__`, `__repr__`)"
+description: "Learn about Magic & Dunder Methods (`__str__`, `__repr__`) in Python with real-world examples. This Think IT Telugu tutorial explains Magic & Dunder Methods (`__str__`, `__repr__`) easily for AI and Data Science beginners."
+keywords: ["Python", "Magic & Dunder Methods (__str__, __repr__)", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Magic & Dunder Methods (`__str__`, `__repr__`)

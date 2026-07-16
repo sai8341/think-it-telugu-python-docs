@@ -1,6 +1,8 @@
 ---
-title: "Version Control Basics"
-sidebar_label: "18.1 Git & GitHub"
+title: "Introduction to Version Control - Python in Telugu | Think IT Telugu"
+sidebar_label: "Introduction to Version Control"
+description: "Learn about Introduction to Version Control in Python with real-world examples. This Think IT Telugu tutorial explains Introduction to Version Control easily for AI and Data Science beginners."
+keywords: ["Python", "Introduction to Version Control", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Introduction to Version Control

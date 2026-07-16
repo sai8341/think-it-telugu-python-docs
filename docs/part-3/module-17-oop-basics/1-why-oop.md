@@ -1,6 +1,8 @@
 ---
-title: "Why OOP? Classes & Objects"
-sidebar_label: "17.1 Classes & Objects"
+title: "Why OOP? Classes & Objects - Python in Telugu | Think IT Telugu"
+sidebar_label: "Why OOP? Classes & Objects"
+description: "Learn about Why OOP? Classes & Objects in Python with real-world examples. This Think IT Telugu tutorial explains Why OOP? Classes & Objects easily for AI and Data Science beginners."
+keywords: ["Python", "Why OOP? Classes & Objects", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Why OOP? Classes & Objects

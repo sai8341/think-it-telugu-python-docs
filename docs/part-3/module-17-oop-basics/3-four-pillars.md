@@ -1,6 +1,8 @@
 ---
-title: "The 4 Pillars of OOP"
-sidebar_label: "17.3 The 4 Pillars of OOP"
+title: "The 4 Pillars of Object-Oriented Programming - Python in Telugu | Think IT Telugu"
+sidebar_label: "The 4 Pillars of Object-Oriented Programming"
+description: "Learn about The 4 Pillars of Object-Oriented Programming in Python with real-world examples. This Think IT Telugu tutorial explains The 4 Pillars of Object-Oriented Programming easily for AI and Data Science beginners."
+keywords: ["Python", "The 4 Pillars of Object-Oriented Programming", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # The 4 Pillars of Object-Oriented Programming

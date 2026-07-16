@@ -1,0 +1,60 @@
+/* ============================================
+   Presentation Mode (Zen Mode)
+   Activated via Shift + P
+   ============================================ */
+
+/* Hide all navigation elements */
+body.presentation-mode .navbar,
+body.presentation-mode .sub-navbar,
+body.presentation-mode .theme-doc-sidebar-container,
+body.presentation-mode .theme-doc-toc-desktop,
+body.presentation-mode .pagination-nav,
+body.presentation-mode .theme-doc-footer,
+body.presentation-mode .theme-doc-breadcrumbs,
+body.presentation-mode .theme-back-to-top-button {
+  display: none !important;
+}
+
+/* Expand main content container to full width */
+body.presentation-mode main,
+body.presentation-mode .container,
+body.presentation-mode .docMainContainer {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode .theme-doc-markdown {
+  max-width: 90% !important;
+  margin: 0 auto;
+}
+
+/* Increase font sizes for better video readability */
+body.presentation-mode article {
+  font-size: 1.3rem !important;
+  line-height: 1.8 !important;
+}
+
+body.presentation-mode article h1 {
+  font-size: 3rem !important;
+  margin-top: 1rem !important;
+}
+
+body.presentation-mode article h2 {
+  font-size: 2.25rem !important;
+}
+
+body.presentation-mode article h3 {
+  font-size: 1.75rem !important;
+}
+
+body.presentation-mode pre {
+  font-size: 1.2rem !important;
+}
+
+/* Ensure images don't look weirdly large */
+body.presentation-mode article img {
+  max-width: 80% !important;
+  margin: 0 auto;
+  display: block;
+}

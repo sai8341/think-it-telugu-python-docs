@@ -1,6 +1,8 @@
 ---
-title: "Package Management & uv"
-sidebar_label: "16.3 Packages & uv"
+title: "Package Management & Astral's uv - Python in Telugu | Think IT Telugu"
+sidebar_label: "Package Management & Astral's uv"
+description: "Learn about Package Management & Astral's uv in Python with real-world examples. This Think IT Telugu tutorial explains Package Management & Astral's uv easily for AI and Data Science beginners."
+keywords: ["Python", "Package Management & Astral's uv", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Package Management & Astral's uv

@@ -1,6 +1,8 @@
 ---
-title: "Python for AI Engineering"
-sidebar_label: "20.1 AI APIs & Requests"
+title: "AI Engineering & REST APIs - Python in Telugu | Think IT Telugu"
+sidebar_label: "AI Engineering & REST APIs"
+description: "Learn about AI Engineering & REST APIs in Python with real-world examples. This Think IT Telugu tutorial explains AI Engineering & REST APIs easily for AI and Data Science beginners."
+keywords: ["Python", "AI Engineering & REST APIs", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # AI Engineering & REST APIs

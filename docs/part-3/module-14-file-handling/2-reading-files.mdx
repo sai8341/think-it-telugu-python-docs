@@ -1,0 +1,29 @@
+---
+title: "Reading Files - Python in Telugu | Think IT Telugu"
+sidebar_label: "Reading Files"
+description: "Learn about Reading Files in Python with real-world examples. This Think IT Telugu tutorial explains Reading Files easily for AI and Data Science beginners."
+keywords: ["Python", "Reading Files", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# Reading Files
+
+Here is how to open and read a file's content:
+
+```python
+# open(file_path, mode)
+file = open("sample.txt", "r")
+content = file.read()
+print(content)
+file.close() # Always close the file to free up system resources
+```
+
+### The with Statement (Recommended Way):
+Using the `with` keyword is safer because Python automatically closes the file for you, even if an error happens.
+
+```python
+with open("sample.txt", "r") as file:
+    content = file.read()
+    print(content)
+```
+
+---

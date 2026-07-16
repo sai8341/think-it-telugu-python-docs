@@ -1,6 +1,8 @@
 ---
-title: "Project: Weather Analyzer App"
-sidebar_label: "19.4 Weather App Project"
+title: "Project: Weather Data Analyzer App - Python in Telugu | Think IT Telugu"
+sidebar_label: "Project: Weather Data Analyzer App"
+description: "Learn about Weather Data Analyzer App in Python with real-world examples. This Think IT Telugu tutorial explains Weather Data Analyzer App easily for AI and Data Science beginners."
+keywords: ["Python", "Project: Weather Data Analyzer App", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Project: Weather Data Analyzer App

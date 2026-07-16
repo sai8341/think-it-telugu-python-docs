@@ -1,6 +1,8 @@
 ---
-title: "Secrets Management"
-sidebar_label: "20.2 Secrets & Dotenv"
+title: "Secrets Management in AI Engineering - Python in Telugu | Think IT Telugu"
+sidebar_label: "Secrets Management in AI Engineering"
+description: "Learn about Secrets Management in AI Engineering in Python with real-world examples. This Think IT Telugu tutorial explains Secrets Management in AI Engineering easily for AI and Data Science beginners."
+keywords: ["Python", "Secrets Management in AI Engineering", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Secrets Management in AI Engineering

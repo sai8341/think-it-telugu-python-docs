@@ -1,6 +1,8 @@
 ---
-title: "Modules in Python"
-sidebar_label: "16.1 Modules & Imports"
+title: "Modules in Python - Python in Telugu | Think IT Telugu"
+sidebar_label: "Modules in Python"
+description: "Learn about Modules in Python in Python with real-world examples. This Think IT Telugu tutorial explains Modules in Python easily for AI and Data Science beginners."
+keywords: ["Python", "Modules in Python", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Modules in Python

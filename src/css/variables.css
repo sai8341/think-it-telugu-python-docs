@@ -95,7 +95,7 @@
 
 @media (min-width: 997px) {
   :root {
-    --ifm-navbar-height: 110px;
+    --ifm-navbar-height: 110px !important;
     /* Desktop with sub-navbar */
   }
 }

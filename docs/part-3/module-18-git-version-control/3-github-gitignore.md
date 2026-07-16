@@ -1,6 +1,8 @@
 ---
-title: "GitHub & Secrets Security"
-sidebar_label: "18.3 GitHub & Secrets"
+title: "GitHub & Secrets Security - Python in Telugu | Think IT Telugu"
+sidebar_label: "GitHub & Secrets Security"
+description: "Learn about GitHub & Secrets Security in Python with real-world examples. This Think IT Telugu tutorial explains GitHub & Secrets Security easily for AI and Data Science beginners."
+keywords: ["Python", "GitHub & Secrets Security", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # GitHub & Secrets Security

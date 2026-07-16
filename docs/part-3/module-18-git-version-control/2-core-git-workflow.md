@@ -1,6 +1,8 @@
 ---
-title: "Core Git Workflow"
-sidebar_label: "18.2 Git Workflow"
+title: "The Core Git Workflow - Python in Telugu | Think IT Telugu"
+sidebar_label: "The Core Git Workflow"
+description: "Learn about The Core Git Workflow in Python with real-world examples. This Think IT Telugu tutorial explains The Core Git Workflow easily for AI and Data Science beginners."
+keywords: ["Python", "The Core Git Workflow", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # The Core Git Workflow

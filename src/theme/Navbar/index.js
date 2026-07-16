@@ -45,7 +45,7 @@ export default function NavbarWrapper(props) {
             <span className="sub-navbar-title">Data structures</span>
           </Link>
           <Link
-            to="/part-3/module-13-error-handling"
+            to="/part-3/module-13-error-handling/intro"
             className={clsx('sub-navbar-item', activePart === 'part3' && 'sub-navbar-item--active')}
             aria-current={activePart === 'part3' ? 'page' : undefined}
           >

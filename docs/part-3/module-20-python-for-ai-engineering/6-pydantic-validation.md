@@ -1,6 +1,8 @@
 ---
-title: "Data Validation with Pydantic"
-sidebar_label: "20.5 Pydantic & Type Hints"
+title: "Data Validation with Pydantic & Type Hints - Python in Telugu | Think IT Telugu"
+sidebar_label: "Data Validation with Pydantic & Type Hints"
+description: "Learn about Data Validation with Pydantic & Type Hints in Python with real-world examples. This Think IT Telugu tutorial explains Data Validation with Pydantic & Type Hints easily for AI and Data Science beginners."
+keywords: ["Python", "Data Validation with Pydantic & Type Hints", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Data Validation with Pydantic & Type Hints

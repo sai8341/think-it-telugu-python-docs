@@ -1,12 +1,14 @@
 ---
 sidebar_position: 3
-title: "Strings"
+title: "Python Strings & Text Manipulation"
 sidebar_label: "Strings"
+description: "Master text manipulation in Python using strings. Learn how to create, format, and use string methods."
+keywords: [python strings, text in python, string manipulation, python string methods, learn python strings]
 ---
 
 # Strings
 
-In programming, we don't call text "text" or "words"—we call it a **String**. 
+In programming, we don't call text "text" or "words" - we call it a **String**. 
 
 A String is simply a sequence of characters (letters, numbers, or symbols) strung together. In Python, you tell the computer that something is a String by wrapping it in quotation marks.
 
@@ -40,12 +42,12 @@ Use double quotes when your text contains apostrophes so Python does not get con
 You can join strings together using the `+` operator (called **concatenation**), or repeat them using `*`:
 
 ```python
-first_name = "John"
-last_name = "Doe"
+first_name = "Ravi"
+last_name = "Kumar"
 
 # Join two strings with a space in the middle
 full_name = first_name + " " + last_name
-print(full_name)  # Output: John Doe
+print(full_name)  # Output: Ravi Kumar
 
 # Repeat a string 5 times
 stars = "*" * 5
@@ -70,17 +72,17 @@ print(len(empty_string))  # Output: 0
 
 ## 4. Converting Numbers to Strings
 
-If you want to join text with numbers, you must first convert the number into a string using `str()`, or use **f-strings** (formatted strings):
+If you want to join text with numbers, you must first convert the number into a string using `str()`:
 
 ```python
 age = 25
 message = "I am " + str(age) + " years old"
 print(message)  # Output: I am 25 years old
-
-# Or use f-strings (much cleaner!)
-message_f = f"I am {age} years old"
-print(message_f)  # Output: I am 25 years old
 ```
+
+---
+
+> **Tip:** Adding strings together using `+` and `str()` can get messy if you have a lot of variables. In the next module (**Input & Output**), we will learn a much cleaner way to build sentences called **f-strings**!
 
 ---
 
@@ -110,9 +112,9 @@ result = "Age: " + str(25)
 ### Mistake 3: Forgetting Quotes Around Words
 Without quotes, Python thinks a word is a variable name.
 ```python
-# Wrong - Python searches for a variable named Alice
-name = Alice
+# Wrong - Python searches for a variable named Kavya
+name = Kavya
 
 # Right - quotes tell Python this is text
-name = "Alice"
+name = "Kavya"
 ```

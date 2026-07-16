@@ -1,6 +1,8 @@
 ---
-title: "Pandas DataFrames"
-sidebar_label: "19.2 Pandas DataFrames"
+title: "Data Manipulation with Pandas - Python in Telugu | Think IT Telugu"
+sidebar_label: "Data Manipulation with Pandas"
+description: "Learn about Data Manipulation with Pandas in Python with real-world examples. This Think IT Telugu tutorial explains Data Manipulation with Pandas easily for AI and Data Science beginners."
+keywords: ["Python", "Data Manipulation with Pandas", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Data Manipulation with Pandas

@@ -1,6 +1,8 @@
 ---
-title: "Constructors & Attributes (__init__)"
-sidebar_label: "17.2 Constructors (__init__)"
+title: "Constructors & Attributes (`__init__`) - Python in Telugu | Think IT Telugu"
+sidebar_label: "Constructors & Attributes (`__init__`)"
+description: "Learn about Constructors & Attributes (`__init__`) in Python with real-world examples. This Think IT Telugu tutorial explains Constructors & Attributes (`__init__`) easily for AI and Data Science beginners."
+keywords: ["Python", "Constructors & Attributes (__init__)", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Constructors & Attributes (`__init__`)

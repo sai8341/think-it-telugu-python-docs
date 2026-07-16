@@ -1,0 +1,63 @@
+---
+title: "Reading JSON - Python in Telugu | Think IT Telugu"
+sidebar_label: "Reading JSON"
+description: "Learn about Reading JSON in Python with real-world examples. This Think IT Telugu tutorial explains Reading JSON easily for AI and Data Science beginners."
+keywords: ["Python", "Reading JSON", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# Reading JSON
+
+Converting JSON text (usually from the web) into a Python dictionary is called **Deserialization** or **Parsing**. We use `json.loads()` for this.
+
+```python
+import json
+
+# JSON text as a string
+json_string = '{"name": "Sai", "age": 22, "is_student": true}'
+
+# Parsing JSON string to Python Dictionary
+data = json.loads(json_string)
+
+print(type(data)) # Output: <class 'dict'>
+print(data["name"]) # Output: Sai
+print(data["is_student"]) # Output: True (automatically converted)
+```
+
+### Reading from a JSON File:
+If the JSON data is stored in a file, use `json.load()`:
+```python
+with open("user.json", "r") as file:
+    data = json.load(file)
+    print(data)
+```
+
+---
+
+
+## 15.4 Writing JSON
+
+Converting a Python dictionary into a JSON string is called **Serialization**. We use `json.dumps()` for this.
+
+```python
+import json
+
+student_dict = {
+    "name": "Ram",
+    "age": 25,
+    "pass": True
+}
+
+# Converting Python Dictionary to JSON String
+json_data = json.dumps(student_dict, indent=4) # indent makes it look clean
+print(json_data)
+print(type(json_data)) # Output: <class 'str'>
+```
+
+### Saving to a JSON File:
+To save a Python dictionary directly into a file as JSON, use `json.dump()`:
+```python
+with open("student.json", "w") as file:
+    json.dump(student_dict, file, indent=4)
+```
+
+---

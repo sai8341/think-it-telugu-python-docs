@@ -1,6 +1,8 @@
 ---
-title: "RAG & Vector Databases"
-sidebar_label: "20.4 RAG & Vector DBs"
+title: "RAG & Vector Databases - Python in Telugu | Think IT Telugu"
+sidebar_label: "RAG & Vector Databases"
+description: "Learn about RAG & Vector Databases in Python with real-world examples. This Think IT Telugu tutorial explains RAG & Vector Databases easily for AI and Data Science beginners."
+keywords: ["Python", "RAG & Vector Databases", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # RAG & Vector Databases

@@ -1,6 +1,8 @@
 ---
-title: "Matplotlib Visualization"
-sidebar_label: "19.3 Matplotlib DataViz"
+title: "Data Visualization with Matplotlib - Python in Telugu | Think IT Telugu"
+sidebar_label: "Data Visualization with Matplotlib"
+description: "Learn about Data Visualization with Matplotlib in Python with real-world examples. This Think IT Telugu tutorial explains Data Visualization with Matplotlib easily for AI and Data Science beginners."
+keywords: ["Python", "Data Visualization with Matplotlib", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Data Visualization with Matplotlib

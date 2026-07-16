@@ -1,11 +1,13 @@
 ---
 sidebar_position: 1
 slug: /
-title: "Python for AI & ML Beginners"
+title: "Python Foundation for AI & Data Science"
 sidebar_label: "Start Here"
+description: "A complete beginner-friendly Python programming course in Telugu. Learn Python from scratch to AI & Data Science level with interactive labs and zero jargon."
+keywords: [python course in telugu, learn python for beginners, python for data science and ai, think it telugu python, python tutorials telugu, python foundation course]
 ---
 
-# Python for AI & ML Beginners
+# Python Foundation for AI & Data Science
 
 Welcome to **Think IT Telugu**! If you have ever opened a programming tutorial and felt completely overwhelmed by complex words, confusing diagrams, or fast-talking instructors, you are in the right place.
 

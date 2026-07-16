@@ -199,9 +199,47 @@ const sidebars = {
       collapsed: false,
       link: {type: 'generated-index'},
       items: [
-        { type: 'doc', id: 'part-3/module-13-error-handling', label: 'Module 13: Error Handling', className: 'icon-edit' },
-        { type: 'doc', id: 'part-3/module-14-file-handling', label: 'Module 14: File Handling', className: 'icon-file' },
-        { type: 'doc', id: 'part-3/module-15-json', label: 'Module 15: JSON', className: 'icon-code' },
+        {
+          type: 'category',
+          label: 'Module 13: Error Handling',
+          className: 'icon-edit',
+          collapsed: true,
+          items: [
+            'part-3/module-13-error-handling/intro',
+            'part-3/module-13-error-handling/what-are-errors',
+            'part-3/module-13-error-handling/syntax-errors',
+            'part-3/module-13-error-handling/runtime-errors',
+            'part-3/module-13-error-handling/try-except',
+            'part-3/module-13-error-handling/finally-block',
+            'part-3/module-13-error-handling/raising-exceptions',
+            'part-3/module-13-error-handling/exercises-qa',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Module 14: File Handling',
+          className: 'icon-file',
+          collapsed: true,
+          items: [
+            'part-3/module-14-file-handling/intro',
+            'part-3/module-14-file-handling/what-is-a-file',
+            'part-3/module-14-file-handling/reading-files',
+            'part-3/module-14-file-handling/writing-appending',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Module 15: JSON',
+          className: 'icon-code',
+          collapsed: true,
+          items: [
+            'part-3/module-15-json/intro',
+            'part-3/module-15-json/what-is-json',
+            'part-3/module-15-json/json-structure',
+            'part-3/module-15-json/reading-writing',
+            'part-3/module-15-json/ai-uses-json',
+          ],
+        },
         {
           type: 'category',
           label: 'Module 16: Modules & Packages',
@@ -246,6 +284,7 @@ const sidebars = {
           collapsed: true,
           items: [
             'part-3/module-19-python-for-data-science/data-science-intro',
+            'part-3/module-19-python-for-data-science/1.5-google-colab',
             'part-3/module-19-python-for-data-science/pandas-dataframes',
             'part-3/module-19-python-for-data-science/matplotlib-visualization',
             'part-3/module-19-python-for-data-science/weather-app-project',

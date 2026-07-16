@@ -1,6 +1,8 @@
 ---
-title: "Python for Data Science"
-sidebar_label: "19.1 Data Science & NumPy"
+title: "Python for Data Science & NumPy - Python in Telugu | Think IT Telugu"
+sidebar_label: "Python for Data Science & NumPy"
+description: "Learn about Python for Data Science & NumPy in Python with real-world examples. This Think IT Telugu tutorial explains Python for Data Science & NumPy easily for AI and Data Science beginners."
+keywords: ["Python", "Python for Data Science & NumPy", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Python for Data Science & NumPy

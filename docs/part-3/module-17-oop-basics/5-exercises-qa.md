@@ -1,6 +1,8 @@
 ---
-title: "Practice Exercises & Placement Q&A"
-sidebar_label: "17.5 Exercises & Interview Q&A"
+title: "Practice Exercises & Placement Q&A - Python in Telugu | Think IT Telugu"
+sidebar_label: "Practice Exercises & Placement Q&A"
+description: "Learn about Practice Exercises & Placement Q&A in Python with real-world examples. This Think IT Telugu tutorial explains Practice Exercises & Placement Q&A easily for AI and Data Science beginners."
+keywords: ["Python", "Practice Exercises & Placement Q&A", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
 # Practice Exercises & Placement Q&A
