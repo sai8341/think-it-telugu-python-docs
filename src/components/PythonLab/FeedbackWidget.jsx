@@ -63,8 +63,8 @@ export default function FeedbackWidget() {
           {feedbackSubmitted ? (
             <div className="pylab-feedback-success">
               <span className="pylab-feedback-success-icon">🎉</span>
-              <h4>Thank you!</h4>
-              <p>Thank you for sharing your feedback.</p>
+              <h4>Got it!</h4>
+              <p>Thanks for helping us improve.</p>
             </div>
           ) : (
             <div className="pylab-feedback-form">
@@ -93,7 +93,7 @@ export default function FeedbackWidget() {
               <textarea
                 value={feedbackComment}
                 onChange={(e) => setFeedbackComment(e.target.value)}
-                placeholder="Share your suggestions or feedback here... (Optional)"
+                placeholder="Any suggestions? Let us know what you think... (Optional)"
                 rows="3"
               />
 
@@ -102,7 +102,7 @@ export default function FeedbackWidget() {
                   className="pylab-feedback-cancel"
                   onClick={() => setShowFeedbackCard(false)}
                 >
-                  Close
+                  Not Now
                 </button>
                 <button
                   className="pylab-feedback-submit"

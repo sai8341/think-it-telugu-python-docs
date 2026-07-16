@@ -134,9 +134,9 @@ export default function PythonLab() {
           return;
         }
 
-        setLoadingProgress('Downloading Python runtime...');
+        setLoadingProgress('Setting up your Python workspace...');
         if (window.__pyodide_global_promise) {
-          setLoadingProgress('Initializing Python 3.11...');
+          setLoadingProgress('Warming up the engine...');
           const pyodide = await window.__pyodide_global_promise;
           if (cancelled) return;
           if (pyodide) {
@@ -164,7 +164,7 @@ export default function PythonLab() {
           return pyodide;
         })();
 
-        setLoadingProgress('Initializing Python 3.11...');
+        setLoadingProgress('Warming up the engine...');
         const pyodide = await window.__pyodide_global_promise;
         if (cancelled) return;
         if (pyodide) {
@@ -348,7 +348,7 @@ async def __run_with_safe_input(code_str):
       let finalOutput = (stdout || '') + (stderr || '');
       setOutput(prev => {
         let result = prev + finalOutput;
-        if (!result.trim()) result = '(No output: add a print() statement)\n';
+        if (!result.trim()) result = 'Code ran successfully, but nothing printed. Try adding a print() statement!\n';
         return result + `\n\n[Finished in ${duration}s]`;
       });
     } catch (err) {
@@ -497,10 +497,7 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
     predefined_inputs = json.loads(predefined_inputs_json)
     input_index = [0]
 
-    # Cycle detection for infinite loops
-    recent_lines = []
-    CYCLE_WINDOW = 20
-    is_infinite_loop = [False]
+
 
     old_input = builtins.input
 
@@ -533,22 +530,20 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
             if step_count[0] > max_steps:
                 raise StepLimitExceeded()
 
-            # Cycle detection: if same few lines repeat, likely infinite loop
-            recent_lines.append(frame.f_lineno)
-            if len(recent_lines) > CYCLE_WINDOW:
-                recent_lines.pop(0)
-            if (len(recent_lines) == CYCLE_WINDOW and
-                len(set(recent_lines)) <= 3 and
-                step_count[0] > 10):
-                is_infinite_loop[0] = True
-                raise StepLimitExceeded()
-
             last_line[0] = frame.f_lineno
 
-            # Collect user variables (skip private and callable)
+            # Collect user variables (skip private, callable, and modules)
             user_vars = {}
+            # First add globals
+            for k, v in frame.f_globals.items():
+                if not k.startswith('_') and not callable(v) and type(v).__name__ != 'module':
+                    try:
+                        user_vars[k] = repr(v)
+                    except:
+                        pass
+            # Then add locals (overriding globals if shadowed)
             for k, v in frame.f_locals.items():
-                if not k.startswith('_') and not callable(v):
+                if not k.startswith('_') and not callable(v) and type(v).__name__ != 'module':
                     try:
                         user_vars[k] = repr(v)
                     except:
@@ -590,12 +585,8 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
     except StepLimitExceeded:
         truncated = True
         remaining_output = output_stream.getvalue()[last_stdout_len[0]:]
-        if is_infinite_loop[0]:
-            stop_reason = 'infinite_loop_suspected'
-            suggestion = f'Your code appears stuck in an infinite loop around line {last_line[0]}. Check if your loop condition ever becomes False.'
-        else:
-            stop_reason = 'step_limit_exceeded'
-            suggestion = f'Execution stopped after {step_count[0]} steps. Your program might have a very long loop near line {last_line[0]}.'
+        stop_reason = 'step_limit_exceeded'
+        suggestion = f'Execution stopped after {step_count[0]} steps. Your program might have a very long loop near line {last_line[0]}.'
         steps.append({
             'line': last_line[0],
             'vars': prev_vars[0],
@@ -772,8 +763,8 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
       {showDebugInputsModal && (
         <div className="pylab-modal-overlay">
           <div className="pylab-modal-content">
-            <h3>📋 Debug Inputs Required</h3>
-            <p>This code uses <code>input()</code>. Please enter the values to use during debugging:</p>
+            <h3>✋ Wait, we need some input!</h3>
+            <p>Your code is asking for information. Fill in the values below to continue debugging:</p>
 
             <div className="pylab-modal-inputs">
               {debugPrompts.map((promptText, idx) => (
@@ -1000,34 +991,9 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
           {/* Debug Mode Panel */}
           {isDebugging && (
             <div className="pylab-debug-panel">
-              {/* Debug Code View */}
-              <div className="pylab-debug-code" ref={debugCodeRef} style={{ pointerEvents: 'none' }}>
-                <div className="pylab-debug-section-title">📄 Code Execution</div>
-                <div className="pylab-debug-code-lines">
-                  {debugCodeLines.map((line, idx) => {
-                    const lineNum = idx + 1;
-                    const isActive = currentDebugStep && currentDebugStep.line === lineNum;
-                    const isErrorLine = currentDebugStep && currentDebugStep.event === 'exception' && currentDebugStep.line === lineNum;
-                    return (
-                      <div
-                        key={idx}
-                        className={`pylab-debug-line ${isActive ? 'pylab-debug-line--active' : ''} ${isErrorLine ? 'pylab-debug-line--error' : ''}`}
-                      >
-                        <span className="pylab-debug-line-num">{lineNum}</span>
-                        <span className="pylab-debug-line-indicator">{isActive ? '▶' : ' '}</span>
-                        <span
-                          className="pylab-debug-line-code"
-                          dangerouslySetInnerHTML={{ __html: highlightLine(line) || ' ' }}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
               {/* Variables Inspector */}
               <div className="pylab-debug-vars">
-                <div className="pylab-debug-section-title">📊 Variables</div>
+                <div className="pylab-debug-section-title">Variables</div>
                 {currentDebugStep && Object.keys(currentDebugStep.vars).length > 0 ? (
                   <table className="pylab-debug-vars-table">
                     <thead>
@@ -1049,7 +1015,7 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
 
               {/* Console Output */}
               <div className="pylab-debug-console">
-                <div className="pylab-debug-section-title">💻 Console Output</div>
+                <div className="pylab-debug-section-title">Console Output</div>
                 <pre className="pylab-debug-console-text">
                   {currentDebugStep && currentDebugStep.stdout
                     ? currentDebugStep.stdout
@@ -1061,17 +1027,17 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
               {/* Status / Error */}
               {currentDebugStep && currentDebugStep.event === 'exception' && (
                 <div className="pylab-debug-error-msg">
-                  ❌ {currentDebugStep.error}
+                  {currentDebugStep.error}
                 </div>
               )}
               {currentDebugStep && currentDebugStep.event === 'truncated' && (
                 <div className="pylab-debug-warn-msg">
-                  ⚠️ {currentDebugStep.error}
+                  {currentDebugStep.error}
                 </div>
               )}
               {currentDebugStep && currentDebugStep.event === 'finished' && (
                 <div className="pylab-debug-success-msg">
-                  ✅ Code execution completed successfully
+                  Code execution completed successfully
                 </div>
               )}
 

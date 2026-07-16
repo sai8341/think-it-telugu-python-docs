@@ -49,8 +49,8 @@
   --ifm-footer-link-color: #0d9488;
   --ifm-footer-title-color: #1F2937;
 
-  --ifm-link-color: #0d9488;
-  --ifm-link-hover-color: #0f766e;
+  --ifm-link-color: #0f766e; /* Darkened for WCAG AA contrast against white */
+  --ifm-link-hover-color: #115e59;
 
   --ifm-menu-color-active: #0d9488;
   --ifm-menu-color-background-active: rgba(13, 148, 136, 0.08);
@@ -127,5 +127,17 @@
   --ifm-menu-color-background-active: rgba(45, 212, 191, 0.12);
 
   --docusaurus-highlighted-code-line-bg: rgba(45, 212, 191, 0.15);
+}
+
+/* ---- Accessibility: Reduced Motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 

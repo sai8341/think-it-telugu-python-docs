@@ -121,8 +121,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   color: var(--ifm-navbar-link-color);
   background: transparent;
   border: 1px solid var(--ifm-border-color, #e3e3e3);
@@ -180,7 +180,7 @@
   .navbar__search-input:focus {
     background-color: var(--ifm-background-color) !important;
     border-color: var(--brand-primary) !important;
-    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1) !important;
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.4) !important; /* Stronger focus indicator for WCAG */
   }
 
   /* Failsafe to hide shortcut keys */
@@ -262,8 +262,8 @@
   .navbar__search:focus-within .navbar__search-input,
   [data-theme='dark'] .navbar__search-input,
   [data-theme='dark'] .navbar__search:focus-within .navbar__search-input {
-    width: 36px !important;
-    height: 36px !important;
+    width: 44px !important;
+    height: 44px !important;
     padding: 0 !important;
     color: transparent !important;
     background-color: var(--ifm-background-color) !important;
@@ -279,7 +279,7 @@
     padding-left: 2.4rem !important;
     color: var(--ifm-font-color-base) !important;
     border-color: var(--brand-primary) !important;
-    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1) !important;
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.4) !important; /* Stronger focus indicator for WCAG */
     font-size: 0.88rem !important;
   }
 }

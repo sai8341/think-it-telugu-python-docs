@@ -53,66 +53,10 @@
   border-bottom-color: rgba(0,0,0,0.06);
 }
 
-/* --- Debug Code View --- */
-.pylab-debug-code {
-  flex: 0 0 auto;
-  max-height: 200px;
-  overflow-y: auto;
-}
-.pylab-debug-code-lines {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.82rem;
-  line-height: 1.7;
-}
-.pylab-debug-line {
-  display: flex;
-  align-items: center;
-  padding: 1px 12px 1px 4px;
-  transition: background 0.15s ease, box-shadow 0.15s ease;
-  min-height: 24px;
-}
-.pylab-debug-line-num {
-  flex: 0 0 28px;
-  color: #475569;
-  text-align: right;
-  font-size: 0.75rem;
-  user-select: none;
-  padding-right: 6px;
-}
-.pylab-debug-line-indicator {
-  flex: 0 0 18px;
-  color: #10B981;
-  font-size: 0.7rem;
-  text-align: center;
-}
-.pylab-debug-line-code {
-  flex: 1;
-  white-space: pre;
-  color: #E2E8F0;
-}
-[data-theme='light'] .pylab-debug-line-code {
-  color: #1E293B;
-}
-
-/* Active line highlight */
-.pylab-debug-line--active {
-  background: rgba(16, 185, 129, 0.15) !important;
-  box-shadow: inset 3px 0 0 #10B981;
-}
-[data-theme='light'] .pylab-debug-line--active {
-  background: rgba(16, 185, 129, 0.12) !important;
-}
-
-/* Error line */
-.pylab-debug-line--error {
-  background: rgba(239, 68, 68, 0.15) !important;
-  box-shadow: inset 3px 0 0 #EF4444;
-}
-
 /* --- Variables Inspector --- */
 .pylab-debug-vars {
-  flex: 0 0 auto;
-  max-height: 160px;
+  flex: 1.5 1 0;
+  min-height: 120px;
   overflow-y: auto;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
@@ -168,9 +112,8 @@
 
 /* --- Console Output --- */
 .pylab-debug-console {
-  flex: 1 1 auto;
-  min-height: 60px;
-  max-height: 140px;
+  flex: 1 1 0;
+  min-height: 80px;
   overflow-y: auto;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
@@ -242,11 +185,15 @@
   gap: 6px;
   padding: 10px 12px;
   border-top: 1px solid rgba(255,255,255,0.08);
-  background: rgba(0,0,0,0.2);
+  background: rgba(10, 15, 28, 0.85); /* Dark solidish background */
+  backdrop-filter: blur(8px);
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
 }
 [data-theme='light'] .pylab-debug-controls {
   border-top-color: rgba(0,0,0,0.08);
-  background: rgba(0,0,0,0.03);
+  background: rgba(248, 250, 252, 0.85); /* Light solidish background */
 }
 
 .pylab-dbg-btn {
