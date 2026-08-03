@@ -192,10 +192,10 @@ const sidebars = {
           className: 'icon-code',
           collapsed: true,
           items: [
-            'part-2/module-12.5-comprehensions/1-list-comprehensions',
-            'part-2/module-12.5-comprehensions/2-dict-set-comprehensions',
-            'part-2/module-12.5-comprehensions/3-pythonic-patterns',
-            'part-2/module-12.5-comprehensions/4-exercises-qa',
+            'part-2/module-12.5-comprehensions/list-comprehensions',
+            'part-2/module-12.5-comprehensions/dict-set-comprehensions',
+            'part-2/module-12.5-comprehensions/pythonic-patterns',
+            'part-2/module-12.5-comprehensions/exercises-qa',
           ],
         },
       ],
@@ -234,14 +234,14 @@ const sidebars = {
           className: 'icon-edit',
           collapsed: true,
           items: [
-            'part-3/module-14-error-handling/0-intro',
-            'part-3/module-14-error-handling/1-what-are-errors',
-            'part-3/module-14-error-handling/2-syntax-errors',
-            'part-3/module-14-error-handling/3-runtime-errors',
-            'part-3/module-14-error-handling/4-try-except',
-            'part-3/module-14-error-handling/5-finally-block',
-            'part-3/module-14-error-handling/6-raising-exceptions',
-            'part-3/module-14-error-handling/7-exercises-qa',
+            'part-3/module-14-error-handling/intro',
+            'part-3/module-14-error-handling/what-are-errors',
+            'part-3/module-14-error-handling/syntax-errors',
+            'part-3/module-14-error-handling/runtime-errors',
+            'part-3/module-14-error-handling/try-except',
+            'part-3/module-14-error-handling/finally-block',
+            'part-3/module-14-error-handling/raising-exceptions',
+            'part-3/module-14-error-handling/exercises-qa',
           ],
         },
         {
@@ -250,10 +250,10 @@ const sidebars = {
           className: 'icon-file',
           collapsed: true,
           items: [
-            'part-3/module-15-file-handling/0-intro',
-            'part-3/module-15-file-handling/1-what-is-a-file',
-            'part-3/module-15-file-handling/2-reading-files',
-            'part-3/module-15-file-handling/3-writing-appending',
+            'part-3/module-15-file-handling/intro',
+            'part-3/module-15-file-handling/what-is-a-file',
+            'part-3/module-15-file-handling/reading-files',
+            'part-3/module-15-file-handling/writing-appending',
           ],
         },
         {
@@ -262,11 +262,11 @@ const sidebars = {
           className: 'icon-code',
           collapsed: true,
           items: [
-            'part-3/module-15-json/0-intro',
-            'part-3/module-15-json/1-what-is-json',
-            'part-3/module-15-json/2-json-structure',
-            'part-3/module-15-json/3-reading-writing',
-            'part-3/module-15-json/4-ai-uses-json',
+            'part-3/module-15-json/intro',
+            'part-3/module-15-json/what-is-json',
+            'part-3/module-15-json/json-structure',
+            'part-3/module-15-json/reading-writing',
+            'part-3/module-15-json/ai-uses-json',
           ],
         },
         {
@@ -275,10 +275,10 @@ const sidebars = {
           className: 'icon-book',
           collapsed: true,
           items: [
-            'part-3/module-16-modules-packages/1-modules',
-            'part-3/module-16-modules-packages/2-virtual-environments',
-            'part-3/module-16-modules-packages/3-packages-uv',
-            'part-3/module-16-modules-packages/4-exercises-qa',
+            'part-3/module-16-modules-packages/modules',
+            'part-3/module-16-modules-packages/virtual-environments',
+            'part-3/module-16-modules-packages/packages-uv',
+            'part-3/module-16-modules-packages/exercises-qa',
           ],
         },
         {
@@ -287,10 +287,10 @@ const sidebars = {
           className: 'icon-book',
           collapsed: true,
           items: [
-            'part-3/module-17-git-version-control/1-version-control-basics',
-            'part-3/module-17-git-version-control/2-core-git-workflow',
-            'part-3/module-17-git-version-control/3-github-gitignore',
-            'part-3/module-17-git-version-control/4-exercises-qa',
+            'part-3/module-17-git-version-control/version-control-basics',
+            'part-3/module-17-git-version-control/core-git-workflow',
+            'part-3/module-17-git-version-control/github-gitignore',
+            'part-3/module-17-git-version-control/exercises-qa',
           ],
         },
         {
@@ -299,7 +299,7 @@ const sidebars = {
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-18-google-colab/1-what-is-colab',
+            'part-3/module-18-google-colab/what-is-colab',
           ],
         },
         {
@@ -308,8 +308,8 @@ const sidebars = {
           className: 'icon-data',
           collapsed: true,
           items: [
-            'part-3/module-19-numpy-data-math/1-why-numpy',
-            'part-3/module-19-numpy-data-math/2-basic-statistics',
+            'part-3/module-19-numpy-data-math/why-numpy',
+            'part-3/module-19-numpy-data-math/basic-statistics',
           ],
         },
         {
@@ -318,8 +318,8 @@ const sidebars = {
           className: 'icon-data',
           collapsed: true,
           items: [
-            'part-3/module-20-pandas-data-cleaning/1-dataframes-intro',
-            'part-3/module-20-pandas-data-cleaning/2-cleaning-messy-data',
+            'part-3/module-20-pandas-data-cleaning/dataframes-intro',
+            'part-3/module-20-pandas-data-cleaning/cleaning-messy-data',
           ],
         },
         {
@@ -328,7 +328,7 @@ const sidebars = {
           className: 'icon-data',
           collapsed: true,
           items: [
-            'part-3/module-21-matplotlib-visualization/1-charts-and-plots',
+            'part-3/module-21-matplotlib-visualization/charts-and-plots',
           ],
         },
         {
@@ -337,8 +337,8 @@ const sidebars = {
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-22-ml-foundations/1-what-is-ml',
-            'part-3/module-22-ml-foundations/2-train-test-linear-regression',
+            'part-3/module-22-ml-foundations/what-is-ml',
+            'part-3/module-22-ml-foundations/train-test-linear-regression',
           ],
         },
         {
@@ -347,7 +347,7 @@ const sidebars = {
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-23-classification/1-classification-basics',
+            'part-3/module-23-classification/classification-basics',
           ],
         },
         {
@@ -356,7 +356,7 @@ const sidebars = {
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-24-rest-apis-ai/1-apis-and-ai',
+            'part-3/module-24-rest-apis-ai/apis-and-ai',
           ],
         },
         {
@@ -365,7 +365,7 @@ const sidebars = {
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-25-prompt-engineering/1-prompt-engineering',
+            'part-3/module-25-prompt-engineering/prompt-engineering',
           ],
         },
         {
@@ -374,7 +374,7 @@ const sidebars = {
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-26-rag-vector-databases/1-rag-basics',
+            'part-3/module-26-rag-vector-databases/rag-basics',
           ],
         },
         {
@@ -383,7 +383,7 @@ const sidebars = {
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-27-pydantic-production/1-pydantic-validation',
+            'part-3/module-27-pydantic-production/pydantic-validation',
           ],
         },
         {
@@ -392,7 +392,7 @@ const sidebars = {
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-28-capstone-project/1-capstone-project',
+            'part-3/module-28-capstone-project/capstone-project',
           ],
         },
       ],
