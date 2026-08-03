@@ -7,17 +7,16 @@ keywords: ["Python", "Indexing & Slicing", "Telugu tutorial", "Learn Python in T
 
 # Indexing & Slicing
 
-Every character in a Python string sits at a specific numbered position called an **index**. You can grab a single character using brackets `[]` or cut out a section of text using slicing `[:]`.
+Because strings are ordered collections of characters, every character in a Python string sits at a specific numbered position called an **index**. You can grab a single character using brackets `[]` or extract a section of text using slicing `[:]`.
 
 ## Index Positions (Start at 0)
 
 Python counts positions starting from `0` from left to right. You can also count backward from `-1` starting from the right end:
 
-```
-Character:   P   Y   T   H   O   N
-Positive:    0   1   2   3   4   5
-Negative:   -6  -5  -4  -3  -2  -1
-```
+![String Indexing Visual Guide](/img/illustrations/string-indexing.webp)
+<figcaption style={{ textAlign: 'center', fontSize: '13px', color: '#64748b', marginTop: '6px', marginBottom: '24px' }}>
+  Visual Guide: Accessing individual characters using positive and negative indexing.
+</figcaption>
 
 ```python
 word = "PYTHON"
@@ -36,6 +35,11 @@ print(word[-1])  # Output: N
 
 To extract a substring (a smaller piece of the text), use a colon `:` inside the brackets. Python starts taking characters at `start` and stops just before reaching `stop`:
 
+![String Slicing Visual Guide](/img/illustrations/string-slicing.webp)
+<figcaption style={{ textAlign: 'center', fontSize: '13px', color: '#64748b', marginTop: '6px', marginBottom: '24px' }}>
+  Visual Guide: Extracting a part of a string using slicing.
+</figcaption>
+
 ```python
 language = "PYTHON"
 
@@ -51,7 +55,14 @@ print(language[2:])   # Output: THON
 
 ## Step Slicing (`[start:stop:step]`)
 
-You can add a third number called the **step** to jump over characters or even reverse the text:
+You can add a third number called the **step** to jump over characters or change the direction of reading:
+- A **positive step** (e.g. `2`) moves forward from left to right, skipping numbers.
+- A **negative step** (e.g. `-1`) moves **backwards** through the string from right to left, which allows you to reverse text easily!
+
+![Step Slicing Visual Guide](/img/illustrations/step-slicing.webp)
+<figcaption style={{ textAlign: 'center', fontSize: '13px', color: '#64748b', marginTop: '6px', marginBottom: '24px' }}>
+  Visual Guide: Understanding step slicing to skip characters and reverse strings.
+</figcaption>
 
 ```python
 alphabet = "ABCDEFGH"
@@ -59,7 +70,7 @@ alphabet = "ABCDEFGH"
 # Jump every 2 letters
 print(alphabet[0:8:2])  # Output: ACEG
 
-# Reverse the entire string with step -1
+# Reverse the entire string with step -1 (moves backwards from right to left)
 print(alphabet[::-1])   # Output: HGFEDCBA
 ```
 
@@ -79,13 +90,38 @@ print(new_text)  # Output: Bat
 ## Common Beginner Mistakes
 
 <AccordionGroup>
-  <Accordion title="Index out of range">
+  <Accordion title="1. Forgetting that Index Starts at 0 (Not 1)">
     ```python
-    # Wrong - trying to grab index 10 when word only has 5 letters
-    word = "Hello"
-    print(word[10])  # IndexError: string index out of range
+    word = "PYTHON"
     
-    # Right - remember valid indices go from 0 up to len(word) - 1
+    # Wrong - assuming index 1 is the first letter
+    print(word[1])  # Output: Y (second letter!)
+
+    # Right - the first character is always at index 0
+    print(word[0])  # Output: P
+    ```
+  </Accordion>
+
+  <Accordion title="2. Forgetting that the Stop Index is Excluded">
+    ```python
+    word = "PYTHON"
+    
+    # Wrong - thinking word[0:3] includes index 3 ('H')
+    print(word[0:3])  # Output: PYT (only includes indices 0, 1, 2!)
+
+    # Right - to include index 3 ('H'), set the stop index to 4
+    print(word[0:4])  # Output: PYTH
+    ```
+  </Accordion>
+
+  <Accordion title="3. Index Out of Range Error">
+    ```python
+    word = "Hello"
+    
+    # Wrong - trying to grab index 5 when word has 5 letters (indices 0 to 4)
+    print(word[5])  # IndexError: string index out of range
+    
+    # Right - valid indices go from 0 up to len(word) - 1
     print(word[len(word) - 1])  # Last letter: o
     ```
   </Accordion>

@@ -29,7 +29,7 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
     } else if (val === 'part2') {
       history.push('/part-2/module-7-strings/string-basics');
     } else if (val === 'part3') {
-      history.push('/part-3/module-13-error-handling');
+      history.push('/part-3/module-13-oop-basics/1-why-oop-classes-objects');
     }
   };
 

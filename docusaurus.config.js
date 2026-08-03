@@ -36,6 +36,23 @@ const config = {
 
   headTags: [
     {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'anonymous',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap',
+        media: 'print',
+        onload: "this.media='all'",
+      },
+    },
+    {
       tagName: 'script',
       attributes: {
         type: 'application/ld+json',
@@ -116,6 +133,9 @@ const config = {
       {
         hashed: true,
         indexBlog: false,
+        indexPages: false,
+        explicitSearchResultPath: false,
+        highlightSearchTermsOnTargetPage: false,
         docsRouteBasePath: '/',
         ignoreCssSelectors: ['pre', 'code'],
         searchBarShortcut: false,

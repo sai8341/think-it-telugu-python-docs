@@ -497,7 +497,19 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
     predefined_inputs = json.loads(predefined_inputs_json)
     input_index = [0]
 
-
+    # Parse conditions for visual evaluation
+    conditions_map = {}
+    try:
+        tree = ast.parse(user_code)
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.If, ast.While)):
+                test_str = ast.unparse(node.test)
+                conditions_map[node.lineno] = {
+                    'expr': test_str,
+                    'code': compile(test_str, '<condition>', 'eval')
+                }
+    except Exception:
+        pass
 
     old_input = builtins.input
 
@@ -566,12 +578,25 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
             stdout_delta = full_output[last_stdout_len[0]:]
             last_stdout_len[0] = len(full_output)
 
+            # Evaluate condition if active on this line
+            condition_val = None
+            if frame.f_lineno in conditions_map:
+                try:
+                    val = eval(conditions_map[frame.f_lineno]['code'], frame.f_globals, frame.f_locals)
+                    condition_val = {
+                        'expression': conditions_map[frame.f_lineno]['expr'],
+                        'result': repr(val)
+                    }
+                except Exception:
+                    pass
+
             steps.append({
                 'line': frame.f_lineno,
                 'vars': user_vars,
                 'var_changes': var_changes,
                 'stdout_delta': stdout_delta,
-                'event': event
+                'event': event,
+                'condition': condition_val
             })
         return tracer
 
@@ -655,6 +680,7 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
       );
 
       const steps = JSON.parse(result);
+      console.log("DEBUG STEPS FROM PYTHON:", JSON.stringify(steps));
 
       // Post-process: reconstruct cumulative stdout from deltas
       let cumulativeStdout = '';
@@ -735,6 +761,8 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
   }, [isDebugPlaying, debugStepIndex, debugSteps, isDebugging]);
 
   const currentDebugStep = isDebugging && debugStepIndex >= 0 ? debugSteps[debugStepIndex] : null;
+  const previousDebugStep = isDebugging && debugStepIndex > 0 ? debugSteps[debugStepIndex - 1] : null;
+  const prevLine = previousDebugStep ? previousDebugStep.line : -1;
   const debugCodeLines = code.split('\n');
   const isDebugComplete = debugStepIndex >= debugSteps.length - 1;
 
@@ -921,6 +949,7 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
             runCode={runCode}
             isDebugging={isDebugging}
             currentDebugStep={currentDebugStep}
+            prevLine={prevLine}
             isRunning={isRunning}
             textareaRef={textareaRef}
             syncScrollExternal={syncScroll}
@@ -991,6 +1020,22 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
           {/* Debug Mode Panel */}
           {isDebugging && (
             <div className="pylab-debug-panel">
+              {/* Debugger Legend / Visual Guide */}
+              <div className="pylab-debug-legend">
+                <div className="pylab-debug-legend-item">
+                  <span className="pylab-debug-legend-indicator pylab-indicator-next">➔</span>
+                  <span className="pylab-debug-legend-text">
+                    <strong>Green (Solid)</strong>: Next Line to Run
+                  </span>
+                </div>
+                <div className="pylab-debug-legend-item">
+                  <span className="pylab-debug-legend-indicator pylab-indicator-prev">✓</span>
+                  <span className="pylab-debug-legend-text">
+                    <strong>Orange (Dashed)</strong>: Just Executed Line
+                  </span>
+                </div>
+              </div>
+
               {/* Variables Inspector */}
               <div className="pylab-debug-vars">
                 <div className="pylab-debug-section-title">Variables</div>
@@ -1012,6 +1057,22 @@ def __debug_trace_and_run(user_code, max_steps, predefined_inputs_json):
                   <div className="pylab-debug-empty">No variables yet</div>
                 )}
               </div>
+
+              {/* Active Condition / Expression Evaluator */}
+              {currentDebugStep && currentDebugStep.condition && (
+                <div className="pylab-debug-condition">
+                  <div className="pylab-debug-section-title">Active Condition</div>
+                  <div className="pylab-debug-condition-card">
+                    <span className="pylab-debug-condition-expr">
+                      <code>{currentDebugStep.condition.expression}</code>
+                    </span>
+                    <span className="pylab-debug-condition-arrow">➔</span>
+                    <span className={`pylab-debug-condition-res ${currentDebugStep.condition.result === 'True' ? 'is-true' : 'is-false'}`}>
+                      {currentDebugStep.condition.result}
+                    </span>
+                  </div>
+                </div>
+              )}
 
               {/* Console Output */}
               <div className="pylab-debug-console">

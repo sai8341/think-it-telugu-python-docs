@@ -17,9 +17,93 @@ To check multiple conditions one after the other, Python uses **`elif`** (which 
 
 ---
 
-## 1. The `if-elif-else` Chain
+## 1. Syntax Structure: Anatomy of an `elif` Chain
 
-Python checks each condition from top to bottom. The moment it finds a condition that is `True`, it runs that block of code and ignores all other options below it.
+Python evaluates conditions top to bottom. The moment it finds a condition that is `True`, it runs that block of code and skips the remaining checks!
+
+{/* Visual Syntax Breakdown Card - ELIF CHAIN (Matching if-else style 100%) */}
+<div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '24px', margin: '24px 0' }}>
+
+  <p style={{ fontSize: '13px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    Syntax Structure of an if-elif-else Chain
+  </p>
+
+  {/* IF condition_A */}
+  <div style={{ fontFamily: 'monospace', fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>
+    <span style={{ color: '#e11d48', marginRight: '8px' }}>if</span>
+    <span style={{ color: '#059669' }}>condition_A</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px', marginBottom: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#e0f2fe', border: '2px solid #0284c7', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#0369a1', textTransform: 'uppercase' }}>IF BLOCK 1</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#0c4a6e' }}>Executes if condition_A is True</span>
+    </div>
+  </div>
+
+  {/* ELIF condition_B */}
+  <div style={{ fontFamily: 'monospace', fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>
+    <span style={{ color: '#e11d48', marginRight: '8px' }}>elif</span>
+    <span style={{ color: '#059669' }}>condition_B</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px', marginBottom: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#e0f2fe', border: '2px solid #0284c7', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#0369a1', textTransform: 'uppercase' }}>ELIF BLOCK 2</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#0c4a6e' }}>Executes if condition_B is True</span>
+    </div>
+  </div>
+
+  {/* ELIF condition_C */}
+  <div style={{ fontFamily: 'monospace', fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>
+    <span style={{ color: '#e11d48', marginRight: '8px' }}>elif</span>
+    <span style={{ color: '#059669' }}>condition_C</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px', marginBottom: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#e0f2fe', border: '2px solid #0284c7', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#0369a1', textTransform: 'uppercase' }}>ELIF BLOCK 3</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#0c4a6e' }}>Executes if condition_C is True</span>
+    </div>
+  </div>
+
+  {/* ELSE */}
+  <div style={{ fontFamily: 'monospace', fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>
+    <span style={{ color: '#e11d48', marginRight: '4px' }}>else</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#fef3c7', border: '2px solid #d97706', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#b45309', textTransform: 'uppercase' }}>ELSE BLOCK</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#78350f' }}>Executes if ALL previous conditions are False</span>
+    </div>
+  </div>
+
+</div>
+
+---
+
+## 2. The `if-elif-else` Code Example
 
 ```python
 marks = 82
@@ -43,40 +127,23 @@ If we wrote `if marks >= 50:` at the very top, a student with `95` marks would t
 
 ---
 
-## 2. Nested Conditions (Choices Inside Choices)
-
-Sometimes, you need to check a condition only after another condition has passed. This is called **nesting** (putting one `if-else` statement inside another one).
-
-### Real-Time Example: Blood Donation Eligibility
-To donate blood, you must meet two rules:
-1. You must be **18 years or older**.
-2. If you are old enough, you must weigh **50 kg or more**.
-
-Let's see how this works in Python:
+## 3. Real-Time Example: Signal Traffic Light
 
 ```python
-age = 20
-weight = 55
+signal = "yellow"
 
-# Outer Check: Age
-if age >= 18:
-    print("Age check passed.")
-    
-    # Inner (Nested) Check: Weight
-    if weight >= 50:
-        print("You are eligible to donate blood!")
-    else:
-        print("Sorry, you must weigh 50 kg or more to donate.")
-        
+if signal == "red":
+    print("STOP immediately!")
+elif signal == "yellow":
+    print("Prepare to stop or proceed with caution.")
+elif signal == "green":
+    print("GO!")
 else:
-    print("Sorry, you must be 18 or older to donate blood.")
+    print("Invalid signal color.")
 ```
-
-### Note on Nesting:
-Notice the indentation! The inner `if-else` block is pushed even further to the right (8 spaces) because it belongs inside the outer `if` statement block. While nesting is very useful, try to keep it simple - deep nesting can make your code hard to read!
 
 ---
 
 ## What's Next?
 
-If you have many exact options to match, writing multiple `elif` blocks can become tedious. Let's learn about Python's modern **`match-case`** statement and try some exercises in the next lesson!
+When making decisions inside decisions, check out the next lesson: **Nested Conditions**!

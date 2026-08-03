@@ -1,7 +1,6 @@
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   introSidebar: [
-
     {
       type: 'doc',
       id: 'intro',
@@ -22,7 +21,6 @@ const sidebars = {
     },
   ],
   part1Sidebar: [
-
     {
       type: 'category',
       label: 'Part 1: Programming & Python Basics',
@@ -92,11 +90,12 @@ const sidebars = {
         {
           type: 'category',
           label: 'Module 5: Conditional Statements',
-          className: 'icon-check',
+          className: 'icon-cond',
           collapsed: true,
           items: [
             'part-1/module-5-conditional-statements/if-else-logic',
             'part-1/module-5-conditional-statements/elif-chains',
+            'part-1/module-5-conditional-statements/nested-conditions',
             'part-1/module-5-conditional-statements/match-case-lab',
           ],
         },
@@ -109,13 +108,13 @@ const sidebars = {
             'part-1/module-6-loops/for-loops-range',
             'part-1/module-6-loops/while-loops',
             'part-1/module-6-loops/loop-control-lab',
+            'part-1/module-6-loops/nested-loops',
           ],
         },
       ],
     },
   ],
   part2Sidebar: [
-
     {
       type: 'category',
       label: 'Part 2: Data Structures & Functions',
@@ -125,7 +124,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Module 7: Strings',
-          className: 'icon-code',
+          className: 'icon-text',
           collapsed: true,
           items: [
             'part-2/module-7-strings/string-basics',
@@ -147,7 +146,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Module 9: Tuples',
-          className: 'icon-list',
+          className: 'icon-tuple',
           collapsed: true,
           items: [
             'part-2/module-9-tuples/tuple-basics',
@@ -157,7 +156,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Module 10: Sets',
-          className: 'icon-list',
+          className: 'icon-set',
           collapsed: true,
           items: [
             'part-2/module-10-sets/set-basics',
@@ -203,7 +202,6 @@ const sidebars = {
     },
   ],
   part3Sidebar: [
-
     {
       type: 'category',
       label: 'Part 3: AI & ML Engineering',

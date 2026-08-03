@@ -5,63 +5,280 @@ description: "Execute a block of code continuously as long as a condition is tru
 keywords: [python while loop, while condition python, infinite loop python, looping basics]
 ---
 
-# Repeating Code with while Loops
+# Repeating Code with `while` Loops
 
-A `for` loop is great when you know in advance how many times to repeat your code. 
+In the previous lesson, we learned how `for` loops repeat code over a fixed sequence. 
 
-But what if you don't know how many repetitions you need? For example:
-- Keep asking a user for their password **until** they type it correctly.
-- Keep running a video game **while** the player still has lives left.
-
-To repeat actions based on a rule (condition), Python provides the **`while` loop**.
+Now, let's explore how to repeat code when we don't know the exact count in advance!
 
 ---
 
-## 1. Structure of a `while` Loop
+## 1. Why Do We Need `while` Loops?
 
-A `while` loop checks a condition. If the condition is `True`, it runs the code inside it. Then it checks the condition again, and runs it again. This repeats **while** the condition remains `True`.
+A `for` loop is extremely useful when we know how many times we want to repeat or when we have a fixed sequence of items to process.
 
-### Real-Time Example: Video Game Lives
-Let's simulate a player playing a game as long as they have lives left:
+However, in many real-world programs, we **don't know the exact number of repetitions** in advance.
+
+### Real-World Examples:
+* **Password Retry:** Keep asking a user for their password **until** they type it correctly.
+* **Video Game Lives:** Keep running a game **while** the player still has lives remaining.
+
+In these situations, repetition is not based on a fixed count. It is based on a **rule or condition**.
+
+> **Key Rule:** When repetition depends on a condition, we use a **`while` loop**.
+
+---
+
+## 2. What is a `while` Loop?
+
+> **Definition:** A **`while` loop** repeats a block of code as long as a specified condition remains **`True`**.
+
+### How a `while` Loop Works Conceptually:
+1. Python checks a condition.
+2. If the condition is **`True`**, Python executes the block of code inside the loop.
+3. After finishing the block, Python jumps back to check the condition again.
+4. When the condition becomes **`False`**, Python stops the loop and moves to the next lines of code.
+
+![How a while Loop Works Flowchart Visual Guide](/img/illustrations/while-loop-flowchart.jpg)
+<figcaption style={{ textAlign: 'center', fontSize: '13px', color: '#64748b', marginTop: '6px', marginBottom: '24px' }}>
+  Visual Guide: Conceptual Execution Flowchart of a Python while Loop.
+</figcaption>
+
+---
+
+## 3. `while` vs `for` Loop
+
+Here is a quick way to decide which loop to use:
+
+| Feature | `for` Loop | `while` Loop |
+| :--- | :--- | :--- |
+| **Primary Use** | Used when we know the sequence or number of repetitions in advance. | Used when repetition depends on a condition that changes dynamically. |
+| **Example Scenario** | Print numbers 1 to 10, or iterate through letters in `"Python"`. | Ask for a password repeatedly until the correct one is entered. |
+| **Control Mechanism** | Iterates over items in a sequence until the sequence ends. | Checks a boolean condition before every round until it becomes `False`. |
+
+---
+
+## 4. Understanding the Basic Structure of a `while` Loop
+
+The syntax of a `while` loop is simple and clean:
+
+```python
+while condition:
+    block of code
+```
+
+Let's break down each part:
+
+### `while` keyword
+* Starts the `while` loop instruction.
+* Tells Python to keep repeating the block of code as long as the condition remains `True`.
+
+### `condition`
+* A condition is a rule that evaluates to either **`True`** or **`False`**.
+* Conditions are usually created using **comparison operators**:
+  * `>` (greater than)
+  * `<` (less than)
+  * `>=` (greater than or equal to)
+  * `<=` (less than or equal to)
+  * `==` (equal to)
+  * `!=` (not equal to)
+
+#### Simple Condition Example:
+Consider the condition: `lives > 0`
+
+* If `lives = 3`:
+  * `3 > 0` &rarr; **`True`** &rarr; The loop continues!
+* If `lives = 0`:
+  * `0 > 0` &rarr; **`False`** &rarr; The loop stops!
+
+### `block of code`
+* The indented lines of code (4 spaces) executed whenever the condition is `True`.
+
+{/* Visual Syntax Breakdown Card - WHILE LOOP */}
+<div style={{ background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', padding: '16px', margin: '16px 0', fontFamily: 'Consolas, Monaco, "Courier New", monospace' }}>
+
+  <p style={{ fontFamily: 'sans-serif', fontSize: '12px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    Visual Anatomy &amp; The 3 Parts of a While Loop
+  </p>
+
+  {/* Part 1: Starting Value */}
+  <div style={{ background: '#fef3c7', border: '2px solid #d97706', borderRadius: '6px', padding: '8px 14px', textAlign: 'center', marginBottom: '10px' }}>
+    <span style={{ fontSize: '10px', fontWeight: '800', color: '#b45309', textTransform: 'uppercase' }}>1. STARTING VALUE</span>
+    <div style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '700', color: '#78350f', marginTop: '1px' }}>lives = 3 &nbsp;&nbsp;(Set variable before loop)</div>
+  </div>
+
+  {/* Line 2: while condition: */}
+  <div style={{ fontSize: '18px', fontWeight: '700', color: '#0f172a', marginBottom: '6px' }}>
+    <span style={{ color: '#dc2626', marginRight: '6px' }}>while</span>
+    <span style={{ color: '#16a34a' }}>lives > 0</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  {/* Indentation Container holding Block of Code + Update Step */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '8px', marginBottom: '10px' }}>
+    
+    {/* Purple Indentation Box */}
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '6px', padding: '8px 6px', minWidth: '85px', width: '85px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>
+      <span style={{ fontSize: '10px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '10px', fontWeight: '700', color: '#6b21a8', marginTop: '2px' }}>(4 Spaces)</span>
+    </div>
+
+    {/* Right Column: Code Block + Update Step */}
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+      
+      {/* Code Block */}
+      <div style={{ background: '#e0f2fe', border: '1px solid #0284c7', borderRadius: '6px', padding: '8px 12px' }}>
+        <span style={{ fontSize: '10px', fontWeight: '800', color: '#0369a1', textTransform: 'uppercase' }}>BLOCK OF CODE</span>
+        <div style={{ fontFamily: 'monospace', fontSize: '12px', fontWeight: '600', color: '#0c4a6e', marginTop: '1px' }}>Actions executed while condition is True</div>
+      </div>
+
+      {/* Part 3: Update Step */}
+      <div style={{ background: '#dcfce7', border: '2px solid #16a34a', borderRadius: '6px', padding: '8px 12px' }}>
+        <span style={{ fontSize: '10px', fontWeight: '800', color: '#15803d', textTransform: 'uppercase' }}>3. UPDATE STEP</span>
+        <div style={{ fontFamily: 'monospace', fontSize: '12px', fontWeight: '600', color: '#14532d', marginTop: '1px' }}>lives = lives - 1 &nbsp;&nbsp;(Update variable to avoid Infinite Loop)</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+---
+
+## 5. How `while` Loop Works Step by Step
+
+Let's look at a video game example:
 
 ```python
 lives = 3
 
 while lives > 0:
     print(f"Playing game... Lives remaining: {lives}")
-    # Reduce lives by 1 after each round
     lives = lives - 1
 
 print("Game Over!")
 ```
 
-**How it works:**
-1. At first, `lives` is `3`. Since `3 > 0` is `True`, the loop runs and subtracts `1` from lives.
-2. Next round, `lives` is `2`. Since `2 > 0` is `True`, it runs again and subtracts `1`.
-3. Next round, `lives` is `1`. Since `1 > 0` is `True`, it runs and subtracts `1`.
-4. Next round, `lives` is `0`. Since `0 > 0` is **`False`**, Python exits the loop and prints "Game Over!".
+### Output:
+```text
+Playing game... Lives remaining: 3
+Playing game... Lives remaining: 2
+Playing game... Lives remaining: 1
+Game Over!
+```
+
+### Detailed Round-by-Round Execution Trace:
+
+* **Starting State:** `lives = 3`
+
+#### Round 1:
+* **Condition Check:** `3 > 0` &rarr; **`True`**
+* **Action:** Prints `"Playing game... Lives remaining: 3"`
+* **Update Step:** `lives = 3 - 1` &rarr; `lives` becomes `2`
+
+#### Round 2:
+* **Condition Check:** `2 > 0` &rarr; **`True`**
+* **Action:** Prints `"Playing game... Lives remaining: 2"`
+* **Update Step:** `lives = 2 - 1` &rarr; `lives` becomes `1`
+
+#### Round 3:
+* **Condition Check:** `1 > 0` &rarr; **`True`**
+* **Action:** Prints `"Playing game... Lives remaining: 1"`
+* **Update Step:** `lives = 1 - 1` &rarr; `lives` becomes `0`
+
+#### Round 4:
+* **Condition Check:** `0 > 0` &rarr; **`False`**
+* **Result:** Loop stops! Python exits the loop and prints `"Game Over!"`.
 
 ---
 
-## 2. ⚠️ Warning: Infinite Loops (DANGER!)
+### Simple Mental Model:
+```text
+Starting Value
+      ↓
+Check Condition
+      ↓
+Execute Block (if True)
+      ↓
+Update Value
+      ↓
+Check Condition Again
+```
 
-Since a `while` loop runs as long as the condition is `True`, you must make sure that the condition will eventually become `False`.
+---
 
-If the condition never becomes `False`, the loop will run forever! This is called an **Infinite Loop**, and it can lock up or freeze your computer.
+## 6. The 3 Essential Parts of a `while` Loop
+
+Notice that every working `while` loop requires **3 essential parts**:
+
+1. **Starting Value:** A variable initialized *before* the loop starts (e.g., `lives = 3`).
+2. **Condition:** The rule checked *before every iteration* (e.g., `while lives > 0:`).
+3. **Update Step:** A statement inside the loop that changes the variable (e.g., `lives = lives - 1`).
+
+![The 3 Essential Parts of a while Loop Visual Guide](/img/illustrations/while-loop-3-parts.jpg)
+<figcaption style={{ textAlign: 'center', fontSize: '13px', color: '#64748b', marginTop: '6px', marginBottom: '24px' }}>
+  Visual Guide: The 3 Essential Parts of a Python while Loop (Starting Value, Condition, and Update Step).
+</figcaption>
+
+### Why the Update Step is Critical:
+The **Update Step** changes the variable state so that the condition will eventually become **`False`**. Without an update step, the condition would stay `True` forever!
+
+---
+
+## 7. Real-World Example: Retrying Password
+
+Here is another classic use case: keeping a program running until a user types the correct password.
 
 ```python
-# DANGER: This loop will run forever!
+password = ""
+
+while password != "secret123":
+    password = input("Enter password: ")
+
+print("Access Granted!")
+```
+
+### Why a `while` Loop is Perfect Here:
+We don't know how many wrong guesses the user will make. 
+* If they type `"secret123"` on attempt 1 &rarr; condition becomes `False` immediately, loop ends!
+* If they take 5 attempts &rarr; loop runs 5 times until `password != "secret123"` evaluates to `False`.
+
+---
+
+## 8. Infinite Loops (Important Warning!)
+
+What happens if you forget **Part 3 (Update Step)**?
+
+If the variable is never updated, the condition remains `True` forever! This is called an **Infinite Loop**, and it can freeze your program or crash your terminal.
+
+```python
+# ⚠️ DANGER: Missing Update Step! Runs forever!
 # counter = 1
 # while counter <= 5:
 #     print("Stuck inside this loop!")
-#     # We forgot to add: counter += 1
+#     # Forgotten: counter = counter + 1
 ```
 
 ### How to Stop an Infinite Loop:
-If your terminal gets stuck in an infinite loop, don't panic! Press **`Ctrl + C`** on your keyboard to instantly force the program to stop.
+If your program gets stuck in an infinite loop:
+Press **`Ctrl + C`** in your terminal to force Python to stop immediately!
+
+---
+
+## 9. Summary: Quick Revision Table
+
+| Concept | Meaning |
+| :--- | :--- |
+| **`while` Loop** | A condition-based repetition system that repeats a block of code as long as a condition is `True`. |
+| **Condition** | A rule checked before every round that evaluates to `True` or `False`. |
+| **Starting Value** | An initial variable set up before the loop starts to track the state. |
+| **Update Step** | A statement inside the loop that changes the variable so the condition can eventually become `False`. |
+| **Block of Code** | Indented lines executed repeatedly whenever the condition is `True`. |
+| **Infinite Loop** | A loop that never stops because its condition stays `True` forever (stop using `Ctrl + C`). |
 
 ---
 
 ## What's Next?
 
-Now that we know both types of loops, what if we want to stop a loop early (like stopping a search once we find the item), or skip a specific round? Let's learn about **`break`** and **`continue`** in the next lesson!
+Now that we know both `for` loops and `while` loops, what if we want to stop a loop early or skip a specific round? Let's learn about **`break`** and **`continue`** in the next lesson!

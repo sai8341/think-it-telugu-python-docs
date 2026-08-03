@@ -1,0 +1,113 @@
+const XLSX = require('xlsx');
+const path = require('path');
+const fs = require('fs');
+
+const headers = [
+  "S No.", "SUBJECT", "TOPIC", "TAGS", "QUESTION TYPE", "QUESTION TEXT",
+  "OPTION1", "OPTION2", "OPTION3", "OPTION4", "OPTION5", "OPTION6",
+  "OPTION7", "OPTION8", "OPTION9", "OPTION10", "RIGHT ANSWER", "EXPLANATION",
+  "CORRECT MARKS", "NEGATIVE MARKS", "DIFFICULTY"
+];
+
+const rows = [
+  [
+    1, "Python", "Variables", "python,variables,basics", "SINGLECORRECT",
+    "What is a variable in Python?",
+    "A storage container for holding data", "A tool for printing text on screen", "A mathematical formula", "A command to close the program",
+    "", "", "", "", "", "",
+    "1", "A variable is used to store data in memory so it can be accessed and used later in code.",
+    "1.00", "0.00", "Easy"
+  ],
+  [
+    2, "Python", "Variables", "python,variables,operators", "SINGLECORRECT",
+    "Which symbol is used to assign a value to a variable in Python?",
+    "==", "=", ":", "->",
+    "", "", "", "", "", "",
+    "2", "The single equals sign (=) is the assignment operator in Python.",
+    "1.00", "0.00", "Easy"
+  ],
+  [
+    3, "Python", "Variables", "python,variables,naming-rules", "SINGLECORRECT",
+    "Which of the following is an INVALID variable name in Python?",
+    "user_age", "1st_player", "_score", "totalAmount",
+    "", "", "", "", "", "",
+    "2", "Variable names in Python cannot start with a number.",
+    "1.00", "0.00", "Easy"
+  ],
+  [
+    4, "Python", "Variables", "python,variables,reassignment", "SINGLECORRECT",
+    "What will be the output of the code: score = 10; score = 25; print(score)?",
+    "10", "25", "35", "SyntaxError",
+    "", "", "", "", "", "",
+    "2", "Assigning 25 overwrites the previous value of 10 stored in the score variable.",
+    "1.00", "0.00", "Medium"
+  ],
+  [
+    5, "Python", "Variables", "python,variables,naming-rules", "SINGLECORRECT",
+    "Why does the code \"user name = 'Alice'\" cause a SyntaxError in Python?",
+    "Variable names cannot contain spaces", "Double quotes are required instead of single quotes", "The name is too long", "Capital letters are mandatory",
+    "", "", "", "", "", "",
+    "1", "Spaces are not allowed inside variable names in Python.",
+    "1.00", "0.00", "Easy"
+  ],
+  [
+    6, "Python", "Variables", "python,variables,snake_case", "SINGLECORRECT",
+    "Which naming style is recommended by Python for multi-word variables?",
+    "camelCase", "PascalCase", "snake_case", "kebab-case",
+    "", "", "", "", "", "",
+    "3", "Python recommends snake_case, using lowercase letters separated by underscores (e.g., player_score).",
+    "1.00", "0.00", "Easy"
+  ],
+  [
+    7, "Python", "Variables", "python,variables,naming-rules", "SINGLECORRECT",
+    "Which characters are allowed when creating a variable name in Python?",
+    "Letters, numbers, and hyphens (-)", "Letters, numbers, and underscores (_)", "Letters, spaces, and exclamation marks (!)", "Any special characters",
+    "", "", "", "", "", "",
+    "2", "Python variable names can only contain letters (A-Z, a-z), digits (0-9), and underscores (_).",
+    "1.00", "0.00", "Easy"
+  ],
+  [
+    8, "Python", "Variables", "python,variables,print", "SINGLECORRECT",
+    "What will print(name) output if name = \"Alice\"?",
+    "Alice", "\"name\"", "name", "SyntaxError",
+    "", "", "", "", "", "",
+    "1", "print(name) looks up the variable name and prints its value 'Alice'.",
+    "1.00", "0.00", "Easy"
+  ],
+  [
+    9, "Python", "Variables", "python,variables,case-sensitivity", "SINGLECORRECT",
+    "Are variable names case-sensitive in Python (e.g., age vs Age)?",
+    "Yes, age and Age are two different variables", "No, Python treats uppercase and lowercase as identical", "Only when storing numbers", "Only inside functions",
+    "", "", "", "", "", "",
+    "1", "Python is case-sensitive, so age, Age, and AGE are treated as different variables.",
+    "1.00", "0.00", "Easy"
+  ],
+  [
+    10, "Python", "Variables", "python,variables,errors", "SINGLECORRECT",
+    "What error occurs if you try to print a variable before creating it?",
+    "SyntaxError", "NameError", "TypeError", "ValueError",
+    "", "", "", "", "", "",
+    "2", "Using an undefined variable raises a NameError in Python.",
+    "1.00", "0.00", "Medium"
+  ]
+];
+
+const desktopDir = 'C:/Users/saikumar/Desktop/Graphy_Python_Quizzes';
+if (!fs.existsSync(desktopDir)) {
+  fs.mkdirSync(desktopDir, { recursive: true });
+}
+
+const wb = XLSX.utils.book_new();
+const wsData = [headers, ...rows];
+const ws = XLSX.utils.aoa_to_sheet(wsData);
+XLSX.utils.book_append_sheet(wb, ws, "Sample Questions");
+
+const excelPath = path.join(desktopDir, 'Variables_Quiz_Graphy.xlsx');
+const csvPath = path.join(desktopDir, 'Variables_Quiz_Graphy.csv');
+
+XLSX.writeFile(wb, excelPath);
+const csvContent = XLSX.utils.sheet_to_csv(ws);
+fs.writeFileSync(csvPath, csvContent);
+
+console.log("Excel saved to:", excelPath);
+console.log("CSV saved to:", csvPath);
