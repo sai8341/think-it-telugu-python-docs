@@ -1,56 +1,117 @@
 ---
-title: "Dictionary Inspection Methods - Python in Telugu | Think IT Telugu"
+title: "Dictionary Methods & Operations - Python in Telugu | Think IT Telugu"
 sidebar_label: "Dictionary Inspection Methods"
-description: "Learn about Dictionary Inspection Methods in Python with real-world examples. This Think IT Telugu tutorial explains Dictionary Inspection Methods easily for AI and Data Science beginners."
+description: "Master dictionary methods like get, keys, values, items, update, and pop using simple real-world examples."
 keywords: ["Python", "Dictionary Inspection Methods", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
 ---
 
-# Dictionary Inspection Methods
+# Dictionary Inspection & Control Methods
 
-Python dictionaries provide essential built-in methods to safely look up values without crashing, and to grab lists of all keys or values.
+Python dictionaries provide built-in methods to safely search for data, extract keys and values, and update multiple items easily.
 
-## Safe Lookups with `.get()`
-
-When you use square brackets `[]` to grab a missing key, Python crashes with a `KeyError`. Using `.get("key")` is much safer because it returns `None` (or a default fallback value you choose) if the key is missing:
+Let's use a simple student profile to understand each method:
 
 ```python
-settings = {"theme": "dark", "notifications": True}
-
-# Safe lookup
-font_size = settings.get("font_size")
-print(font_size)  # Output: None (no crash!)
-
-# Provide a default fallback if key is missing
-volume = settings.get("volume", 50)
-print(volume)     # Output: 50
+student = {"name": "Rahul", "age": 20, "city": "Hyderabad"}
 ```
 
-## Grabbing Keys, Values, and Items
+---
 
-- `.keys()` gives you a view of every key inside the dictionary.
-- `.values()` gives you a view of every stored value.
-- `.items()` gives you pairs of `(key, value)` tuples.
+## 1. Safe Lookups with `.get()`
+
+When you use square brackets `student["phone"]` to search for a missing key, Python crashes with a `KeyError`.
+
+Using `.get("key")` is much safer because it returns `None` (or a default fallback message you choose) instead of crashing your program:
 
 ```python
-profile = {"user": "alice", "score": 98}
+student = {"name": "Rahul", "age": 20, "city": "Hyderabad"}
 
-print(profile.keys())    # dict_keys(['user', 'score'])
-print(profile.values())  # dict_values(['alice', 98])
-print(profile.items())   # dict_items([('user', 'alice'), ('score', 98)])
+# 1. Look up an existing key
+print(student.get("name"))
+# Output: Rahul
+
+# 2. Look up a missing key (returns None, no crash!)
+print(student.get("phone"))
+# Output: None
+
+# 3. Provide a custom fallback message if key is missing
+print(student.get("phone", "Phone number not provided"))
+# Output: Phone number not provided
 ```
 
-## Updating Multiple Keys at Once (`.update()`)
+---
 
-You can merge two dictionaries or update multiple values in one shot using `.update()`:
+## 2. Extracting Keys (`.keys()`), Values (`.values()`), and Pairs (`.items()`)
+
+Python allows you to inspect all parts of a dictionary separately:
+
+### 2.1 The `.keys()` Method (Get All Field Names)
+Returns a list-like view of all keys in the dictionary:
 
 ```python
-config = {"host": "localhost", "port": 8080}
-new_settings = {"port": 9000, "debug": True}
+student = {"name": "Rahul", "age": 20, "city": "Hyderabad"}
 
-config.update(new_settings)
-print(config)
-# Output: {'host': 'localhost', 'port': 9000, 'debug': True}
+print(student.keys())
+# Output: dict_keys(['name', 'age', 'city'])
 ```
+
+---
+
+### 2.2 The `.values()` Method (Get All Stored Data)
+Returns a list-like view of all values:
+
+```python
+student = {"name": "Rahul", "age": 20, "city": "Hyderabad"}
+
+print(student.values())
+# Output: dict_values(['Rahul', 20, 'Hyderabad'])
+```
+
+---
+
+### 2.3 The `.items()` Method (Get Key-Value Pairs)
+Returns each key and value grouped together inside a tuple `(key, value)`:
+
+```python
+student = {"name": "Rahul", "age": 20, "city": "Hyderabad"}
+
+print(student.items())
+# Output: dict_items([('name', 'Rahul'), ('age', 20), ('city', 'Hyderabad')])
+```
+
+---
+
+## 3. Updating Multiple Keys at Once (`.update()`)
+
+The `.update()` method merges new key-value pairs into a dictionary or updates existing values in one step:
+
+```python
+student = {"name": "Rahul", "age": 20, "city": "Hyderabad"}
+
+# Update age and add a new phone number
+student.update({"age": 21, "phone": "9876543210"})
+
+print(student)
+# Output: {'name': 'Rahul', 'age': 21, 'city': 'Hyderabad', 'phone': '9876543210'}
+```
+
+---
+
+## 4. Removing Keys (`.pop()`)
+
+The `.pop("key")` method removes a specific key and returns its value:
+
+```python
+student = {"name": "Rahul", "age": 20, "city": "Hyderabad"}
+
+# Remove "city" and get its value
+removed_city = student.pop("city")
+
+print("Removed:", removed_city)  # Output: Removed: Hyderabad
+print(student)                    # Output: {'name': 'Rahul', 'age': 20}
+```
+
+---
 
 ## Common Beginner Mistakes
 
@@ -58,22 +119,17 @@ print(config)
   <Accordion title="Forgetting to convert dictionary views into a standard list">
     ```python
     # Note: .keys() returns a special dict_keys view object
-    user = {"name": "Alice"}
-    keys_view = user.keys()
+    user = {"name": "Rahul"}
     
-    # If you need standard list methods like indexing or sorting, convert it:
+    # If you need standard list indexing like [0], convert it using list():
     keys_list = list(user.keys())
     print(keys_list[0])  # Output: name
     ```
   </Accordion>
 </AccordionGroup>
 
+---
+
 ## What's Next?
 
-Let's explore how to loop through dictionaries and how to organize complex nested structures like dictionaries containing lists.
-
-<CardGroup cols={1}>
-  <Card title="Looping & Nested Dictionaries" icon="arrow-right" href="/part-2/module-11-dictionaries/nested-dicts-iteration">
-    Master for-loops on key-value pairs and building realistic JSON-like profiles
-  </Card>
-</CardGroup>
+Let's explore how to loop through dictionaries and organize complex nested structures like dictionaries containing lists in the next lesson!

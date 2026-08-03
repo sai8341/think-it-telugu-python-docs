@@ -1,0 +1,217 @@
+---
+sidebar_position: 3
+title: "Python Nested Conditions (Nested if-else)"
+sidebar_label: "Nested Conditions"
+description: "Master decision making inside decisions using nested if-else statements in Python."
+keywords: [python nested if, nested conditions python, nested if else, decision trees python]
+---
+
+# Nested Conditions (Choices Inside Choices)
+
+In real life, making a decision often depends on a prior decision. 
+
+For example, before riding a motor bike, you must first check if you have a **Driver's License**. If you have a license, you then check if you are wearing a **Helmet**. 
+
+In Python, putting one `if` or `if-else` statement inside another `if` or `else` block is called **Nested Conditions**.
+
+---
+
+## 1. Syntax Structure: Nested Condition in `if` Block
+
+The conditional block inside another `if` or `else` block is called a **Nested Conditional Block**.
+
+{/* Visual Syntax Breakdown Card - NESTED IN IF (Matching if-else style 100%) */}
+<div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '24px', margin: '24px 0' }}>
+
+  <p style={{ fontSize: '13px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    Syntax Structure of Nested Condition in IF Block
+  </p>
+
+  {/* Line 1: if condition_A: */}
+  <div style={{ fontFamily: 'monospace', fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>
+    <span style={{ color: '#e11d48', marginRight: '8px' }}>if</span>
+    <span style={{ color: '#059669' }}>condition_A</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  {/* Row 1: Block 1 */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px', marginBottom: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#e0f2fe', border: '2px solid #0284c7', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#0369a1', textTransform: 'uppercase' }}>OUTER IF BLOCK</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#0c4a6e' }}>Executes if condition_A is True</span>
+    </div>
+  </div>
+
+  {/* Line 2: if condition_B: (Indented under condition_A) */}
+  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '8px 12px', minWidth: '130px', textAlign: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+    </div>
+    <div style={{ fontFamily: 'monospace', fontSize: '18px', fontWeight: '700' }}>
+      <span style={{ color: '#e11d48', marginRight: '8px' }}>if</span>
+      <span style={{ color: '#059669' }}>condition_B</span>
+      <span style={{ color: '#0f172a' }}>:</span>
+    </div>
+  </div>
+
+  {/* Row 3: Block 2 (NESTED BLOCK - 8 Spaces) */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px', marginBottom: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ background: '#fae8ff', border: '2px dashed #d946ef', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#86198f', textTransform: 'uppercase' }}>NESTED GAP</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#a21caf' }}>(+ 4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#dcfce7', border: '2px solid #16a34a', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#15803d', textTransform: 'uppercase' }}>NESTED CONDITIONAL BLOCK</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#14532d' }}>Executes ONLY if BOTH condition_A and condition_B are True</span>
+    </div>
+  </div>
+
+  {/* Line 4: else: */}
+  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '8px 12px', minWidth: '130px', textAlign: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+    </div>
+    <div style={{ fontFamily: 'monospace', fontSize: '18px', fontWeight: '700' }}>
+      <span style={{ color: '#e11d48', marginRight: '4px' }}>else</span>
+      <span style={{ color: '#0f172a' }}>:</span>
+    </div>
+  </div>
+
+  {/* Row 5: Inner Else Block */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ background: '#fae8ff', border: '2px dashed #d946ef', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#86198f', textTransform: 'uppercase' }}>NESTED GAP</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#a21caf' }}>(+ 4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#fef3c7', border: '2px solid #d97706', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#b45309', textTransform: 'uppercase' }}>NESTED ELSE BLOCK</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#78350f' }}>Executes if condition_A is True BUT condition_B is False</span>
+    </div>
+  </div>
+
+</div>
+
+### Real-Time Example: Blood Donation Eligibility
+```python
+age = 20
+weight = 55
+
+if age >= 18:
+    print("Age requirement met.")
+    
+    # Nested condition inside IF
+    if weight >= 50:
+        print("Eligible to donate blood!")
+    else:
+        print("Not eligible: Weight must be 50 kg or more.")
+else:
+    print("Not eligible: Must be 18 years or older.")
+```
+
+---
+
+## 2. Syntax Structure: Nested Condition in `else` Block
+
+We can also write a nested condition inside an `else` block.
+
+{/* Visual Syntax Breakdown Card - NESTED IN ELSE (Matching if-else style 100%) */}
+<div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '24px', margin: '24px 0' }}>
+
+  <p style={{ fontSize: '13px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    Syntax Structure of Nested Condition in ELSE Block
+  </p>
+
+  {/* Line 1: if condition_A: */}
+  <div style={{ fontFamily: 'monospace', fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>
+    <span style={{ color: '#e11d48', marginRight: '8px' }}>if</span>
+    <span style={{ color: '#059669' }}>condition_A</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  {/* Row 1: Block 1 */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px', marginBottom: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#e0f2fe', border: '2px solid #0284c7', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#0369a1', textTransform: 'uppercase' }}>IF BLOCK 1</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#0c4a6e' }}>Executes if condition_A is True</span>
+    </div>
+  </div>
+
+  {/* Line 2: else: */}
+  <div style={{ fontFamily: 'monospace', fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>
+    <span style={{ color: '#e11d48', marginRight: '4px' }}>else</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  {/* Line 3: if condition_B: inside ELSE */}
+  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '8px 12px', minWidth: '130px', textAlign: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+    </div>
+    <div style={{ fontFamily: 'monospace', fontSize: '18px', fontWeight: '700' }}>
+      <span style={{ color: '#e11d48', marginRight: '8px' }}>if</span>
+      <span style={{ color: '#059669' }}>condition_B</span>
+      <span style={{ color: '#0f172a' }}>:</span>
+    </div>
+  </div>
+
+  {/* Row 4: Nested Block inside ELSE */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ background: '#fae8ff', border: '2px dashed #d946ef', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#86198f', textTransform: 'uppercase' }}>NESTED GAP</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#a21caf' }}>(+ 4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#dcfce7', border: '2px solid #16a34a', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#15803d', textTransform: 'uppercase' }}>NESTED CONDITIONAL BLOCK</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#14532d' }}>Executes if condition_A is False AND condition_B is True</span>
+    </div>
+  </div>
+
+</div>
+
+### Real-Time Example: Streaming Quality Check
+```python
+is_logged_in = True
+has_premium = False
+
+if not is_logged_in:
+    print("Please log in to watch videos.")
+else:
+    # Nested condition INSIDE the else block
+    if has_premium:
+        print("Streaming in 4K Ultra HD!")
+    else:
+        print("Streaming in 720p High Definition.")
+```
+
+---
+
+## 3. Best Practices for Beginners
+
+1. **Watch the Indentation:** Always make sure your inner `if-else` blocks align properly with 4 spaces (or 8 spaces for nested blocks).
+2. **Keep it Simple:** Try not to nest more than 2 levels deep. If code gets too deeply nested, combine rules using logical operators (`and`, `or`).
+
+---
+
+## What's Next?
+
+Now that you understand nested decisions in both `if` and `else` blocks, let's explore **Match-Case Statements** for handling exact pattern matches!

@@ -1,0 +1,188 @@
+---
+sidebar_position: 4
+title: "Python Nested Loops & Pattern Printing"
+sidebar_label: "Nested Loops"
+description: "Master loops inside loops in Python to process multi-step rounds and grids."
+keywords: [python nested loops, loop inside loop, pattern printing python, 2d grid python]
+---
+
+# Nested Loops (Loops Inside Loops)
+
+A **Nested Loop** is simply a loop placed inside another loop.
+
+---
+
+## 1. Why Do We Need Nested Loops?
+
+Sometimes in programming, one repeated task contains another repeated task inside it.
+
+### Real-World Examples:
+
+* **Classroom Seating:** A teacher inspects **Row 1** (Seats 1, 2, 3, 4), then **Row 2** (Seats 1, 2, 3, 4), then **Row 3** (Seats 1, 2, 3, 4).
+* **Cinema Theater:** Movie seats are arranged in rows and seats (Row A: Seats 1 to 10, Row B: Seats 1 to 10).
+* **Calendar:** A year has **12 months** (outer loop), and each month has **30 days** (inner loop).
+* **Multiplication Tables:** Printing table numbers 1 to 10 (outer loop), where each number is multiplied by 1 to 10 (inner loop).
+
+In all these scenarios, you have a **main repeated action** (rows/months), and inside each main action, you perform **another repeated action** (seats/days).
+
+> **Key Rule:** When one repeated task contains another repeated task, we use **nested loops**.
+
+---
+
+## 2. How Nested Loops Work
+
+For **every single turn** of the outer loop, the inner loop runs completely from start to finish.
+
+* **Outer Loop:** Controls the main round (e.g., current row).
+* **Inner Loop:** Runs completely from start to finish for *every single turn* of the outer loop.
+
+> **Important Rule:** The inner loop **always starts from the beginning** every time the outer loop begins a new iteration.
+
+{/* Visual Syntax Breakdown Card - NESTED LOOPS */}
+<div style={{ background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', padding: '16px', margin: '16px 0', fontFamily: 'Consolas, Monaco, "Courier New", monospace' }}>
+
+  <p style={{ fontFamily: 'sans-serif', fontSize: '12px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    Syntax Structure of Nested Loops
+  </p>
+
+  {/* Line 1: Outer Loop */}
+  <div style={{ fontSize: '18px', fontWeight: '700', color: '#0f172a', marginBottom: '6px' }}>
+    <span style={{ color: '#dc2626', marginRight: '6px' }}>for</span>
+    <span style={{ color: '#0284c7', marginRight: '6px' }}>outer_item</span>
+    <span style={{ color: '#dc2626', marginRight: '6px' }}>in</span>
+    <span style={{ color: '#16a34a' }}>outer_sequence</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  {/* Indentation Level 1: Outer Body holding Inner Loop */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '8px', marginBottom: '8px' }}>
+    
+    {/* Purple Indentation Box */}
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '6px', padding: '8px 6px', minWidth: '85px', width: '85px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>
+      <span style={{ fontSize: '10px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '10px', fontWeight: '700', color: '#6b21a8', marginTop: '2px' }}>(4 Spaces)</span>
+    </div>
+
+    {/* Right Column: Inner Loop Container */}
+    <div style={{ flex: 1, background: '#f8fafc', border: '1px solid #94a3b8', borderRadius: '6px', padding: '10px' }}>
+      
+      {/* Line 2: Inner Loop */}
+      <div style={{ fontSize: '16px', fontWeight: '700', color: '#0f172a', marginBottom: '6px' }}>
+        <span style={{ color: '#dc2626', marginRight: '6px' }}>for</span>
+        <span style={{ color: '#d97706', marginRight: '6px' }}>inner_item</span>
+        <span style={{ color: '#dc2626', marginRight: '6px' }}>in</span>
+        <span style={{ color: '#16a34a' }}>inner_sequence</span>
+        <span style={{ color: '#0f172a' }}>:</span>
+      </div>
+
+      {/* Indentation Level 2: Inner Loop Body */}
+      <div style={{ display: 'flex', alignItems: 'stretch', gap: '8px' }}>
+        
+        {/* Magenta Indentation Box */}
+        <div style={{ background: '#fae8ff', border: '2px dashed #d946ef', borderRadius: '6px', padding: '6px', minWidth: '85px', width: '85px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>
+          <span style={{ fontSize: '9px', fontWeight: '800', color: '#86198f', textTransform: 'uppercase' }}>NESTED GAP</span>
+          <span style={{ fontSize: '10px', fontWeight: '700', color: '#a21caf', marginTop: '1px' }}>(+ 4 Spaces)</span>
+        </div>
+
+        {/* Inner Code Block Box */}
+        <div style={{ flex: 1, background: '#dcfce7', border: '1px solid #16a34a', borderRadius: '6px', padding: '8px 12px' }}>
+          <span style={{ fontSize: '10px', fontWeight: '800', color: '#15803d', textTransform: 'uppercase' }}>INNER LOOP BODY BLOCK</span>
+          <div style={{ fontFamily: 'monospace', fontSize: '11px', fontWeight: '600', color: '#14532d', marginTop: '1px' }}>Executes completely for EVERY turn of outer loop</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+---
+
+## 3. Basic Example: How Outer and Inner Loops Execute
+
+Let's print messages showing when the Outer Loop turns vs when the Inner Loop runs:
+
+```python
+for i in range(1, 3):         # Outer loop: i = 1, 2
+    print(f"--- Outer Loop Turn: i = {i} ---")
+    
+    for j in range(1, 4):     # Inner loop: j = 1, 2, 3
+        print(f"  Inner Loop Running: j = {j}")
+```
+
+### Output:
+```text
+--- Outer Loop Turn: i = 1 ---
+  Inner Loop Running: j = 1
+  Inner Loop Running: j = 2
+  Inner Loop Running: j = 3
+--- Outer Loop Turn: i = 2 ---
+  Inner Loop Running: j = 1
+  Inner Loop Running: j = 2
+  Inner Loop Running: j = 3
+```
+
+### Notice What Happened:
+
+* **Outer Loop Turn 1 (`i = 1`):**
+  * Inner loop runs completely: `j = 1`, `j = 2`, `j = 3`
+* **Outer Loop Turn 2 (`i = 2`):**
+  * The inner loop **starts again from `j = 1`**. It does **NOT** continue from `j = 4`!
+
+> **Most Important Concept:** Every new iteration of the outer loop creates a **completely new execution** of the inner loop from start to finish.
+
+<p style={{ textAlign: 'center', fontSize: '14px', fontWeight: '600', color: '#475569', marginTop: '24px', marginBottom: '8px' }}>
+  Now let's connect the programming execution of nested loops with a real-world example:
+</p>
+
+![Real-world view of Nested Loops](/img/illustrations/nested-loops-real-life.webp)
+<figcaption style={{ textAlign: 'center', fontSize: '13px', color: '#64748b', marginTop: '6px', marginBottom: '24px' }}>
+  Real-world view of Nested Loops: Outer Loop controls the main repetition, Inner Loop completes all repeated tasks inside it.
+</figcaption>
+
+---
+
+## 4. Printing Grid Patterns (Rows & Columns)
+
+Think of a grid like a set of **rows** and **columns**.
+
+* The **outer loop** controls the **rows**.
+* The **inner loop** controls the **columns**.
+
+For every row, the columns are printed completely on the same line. Then, the program moves to the next line for the next row.
+
+To keep printed items on the same line in Python, we pass `end=""` to `print()`. An empty `print()` afterwards moves execution to the next line:
+
+```python
+for row in range(3):
+    for col in range(3):
+        print("* ", end="")     # Print star and stay on same line
+    print()                     # Move to next line after completing a row
+```
+
+### Output:
+```text
+* * * 
+* * * 
+* * * 
+```
+
+---
+
+## 5. Summary: Quick Revision Table
+
+| Concept | Meaning |
+| :--- | :--- |
+| **Nested Loop** | A loop placed inside another loop. |
+| **Outer Loop** | Controls the main repetition (e.g., current row or main turn). |
+| **Inner Loop** | Runs completely from start to finish for *every single turn* of the outer loop. |
+| **Execution Order** | Every time the outer loop runs once, the inner loop resets and starts again from the beginning. |
+| **Common Use Cases** | Grids (rows & columns), 2D tables, nested structures, and multi-level tasks. |
+
+---
+
+## What's Next?
+
+Congratulations! You now master basic loops, loop controls, and nested loops. Next, we will learn about **Lists and Data Collections** in Part 2!

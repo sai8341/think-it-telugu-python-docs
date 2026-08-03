@@ -465,3 +465,128 @@
   }
 }
 
+/* --- Active Condition Evaluator --- */
+.pylab-debug-condition {
+  padding: 10px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+[data-theme='light'] .pylab-debug-condition {
+  border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+.pylab-debug-condition-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+[data-theme='light'] .pylab-debug-condition-card {
+  background: rgba(37, 99, 235, 0.04);
+}
+
+.pylab-debug-condition-expr {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: #93c5fd;
+}
+
+[data-theme='light'] .pylab-debug-condition-expr {
+  color: #1e3a8a;
+}
+
+.pylab-debug-condition-arrow {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.pylab-debug-condition-res {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.pylab-debug-condition-res.is-true {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.15);
+}
+
+[data-theme='light'] .pylab-debug-condition-res.is-true {
+  color: #065f46;
+  background: rgba(52, 211, 153, 0.2);
+}
+
+.pylab-debug-condition-res.is-false {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.15);
+}
+
+[data-theme='light'] .pylab-debug-condition-res.is-false {
+  color: #991b1b;
+  background: rgba(248, 113, 113, 0.2);
+}
+
+/* --- Debugger Legend / Help Card --- */
+.pylab-debug-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  margin: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+}
+
+[data-theme='light'] .pylab-debug-legend {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.pylab-debug-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.pylab-debug-legend-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.pylab-indicator-next {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid #22c55e;
+  color: #22c55e;
+}
+
+.pylab-indicator-prev {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px dashed #f59e0b;
+  color: #f59e0b;
+}
+
+.pylab-debug-legend-text {
+  color: #cbd5e1;
+}
+
+[data-theme='light'] .pylab-debug-legend-text {
+  color: #475569;
+}
+
+

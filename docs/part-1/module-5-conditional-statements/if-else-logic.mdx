@@ -1,90 +1,209 @@
 ---
 title: "Python If-Else Conditional Statements"
 sidebar_label: "If-Else Conditions"
-description: "Control your program's logic using if, else, and conditional statements in Python."
-keywords: [python if else, conditional statements, python logic, if condition python]
+description: "Master decision making, conditions, colons, and indentation in Python."
+keywords: [python if else, conditional statements, python logic, if condition python, indentation python]
 ---
 
-# If-Else Conditions
+# Decision Making in Python (if-else)
 
-Normally, Python runs your code line-by-line from top to bottom. But what if you want your program to make choices? 
+Normally, Python executes your code line-by-line from top to bottom. But real-world software needs to make decisions based on rules.
 
 For example:
-- **If** a student gets 35 marks or more, they **Pass**.
-- **Else** (otherwise), they **Fail**.
+- **If** a student gets 35 marks or more &rarr; They **Pass**.
+- **Else** (otherwise) &rarr; They **Fail**.
 
-To do this, we use conditional statements. They evaluate a condition (which returns `True` or `False`) to decide which path of code to run:
-
-```text
-               [ Start of Code ]
-                       |
-             Is marks >= 35? (True/False)
-               /                  \
-            (True)              (False)
-             /                      \
-   [ Print "Pass" ]            [ Print "Fail" ]
-             \                      /
-              \                    /
-               [ Continue Program ]
-```
+To achieve this, we use **Conditional Statements**.
 
 ---
 
-## 1. The Simple `if` Statement
+## 1. What is a "Condition" vs a "Conditional Statement"?
 
-The `if` statement checks a condition. If the condition is **`True`**, the code directly inside it runs. If it is **`False`**, Python completely skips it.
+Before writing code, let's clarify two core terms:
+
+*   **Condition:** A logical test that evaluates to either **`True`** or **`False`** (e.g., `marks >= 35`).
+*   **Conditional Statement:** The decision-making construct (`if`, `if-else`) that controls which block of code to run based on the condition.
+
+---
+
+## 2. Visual Structure: Anatomy of an `if` Statement
+
+Understanding how an `if` statement is structured visually helps prevent syntax and indentation errors:
+
+{/* Visual Syntax Breakdown Card - IF ONLY */}
+<div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '24px', margin: '24px 0' }}>
+
+  <p style={{ fontSize: '13px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    Syntax Structure of an if Statement
+  </p>
+
+  {/* Syntax Line */}
+  <div style={{ fontFamily: 'monospace', fontSize: '22px', fontWeight: '700', marginBottom: '12px' }}>
+    <span style={{ color: '#e11d48', marginRight: '8px' }}>if</span>
+    <span style={{ color: '#059669' }}>condition</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
+
+  {/* Indentation + Conditional Block Visual */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px', marginBottom: '8px' }}>
+    
+    {/* Purple Indentation Box */}
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '14px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '13px', fontWeight: '700', color: '#6b21a8', marginTop: '2px' }}>(4 Spaces)</span>
+    </div>
+
+    {/* Blue Code Block Box */}
+    <div style={{ flex: 1, background: '#e0f2fe', border: '2px solid #0284c7', borderRadius: '8px', padding: '14px 18px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#0369a1', textTransform: 'uppercase' }}>CONDITIONAL BLOCK</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '14px', fontWeight: '600', color: '#0c4a6e', marginTop: '2px' }}>Block of code (Executes ONLY if condition is True)</span>
+    </div>
+
+  </div>
+
+</div>
+
+---
+
+## 3. The 3 Golden Rules of `if` Syntax
+
+1. **The Condition:** The logical test that produces `True` or `False`.
+2. **The Colon (`:`):** Placed at the end of the `if` line. It signals to Python: *"Attention! A new block of code starts on the next line."*
+3. **Indentation (4 Spaces):** Spacing in front of the conditional block. It is used to identify which lines belong **inside** the conditional block.
+
+---
+
+## 4. The Simple `if` Statement (One Choice)
+
+The `if` statement checks a condition. If the condition is **`True`**, the conditional block runs. If it is **`False`**, Python completely skips it.
 
 ```python
 marks = 75
 
-# The colon (:) tells Python a check is starting
 if marks >= 35:
     print("Congratulations!")
     print("You passed the exam.")
+
+print("Program complete.")
+```
+
+### Output:
+```text
+Congratulations!
+You passed the exam.
+Program complete.
 ```
 
 ---
 
-## 2. What is Indentation & Why is it Important?
+## 5. The `if-else` Statement (Two Choices)
 
-In languages like C, Java, or JavaScript, programmers use curly braces `{ }` to group lines of code together. 
+What if you want one action when the condition is `True`, and a fallback action when it is `False`? We add an **`else`** block.
 
-But **Python does not use curly braces**. Instead, Python uses **Indentation** (blank spaces at the start of a line) to group code blocks!
+{/* Visual Syntax Breakdown Card - IF ELSE */}
+<div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '24px', margin: '24px 0' }}>
 
-```python
-if marks >= 35:
-    print("Congratulations!")  # Indented by 4 spaces
-    print("You passed.")       # Indented by 4 spaces
-    
-print("Thank you!")            # NOT indented (runs normally outside the check)
-```
+  <p style={{ fontSize: '13px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    Syntax Structure of an if-else Statement
+  </p>
 
-### Key Rules of Indentation:
-*   **The Standard:** The standard way is to use **4 spaces** (or press the **Tab** key once) to indent your code.
-*   **The Container:** Every line that is indented under the `if` statement is considered to be "inside" that check.
-*   **The Danger (IndentationError):** If you forget to indent, or mix spaces and tabs, Python will get confused and crash with an `IndentationError`. 
+  {/* IF Line */}
+  <div style={{ fontFamily: 'monospace', fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>
+    <span style={{ color: '#e11d48', marginRight: '8px' }}>if</span>
+    <span style={{ color: '#059669' }}>condition</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
 
-> **Python's Superpower:** Indentation makes Python code incredibly clean, neat, and easy for everyone to read, because it forces all programmers to align their code properly!
+  {/* IF Block */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px', marginBottom: '16px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#e0f2fe', border: '2px solid #0284c7', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#0369a1', textTransform: 'uppercase' }}>IF BLOCK</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#0c4a6e' }}>Executes ONLY if condition is True</span>
+    </div>
+  </div>
 
----
+  {/* ELSE Line */}
+  <div style={{ fontFamily: 'monospace', fontSize: '20px', fontWeight: '700', marginBottom: '8px' }}>
+    <span style={{ color: '#e11d48', marginRight: '4px' }}>else</span>
+    <span style={{ color: '#0f172a' }}>:</span>
+  </div>
 
-## 3. The `if-else` Structure (Two Choices)
+  {/* ELSE Block */}
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '12px' }}>
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '12px', minWidth: '130px', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#7e22ce', textTransform: 'uppercase' }}>INDENTATION</span>
+      <span style={{ fontSize: '12px', fontWeight: '700', color: '#6b21a8' }}>(4 Spaces)</span>
+    </div>
+    <div style={{ flex: 1, background: '#fef3c7', border: '2px solid #d97706', borderRadius: '8px', padding: '12px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <span style={{ fontSize: '11px', fontWeight: '800', color: '#b45309', textTransform: 'uppercase' }}>ELSE BLOCK</span>
+      <span style={{ fontFamily: 'monospace', fontSize: '13px', fontWeight: '600', color: '#78350f' }}>Executes ONLY if condition is False</span>
+    </div>
+  </div>
 
-What if you want to run one check when the condition is true, and a different check when it is false? We add an `else` block:
+</div>
 
 ```python
 marks = 28
 
 if marks >= 35:
-    print("Congratulations! You passed.")
+    print("Result: Pass")
 else:
-    print("Sorry, you did not pass. Keep studying and try again!")
+    print("Result: Fail")
 ```
 
-If `marks` is 35 or more, only the code under `if` runs. If `marks` is less than 35, only the code under `else` runs. Note that both `if` and `else` end with a colon (`:`), and their blocks are indented!
+### How it executes:
+*   If `marks >= 35` is **`True`**, only the `if` block runs.
+*   If `marks >= 35` is **`False`**, only the `else` block runs.
+*   Notice that both `if` and `else` end with a colon (`:`), and their blocks are indented by 4 spaces.
+
+---
+
+## 6. What is Indentation & Possible Mistakes
+
+In languages like C, Java, or JavaScript, curly braces `{ }` are used to group code. **Python does not use curly braces.** Instead, Python uses **Indentation** (spaces) to define a code block.
+
+```python
+marks = 80
+
+if marks >= 35:
+    print("Line 1: Inside IF block")   # Indented -> Inside IF
+    print("Line 2: Inside IF block")   # Indented -> Inside IF
+
+print("Line 3: Outside IF block")     # NOT indented -> Always runs
+```
+
+### Common Mistakes to Avoid:
+
+#### ❌ Mistake 1: Missing Colon (`:`)
+```python
+if marks >= 35  # Missing colon at the end!
+    print("Pass")
+# SyntaxError: expected ':'
+```
+
+#### ❌ Mistake 2: Missing Indentation
+```python
+if marks >= 35:
+print("Pass")  # Not indented!
+# IndentationError: expected an indented block after 'if' statement
+```
+
+---
+
+## Summary
+
+*   A **Condition** evaluates to `True` or `False`.
+*   A **Conditional Block** is the indented block of code that executes when a condition is `True`.
+*   An **`else` Block** executes when the condition is `False`.
+*   **Indentation (4 spaces)** is used to identify the conditional blocks.
+*   Always use a **colon (`:`)** after `if` and `else`.
 
 ---
 
 ## What's Next?
 
-What if you have more than two choices? For example, grading a student (A, B, C, or Fail). Let's learn how to handle multiple checks using **`elif` chains** in the next lesson!
+Now that you understand basic `if-else` logic and visual structure, let's learn how to handle multiple choices using **`elif` chains** in the next lesson!

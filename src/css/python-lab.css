@@ -417,8 +417,38 @@ pre,
   overflow: hidden;
 }
 
+/* Syntax Highlight Container (Scrollable) */
+.pylab-highlight-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
 /* Syntax Highlight Overlay & Input Textarea */
-.pylab-highlight,
+.pylab-highlight {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 12px 16px 40px 16px !important;
+  box-sizing: border-box;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  border: none;
+  white-space: pre;
+  tab-size: 4;
+  overflow: hidden;
+  pointer-events: none;
+  color: #1f2937;
+  z-index: 1;
+}
+
 .pylab-input {
   position: absolute;
   top: 0;
@@ -434,18 +464,9 @@ pre,
   border: none;
   white-space: pre;
   tab-size: 4;
-}
-
-.pylab-input {
   overflow: auto;
 }
 
-.pylab-highlight {
-  overflow: hidden;
-  pointer-events: none;
-  color: #1f2937;
-  z-index: 1;
-}
 [data-theme='dark'] .pylab-highlight {
   color: #E6EDF3;
 }
@@ -455,7 +476,7 @@ pre,
   left: 0;
   width: 100%;
   height: 1.5em;
-  background-color: rgba(34, 197, 94, 0.2);
+  background-color: rgba(34, 197, 94, 0.15);
   border-left: 3px solid #22c55e;
   z-index: 1; /* Sit above pre background */
   pointer-events: none;
@@ -464,8 +485,8 @@ pre,
 }
 
 [data-theme='dark'] .pylab-active-line-overlay {
-  background-color: rgba(56, 139, 253, 0.12);
-  border-left-color: #58A6FF;
+  background-color: rgba(34, 197, 94, 0.1);
+  border-left-color: #22c55e;
 }
 
 .pylab-active-num {
@@ -473,7 +494,31 @@ pre,
   font-weight: bold;
 }
 [data-theme='dark'] .pylab-active-num {
-  color: #58A6FF !important;
+  color: #22c55e !important;
+}
+
+/* Previous Line Highlight (Just Executed) */
+.pylab-prev-line-overlay {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5em;
+  background-color: rgba(245, 158, 11, 0.1);
+  border-left: 3px dashed #f59e0b;
+  z-index: 1;
+  pointer-events: none;
+  transition: top 0.15s ease-out;
+  font-size: 0.9rem;
+}
+
+[data-theme='dark'] .pylab-prev-line-overlay {
+  background-color: rgba(245, 158, 11, 0.06);
+  border-left-color: #f59e0b;
+}
+
+.pylab-prev-num {
+  color: #f59e0b !important;
+  font-weight: bold;
 }
 
 .pylab-input {

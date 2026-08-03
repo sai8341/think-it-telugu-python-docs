@@ -7,6 +7,7 @@ export default function CodeEditor({
   runCode,
   isDebugging,
   currentDebugStep,
+  prevLine,
   isRunning,
   textareaRef,
   syncScrollExternal,
@@ -163,25 +164,48 @@ export default function CodeEditor({
   return (
     <>
       <div className="pylab-linenum" ref={lnRef}>
-        {Array.from({ length: lineCount }, (_, i) => (
-          <div key={i} className={isDebugging && currentDebugStep?.line === i + 1 ? 'pylab-active-num' : ''}>{i + 1}</div>
-        ))}
+        {Array.from({ length: lineCount }, (_, i) => {
+          const lineNum = i + 1;
+          const isCurrent = isDebugging && currentDebugStep?.line === lineNum;
+          const isPrev = isDebugging && prevLine === lineNum;
+          let className = '';
+          if (isCurrent) className = 'pylab-active-num';
+          else if (isPrev) className = 'pylab-prev-num';
+          
+          return (
+            <div key={i} className={className}>
+              {lineNum}
+            </div>
+          );
+        })}
       </div>
       <div className="pylab-editor-inner">
-        {/* Syntax-highlighted overlay */}
-        <pre
-          className="pylab-highlight"
+        {/* Scrollable container for highlight and overlays */}
+        <div 
+          className="pylab-highlight-container"
           ref={hlRef}
-          aria-hidden="true"
-          dangerouslySetInnerHTML={{ __html: highlightedCode + '\n' }}
-        />
-        {/* Active Line Overlay */}
-        {isDebugging && currentDebugStep && currentDebugStep.line > 0 && (
-          <div 
-            className="pylab-active-line-overlay"
-            style={{ top: `calc(12px + ${(currentDebugStep.line - 1) * 1.5}em)` }}
+        >
+          {/* Syntax-highlighted overlay */}
+          <pre
+            className="pylab-highlight"
+            aria-hidden="true"
+            dangerouslySetInnerHTML={{ __html: highlightedCode + '\n' }}
           />
-        )}
+          {/* Active Line Overlay */}
+          {isDebugging && currentDebugStep && currentDebugStep.line > 0 && (
+            <div 
+              className="pylab-active-line-overlay"
+              style={{ top: `calc(12px + ${(currentDebugStep.line - 1) * 1.5}em)` }}
+            />
+          )}
+          {/* Previous Line Overlay */}
+          {isDebugging && prevLine > 0 && (
+            <div 
+              className="pylab-prev-line-overlay"
+              style={{ top: `calc(12px + ${(prevLine - 1) * 1.5}em)` }}
+            />
+          )}
+        </div>
         {/* Invisible textarea for input */}
         <textarea
           ref={taRef}
