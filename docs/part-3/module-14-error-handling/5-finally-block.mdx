@@ -1,0 +1,32 @@
+---
+title: "The finally Block - Python in Telugu | Think IT Telugu"
+sidebar_label: "The finally Block"
+description: "Learn about The finally Block in Python with real-world examples. This Think IT Telugu tutorial explains The finally Block easily for AI and Data Science beginners."
+keywords: ["Python", "The finally Block", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# The finally Block
+
+The `finally` block runs no matter what. It executes whether an error occurs or not. It is typically used for cleanup tasks like closing open files or database connections.
+
+```python
+try:
+    print("Opening database...")
+    x = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+finally:
+    print("Closing database connection... (Always Runs)")
+```
+
+### Output:
+```text
+Opening database...
+Cannot divide by zero!
+Closing database connection... (Always Runs)
+```
+:::tip Golden Rule
+Never trust user inputs. Always use **try-except** blocks to protect your programs from crashing due to unexpected input values!
+:::
+
+---

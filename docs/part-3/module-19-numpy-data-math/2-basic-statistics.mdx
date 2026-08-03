@@ -1,0 +1,142 @@
+---
+title: "Basic Statistics with NumPy - Python in Telugu | Think IT Telugu"
+sidebar_label: "2. Basic Statistics"
+description: "Learn mean, median, standard deviation, and other basic statistics using NumPy for ML beginners."
+keywords: ["Python", "Statistics", "NumPy", "Mean", "Median", "Telugu tutorial", "AI", "ML"]
+---
+
+# Basic Statistics with NumPy
+
+Before you can build any ML model, you need to **understand your data**. Statistics helps you answer simple questions like: What is the average? What is the highest value? How spread out is the data?
+
+NumPy gives you ready-made functions for all of these.
+
+---
+
+## 1. Mean (Average)
+
+The **mean** is the average of all numbers. Add them all up and divide by how many there are.
+
+```python
+import numpy as np
+
+marks = np.array([85, 90, 78, 92, 88])
+
+average = np.mean(marks)
+print("Mean:", average)  # Output: Mean: 86.6
+```
+
+> **In ML:** The mean of your data tells you the "center" — what a typical value looks like.
+
+---
+
+## 2. Median (Middle Value)
+
+The **median** is the middle number when you sort the data. It is more useful than mean when your data has extreme values (outliers).
+
+```python
+import numpy as np
+
+salaries = np.array([30000, 35000, 32000, 28000, 500000])
+
+print("Mean:", np.mean(salaries))    # Output: Mean: 125000.0  (misleading!)
+print("Median:", np.median(salaries))  # Output: Median: 32000.0  (more accurate!)
+```
+
+> **Why median matters:** If one person earns ₹5 lakhs and others earn ₹30K, the mean gets pulled up. The median gives a better picture of what most people earn.
+
+---
+
+## 3. Min, Max, and Sum
+
+```python
+import numpy as np
+
+scores = np.array([72, 85, 91, 68, 95])
+
+print("Min:", np.min(scores))   # Output: Min: 68
+print("Max:", np.max(scores))   # Output: Max: 95
+print("Sum:", np.sum(scores))   # Output: Sum: 411
+```
+
+---
+
+## 4. Standard Deviation (How Spread Out is the Data?)
+
+**Standard deviation** tells you how far the numbers are from the mean. A small number means the data is tightly packed. A big number means the data is spread out.
+
+```python
+import numpy as np
+
+# Consistent student: marks are close together
+student_a = np.array([80, 82, 78, 81, 79])
+print("Std Dev (A):", np.std(student_a))  # Output: ~1.41
+
+# Inconsistent student: marks jump around
+student_b = np.array([50, 95, 60, 90, 55])
+print("Std Dev (B):", np.std(student_b))  # Output: ~18.17
+```
+
+> **In ML:** Standard deviation helps you see if your data needs **scaling** before feeding it to a model. If one feature has values from 1-10 and another has 1000-50000, the model gets confused. We fix this using **feature scaling**.
+
+---
+
+## 5. What is a Vector? (Intuition for ML)
+
+In everyday language, a **vector** is just a list of numbers.
+
+```python
+import numpy as np
+
+# This is a vector (1D array)
+student_features = np.array([85, 72, 3.8])
+# Meaning: [marks, attendance%, GPA]
+```
+
+In ML, each data point (like a student) is stored as a **vector of features**. The ML model learns patterns from these vectors.
+
+---
+
+## 6. What is a Matrix? (Intuition for ML)
+
+A **matrix** is a table of numbers — many vectors stacked together.
+
+```python
+import numpy as np
+
+# Each row = one student
+# Columns = [marks, attendance%, GPA]
+student_data = np.array([
+    [85, 72, 3.8],
+    [90, 95, 3.9],
+    [60, 50, 2.5],
+    [78, 88, 3.2]
+])
+
+print("Shape:", student_data.shape)  # Output: (4, 3) → 4 students, 3 features
+
+# Get the average marks (first column)
+avg_marks = np.mean(student_data[:, 0])
+print("Average marks:", avg_marks)  # Output: 78.25
+```
+
+> **In ML terminology:**
+> - Each **row** is a **sample** (one data point)
+> - Each **column** is a **feature** (one measurement)
+> - The entire table is your **dataset**
+
+---
+
+## Summary
+
+| Function | What it Does | Example |
+|---|---|---|
+| `np.mean()` | Average of all values | `np.mean([1,2,3])` → 2.0 |
+| `np.median()` | Middle value (better for outliers) | `np.median([1,2,100])` → 2.0 |
+| `np.min()` / `np.max()` | Smallest / Largest value | `np.max([5,3,9])` → 9 |
+| `np.sum()` | Total of all values | `np.sum([1,2,3])` → 6 |
+| `np.std()` | How spread out the data is | Low = consistent, High = scattered |
+
+* A **vector** = one row of numbers (one data point).
+* A **matrix** = many rows stacked (your whole dataset).
+* Understanding these basics is **essential** before building any ML model.

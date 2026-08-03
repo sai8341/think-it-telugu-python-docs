@@ -1,0 +1,243 @@
+---
+id: 4-methods-variables-scope
+title: "Instance Methods & Variable Scopes - Python in Telugu | Think IT Telugu"
+sidebar_label: "4. Instance Methods & Scope"
+description: "Learn how instance methods work, why Python passes self automatically, and the crucial difference between Instance Variables and Local Variables."
+keywords: ["Python", "Instance Methods", "Instance Variables", "Local Variables", "Scope", "Telugu tutorial", "Learn Python in Telugu", "AI"]
+---
+
+# Instance Methods & Variable Scopes
+
+Objects aren't just passive data holders—they can perform actions. In Python, functions defined inside a class that operate on an object's data are called **Instance Methods**.
+
+In this lesson, we will explore how instance methods work under the hood and clarify the vital difference between **Instance Variables** and **Local Variables**.
+
+---
+
+## 1. Learning Objective
+
+By the end of this lesson, you will understand:
+* What an Instance Method is and why every instance method requires `self` as its first parameter.
+* How Python translates `s1.introduce()` to `Student.introduce(s1)` behind the scenes.
+* The difference in memory lifecycle between Instance Variables (`self.x`) and Local Variables (`x`).
+* Why local variables disappear as soon as a method finishes executing.
+
+---
+
+## 2. Why This Concept Exists
+
+In procedural programming, if you have a `calculate_grade(student_name, marks, attendance)` function, you must manually pass every piece of data into the function every single time.
+
+With **Instance Methods**, because the method belongs to the object, it already has direct access to all of that object's internal data through `self`. You don't need to pass `name`, `marks`, or `attendance` repeatedly!
+
+---
+
+## 3. Common Beginner Confusions
+
+### Confusion 1: "Why do I have to write `def introduce(self):` if I don't pass any arguments when calling `s1.introduce()`?"
+* **Answer:** When you call `s1.introduce()`, Python automatically transforms your call into `Student.introduce(s1)`. Python silently passes `s1` (the object reference) as the first argument into `self`.
+
+### Confusion 2: "Can I access a variable defined in `__init__` inside another method?"
+* **Answer:** YES, if it is an Instance Variable (`self.name`). NO, if it is a local variable (`temp_val = 100`). Local variables vanish when `__init__` finishes.
+
+---
+
+## 4. Mental Model: Remote Control Buttons & Temporary Scratchpad
+
+1. **Remote Control Buttons (Instance Methods):**
+   * Imagine a Smart TV object. Pressing the `.mute()` button on Remote #1 mutes TV #1 because Remote #1 passes its TV address (`self`) to the mute instruction.
+
+2. **Permanent Badge vs. Temporary Scratchpad:**
+   * **Instance Variable (`self.name`):** Engraved on a plastic ID badge clipped to the object in Heap RAM. It stays alive as long as the object exists.
+   * **Local Variable (`temp_calc = x + y`):** Written on a paper sticky note on a worker's desk (Stack Frame). As soon as the worker finishes the task, the sticky note is thrown in the trash.
+
+---
+
+## 5. Internal Python Execution Flow
+
+Let's trace how Python executes an instance method call:
+
+```text
+Code Executed: s1.display_marks()
+
+↓ Step-by-Step Translation:
+
+1. Python reads s1.display_marks().
+2. Python looks up the class of s1 -> finds class 'Student'.
+3. Python rewrites the expression into: Student.display_marks(s1)
+4. Python opens function display_marks() in class Student.
+5. Parameter 'self' receives reference s1 (Address 0x9000).
+6. Inside method: self.marks resolves to 0x9000 -> fetches 85.
+7. Method finishes and control returns to main program.
+```
+
+---
+
+## 6. Memory Visualization: Instance vs. Local Variable Lifespan
+
+{/* Color-Coded Memory Layout Card: Variable Scope */}
+<div style={{ background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: '10px', padding: '16px', margin: '20px 0', fontFamily: 'sans-serif' }}>
+
+  <p style={{ fontSize: '12px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    RAM Layout: Instance Variable (Heap) vs Local Variable (Stack)
+  </p>
+
+  <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+    
+    {/* Method Stack Frame */}
+    <div style={{ flex: '1', minWidth: '200px', background: '#ffffff', border: '2px solid #ef4444', borderRadius: '8px', padding: '12px' }}>
+      <div style={{ background: '#ef4444', color: '#ffffff', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: '800', textAlign: 'center' }}>
+        calculate_discount() STACK FRAME
+      </div>
+      <div style={{ marginTop: '12px', fontFamily: 'monospace', fontSize: '12px' }}>
+        <div style={{ background: '#fef2f2', border: '1px dashed #f87171', padding: '6px', borderRadius: '4px', color: '#991b1b' }}>
+          discount_rate = 0.10<br/>
+          <span style={{ fontSize: '10px', fontWeight: '800' }}>(TEMPORARY - Destroyed when method ends!)</span>
+        </div>
+      </div>
+    </div>
+
+    {/* Heap Object */}
+    <div style={{ flex: '1.5', minWidth: '240px', background: '#ffffff', border: '2px solid #16a34a', borderRadius: '8px', padding: '12px' }}>
+      <div style={{ background: '#16a34a', color: '#ffffff', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: '800', textAlign: 'center' }}>
+        HEAP OBJECT (Address 0x9000)
+      </div>
+      <div style={{ marginTop: '12px', fontFamily: 'monospace', fontSize: '13px' }}>
+        <div style={{ background: '#f0fdf4', border: '1px solid #4ade80', padding: '8px', borderRadius: '4px', color: '#166534' }}>
+          self.price = 500<br/>
+          self.title = "Python Book"<br/>
+          <span style={{ fontSize: '10px', fontWeight: '800' }}>(PERMANENT - Stored in object memory!)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+---
+
+## 7. Python Code Implementation
+
+```python
+class Student:
+    def __init__(self, name, marks):
+        # Instance Variables (Stored on Heap Object)
+        self.name = name
+        self.marks = marks
+
+    # Instance Method
+    def calculate_final_score(self, bonus):
+        # 'bonus' is a Local Parameter Variable
+        # 'passing_cutoff' is a Local Variable
+        passing_cutoff = 40
+        
+        total = self.marks + bonus  # Accessing instance variable self.marks
+        
+        if total >= passing_cutoff:
+            return f"{self.name} Passed with total score: {total}"
+        else:
+            return f"{self.name} Failed with total score: {total}"
+
+# Usage
+s1 = Student("Sai", 35)
+
+# Calling instance method passing 10 as bonus
+result = s1.calculate_final_score(10)
+print(result)
+
+# Trying to access local variable outside method:
+# print(passing_cutoff) # Throws NameError!
+```
+
+### Output:
+```text
+Sai Passed with total score: 45
+```
+
+---
+
+## 8. Line-by-Line Execution Analysis
+
+### Line: `result = s1.calculate_final_score(10)`
+* **Translation:** Python executes `Student.calculate_final_score(s1, 10)`.
+* **Stack frame created:** `self` receives reference `s1`, `bonus` receives integer `10`.
+
+### Line: `passing_cutoff = 40`
+* **Local allocation:** `passing_cutoff` is created inside `calculate_final_score` stack frame.
+
+### Line: `total = self.marks + bonus`
+* **Lookup:** `self.marks` navigates heap reference `s1` to fetch `35`. `bonus` fetches `10`. `total` becomes `45`.
+
+### Method Completion:
+* **Cleanup:** The stack frame containing `passing_cutoff`, `bonus`, and `total` is destroyed.
+* **Preservation:** `self.name` and `self.marks` remain safely stored inside object `s1` on Heap RAM.
+
+---
+
+## 9. Before / After Memory Visualization
+
+### During `calculate_final_score(10)` Execution
+* **Stack Frame:** `self` &rarr; `s1`, `bonus = 10`, `passing_cutoff = 40`.
+* **Heap:** Object `s1` contains `name = "Sai"`, `marks = 35`.
+
+### After Method Completion
+* **Stack Frame:** Destroyed! `bonus` and `passing_cutoff` no longer exist in memory.
+* **Heap:** Object `s1` still contains `name = "Sai"`, `marks = 35`.
+
+---
+
+## 10. Illustration Prompt for Diagram Generation
+
+> **Excalidraw Diagram Prompt:**
+> A hand-drawn diagram illustrating Instance Method Execution & Variable Scope.
+> Show a call box labeled "s1.calculate_final_score(10)". Draw a transformation arrow rewriting it to "Student.calculate_final_score(self=0x9000, bonus=10)".
+> On the right, draw a Heap box labeled "Student Object 0x9000" containing "self.name = Sai", "self.marks = 35".
+> On the left, draw a temporary red stack frame box labeled "Local Scope (Temporary)" containing "bonus=10" and "passing_cutoff=40" with a trash icon indicating memory cleanup upon function return.
+> White background, hand-drawn style, colors: Red (Temporary Stack), Green (Permanent Heap), Blue (Transformations).
+
+---
+
+## 11. Knowledge Check
+
+1. What happens under the hood when you call `obj.my_method(arg1, arg2)`?
+2. If you define a variable `temp = 50` inside a method without writing `self.temp = 50`, can other methods in the same class access `temp`? Why or why not?
+3. What is the scope lifetime of an Instance Variable versus a Local Variable?
+4. Can an instance method modify an instance variable created inside `__init__`?
+
+---
+
+## 12. Mini Exercises
+
+### Exercise 4.1: Bank Account Withdrawal Method
+Extend the `BankAccount` class with a method `withdraw(self, amount)`.
+* `amount` should be a local parameter.
+* Check if `self.balance >= amount`. If true, deduct `amount` from `self.balance` and return updated balance. Otherwise, return `"Insufficient Funds"`.
+* Verify that `self.balance` is updated permanently on Heap RAM.
+
+### Exercise 4.2: Identifying Variable Types
+Look at the following method and classify every variable as either **Instance Variable** or **Local Variable**:
+
+```python
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def get_diagonal(self):
+        w_sq = self.width ** 2
+        h_sq = self.height ** 2
+        diag = (w_sq + h_sq) ** 0.5
+        return diag
+```
+
+Classify: `self.width`, `w_sq`, `h_sq`, `diag`.
+
+---
+
+## 13. Summary
+
+* **Instance Methods** are functions defined inside a class that operate on specific object instances.
+* Python automatically rewrites `obj.method()` to `Class.method(obj)`, passing `obj` into `self`.
+* **Instance Variables (`self.x`)** live in Heap RAM inside the object as long as the object exists.
+* **Local Variables (`x`)** live in Stack RAM inside the method call frame and are destroyed as soon as the method returns.

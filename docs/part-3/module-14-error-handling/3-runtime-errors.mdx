@@ -1,0 +1,141 @@
+---
+title: "Runtime Errors (Exceptions) - Python in Telugu | Think IT Telugu"
+sidebar_label: "Runtime Errors (Exceptions)"
+description: "Learn about the most common Python Runtime Errors (Exceptions) such as ZeroDivisionError, ValueError, TypeError, KeyError, NameError, and FileNotFoundError with examples."
+keywords: ["Python", "Runtime Errors", "Exceptions", "ZeroDivisionError", "ValueError", "TypeError", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# Runtime Errors (Exceptions)
+
+Unlike syntax errors, a **Runtime Error** occurs while the program is actively running. 
+
+In this case, the syntax (grammar) of your code is perfectly correct, so Python successfully starts the program. However, during execution, Python encounters an operation that is impossible to perform. When this happens, Python halts the program and raises an **Exception**.
+
+If these exceptions are not handled, your application will crash instantly.
+
+---
+
+## Common Python Exceptions with Examples
+
+Here are the most common runtime exceptions you will encounter in Python, what causes them, and how they look:
+
+### 1. `ZeroDivisionError`
+This happens when you attempt to divide a number by zero, which is mathematically undefined.
+
+**Example Code:**
+```python
+numerator = 10
+denominator = 0
+result = numerator / denominator
+```
+
+**Python's Error Message:**
+```text
+ZeroDivisionError: division by zero
+```
+
+---
+
+### 2. `ValueError`
+This occurs when a function receives an argument of the correct data type, but the value itself is inappropriate or invalid.
+
+**Example Code:**
+```python
+# Converting text to integer
+# "123" would work, but "hello" is not a valid number representation
+number = int("hello")
+```
+
+**Python's Error Message:**
+```text
+ValueError: invalid literal for int() with base 10: 'hello'
+```
+
+---
+
+### 3. `TypeError`
+This is raised when an operation or function is applied to an object of an inappropriate data type.
+
+**Example Code:**
+```python
+# Attempting to add an integer and a string directly
+total = 10 + "5"
+```
+
+**Python's Error Message:**
+```text
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+```
+
+---
+
+### 4. `IndexError`
+This happens when you try to access an index of a list or tuple that is out of its range.
+
+**Example Code:**
+```python
+colors = ["red", "green", "blue"]  # Indexes are 0, 1, 2
+print(colors[5])  # Index 5 does not exist
+```
+
+**Python's Error Message:**
+```text
+IndexError: list index out of range
+```
+
+---
+
+### 5. `KeyError`
+This occurs when you attempt to access a dictionary key that does not exist.
+
+**Example Code:**
+```python
+student = {"name": "Sai", "course": "Python"}
+# Accessing the key "age" which was not defined
+print(student["age"])
+```
+
+**Python's Error Message:**
+```text
+KeyError: 'age'
+```
+
+---
+
+### 6. `NameError`
+This happens when your code tries to access a variable or call a function that has not been defined or initialized.
+
+**Example Code:**
+```python
+# Printing a variable before declaring it
+print(score)
+```
+
+**Python's Error Message:**
+```text
+NameError: name 'score' is not defined
+```
+
+---
+
+### 7. `FileNotFoundError`
+This is raised when you attempt to open or work with a file that does not exist at the specified path.
+
+**Example Code:**
+```python
+# Trying to open a file that isn't on the disk
+with open("missing_file.txt", "r") as file:
+    content = file.read()
+```
+
+**Python's Error Message:**
+```text
+FileNotFoundError: [Errno 2] No such file or directory: 'missing_file.txt'
+```
+
+---
+
+## Why Understanding Exceptions is Crucial
+Since these errors occur based on external factors (like a user typing invalid data, or a database connection drop), we cannot always prevent them simply by writing clean code. 
+
+Instead, we must write defensive code that **catches** these exceptions and handles them gracefully. This is where **`try` and `except`** blocks come in, which we will study in the next chapter.

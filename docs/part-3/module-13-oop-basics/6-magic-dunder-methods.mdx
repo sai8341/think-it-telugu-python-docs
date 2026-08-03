@@ -1,0 +1,243 @@
+---
+id: 6-magic-dunder-methods
+title: "Magic & Dunder Methods - Python in Telugu | Think IT Telugu"
+sidebar_label: "6. Magic & Dunder Methods"
+description: "Master Python Magic/Dunder methods (__str__, __repr__, __len__, __eq__) to customize built-in operator behaviors."
+keywords: ["Python", "Dunder Methods", "Magic Methods", "__str__", "__repr__", "__len__", "__eq__", "Telugu tutorial", "Learn Python in Telugu", "AI"]
+---
+
+# Magic & Dunder Methods
+
+In Python, methods that start and end with double underscores—like `__init__`—are called **Dunder Methods** (short for **D**ouble **Under**score) or **Magic Methods**.
+
+Dunder methods are Python's internal hook mechanism. They allow your custom objects to integrate seamlessly with built-in functions like `print()`, `len()`, `str()`, and mathematical operators like `+` or `==`.
+
+---
+
+## 1. Learning Objective
+
+By the end of this lesson, you will understand:
+* What Dunder Methods are and how Python triggers them automatically.
+* How to override `__str__` to display human-readable object descriptions.
+* The difference between `__str__` (for end users) and `__repr__` (for developers/debugging).
+* How to customize `len(obj)` using `__len__` and `obj1 == obj2` using `__eq__`.
+
+---
+
+## 2. Why This Concept Exists
+
+If you create a custom `Book` object and print it without defining a dunder method, Python outputs an ugly, unreadable memory string:
+
+```python
+b1 = Book("Python Mastery", 350)
+print(b1)  # Output: <__main__.Book object at 0x0000021F7B8E07F0>
+```
+
+Similarly, trying to run `len(b1)` or `b1 + b2` throws a `TypeError`.
+
+Python uses Dunder Methods so you can teach your custom objects how to behave when interacted with using standard Python operators.
+
+---
+
+## 3. Common Beginner Confusions
+
+### Confusion 1: "What is the difference between `__str__` and `__repr__`?"
+* **`__str__` (String):** Intended to produce a clean, friendly text description for **end-users** (triggered by `print(obj)` or `str(obj)`).
+* **`__repr__` (Representation):** Intended to produce an unambiguous, developer-focused description for **debugging and logs** (triggered in terminal REPL or `repr(obj)`).
+
+### Confusion 2: "Do I call `b1.__str__()` directly in code?"
+* **Answer:** NO! You should rarely call dunder methods directly. Instead, use Python's clean built-in syntax `print(b1)` or `str(b1)`. Python calls `__str__()` automatically under the hood.
+
+---
+
+## 4. Mental Model: Universal Translator
+
+Think of Dunder Methods as a **Universal Plug-and-Play Adapter**:
+
+Imagine buying a device from overseas. If it has a proprietary 3-prong plug, your wall outlet cannot accept it.
+
+Dunder methods act as standard adapters:
+* When `print()` plugs into your object, it asks: "Do you implement the `__str__` adapter?"
+* When `len()` plugs into your object, it asks: "Do you implement the `__len__` adapter?"
+
+---
+
+## 5. Internal Python Execution Flow
+
+Let's trace what happens when you execute `print(b1)`:
+
+```text
+Code Executed: print(b1)
+
+↓ Execution Steps:
+
+1. Function print() receives argument b1 (Address 0x9000).
+2. print() invokes built-in str(b1).
+3. str(b1) looks up the class of b1 -> 'Book'.
+4. Python checks if '__str__' exists inside class 'Book'.
+5. If found -> Python executes Book.__str__(b1) -> returns "Book: Python Mastery (350 pages)".
+6. If NOT found -> Python falls back to default object.__repr__() -> outputs "<__main__.Book object at 0x9000>".
+```
+
+---
+
+## 6. Memory Visualization: Operator Hook Interception
+
+{/* Color-Coded Memory Layout Card: Dunder Hook Interception */}
+<div style={{ background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: '10px', padding: '16px', margin: '20px 0', fontFamily: 'sans-serif' }}>
+
+  <p style={{ fontSize: '12px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    Internal Protocol Hook Interception
+  </p>
+
+  <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+    
+    {/* Built-in Call */}
+    <div style={{ background: '#eff6ff', border: '2px solid #2563eb', borderRadius: '8px', padding: '10px 14px', color: '#1e40af', fontWeight: '800', fontSize: '13px' }}>
+      print(b1)
+    </div>
+
+    <div style={{ fontSize: '18px', fontWeight: '800', color: '#2563eb' }}>➔</div>
+
+    {/* Interceptor Hook */}
+    <div style={{ background: '#f3e8ff', border: '2px dashed #a855f7', borderRadius: '8px', padding: '10px 14px', color: '#6b21a8', fontWeight: '800', fontSize: '13px' }}>
+      DUNDER HOOK<br/>
+      <span style={{ fontSize: '11px', fontFamily: 'monospace' }}>b1.__str__()</span>
+    </div>
+
+    <div style={{ fontSize: '18px', fontWeight: '800', color: '#2563eb' }}>➔</div>
+
+    {/* Custom Output */}
+    <div style={{ background: '#f0fdf4', border: '2px solid #16a34a', borderRadius: '8px', padding: '10px 14px', color: '#166534', fontWeight: '800', fontSize: '13px' }}>
+      "Book: Python Mastery"
+    </div>
+
+  </div>
+
+</div>
+
+---
+
+## 7. Python Code Implementation
+
+```python
+class Book:
+    def __init__(self, title, pages):
+        self.title = title
+        self.pages = pages
+
+    # 1. Human-Readable User String
+    def __str__(self):
+        return f"Book: '{self.title}' ({self.pages} pages)"
+
+    # 2. Developer Debug Representation
+    def __repr__(self):
+        return f"Book(title='{self.title}', pages={self.pages})"
+
+    # 3. Custom Length Protocol
+    def __len__(self):
+        return self.pages
+
+    # 4. Custom Equality Comparison Protocol (==)
+    def __eq__(self, other):
+        if isinstance(other, Book):
+            return self.title == other.title and self.pages == other.pages
+        return False
+
+# --- Execution ---
+b1 = Book("Python Mastery", 350)
+b2 = Book("Python Mastery", 350)
+b3 = Book("Data Science Fundamentals", 420)
+
+# Triggers __str__
+print(b1)
+
+# Triggers __len__
+print("Book page count via len():", len(b1))
+
+# Triggers __eq__
+print("Is b1 equal to b2?", b1 == b2)
+print("Is b1 equal to b3?", b1 == b3)
+
+# Triggers __repr__
+print("Developer Repr:", repr(b1))
+```
+
+### Output:
+```text
+Book: 'Python Mastery' (350 pages)
+Book page count via len(): 350
+Is b1 equal to b2? True
+Is b1 equal to b3? False
+Developer Repr: Book(title='Python Mastery', pages=350)
+```
+
+---
+
+## 8. Line-by-Line Execution Analysis
+
+### Line: `def __str__(self):`
+* **Purpose:** Overrides the default string conversion protocol.
+* **Return requirement:** MUST return a string. Returning an integer or list raises a `TypeError`.
+
+### Line: `def __len__(self):`
+* **Purpose:** Overrides built-in `len(obj)`.
+* **Return requirement:** MUST return a non-negative integer representing the length or size.
+
+### Line: `b1 == b2`
+* **Translation:** Python transforms `b1 == b2` into `b1.__eq__(b2)`.
+* **Execution:** Passes `b1` as `self` and `b2` as `other`. Compares titles and pages. Returns `True`.
+
+---
+
+## 9. Essential Dunder Methods Reference Table
+
+| Dunder Method | Syntax Trigger | Purpose | Example |
+| :--- | :--- | :--- | :--- |
+| `__init__(self, ...)` | `Obj(...)` | Object Initialization | Setting attributes on creation |
+| `__str__(self)` | `print(obj)`, `str(obj)` | User text string | Friendly formatted description |
+| `__repr__(self)` | `repr(obj)`, terminal REPL | Developer debug string | Unambiguous object code representation |
+| `__len__(self)` | `len(obj)` | Collection / size length | Page count, playlist size |
+| `__eq__(self, other)` | `obj1 == obj2` | Equality comparison | Comparing object attribute values |
+| `__add__(self, other)` | `obj1 + obj2` | Addition operator | Combining two custom objects |
+
+---
+
+## 10. Illustration Prompt for Diagram Generation
+
+> **Excalidraw Diagram Prompt:**
+> A hand-drawn diagram illustrating Python Dunder Methods as Protocol Hooks.
+> Draw 3 built-in Python call boxes on the left: "print(b1)", "len(b1)", "b1 == b2".
+> Draw 3 dashed arrows leading to a central Class Box labeled "Class Book (Protocol Implementation)".
+> Inside the Class Box, show 3 hook receptors: "__str__ -> returns formatted string", "__len__ -> returns self.pages", "__eq__ -> compares titles".
+> Draw output arrows pointing to the right showing the final results.
+> White background, clean hand-drawn look, minimal color scheme (Blue, Purple, Green).
+
+---
+
+## 11. Knowledge Check
+
+1. What happens if you print an object whose class defines `__repr__` but does NOT define `__str__`?
+2. What error occurs if your `__len__()` dunder method returns a string like `"350"` instead of an integer `350`?
+3. Without defining `__eq__`, what does Python use by default when comparing `b1 == b2`? (Hint: Does it compare memory addresses or values?)
+4. Which dunder method is triggered when you run `obj1 + obj2`?
+
+---
+
+## 12. Mini Exercises
+
+### Exercise 6.1: Custom Playlist Dunder Methods
+Create a class `Playlist`:
+* Attributes: `name` (string), `songs` (list of song titles).
+* Implement `__str__` so `print(my_playlist)` displays `"Playlist 'Telugu Hits' - 3 songs"`.
+* Implement `__len__` so `len(my_playlist)` returns `len(self.songs)`.
+* Implement `__add__` so `playlist1 + playlist2` combines songs into a new `Playlist` object!
+
+---
+
+## 13. Summary
+
+* **Dunder Methods** (`__name__`) are special hook methods that bind custom objects to Python built-in syntax.
+* **`__str__`** provides user-friendly text descriptions (`print()`).
+* **`__repr__`** provides developer-focused debug representations.
+* **`__len__`** and **`__eq__`** customize `len()` and `==` operator behaviors.

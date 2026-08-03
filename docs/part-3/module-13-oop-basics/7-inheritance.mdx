@@ -1,0 +1,277 @@
+---
+id: 7-inheritance
+title: "Pillar 1: Inheritance - Python in Telugu | Think IT Telugu"
+sidebar_label: "7. Pillar 1: Inheritance"
+description: "Master Inheritance and super() in Python using a Vehicle Fleet case study with step-by-step memory tracking."
+keywords: ["Python", "Inheritance", "OOP Inheritance", "super()", "Vehicle Fleet", "Telugu tutorial", "Learn Python in Telugu", "AI"]
+---
+
+# Pillar 1: Inheritance
+
+Now that you have a complete mental model of objects, memory, references, constructors, and `self`, you are ready to learn the **Four Pillars of OOP**.
+
+The First Pillar is **Inheritance**.
+
+---
+
+## 1. Learning Objective
+
+By the end of this lesson, you will understand:
+* How Inheritance allows a child class to reuse attributes and methods from a parent class.
+* How Python's method resolution order (MRO) searches for attributes in memory.
+* What **`super().__init__()`** actually does under the hood.
+* How to design clean parent/child class hierarchies without code duplication.
+
+---
+
+## 2. Why This Concept Exists: Vehicle Fleet Case Study
+
+Imagine building a vehicle tracking app for a company managing **Electric Cars** and **Petrol Cars**.
+
+Let's look at the attributes required for both vehicle types:
+
+* **ElectricCar:** `brand`, `model`, `price`, `battery_capacity_kwh`, `charging_time_hrs`, `start_engine()`
+* **PetrolCar:** `brand`, `model`, `price`, `fuel_tank_capacity_l`, `mileage_kpl`, `start_engine()`
+
+Notice that `brand`, `model`, `price`, and `start_engine()` are **100% identical** in both classes!
+
+Writing these fields twice causes **code redundancy**. If you need to update how `start_engine()` works, you would have to edit code in 20 separate classes.
+
+**Inheritance** solves this by extracting common attributes into a single parent base class (**`Vehicle`**).
+
+---
+
+## 3. Common Beginner Confusions
+
+### Confusion 1: "Does Inheritance create two separate objects in memory?"
+* **Answer:** NO! Creating an instance of `ElectricCar` allocates **ONE single object** in Heap RAM. That single object contains both inherited parent attributes (`brand`, `model`, `price`) AND child-specific attributes (`battery_capacity_kwh`).
+
+### Confusion 2: "Why do we need `super().__init__()`?"
+* **Answer:** `super().__init__()` invokes the parent class constructor to populate common parent attributes on the current object reference (`self`). If you omit `super().__init__()`, parent attributes like `self.brand` will never be created!
+
+---
+
+## 4. Mental Model: Base Vehicle Chassis
+
+Think of Inheritance as a Modular Car Factory:
+
+1. **Parent Base Class (`Vehicle`):**
+   * The factory manufactures a standard base chassis containing an engine starter button, brand badge, and wheels.
+2. **Child Classes (`ElectricCar` / `PetrolCar`):**
+   * **`ElectricCar`** takes the base chassis and installs a high-voltage battery and charging port.
+   * **`PetrolCar`** takes the exact same base chassis and installs a petrol tank and fuel gauge.
+
+Both vehicles inherit the base chassis features while customizing their specific components!
+
+---
+
+## 5. Internal Python Execution Flow
+
+Let's trace what happens when executing `ev = ElectricCar("Tata", "Nexon EV", 1500000, 40.5, 6)`:
+
+```text
+Code Executed: ev = ElectricCar("Tata", "Nexon EV", 1500000, 40.5, 6)
+
+↓ Execution Trace:
+
+1. Python allocates a fresh empty Heap Object (Address 0xA000).
+2. Python calls ElectricCar.__init__(0xA000, "Tata", "Nexon EV", 1500000, 40.5, 6).
+3. Inside ElectricCar.__init__, Python hits: super().__init__("Tata", "Nexon EV", 1500000).
+4. super() resolves Parent Class -> 'Vehicle'.
+5. Vehicle.__init__(0xA000, "Tata", "Nexon EV", 1500000) runs.
+6. Vehicle.__init__ sets self.brand, self.model, self.price on Heap Object 0xA000.
+7. Control returns to ElectricCar.__init__.
+8. ElectricCar.__init__ sets self.battery_capacity_kwh and self.charging_time_hrs on Heap Object 0xA000.
+9. Object 0xA000 contains all 5 attributes. Reference 0xA000 is assigned to variable 'ev'.
+```
+
+---
+
+## 6. Memory Visualization: Single Heap Object Layout
+
+{/* Color-Coded Memory Layout Card: Inheritance Memory */}
+<div style={{ background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: '10px', padding: '16px', margin: '20px 0', fontFamily: 'sans-serif' }}>
+
+  <p style={{ fontSize: '12px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    RAM Layout: Unified Heap Memory for Inherited Object
+  </p>
+
+  <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+    
+    {/* Variable Reference */}
+    <div style={{ flex: '1', minWidth: '180px', background: '#ffffff', border: '2px solid #a855f7', borderRadius: '8px', padding: '12px' }}>
+      <div style={{ background: '#a855f7', color: '#ffffff', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: '800', textAlign: 'center' }}>
+        STACK MEMORY
+      </div>
+      <div style={{ marginTop: '12px', fontFamily: 'monospace', fontSize: '13px' }}>
+        <span style={{ color: '#7e22ce', fontWeight: '800' }}>ev</span> &nbsp;=&gt;&nbsp; <span style={{ color: '#2563eb', fontWeight: '700' }}>0xA000</span>
+      </div>
+    </div>
+
+    {/* Arrow */}
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: '800', color: '#2563eb' }}>
+      ➔
+    </div>
+
+    {/* Single Heap Object */}
+    <div style={{ flex: '1.8', minWidth: '260px', background: '#ffffff', border: '2px solid #16a34a', borderRadius: '8px', padding: '12px' }}>
+      <div style={{ background: '#16a34a', color: '#ffffff', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: '800', textAlign: 'center' }}>
+        SINGLE HEAP OBJECT (0xA000)
+      </div>
+      <div style={{ marginTop: '8px', fontFamily: 'monospace', fontSize: '12px' }}>
+        
+        {/* Parent Attributes Box */}
+        <div style={{ background: '#e0f2fe', border: '1px solid #0284c7', padding: '6px 8px', borderRadius: '4px', marginBottom: '6px' }}>
+          <div style={{ color: '#0369a1', fontWeight: '800', fontSize: '10px' }}>INHERITED FROM VEHICLE (PARENT):</div>
+          <div style={{ color: '#0f172a' }}>brand = "Tata"</div>
+          <div style={{ color: '#0f172a' }}>model = "Nexon EV"</div>
+          <div style={{ color: '#0f172a' }}>price = 1500000</div>
+        </div>
+
+        {/* Child Attributes Box */}
+        <div style={{ background: '#f0fdf4', border: '1px solid #16a34a', padding: '6px 8px', borderRadius: '4px' }}>
+          <div style={{ color: '#15803d', fontWeight: '800', fontSize: '10px' }}>CHILD SPECIFIC (ELECTRICCAR):</div>
+          <div style={{ color: '#0f172a' }}>battery_capacity_kwh = 40.5</div>
+          <div style={{ color: '#0f172a' }}>charging_time_hrs = 6</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+---
+
+## 7. Python Code Implementation
+
+```python
+# 1. Parent Base Class
+class Vehicle:
+    def __init__(self, brand, model, price):
+        self.brand = brand
+        self.model = model
+        self.price = price
+
+    def start_engine(self):
+        print(f"Engine started for {self.brand} {self.model}.")
+
+
+# 2. Child Class 1: ElectricCar inherits from Vehicle
+class ElectricCar(Vehicle):
+    def __init__(self, brand, model, price, battery_capacity_kwh, charging_time_hrs):
+        # Call parent constructor to populate common attributes
+        super().__init__(brand, model, price)
+        
+        # Child-specific attributes
+        self.battery_capacity_kwh = battery_capacity_kwh
+        self.charging_time_hrs = charging_time_hrs
+
+    def charge_battery(self):
+        print(f"Charging {self.brand} {self.model}... Estimated time: {self.charging_time_hrs} hours.")
+
+
+# 3. Child Class 2: PetrolCar inherits from Vehicle
+class PetrolCar(Vehicle):
+    def __init__(self, brand, model, price, fuel_tank_capacity_l, mileage_kpl):
+        # Call parent constructor to populate common attributes
+        super().__init__(brand, model, price)
+        
+        # Child-specific attributes
+        self.fuel_tank_capacity_l = fuel_tank_capacity_l
+        self.mileage_kpl = mileage_kpl
+
+    def refuel(self):
+        print(f"Refueling {self.brand} {self.model} with petrol...")
+
+
+# --- Usage ---
+ev = ElectricCar("Tata", "Nexon EV", 1500000, 40.5, 6)
+car = PetrolCar("Maruti", "Swift", 700000, 37, 22)
+
+# Accessing inherited parent method
+ev.start_engine()
+car.start_engine()
+
+# Accessing specific child methods
+ev.charge_battery()
+car.refuel()
+```
+
+### Output:
+```text
+Engine started for Tata Nexon EV.
+Engine started for Maruti Swift.
+Charging Tata Nexon EV... Estimated time: 6 hours.
+Refueling Maruti Swift with petrol...
+```
+
+---
+
+## 8. Line-by-Line Execution Analysis
+
+### Line: `class ElectricCar(Vehicle):`
+* **Syntax:** `(Vehicle)` inside parentheses informs Python that `ElectricCar` derives from parent class `Vehicle`.
+
+### Line: `super().__init__(brand, model, price)`
+* **Function `super()`:** Returns a proxy object delegating method calls to parent class `Vehicle`.
+* **Execution:** Runs `Vehicle.__init__`, attaching `self.brand`, `self.model`, and `self.price` onto current object reference `self`.
+
+---
+
+## 9. Before / After Memory Visualization
+
+### Before `super().__init__()` runs inside `ElectricCar`
+* Heap Address `0xA000` is an unpopulated object box `{}`.
+
+### After `super().__init__()` finishes
+* Heap Address `0xA000` contains `{"brand": "Tata", "model": "Nexon EV", "price": 1500000}`.
+
+### After `ElectricCar.__init__()` finishes
+* Heap Address `0xA000` contains all 5 fields `{"brand": "Tata", "model": "Nexon EV", "price": 1500000, "battery_capacity_kwh": 40.5, "charging_time_hrs": 6}`.
+
+---
+
+## 10. Illustration Prompt for Diagram Generation
+
+> **Excalidraw Diagram Prompt:**
+> A hand-drawn diagram illustrating Inheritance and super() execution flow in Python.
+> At top, draw a blue box labeled "Parent Class: Vehicle" with attributes (brand, model, price) and method "start_engine()".
+> Below, draw two green boxes labeled "Child: ElectricCar" and "Child: PetrolCar" with solid arrows pointing up labeled "inherits from".
+> Draw a 4-step sequence arrow showing:
+> 1. "ElectricCar('Tata', ...)" creates Heap Box 0xA000.
+> 2. "super().__init__()" calls Vehicle.__init__ to write parent attributes into 0xA000.
+> 3. ElectricCar writes specific attributes into 0xA000.
+> 4. Variable "ev" receives reference 0xA000.
+> White background, clean hand-drawn style, colors: Blue (Parent), Green (Child/Heap), Purple (Stack Reference).
+
+---
+
+## 11. Knowledge Check
+
+1. What happens if a child class defines a method with the exact same name as a parent class method? (Hint: Method Overriding).
+2. How can you check if `ev` is an instance of `Vehicle` using built-in function `isinstance()`?
+3. What is Method Resolution Order (MRO) in Python, and how can you view it for a class using `ClassName.__mro__`?
+4. What error occurs if a child class constructor forgets to call `super().__init__()` and then tries to access `self.brand`?
+
+---
+
+## 12. Mini Exercises
+
+### Exercise 7.1: Employee Inheritance Hierarchy
+Create a parent class `Employee` with attributes `name` and `salary`, and method `get_details()`.
+Create two child classes:
+1. `Manager(Employee)` with extra attribute `department` and method `schedule_meeting()`.
+2. `Developer(Employee)` with extra attribute `programming_language` and method `write_code()`.
+
+Instantiate one `Manager` and one `Developer`. Call inherited methods and child-specific methods for both.
+
+---
+
+## 13. Summary
+
+* **Inheritance** allows child classes to inherit attributes and methods from a parent base class using `class Child(Parent):`.
+* Inheritance creates **ONE unified object** in Heap RAM containing both parent and child attributes.
+* **`super().__init__()`** delegates initialization of common parent attributes to the parent constructor.
+* Inheritance eliminates duplicate code and organizes software into clean hierarchical models.

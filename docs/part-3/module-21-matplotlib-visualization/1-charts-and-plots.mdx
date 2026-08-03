@@ -1,0 +1,151 @@
+---
+title: "Matplotlib Data Visualization - Python in Telugu | Think IT Telugu"
+sidebar_label: "1. Why Visualize Data?"
+description: "Learn how to create charts and plots with Matplotlib to understand your data visually before building ML models."
+keywords: ["Python", "Matplotlib", "Data Visualization", "Charts", "Telugu tutorial", "AI", "ML"]
+---
+
+# Matplotlib: Data Visualization
+
+Numbers in a table are hard to understand. But when you turn them into a **chart or graph**, patterns become clear instantly. In AI & ML, visualization helps you:
+
+1. **Understand your data** before training a model
+2. **Find problems** like outliers or missing patterns
+3. **Show results** to others in a clear way
+
+---
+
+## 1. Installing Matplotlib
+
+```bash
+pip install matplotlib
+```
+
+> Already installed in Google Colab.
+
+---
+
+## 2. Your First Plot — Line Chart
+
+```python
+import matplotlib.pyplot as plt
+
+months = ["Jan", "Feb", "Mar", "Apr", "May"]
+sales = [100, 150, 130, 180, 200]
+
+plt.plot(months, sales)
+plt.title("Monthly Sales")
+plt.xlabel("Month")
+plt.ylabel("Sales (in units)")
+plt.show()
+```
+
+> **`plt.show()`** displays the chart. In Colab, charts show automatically.
+
+---
+
+## 3. Bar Chart
+
+Best for comparing different categories:
+
+```python
+import matplotlib.pyplot as plt
+
+languages = ["Python", "JavaScript", "Java", "C++"]
+popularity = [85, 78, 65, 55]
+
+plt.bar(languages, popularity, color="skyblue")
+plt.title("Programming Language Popularity")
+plt.xlabel("Language")
+plt.ylabel("Popularity Score")
+plt.show()
+```
+
+---
+
+## 4. Scatter Plot
+
+Best for seeing the **relationship between two numbers**:
+
+```python
+import matplotlib.pyplot as plt
+
+study_hours = [2, 3, 5, 7, 8, 4, 6, 1]
+exam_scores = [55, 60, 75, 85, 90, 65, 80, 40]
+
+plt.scatter(study_hours, exam_scores, color="red")
+plt.title("Study Hours vs Exam Score")
+plt.xlabel("Hours Studied")
+plt.ylabel("Exam Score")
+plt.show()
+```
+
+> **In ML:** Scatter plots help you see if two features are related. If the dots form a line going up, it means more study hours = higher scores. This is **correlation** — the basis of Linear Regression.
+
+---
+
+## 5. Histogram
+
+Best for seeing **how data is spread out** (distribution):
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate 1000 random exam scores around 70 with some spread
+scores = np.random.normal(70, 10, 1000)
+
+plt.hist(scores, bins=20, color="green", edgecolor="black")
+plt.title("Exam Score Distribution")
+plt.xlabel("Score")
+plt.ylabel("Number of Students")
+plt.show()
+```
+
+> **In ML:** Histograms show you if your data follows a **normal distribution** (bell curve). Many ML algorithms work better when data is normally distributed.
+
+---
+
+## 6. Multiple Plots in One Figure
+
+```python
+import matplotlib.pyplot as plt
+
+months = ["Jan", "Feb", "Mar", "Apr", "May"]
+product_a = [100, 150, 130, 180, 200]
+product_b = [80, 120, 140, 160, 170]
+
+plt.plot(months, product_a, label="Product A", marker="o")
+plt.plot(months, product_b, label="Product B", marker="s")
+plt.title("Sales Comparison")
+plt.xlabel("Month")
+plt.ylabel("Sales")
+plt.legend()
+plt.show()
+```
+
+---
+
+## 7. Saving Charts as Images
+
+```python
+plt.plot([1, 2, 3], [10, 20, 30])
+plt.title("My Chart")
+plt.savefig("my_chart.png", dpi=150)
+print("Chart saved!")
+```
+
+---
+
+## Summary
+
+| Chart Type | Best For | Function |
+|---|---|---|
+| **Line Chart** | Trends over time | `plt.plot()` |
+| **Bar Chart** | Comparing categories | `plt.bar()` |
+| **Scatter Plot** | Relationship between two numbers | `plt.scatter()` |
+| **Histogram** | Data distribution/spread | `plt.hist()` |
+
+* Always add **`plt.title()`**, **`plt.xlabel()`**, and **`plt.ylabel()`** to make charts readable.
+* Use **`plt.legend()`** when showing multiple lines.
+* Visualization is the **first step** in any ML project — always look at your data before training models!

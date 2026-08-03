@@ -1,0 +1,175 @@
+---
+title: "Cleaning Messy Data - Python in Telugu | Think IT Telugu"
+sidebar_label: "2. Cleaning Messy Data"
+description: "Learn how to handle missing values, duplicates, and dirty data using Pandas in Python."
+keywords: ["Python", "Pandas", "Data Cleaning", "Missing Values", "Telugu tutorial", "AI", "ML"]
+---
+
+# Cleaning Messy Data
+
+Real-world data is **never clean**. It has missing values, duplicate rows, wrong data types, and typos. Before you can train any ML model, you must clean your data first. This is called **data preprocessing**.
+
+> **Fun fact:** Data scientists and AI engineers spend about **60-80% of their time** cleaning data, not building models!
+
+---
+
+## 1. Finding Missing Values
+
+```python
+import pandas as pd
+
+data = {
+    "name": ["Sai", "Ravi", None, "Anu"],
+    "score": [85, None, 91, 68],
+    "city": ["Hyderabad", "Chennai", "Bangalore", None]
+}
+df = pd.DataFrame(data)
+print(df)
+```
+
+Output:
+```
+   name  score       city
+0   Sai   85.0  Hyderabad
+1  Ravi    NaN    Chennai
+2  None   91.0  Bangalore
+3   Anu   68.0       None
+```
+
+### Check for missing values:
+```python
+# Shows True where values are missing
+print(df.isnull())
+
+# Count missing values per column
+print(df.isnull().sum())
+```
+
+Output:
+```
+name     1
+score    1
+city     1
+```
+
+---
+
+## 2. Handling Missing Values
+
+You have two main options:
+
+### Option 1: Remove Rows with Missing Data
+```python
+# Drop any row that has at least one missing value
+clean_df = df.dropna()
+print(clean_df)
+```
+
+> **When to use:** When you have lots of data and a few missing rows won't hurt.
+
+### Option 2: Fill Missing Values
+```python
+# Fill missing scores with the average score
+df["score"] = df["score"].fillna(df["score"].mean())
+print(df)
+
+# Fill missing names with "Unknown"
+df["name"] = df["name"].fillna("Unknown")
+print(df)
+```
+
+> **When to use:** When you can't afford to lose data and a reasonable default exists.
+
+---
+
+## 3. Removing Duplicates
+
+```python
+import pandas as pd
+
+data = {
+    "name": ["Sai", "Ravi", "Sai", "Anu", "Ravi"],
+    "score": [85, 72, 85, 68, 72]
+}
+df = pd.DataFrame(data)
+print("Before:", len(df))  # Output: 5
+
+# Remove duplicate rows
+df_clean = df.drop_duplicates()
+print("After:", len(df_clean))  # Output: 3
+print(df_clean)
+```
+
+---
+
+## 4. Changing Data Types
+
+Sometimes numbers are stored as text. You need to fix this before doing math:
+
+```python
+import pandas as pd
+
+data = {"price": ["100", "200", "300"]}
+df = pd.DataFrame(data)
+
+print(df["price"].dtype)  # Output: object (means text/string)
+
+# Convert to numbers
+df["price"] = df["price"].astype(int)
+print(df["price"].dtype)  # Output: int64
+print(df["price"].sum())  # Output: 600
+```
+
+---
+
+## 5. Filtering and Grouping Data
+
+### Filtering:
+```python
+import pandas as pd
+
+data = {
+    "name": ["Sai", "Ravi", "Priya", "Anu"],
+    "score": [85, 72, 91, 68],
+    "department": ["CSE", "ECE", "CSE", "ECE"]
+}
+df = pd.DataFrame(data)
+
+# Get only CSE students
+cse_students = df[df["department"] == "CSE"]
+print(cse_students)
+
+# Get students who scored above 80
+toppers = df[df["score"] > 80]
+print(toppers)
+```
+
+### Grouping:
+```python
+# Average score by department
+avg_by_dept = df.groupby("department")["score"].mean()
+print(avg_by_dept)
+# Output:
+# department
+# CSE    88.0
+# ECE    70.0
+```
+
+> **In ML:** Groupby is used to understand patterns in your data before building models.
+
+---
+
+## Summary
+
+| Task | Pandas Function | Example |
+|---|---|---|
+| Check missing values | `df.isnull().sum()` | Count of NaN per column |
+| Remove missing rows | `df.dropna()` | Drop rows with NaN |
+| Fill missing values | `df.fillna(value)` | Replace NaN with a default |
+| Remove duplicates | `df.drop_duplicates()` | Keep only unique rows |
+| Change data type | `df["col"].astype(int)` | Convert text to number |
+| Filter rows | `df[df["col"] > 50]` | Keep rows matching condition |
+| Group and summarize | `df.groupby("col").mean()` | Average per group |
+
+* Clean data = better ML models. **Garbage in, garbage out.**
+* Always explore and clean your data **before** training any model.

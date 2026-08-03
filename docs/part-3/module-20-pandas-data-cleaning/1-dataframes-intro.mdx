@@ -1,0 +1,166 @@
+---
+title: "Pandas DataFrames - Python in Telugu | Think IT Telugu"
+sidebar_label: "1. DataFrames Intro"
+description: "Learn what Pandas DataFrames are, how to create them, and basic operations for data analysis."
+keywords: ["Python", "Pandas", "DataFrame", "Telugu tutorial", "AI", "ML"]
+---
+
+# Pandas DataFrames
+
+**Pandas** is the most popular Python library for working with **tabular data** — data that looks like a table with rows and columns (like an Excel spreadsheet).
+
+While NumPy works with plain numbers, Pandas works with **labeled data** — it gives names to your columns and lets you do powerful data operations.
+
+---
+
+## 1. Installing Pandas
+
+```bash
+pip install pandas
+```
+
+> **Note:** Pandas is already installed in Google Colab.
+
+---
+
+## 2. What is a DataFrame?
+
+A **DataFrame** is a 2D table of data with:
+- **Rows** = individual data points (e.g., one student, one sale)
+- **Columns** = features/properties (e.g., name, score, date)
+
+```python
+import pandas as pd
+
+# Create a DataFrame from a dictionary
+data = {
+    "name": ["Sai", "Ravi", "Priya", "Anu"],
+    "score": [85, 72, 91, 68],
+    "city": ["Hyderabad", "Chennai", "Bangalore", "Mumbai"]
+}
+
+df = pd.DataFrame(data)
+print(df)
+```
+
+Output:
+```
+    name  score       city
+0    Sai     85  Hyderabad
+1   Ravi     72    Chennai
+2  Priya     91  Bangalore
+3    Anu     68     Mumbai
+```
+
+---
+
+## 3. Reading Data from CSV Files
+
+In the real world, you do not type data by hand. You load it from **CSV files** (Comma Separated Values):
+
+```python
+import pandas as pd
+
+# Read a CSV file into a DataFrame
+df = pd.read_csv("students.csv")
+
+# See the first 5 rows
+print(df.head())
+
+# See the last 3 rows
+print(df.tail(3))
+```
+
+---
+
+## 4. Exploring Your Data
+
+Before doing anything with data, always explore it first:
+
+```python
+import pandas as pd
+
+df = pd.read_csv("students.csv")
+
+# Shape: How many rows and columns?
+print(df.shape)  # Output: (100, 5)  → 100 rows, 5 columns
+
+# Column names
+print(df.columns)  # Output: Index(['name', 'score', 'city', ...])
+
+# Data types of each column
+print(df.dtypes)
+
+# Quick summary of numeric columns
+print(df.describe())
+
+# Info about the whole DataFrame
+print(df.info())
+```
+
+---
+
+## 5. Selecting Columns
+
+```python
+import pandas as pd
+
+data = {
+    "name": ["Sai", "Ravi", "Priya"],
+    "score": [85, 72, 91],
+    "city": ["Hyderabad", "Chennai", "Bangalore"]
+}
+df = pd.DataFrame(data)
+
+# Select one column (returns a Series)
+print(df["name"])
+
+# Select multiple columns (returns a DataFrame)
+print(df[["name", "score"]])
+```
+
+---
+
+## 6. Selecting Rows
+
+```python
+# Select by index position
+print(df.iloc[0])    # First row
+print(df.iloc[0:2])  # First two rows
+
+# Select by condition (filtering)
+toppers = df[df["score"] > 80]
+print(toppers)
+```
+
+Output:
+```
+    name  score       city
+0    Sai     85  Hyderabad
+2  Priya     91  Bangalore
+```
+
+---
+
+## 7. Adding and Removing Columns
+
+```python
+# Add a new column
+df["passed"] = df["score"] >= 50
+print(df)
+
+# Remove a column
+df = df.drop("passed", axis=1)
+print(df)
+```
+
+---
+
+## Summary
+
+* **Pandas** = Python library for working with tables of data.
+* **DataFrame** = A table with rows and columns (like Excel).
+* **`pd.read_csv()`** = Load data from a CSV file.
+* **`df.head()`**, **`df.shape`**, **`df.describe()`** = Explore your data quickly.
+* **`df["column"]`** = Select a column. **`df[condition]`** = Filter rows.
+* Pandas is built on top of NumPy — everything you learned about NumPy helps here.

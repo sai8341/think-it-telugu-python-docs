@@ -1,0 +1,192 @@
+---
+title: "Pythonic Patterns - Python in Telugu | Think IT Telugu"
+sidebar_label: "3. Pythonic Patterns"
+description: "Learn Pythonic shortcuts like ternary expressions, unpacking, and any/all that make your code clean and professional."
+keywords: ["Python", "Pythonic Code", "Ternary", "Unpacking", "Telugu tutorial", "AI", "ML"]
+---
+
+# Pythonic Patterns
+
+Python has many built-in shortcuts that make your code shorter, cleaner, and easier to read. Professional AI engineers use these patterns every day. Let's learn the most important ones.
+
+---
+
+## 1. Ternary Expression (One-Line If-Else)
+
+Instead of writing a full `if-else` block for simple decisions:
+
+### The Long Way:
+```python
+age = 20
+if age >= 18:
+    status = "adult"
+else:
+    status = "minor"
+```
+
+### The Pythonic Way:
+```python
+age = 20
+status = "adult" if age >= 18 else "minor"
+print(status)  # Output: adult
+```
+
+### Formula:
+```python
+result = value_if_true if condition else value_if_false
+```
+
+### More Examples:
+```python
+score = 85
+grade = "pass" if score >= 50 else "fail"
+print(grade)  # Output: pass
+
+# Use it directly inside print
+temp = 38
+print("fever" if temp > 37 else "normal")  # Output: fever
+```
+
+---
+
+## 2. Multiple Assignment (Unpacking)
+
+Python lets you assign multiple variables in one line:
+
+```python
+# Instead of this:
+x = 10
+y = 20
+z = 30
+
+# Do this:
+x, y, z = 10, 20, 30
+print(x, y, z)  # Output: 10 20 30
+```
+
+### Swapping Two Values:
+```python
+a = "hello"
+b = "world"
+
+# In other languages, you need a temp variable
+# In Python, just swap directly:
+a, b = b, a
+print(a, b)  # Output: world hello
+```
+
+### Unpacking a List:
+```python
+coordinates = [28.6, 77.2, 150]
+lat, lon, altitude = coordinates
+print(f"Latitude: {lat}, Longitude: {lon}")
+# Output: Latitude: 28.6, Longitude: 77.2
+```
+
+### Using `*` to Grab the Rest:
+```python
+scores = [90, 85, 78, 72, 65]
+best, second, *rest = scores
+print(best)    # Output: 90
+print(second)  # Output: 85
+print(rest)    # Output: [78, 72, 65]
+```
+
+---
+
+## 3. `any()` and `all()` — Quick Checks
+
+These are like quick question-askers for a list of True/False values:
+
+- **`any()`** → Returns `True` if **at least one** item is True
+- **`all()`** → Returns `True` only if **every** item is True
+
+```python
+# Did any student fail?
+scores = [85, 42, 90, 78]
+any_failed = any(score < 50 for score in scores)
+print(any_failed)  # Output: True (because 42 < 50)
+
+# Did all students pass?
+all_passed = all(score >= 50 for score in scores)
+print(all_passed)  # Output: False (because 42 failed)
+```
+
+### Real-World Use:
+```python
+# Check if any field is empty in a form
+form_data = ["Sai Kumar", "", "sai@email.com"]
+has_empty = any(field == "" for field in form_data)
+print(has_empty)  # Output: True
+
+# Check if all required files exist
+file_checks = [True, True, True]
+ready = all(file_checks)
+print(ready)  # Output: True
+```
+
+---
+
+## 4. `join()` — Combine a List into One String
+
+```python
+words = ["Python", "for", "AI"]
+sentence = " ".join(words)
+print(sentence)  # Output: Python for AI
+
+# Join with a different separator
+tags = ["machine-learning", "python", "tutorial"]
+result = ", ".join(tags)
+print(result)  # Output: machine-learning, python, tutorial
+```
+
+---
+
+## 5. `sorted()` with `key` — Smart Sorting
+
+```python
+# Sort names by length (shortest first)
+names = ["Sai", "Priyanka", "Ravi", "Anu"]
+by_length = sorted(names, key=len)
+print(by_length)  # Output: ['Sai', 'Anu', 'Ravi', 'Priyanka']
+
+# Sort students by score (highest first)
+students = [
+    {"name": "Sai", "score": 85},
+    {"name": "Ravi", "score": 72},
+    {"name": "Priya", "score": 91},
+]
+top_students = sorted(students, key=lambda s: s["score"], reverse=True)
+print(top_students[0]["name"])  # Output: Priya
+```
+
+---
+
+## 6. `map()` and `filter()` — Quick Transformations
+
+```python
+# map: Apply a function to every item
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x ** 2, numbers))
+print(squared)  # Output: [1, 4, 9, 16, 25]
+
+# filter: Keep only items that match a condition
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(evens)  # Output: [2, 4]
+```
+
+> **Tip:** Most Python developers prefer comprehensions over `map()`/`filter()` because comprehensions are easier to read. But you should know both — you will see `map()` in many AI codebases.
+
+---
+
+## Summary
+
+| Pattern | What it Does | Example |
+|---|---|---|
+| **Ternary** | One-line if-else | `"pass" if score >= 50 else "fail"` |
+| **Unpacking** | Assign multiple values at once | `x, y, z = 10, 20, 30` |
+| **Swapping** | Swap two values | `a, b = b, a` |
+| **`any()` / `all()`** | Quick True/False checks | `any(x > 10 for x in nums)` |
+| **`join()`** | Combine list into string | `" ".join(["a", "b"])` |
+| **`sorted(key=)`** | Smart sorting | `sorted(data, key=len)` |
+| **`map()` / `filter()`** | Transform or filter data | `list(map(func, data))` |

@@ -1,0 +1,244 @@
+---
+id: 9-encapsulation
+title: "Pillar 3: Encapsulation - Python in Telugu | Think IT Telugu"
+sidebar_label: "9. Pillar 3: Encapsulation"
+description: "Master Encapsulation, Private attributes (__), Name Mangling, and Getters/Setters with step-by-step memory tracking."
+keywords: ["Python", "Encapsulation", "Private Attributes", "Name Mangling", "Getters and Setters", "Telugu tutorial", "Learn Python in Telugu", "AI"]
+---
+
+# Pillar 3: Encapsulation
+
+The Third Pillar of Object-Oriented Programming is **Encapsulation**.
+
+**Encapsulation** means bundling data (attributes) and methods together inside a single class container while restricting direct, unauthorized external access to sensitive variables.
+
+---
+
+## 1. Learning Objective
+
+By the end of this lesson, you will understand:
+* Why exposing public attributes directly (`account.balance = -9999`) is dangerous.
+* How to define **Private Attributes** in Python using double underscores (`__attribute`).
+* How Python's internal **Name Mangling** mechanism works in memory.
+* How to use **Getters and Setters** with validation to protect object integrity.
+
+---
+
+## 2. Why This Concept Exists
+
+Imagine a Banking System where anyone can write:
+
+```python
+account = BankAccount("Sai", 5000)
+
+# Unrestricted Public Access (DANGEROUS!)
+account.balance = -9999999
+```
+
+Without Encapsulation, external code can corrupt internal object data without validation or security checks.
+
+**Encapsulation** acts as a protective shield around an object's internal state. It forces external code to pass through approved **Getter** and **Setter** methods that validate inputs before making modifications.
+
+---
+
+## 3. Common Beginner Confusions
+
+### Confusion 1: "Is double underscore `__balance` truly 100% private in Python?"
+* **Answer:** Conceptually yes, but physically in Python memory, Python uses **Name Mangling**. Adding double underscores transforms `__balance` into `_ClassName__balance` (e.g., `_BankAccount__balance`). Python does this to prevent accidental overrides, but it respects developer maturity ("We are all consenting adults here").
+
+### Confusion 2: "What is the difference between single underscore `_var` and double underscore `__var`?"
+* **Answer:**
+  * **Single Underscore `_var` (Protected Convention):** Hints to other developers: "This is internal; please don't touch it directly." Python does NOT mangle the name.
+  * **Double Underscore `__var` (Private Name Mangling):** Python actively mangles the name in memory, raising an `AttributeError` if accessed directly via `obj.__var`.
+
+---
+
+## 4. Mental Model: ATM Machine Vault Keypad
+
+Think of Encapsulation using the **ATM Machine** analogy:
+
+* **Inside the Vault (`__balance`):** The cash vault inside an ATM is private data. Bank customers are not allowed to open the vault door with a crowbar to grab cash directly (`account.__balance`).
+* **The ATM Screen & Keypad (Getters/Setters):** You must interact with approved, validated methods:
+  * `get_balance()` &rarr; Checks your PIN and reads the screen.
+  * `deposit(amount)` &rarr; Checks if `amount > 0` before adding cash to the vault.
+
+---
+
+## 5. Internal Python Execution Flow
+
+Let's trace how Python mangles private attribute names in memory:
+
+```text
+Code Executed: self.__balance = balance  (inside class BankAccount)
+
+↓ Name Mangling Trace:
+
+1. Python sees double underscore prefix '__' before attribute name 'balance'.
+2. Python inspects current class name -> 'BankAccount'.
+3. Python rewrites key name into: _BankAccount__balance.
+4. Python stores value 5000 inside _BankAccount__balance on Heap Object.
+5. If external code calls account.__balance:
+   - Python looks for key '__balance' -> Not Found!
+   - Raises AttributeError: 'BankAccount' object has no attribute '__balance'.
+```
+
+---
+
+## 6. Memory Visualization: Private Name Mangling Layout
+
+{/* Color-Coded Memory Layout Card: Private Name Mangling */}
+<div style={{ background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: '10px', padding: '16px', margin: '20px 0', fontFamily: 'sans-serif' }}>
+
+  <p style={{ fontSize: '12px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    RAM Layout: Protected Private Attribute (Name Mangling)
+  </p>
+
+  <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+    
+    {/* External Code Attempt */}
+    <div style={{ flex: '1', minWidth: '200px', background: '#ffffff', border: '2px solid #ef4444', borderRadius: '8px', padding: '12px' }}>
+      <div style={{ background: '#ef4444', color: '#ffffff', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: '800', textAlign: 'center' }}>
+        EXTERNAL DIRECT ACCESS
+      </div>
+      <div style={{ marginTop: '12px', fontFamily: 'monospace', fontSize: '12px', color: '#991b1b' }}>
+        account.__balance<br/>
+        <span style={{ fontSize: '11px', fontWeight: '800' }}>❌ AttributeError! (Key '__balance' hidden)</span>
+      </div>
+    </div>
+
+    {/* Heap Memory Object */}
+    <div style={{ flex: '1.5', minWidth: '240px', background: '#ffffff', border: '2px solid #16a34a', borderRadius: '8px', padding: '12px' }}>
+      <div style={{ background: '#16a34a', color: '#ffffff', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: '800', textAlign: 'center' }}>
+        HEAP OBJECT (Address 0xC100)
+      </div>
+      <div style={{ marginTop: '12px', fontFamily: 'monospace', fontSize: '12px' }}>
+        <div style={{ background: '#f0fdf4', border: '1px solid #4ade80', padding: '8px', borderRadius: '4px' }}>
+          <strong>owner:</strong> "Sai" (Public)<br/>
+          <strong style={{ color: '#dc2626' }}>_BankAccount__balance:</strong> 5000 (Mangled Private)
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+---
+
+## 7. Python Code Implementation
+
+```python
+class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.__balance = balance  # Private Attribute (Name Mangled)
+
+    # 1. Getter Method: Controlled Read Access
+    def get_balance(self):
+        return self.__balance
+
+    # 2. Setter Method: Controlled Write Access with Input Validation
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited ₹{amount}. New Balance: ₹{self.__balance}")
+        else:
+            print("Error: Deposit amount must be positive!")
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            print(f"Withdrew ₹{amount}. Remaining Balance: ₹{self.__balance}")
+        else:
+            print("Error: Invalid transaction or Insufficient Funds!")
+
+
+# --- Execution ---
+acc = BankAccount("Sai", 5000)
+
+# Attempting direct private access:
+# print(acc.__balance) # Raises AttributeError!
+
+# Controlled Read via Getter
+print("Current Balance:", acc.get_balance())
+
+# Controlled Write via Setter (Validation Success)
+acc.deposit(1500)
+
+# Controlled Write via Setter (Validation Failure)
+acc.deposit(-500)
+acc.withdraw(10000)
+```
+
+### Output:
+```text
+Current Balance: 5000
+Deposited ₹1500. New Balance: ₹6500
+Error: Deposit amount must be positive!
+Error: Invalid transaction or Insufficient Funds!
+```
+
+---
+
+## 8. Line-by-Line Execution Analysis
+
+### Line: `self.__balance = balance`
+* **Name Mangling:** Python internally transforms `__balance` into `_BankAccount__balance` on Heap object.
+
+### Line: `acc.deposit(-500)`
+* **Validation Defense:** Setter method checks `if amount > 0`. Since `-500 > 0` is `False`, the invalid deposit is rejected, preserving internal data integrity.
+
+---
+
+## 9. Before / After Direct Access vs Encapsulated Access
+
+### Unencapsulated (Public Attribute)
+```python
+acc.balance = -500  # Object data corrupted instantly!
+```
+
+### Encapsulated (Private Attribute + Setter)
+```python
+acc.deposit(-500)  # Validation fails: "Error: Amount must be positive!" Data remains safe.
+```
+
+---
+
+## 10. Illustration Prompt for Diagram Generation
+
+> **Excalidraw Diagram Prompt:**
+> A hand-drawn diagram illustrating Encapsulation and Name Mangling in Python.
+> Draw a thick circular shield boundary labeled "Class BankAccount (Encapsulation Boundary)".
+> Inside the shield, draw a locked safe box labeled "Private Attribute: __balance (Mangled to _BankAccount__balance = 5000)".
+> On the outside of the shield, draw an unauthorized user arrow labeled "acc.__balance" hitting the shield wall and bouncing off with a red "AttributeError" collision spark.
+> Draw two approved door keypads labeled "get_balance()" and "deposit(amount)" with green arrows passing through validation checkpoints into the safe box.
+> White background, clean hand-drawn style, colors: Red (Blocked Access), Green (Approved Gateways), Blue (Shield Boundary).
+
+---
+
+## 11. Knowledge Check
+
+1. Why does `acc.__balance` raise an `AttributeError`?
+2. What mangled name does Python store in Heap RAM for `self.__secret` inside class `User`?
+3. What is the difference between a Getter method and a Setter method?
+4. How do Python `@property` decorators simplify Getters and Setters? (e.g. `@property` and `@balance.setter`).
+
+---
+
+## 12. Mini Exercises
+
+### Exercise 9.1: Student Grade Encapsulation
+Create a class `StudentGrade`:
+* Private attribute `__score` initialized via `__init__(self, student_name, score)`.
+* Getter `get_score(self)` that returns `__score`.
+* Setter `set_score(self, new_score)` that verifies `0 <= new_score <= 100` before updating. If `new_score` is invalid, print an error message.
+* Test updating scores with `105`, `-10`, and `95`.
+
+---
+
+## 13. Summary
+
+* **Encapsulation** bundles data and methods while restricting direct external access to sensitive attributes.
+* Use double underscores **`__attribute`** to make attributes private.
+* Python protects private attributes via **Name Mangling** (`_ClassName__attribute`).
+* **Getters and Setters** provide controlled, validated interfaces to read and update private object data safely.

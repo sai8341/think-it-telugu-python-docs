@@ -4,7 +4,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Think IT Telugu',
-  tagline: 'Python for College Students - Nee coding journey ikkada start avuthundi! ',
+  tagline: 'Python for AI & ML - Nee AI engineering journey ikkada start avuthundi!',
   favicon: 'img/python-logo.svg',
 
   future: {
@@ -43,9 +43,9 @@ const config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: 'Think IT Telugu - Python Course',
+        name: 'Think IT Telugu - Python for AI & ML',
         url: 'https://python.thinkittelugu.in',
-        description: 'Python for College Students in Telugu - Interactive coding playground and structured modules.',
+        description: 'Python for AI & ML in Telugu - Learn Python from scratch to build real AI applications.',
         publisher: {
           '@type': 'Organization',
           name: 'Think IT Telugu',
@@ -67,8 +67,8 @@ const config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Course',
-        name: 'Complete Python Programming Course in Telugu',
-        description: 'Comprehensive Python programming tutorial series designed specifically for college students in Telugu.',
+        name: 'Python for AI & ML - Complete Course in Telugu',
+        description: 'Learn Python from zero to building real AI & ML applications. Designed for beginners in Telugu.',
         provider: {
           '@type': 'Organization',
           name: 'Think IT Telugu',

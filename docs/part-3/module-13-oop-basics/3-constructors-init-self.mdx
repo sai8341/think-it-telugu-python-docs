@@ -1,0 +1,238 @@
+---
+id: 3-constructors-init-self
+title: "Constructors (__init__), self, & Attributes - Python in Telugu | Think IT Telugu"
+sidebar_label: "3. Constructors (__init__) & self"
+description: "Master Python constructors (__init__), the self parameter, and attribute assignment with step-by-step memory tracing."
+keywords: ["Python", "Constructor", "__init__", "self", "Attributes", "Telugu tutorial", "Learn Python in Telugu", "AI"]
+---
+
+# Constructors (`__init__`), `self`, & Attributes
+
+In previous lessons, we created an empty object and then manually assigned attributes like `s1.name = "Sai"`. But what if you forget to assign `name` to `s2`? Your app crashes!
+
+In this lesson, we will explore **Constructors (`__init__`)**, **`self`**, and **Attributes** to automatically initialize objects cleanly on creation.
+
+---
+
+## 1. Learning Objective
+
+By the end of this lesson, you will understand:
+* Why manual attribute assignment is dangerous and how `__init__` fixes it.
+* What the magic method `__init__` actually does (initialization, NOT creation).
+* What `self` really is (the memory reference of the newly created object).
+* How `self.name = name` works step-by-step in memory.
+
+---
+
+## 2. Why This Concept Exists
+
+Imagine a smartphone factory. If workers built a phone shell and shipped it without installing a screen or battery, customers would receive broken, empty devices.
+
+Without constructors, every time you create an object in Python, you have to remember to type:
+
+```python
+s1 = Student()
+s1.name = "Sai"
+s1.age = 21
+s1.course = "Python"
+```
+
+If another developer creates `s2 = Student()` and forgets `s2.course`, the app crashes later with an `AttributeError`.
+
+A **Constructor (`__init__`)** is an automatic initialization routine that runs the instant an object is created, guaranteeing that every object starts life with all mandatory attributes properly populated.
+
+---
+
+## 3. Common Beginner Confusions
+
+### Confusion 1: "I think `__init__` creates the object in memory."
+* **Answer:** FALSE! `__init__` does NOT create the object. Python's internal `__new__()` method creates the empty object in Heap RAM *first*. Then Python passes that empty object into `__init__` so it can populate attributes. `__init__` is an *initializer*, not a *creator*.
+
+### Confusion 2: "What is `self`? Is it a Python keyword?"
+* **Answer:** `self` is NOT a reserved keyword in Python; it is simply a parameter convention. When Python calls `__init__`, it automatically passes the **memory address reference of the new object** as the first parameter. By convention, we name this first parameter `self`.
+
+---
+
+## 4. Mental Model: Factory Assembly Line Tag
+
+Imagine a smartphone factory line:
+
+1. **Empty Chassis Built (Object Memory Creation):**
+   * The machine stamps out a raw phone chassis at physical station `#Station-99`.
+2. **Attaching the Factory Tag (`self`):**
+   * The worker clips a tag onto `#Station-99` that reads `self`.
+3. **Customizing Attributes (`self.color = "Black"`):**
+   * The worker installs a black shell onto **this specific phone** (`self.color`).
+   * When the next chassis `#Station-100` comes down the line, `self` automatically points to `#Station-100`.
+
+---
+
+## 5. Internal Python Execution Flow
+
+What actually happens when you write `s1 = Student("Sai", 21)`? Here is the exact internal 9-step execution trace:
+
+```text
+Code Executed: s1 = Student("Sai", 21)
+
+↓ Execution Trace:
+
+1. Python reads Student("Sai", 21).
+2. Python allocates a fresh empty block of Heap Memory (e.g., Address 0x9000).
+3. Python calls the class constructor __init__().
+4. Python passes Heap Address 0x9000 as the first argument -> self = 0x9000.
+5. Python passes "Sai" as the second argument -> name = "Sai".
+6. Python passes 21 as the third argument -> age = 21.
+7. Inside __init__, self.name = name executes -> stores "Sai" inside 0x9000.
+8. Inside __init__, self.age = age executes -> stores 21 inside 0x9000.
+9. __init__ finishes. Python returns reference 0x9000 and assigns it to variable s1.
+```
+
+---
+
+## 6. Memory Visualization: Constructor Execution
+
+{/* Color-Coded Memory Layout Card: Constructor Execution */}
+<div style={{ background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: '10px', padding: '16px', margin: '20px 0', fontFamily: 'sans-serif' }}>
+
+  <p style={{ fontSize: '12px', fontWeight: '800', color: '#64748b', marginTop: 0, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+    RAM Layout during __init__ Execution
+  </p>
+
+  <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+    
+    {/* Local Frame Stack */}
+    <div style={{ flex: '1', minWidth: '200px', background: '#ffffff', border: '2px solid #a855f7', borderRadius: '8px', padding: '12px' }}>
+      <div style={{ background: '#a855f7', color: '#ffffff', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: '800', textAlign: 'center' }}>
+        __init__ LOCAL STACK FRAME
+      </div>
+      <div style={{ marginTop: '12px', fontFamily: 'monospace', fontSize: '12px', lineHeight: '1.8' }}>
+        <div><span style={{ color: '#7e22ce', fontWeight: '800' }}>self</span> &nbsp;=&gt;&nbsp; <span style={{ color: '#2563eb', fontWeight: '700' }}>0x9000</span></div>
+        <div><span style={{ color: '#7e22ce', fontWeight: '800' }}>name</span> &nbsp;=&gt;&nbsp; <span style={{ color: '#d97706' }}>"Sai"</span></div>
+        <div><span style={{ color: '#7e22ce', fontWeight: '800' }}>age</span> &nbsp;&nbsp;=&gt;&nbsp; <span style={{ color: '#d97706' }}>21</span></div>
+      </div>
+    </div>
+
+    {/* Arrow */}
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: '800', color: '#2563eb' }}>
+      ➔
+    </div>
+
+    {/* Heap Memory */}
+    <div style={{ flex: '1.5', minWidth: '240px', background: '#ffffff', border: '2px solid #16a34a', borderRadius: '8px', padding: '12px' }}>
+      <div style={{ background: '#16a34a', color: '#ffffff', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: '800', textAlign: 'center' }}>
+        HEAP MEMORY (Address 0x9000)
+      </div>
+      <div style={{ marginTop: '12px', fontFamily: 'monospace', fontSize: '13px' }}>
+        <div style={{ background: '#f0fdf4', border: '1px solid #4ade80', padding: '10px', borderRadius: '6px' }}>
+          <div style={{ color: '#166534', fontWeight: '800', fontSize: '11px', textTransform: 'uppercase' }}>Populating Attributes...</div>
+          <div style={{ marginTop: '6px', color: '#d97706', fontWeight: '700' }}>self.name = "Sai"</div>
+          <div style={{ color: '#d97706', fontWeight: '700' }}>self.age = 21</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+---
+
+## 7. Python Code Implementation
+
+```python
+class Student:
+    # Constructor Method
+    def __init__(self, name, age):
+        # Assigning instance attributes using self
+        self.name = name  # Left: Object attribute | Right: Parameter value
+        self.age = age
+
+# Creating two distinct student objects
+s1 = Student("Sai", 21)
+s2 = Student("Ananya", 20)
+
+print(f"s1 -> Name: {s1.name}, Age: {s1.age}")
+print(f"s2 -> Name: {s2.name}, Age: {s2.age}")
+```
+
+### Output:
+```text
+s1 -> Name: Sai, Age: 21
+s2 -> Name: Ananya, Age: 20
+```
+
+---
+
+## 8. Line-by-Line Execution Analysis
+
+Let's dissect the line `self.name = name` inside `__init__`:
+
+### Right Side: `= name`
+* **What Python does:** Looks up the local parameter variable `name` passed into the function (e.g., `"Sai"`).
+
+### Left Side: `self.name`
+* **What Python does:** Takes the reference `self` (Address `0x9000`), navigates to that Heap object, and creates an internal attribute key named `name`.
+
+### Assignment: `self.name = name`
+* **Result:** Stores string `"Sai"` inside attribute key `name` on Heap object `0x9000`.
+
+---
+
+## 9. Before / After Memory Visualization
+
+### Before `__init__` Runs
+* **Heap Address `0x9000`:** An uninitialized empty object container `{}`.
+
+### After `__init__` Completes
+* **Heap Address `0x9000`:** A populated object container `{"name": "Sai", "age": 21}`.
+
+---
+
+## 10. Illustration Prompt for Diagram Generation
+
+> **Excalidraw Diagram Prompt:**
+> A detailed 3-step hand-drawn workflow illustrating Python __init__ and self.
+> Step 1 (Creation): Show an arrow from "Student('Sai', 21)" creating a box in Heap RAM labeled "Empty Object 0x9000".
+> Step 2 (Self Binding): Draw a function box labeled "__init__(self, name, age)". Draw a curved purple line pointing from "self" directly to "Empty Object 0x9000".
+> Step 3 (Attribute Assignment): Draw two green arrows putting "name = 'Sai'" and "age = 21" inside object 0x9000.
+> White background, clean hand-drawn style, color scheme: Purple (self/stack), Green (Heap Object), Orange (Data values).
+
+---
+
+## 11. Knowledge Check
+
+1. What happens if you call `Student()` without passing required positional arguments like `name` and `age`?
+2. Is `self` a mandatory keyword in Python, or can you name it `this` or `me`? (What is the PEP 8 standard?)
+3. What is the difference between local parameter `name` and instance attribute `self.name`?
+4. Does `__init__` return a value explicitly using a `return` statement?
+
+---
+
+## 12. Mini Exercises
+
+### Exercise 3.1: Bank Account Constructor
+Create a class `BankAccount` whose constructor `__init__(self, account_number, holder_name, balance=0)` initializes three instance attributes. Create two account objects: one with an initial balance of `1000` and one with the default balance. Print both balances.
+
+### Exercise 3.2: Debugging Attribute Name Collision
+Fix the bug in the following code:
+
+```python
+class Car:
+    def __init__(self, brand, speed):
+        brand = brand  # Bug here!
+        speed = speed  # Bug here!
+
+c1 = Car("Tesla", 150)
+print(c1.brand)  # Throws AttributeError! Why?
+```
+
+Rewrite the code so that attributes are correctly attached to the object instance.
+
+---
+
+## 13. Summary
+
+* **`__init__`** is an automatic initialization function that runs immediately after an object is created in memory.
+* **`self`** holds the memory address reference of the object currently being initialized.
+* **`self.attribute_name = value`** attaches data directly to the object in Heap RAM.
+* Constructors guarantee that every object is instantiated with mandatory attributes.

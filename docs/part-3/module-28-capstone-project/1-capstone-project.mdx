@@ -1,0 +1,270 @@
+---
+title: "Capstone Project: AI Study Assistant - Python in Telugu | Think IT Telugu"
+sidebar_label: "1. Project Overview"
+description: "Build a complete AI Study Assistant that combines Python, Pandas, ML, and RAG — your portfolio project for AI & ML job applications."
+keywords: ["Python", "Capstone Project", "AI Project", "Portfolio", "Telugu tutorial", "AI", "ML"]
+---
+
+# Capstone Project: AI Study Assistant
+
+Congratulations! You have learned Python from scratch, mastered data structures, built ML models, connected to AI APIs, and even built a RAG system. Now it is time to **combine everything** into one complete project.
+
+This project will be a **portfolio piece** — something you can show to employers to prove your AI & ML skills.
+
+---
+
+## 1. What We Will Build
+
+An **AI Study Assistant** that:
+1. Loads student performance data from a CSV file (Pandas)
+2. Cleans and visualizes the data (Pandas + Matplotlib)
+3. Trains a ML model to predict pass/fail (Scikit-Learn)
+4. Stores course notes in a vector database (ChromaDB)
+5. Answers questions about course content using RAG (AI API + ChromaDB)
+
+---
+
+## 2. Project Structure
+
+```
+ai-study-assistant/
+├── data/
+│   └── students.csv
+├── notes/
+│   └── python_notes.txt
+├── .env
+├── .gitignore
+├── requirements.txt
+├── step1_data_analysis.py
+├── step2_ml_model.py
+├── step3_rag_assistant.py
+└── README.md
+```
+
+---
+
+## 3. Step 1: Data Analysis
+
+Create `step1_data_analysis.py`:
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load data
+df = pd.read_csv("data/students.csv")
+
+# Explore the data
+print("Shape:", df.shape)
+print("\nFirst 5 rows:")
+print(df.head())
+print("\nBasic stats:")
+print(df.describe())
+print("\nMissing values:")
+print(df.isnull().sum())
+
+# Clean: Fill missing values
+df["study_hours"] = df["study_hours"].fillna(df["study_hours"].mean())
+df["attendance"] = df["attendance"].fillna(df["attendance"].median())
+
+# Visualize: Study hours vs Score
+plt.scatter(df["study_hours"], df["score"], color="blue", alpha=0.6)
+plt.title("Study Hours vs Exam Score")
+plt.xlabel("Study Hours per Week")
+plt.ylabel("Exam Score")
+plt.savefig("scatter_plot.png")
+plt.show()
+
+# Visualize: Pass/Fail distribution
+df["result"].value_counts().plot(kind="bar", color=["green", "red"])
+plt.title("Pass vs Fail Distribution")
+plt.savefig("pass_fail_chart.png")
+plt.show()
+
+print("Step 1 complete! Charts saved.")
+```
+
+---
+
+## 4. Step 2: ML Model
+
+Create `step2_ml_model.py`:
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load and prepare data
+df = pd.read_csv("data/students.csv")
+df = df.dropna()
+
+# Features and target
+X = df[["study_hours", "attendance", "past_score"]].values
+y = (df["score"] >= 50).astype(int).values  # 1 = Pass, 0 = Fail
+
+# Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+# Evaluate
+predictions = model.predict(X_test)
+accuracy = accuracy_score(y_test, predictions)
+print(f"Model Accuracy: {accuracy * 100:.1f}%")
+print("\nDetailed Report:")
+print(classification_report(y_test, predictions, target_names=["Fail", "Pass"]))
+
+# Predict for a new student
+new_student = np.array([[6, 80, 55]])  # 6 hours study, 80% attendance, 55 past score
+result = model.predict(new_student)
+print(f"\nNew Student Prediction: {'Pass' if result[0] == 1 else 'Fail'}")
+```
+
+---
+
+## 5. Step 3: RAG Study Assistant
+
+Create `step3_rag_assistant.py`:
+
+```python
+import chromadb
+import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+
+# Setup vector database with course notes
+client = chromadb.Client()
+collection = client.create_collection("study_notes")
+
+# Add your course notes
+notes = [
+    "A list in Python stores multiple items in one variable. Use square brackets [].",
+    "A dictionary stores data as key-value pairs using curly braces {}.",
+    "A for loop repeats code a fixed number of times. Use range() for number sequences.",
+    "Functions are reusable blocks of code. Define with def keyword.",
+    "NumPy arrays are faster than lists for mathematical operations.",
+    "Pandas DataFrames are like Excel tables for data analysis.",
+    "Machine Learning lets computers learn patterns from data automatically.",
+    "train_test_split divides data into training and testing sets.",
+    "RAG stands for Retrieval-Augmented Generation. It adds context to AI prompts."
+]
+
+collection.add(
+    documents=notes,
+    ids=[f"note_{i}" for i in range(len(notes))]
+)
+
+def ask_assistant(question):
+    # Step 1: Find relevant notes
+    results = collection.query(query_texts=[question], n_results=3)
+    context = "\n".join(results["documents"][0])
+
+    # Step 2: Build RAG prompt
+    prompt = f"""You are a friendly Python tutor. Answer the student's question using
+the context provided. Keep your answer short and simple.
+
+Context from course notes:
+{context}
+
+Student's question: {question}
+
+Answer:"""
+
+    # Step 3: Call Gemini API
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    payload = {"contents": [{"parts": [{"text": prompt}]}]}
+    response = requests.post(url, json=payload)
+    answer = response.json()["candidates"][0]["content"]["parts"][0]["text"]
+
+    return answer
+
+# Interactive chat loop
+print("AI Study Assistant (type 'quit' to exit)")
+print("-" * 40)
+while True:
+    question = input("\nYour question: ")
+    if question.lower() == "quit":
+        print("Goodbye! Keep studying!")
+        break
+    answer = ask_assistant(question)
+    print(f"\nAssistant: {answer}")
+```
+
+---
+
+## 6. Supporting Files
+
+### `requirements.txt`:
+```
+pandas
+numpy
+matplotlib
+scikit-learn
+chromadb
+requests
+python-dotenv
+```
+
+### `.gitignore`:
+```
+.env
+__pycache__/
+*.pyc
+```
+
+### `.env`:
+```
+GEMINI_API_KEY=your-api-key-here
+```
+
+---
+
+## 7. What to Include in Your GitHub README
+
+```markdown
+# AI Study Assistant
+
+An AI-powered study assistant built with Python that:
+- Analyzes student performance data
+- Predicts pass/fail using Machine Learning
+- Answers questions about Python using RAG
+
+## Technologies Used
+- Python, Pandas, Matplotlib, Scikit-Learn
+- ChromaDB (Vector Database)
+- Google Gemini API (LLM)
+- RAG (Retrieval-Augmented Generation)
+
+## How to Run
+1. Clone this repo
+2. Install dependencies: `pip install -r requirements.txt`
+3. Add your API key to `.env`
+4. Run each step: `python step1_data_analysis.py`
+```
+
+---
+
+## Summary
+
+You just built a **complete AI application** that combines:
+
+| Skill | Where You Used It |
+|---|---|
+| **Python Basics** | Variables, loops, functions, file handling |
+| **Pandas** | Loading CSV, cleaning data, analysis |
+| **Matplotlib** | Visualizing student data |
+| **Scikit-Learn** | Training a classification model |
+| **APIs** | Calling Google Gemini |
+| **RAG + ChromaDB** | Building a smart Q&A assistant |
+| **Pydantic / dotenv** | Secure API key handling |
+| **Git** | Version control and README |
+
+**This one project proves you can do the job of an AI/ML Engineer.** Put it on your GitHub and add the link to your resume!

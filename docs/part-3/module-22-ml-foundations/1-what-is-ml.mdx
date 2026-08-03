@@ -1,0 +1,105 @@
+---
+title: "What is Machine Learning? - Python in Telugu | Think IT Telugu"
+sidebar_label: "1. What is Machine Learning?"
+description: "Learn what Machine Learning is, how it is different from normal programming, and the types of ML."
+keywords: ["Python", "Machine Learning", "AI", "Supervised Learning", "Telugu tutorial", "ML"]
+---
+
+# What is Machine Learning?
+
+Machine Learning (ML) is the technology behind recommendation systems (Netflix, YouTube), spam filters (Gmail), voice assistants (Alexa, Siri), and self-driving cars. Let's understand what it is in simple words.
+
+---
+
+## 1. Traditional Programming vs Machine Learning
+
+### Traditional Programming (What you have been doing so far):
+```
+You write RULES (if-else logic) + INPUT DATA → Computer gives OUTPUT
+```
+
+Example: "If temperature > 37, print fever. Else print normal."
+
+### Machine Learning (A new way of thinking):
+```
+You give INPUT DATA + CORRECT ANSWERS → Computer learns the RULES automatically
+```
+
+Example: You give 10,000 patient records (temperature, symptoms, diagnosis). The computer **finds the pattern** and can predict diagnoses for new patients!
+
+---
+
+## 2. A Simple Analogy
+
+Imagine you are teaching a child to recognize fruits:
+
+- **Traditional Programming:** You write a rule book: "If it is round and red, it is an apple. If it is yellow and curved, it is a banana." (You write every rule manually.)
+
+- **Machine Learning:** You show the child 100 pictures of apples and 100 pictures of bananas. After enough examples, the child **learns the pattern** and can identify new fruits on their own — even ones they have never seen before!
+
+---
+
+## 3. Types of Machine Learning
+
+### Supervised Learning (Most Common — This is what we will learn)
+- You give the computer **labeled data** — data where you already know the correct answer.
+- The computer learns the relationship between input and output.
+- Example: Predicting house prices based on size, location, and number of rooms.
+
+### Unsupervised Learning
+- You give the computer **unlabeled data** — data without answers.
+- The computer finds hidden groups or patterns on its own.
+- Example: Grouping customers into segments based on shopping behavior.
+
+### Reinforcement Learning
+- The computer learns by **trial and error**, getting rewards for good actions.
+- Example: Training a robot to walk or an AI to play chess.
+
+> **For this course**, we will focus on **Supervised Learning** because it is the most practical and commonly used in industry jobs.
+
+---
+
+## 4. Features (X) and Target (y)
+
+In supervised learning, your data has two parts:
+
+- **Features (X):** The information used to make predictions (also called "inputs" or "independent variables")
+- **Target (y):** The answer you want to predict (also called "output" or "label")
+
+### Example: Predicting Student Pass/Fail
+
+| Study Hours (X₁) | Attendance % (X₂) | Past Score (X₃) | Result (y) |
+|---|---|---|---|
+| 8 | 90 | 75 | Pass |
+| 2 | 40 | 35 | Fail |
+| 6 | 85 | 65 | Pass |
+| 1 | 30 | 20 | Fail |
+
+- **Features (X):** Study Hours, Attendance %, Past Score
+- **Target (y):** Result (Pass/Fail)
+
+The ML model learns the pattern: "Students who study more, attend regularly, and have good past scores tend to pass."
+
+---
+
+## 5. The 4 Steps of Every ML Project
+
+No matter what ML model you build, the steps are always the same:
+
+```
+Step 1: PREPARE DATA    → Load, clean, split into X and y
+Step 2: CHOOSE MODEL    → Pick an algorithm (Linear Regression, Decision Tree, etc.)
+Step 3: TRAIN MODEL     → Feed data to the model using .fit(X, y)
+Step 4: PREDICT & TEST  → Test with new data using .predict(X_new)
+```
+
+We will follow these exact 4 steps in the next lessons.
+
+---
+
+## Summary
+
+* **Traditional programming** = You write the rules. **Machine Learning** = The computer learns the rules from data.
+* **Supervised Learning** = Learning from labeled data (input + correct answer).
+* **Features (X)** = The input data. **Target (y)** = The answer to predict.
+* Every ML project follows: **Prepare → Choose → Train → Predict**.

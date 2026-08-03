@@ -1,0 +1,169 @@
+---
+title: "Comprehensions Exercises - Python in Telugu | Think IT Telugu"
+sidebar_label: "4. Exercises & Q&A"
+description: "Practice comprehensions, enumerate, zip, and Pythonic patterns with hands-on exercises."
+keywords: ["Python", "Comprehensions Exercises", "Telugu tutorial", "Learn Python in Telugu", "AI", "ML"]
+---
+
+# Exercises: Comprehensions & Pythonic Patterns
+
+Test your understanding of list comprehensions, dict/set comprehensions, enumerate, zip, and Pythonic patterns.
+
+---
+
+## Exercise 1: List Comprehension Basics
+
+**Task:** Create a list of cubes (number × number × number) for numbers 1 to 10.
+
+<details>
+<summary>Show Solution</summary>
+
+```python
+cubes = [n ** 3 for n in range(1, 11)]
+print(cubes)
+# Output: [1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
+```
+
+</details>
+
+---
+
+## Exercise 2: Filtering with Comprehension
+
+**Task:** From this list of ages, create a new list with only the ages that are 18 or above.
+
+```python
+ages = [12, 18, 25, 10, 30, 16, 22]
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```python
+ages = [12, 18, 25, 10, 30, 16, 22]
+adults = [age for age in ages if age >= 18]
+print(adults)  # Output: [18, 25, 30, 22]
+```
+
+</details>
+
+---
+
+## Exercise 3: Dictionary Comprehension
+
+**Task:** Create a dictionary where keys are words and values are their lengths.
+
+```python
+words = ["python", "ai", "machine", "learning"]
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```python
+words = ["python", "ai", "machine", "learning"]
+word_lengths = {word: len(word) for word in words}
+print(word_lengths)
+# Output: {'python': 6, 'ai': 2, 'machine': 7, 'learning': 8}
+```
+
+</details>
+
+---
+
+## Exercise 4: Using zip()
+
+**Task:** You have two lists — `cities` and `temperatures`. Create a dictionary mapping each city to its temperature.
+
+```python
+cities = ["Hyderabad", "Chennai", "Mumbai"]
+temperatures = [35, 33, 31]
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```python
+cities = ["Hyderabad", "Chennai", "Mumbai"]
+temperatures = [35, 33, 31]
+
+weather = {city: temp for city, temp in zip(cities, temperatures)}
+print(weather)
+# Output: {'Hyderabad': 35, 'Chennai': 33, 'Mumbai': 31}
+```
+
+</details>
+
+---
+
+## Exercise 5: Using enumerate()
+
+**Task:** Print each student's rank (starting from 1) along with their name.
+
+```python
+toppers = ["Priya", "Sai", "Ravi"]
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```python
+toppers = ["Priya", "Sai", "Ravi"]
+
+for rank, name in enumerate(toppers, start=1):
+    print(f"Rank {rank}: {name}")
+
+# Output:
+# Rank 1: Priya
+# Rank 2: Sai
+# Rank 3: Ravi
+```
+
+</details>
+
+---
+
+## Exercise 6: any() and all()
+
+**Task:** Check if (a) any student scored above 90, and (b) all students scored above 40.
+
+```python
+scores = [85, 42, 90, 78, 95]
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```python
+scores = [85, 42, 90, 78, 95]
+
+has_topper = any(score > 90 for score in scores)
+print("Any above 90?", has_topper)  # Output: True
+
+all_passed = all(score > 40 for score in scores)
+print("All above 40?", all_passed)  # Output: True
+```
+
+</details>
+
+---
+
+## Exercise 7: Real-World AI Challenge
+
+**Task:** You have raw AI model output. Clean it by: (1) removing empty strings, (2) making all text lowercase, and (3) creating a final list.
+
+```python
+raw_output = ["Hello", "", "WORLD", "Python", "", "AI"]
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```python
+raw_output = ["Hello", "", "WORLD", "Python", "", "AI"]
+clean = [word.lower() for word in raw_output if word != ""]
+print(clean)
+# Output: ['hello', 'world', 'python', 'ai']
+```
+
+</details>

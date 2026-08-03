@@ -1,0 +1,161 @@
+---
+title: "List Comprehensions - Python in Telugu | Think IT Telugu"
+sidebar_label: "1. List Comprehensions"
+description: "Learn list comprehensions in Python — a shorter and faster way to create lists. Simple examples for beginners."
+keywords: ["Python", "List Comprehensions", "Telugu tutorial", "Learn Python in Telugu", "AI", "ML"]
+---
+
+# List Comprehensions
+
+In Python, there is a short and powerful way to create new lists from existing data — it is called a **List Comprehension**. It does the same thing as a `for` loop but in just one line.
+
+---
+
+## 1. The Problem: Too Many Lines for Simple Tasks
+
+Imagine you want to create a list of squares from 1 to 5.
+
+### The Long Way (Using a Loop):
+```python
+squares = []
+for num in range(1, 6):
+    squares.append(num ** 2)
+
+print(squares)
+# Output: [1, 4, 9, 16, 25]
+```
+
+That works, but it takes **4 lines** for a simple task.
+
+### The Short Way (List Comprehension):
+```python
+squares = [num ** 2 for num in range(1, 6)]
+
+print(squares)
+# Output: [1, 4, 9, 16, 25]
+```
+
+**Same result, just 1 line!** This is a list comprehension.
+
+---
+
+## 2. The Basic Formula
+
+```python
+new_list = [expression for item in iterable]
+```
+
+- **expression** → What you want to do with each item (e.g., `num ** 2`)
+- **item** → The variable name for each element (e.g., `num`)
+- **iterable** → The data you are looping through (e.g., `range(1, 6)` or a list)
+
+### More Examples:
+
+```python
+# Double every number
+numbers = [1, 2, 3, 4, 5]
+doubled = [n * 2 for n in numbers]
+print(doubled)  # Output: [2, 4, 6, 8, 10]
+
+# Convert names to uppercase
+names = ["sai", "ravi", "priya"]
+upper_names = [name.upper() for name in names]
+print(upper_names)  # Output: ['SAI', 'RAVI', 'PRIYA']
+
+# Get the length of each word
+words = ["python", "ai", "ml"]
+lengths = [len(word) for word in words]
+print(lengths)  # Output: [6, 2, 2]
+```
+
+---
+
+## 3. Adding a Condition (Filtering)
+
+You can add an `if` condition to pick only certain items:
+
+```python
+new_list = [expression for item in iterable if condition]
+```
+
+### Examples:
+
+```python
+# Only even numbers
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+evens = [n for n in numbers if n % 2 == 0]
+print(evens)  # Output: [2, 4, 6, 8]
+
+# Only names with more than 3 letters
+names = ["sai", "ravi", "priya", "raj"]
+long_names = [name for name in names if len(name) > 3]
+print(long_names)  # Output: ['ravi', 'priya']
+
+# Squares of only odd numbers
+odd_squares = [n ** 2 for n in range(1, 11) if n % 2 != 0]
+print(odd_squares)  # Output: [1, 9, 25, 49, 81]
+```
+
+---
+
+## 4. If-Else Inside a Comprehension
+
+When you want to do different things based on a condition:
+
+```python
+# Mark "pass" or "fail" based on marks
+marks = [85, 40, 72, 30, 91]
+results = ["pass" if m >= 50 else "fail" for m in marks]
+print(results)
+# Output: ['pass', 'fail', 'pass', 'fail', 'pass']
+```
+
+> **Note:** When using `if-else` together, the condition goes **before** the `for`. When using only `if` (filtering), it goes **after** the `for`.
+
+---
+
+## 5. Nested List Comprehensions
+
+You can also loop through 2D data (a list inside a list):
+
+```python
+# Flatten a 2D list into a 1D list
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flat = [num for row in matrix for num in row]
+print(flat)
+# Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+> **Tip:** Read nested comprehensions from left to right — the outer loop comes first.
+
+---
+
+## 6. Why This Matters for AI & ML
+
+In AI and ML code, you will see list comprehensions **everywhere**:
+
+```python
+# Clean a dataset: Remove empty strings
+raw_data = ["hello", "", "world", "", "python"]
+clean_data = [item for item in raw_data if item != ""]
+print(clean_data)  # Output: ['hello', 'world', 'python']
+
+# Extract specific features from data
+students = [
+    {"name": "Sai", "score": 85},
+    {"name": "Ravi", "score": 72},
+    {"name": "Priya", "score": 91},
+]
+scores = [student["score"] for student in students]
+print(scores)  # Output: [85, 72, 91]
+```
+
+---
+
+## Summary
+
+* **List comprehension** = A one-line way to create lists from loops.
+* **Formula:** `[expression for item in iterable]`
+* **With filter:** `[expression for item in iterable if condition]`
+* **With if-else:** `[value_if_true if condition else value_if_false for item in iterable]`
+* Used **heavily** in AI & ML code for data cleaning and feature extraction.

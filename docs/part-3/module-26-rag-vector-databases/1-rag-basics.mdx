@@ -1,0 +1,178 @@
+---
+title: "RAG & Vector Databases - Python in Telugu | Think IT Telugu"
+sidebar_label: "1. What is RAG?"
+description: "Learn RAG (Retrieval-Augmented Generation), embeddings, and vector databases to make AI models answer questions from your own data."
+keywords: ["Python", "RAG", "Vector Database", "Embeddings", "ChromaDB", "Telugu tutorial", "AI", "ML"]
+---
+
+# RAG & Vector Databases
+
+AI models like Gemini and ChatGPT are trained on general internet data. They do **not** know about:
+1. **Your private data** — company documents, personal notes, student records
+2. **Recent events** — anything that happened after the model was trained
+
+To fix this without spending millions retraining the model, we use **RAG (Retrieval-Augmented Generation)**.
+
+---
+
+## 1. What is RAG? (Simple Explanation)
+
+RAG is a technique where you:
+1. **Search** your own documents to find relevant information
+2. **Add** that information to the AI prompt
+3. **Generate** an answer based on your data + AI model
+
+```
+User Question → Search Your Documents → Add Context to Prompt → AI Generates Answer
+```
+
+**Analogy:** Imagine you are taking an open-book exam. You look up relevant pages in your textbook first, then write your answer using that information. RAG makes AI do the same thing!
+
+---
+
+## 2. The RAG Process (4 Steps)
+
+### Step 1: Chunk Your Documents
+Long documents (like a 100-page PDF) are too big for an AI prompt. We split them into small pieces called **chunks** (e.g., 500 characters each).
+
+### Step 2: Create Embeddings
+We convert each chunk into a list of numbers (a **vector**) using an embedding model. This vector captures the **meaning** of the text.
+
+> **What is an embedding?** It is a list of numbers that represents the meaning of text. Sentences with similar meanings have vectors that are close together in number-space.
+
+```python
+# Example: These two sentences have similar embeddings
+"Python is great for AI" → [0.12, 0.85, 0.33, ...]
+"I love coding in Python" → [0.11, 0.82, 0.35, ...]
+
+# This sentence has a very different embedding
+"The weather is sunny today" → [0.95, 0.10, 0.88, ...]
+```
+
+### Step 3: Store in a Vector Database
+We save these embedding vectors in a special database called a **Vector Database** (like ChromaDB or Pinecone). Unlike normal databases that search for exact word matches, vector databases search by **meaning**.
+
+### Step 4: Query and Generate
+When a user asks a question:
+1. Convert the question into an embedding
+2. Find the 3 most similar chunks from the database
+3. Put those chunks into the AI prompt
+4. The AI gives an accurate answer based on your data!
+
+---
+
+## 3. Hands-On: Build a Simple RAG with ChromaDB
+
+### Install ChromaDB:
+```bash
+pip install chromadb
+```
+
+### Complete Example:
+```python
+import chromadb
+
+# Step 1: Create a ChromaDB client and collection
+client = chromadb.Client()
+collection = client.create_collection("my_notes")
+
+# Step 2: Add documents (ChromaDB creates embeddings automatically)
+collection.add(
+    documents=[
+        "Python lists can store multiple items in one variable.",
+        "NumPy arrays are faster than Python lists for math operations.",
+        "Pandas DataFrames are like Excel tables in Python.",
+        "Matplotlib is used to create charts and graphs in Python.",
+        "Scikit-Learn is the main library for Machine Learning in Python."
+    ],
+    ids=["doc1", "doc2", "doc3", "doc4", "doc5"]
+)
+
+print(f"Added {collection.count()} documents to the database!")
+
+# Step 3: Search for relevant documents
+query = "How do I do math calculations quickly in Python?"
+results = collection.query(query_texts=[query], n_results=2)
+
+print("\nMost relevant documents:")
+for doc in results["documents"][0]:
+    print(f"  - {doc}")
+```
+
+Output:
+```
+Most relevant documents:
+  - NumPy arrays are faster than Python lists for math operations.
+  - Python lists can store multiple items in one variable.
+```
+
+> **Notice:** The search found "NumPy arrays" even though we never used the word "NumPy" in our question! That is the power of **semantic search** — it searches by meaning, not exact words.
+
+---
+
+## 4. Connecting RAG to an AI Model
+
+```python
+import chromadb
+import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+
+# Setup ChromaDB
+client = chromadb.Client()
+collection = client.create_collection("course_notes")
+
+# Add your course content
+collection.add(
+    documents=[
+        "A for loop repeats code a fixed number of times using range().",
+        "A while loop keeps running as long as a condition is True.",
+        "break stops a loop immediately. continue skips to the next round.",
+        "Nested loops are loops inside loops, used for patterns and grids."
+    ],
+    ids=["d1", "d2", "d3", "d4"]
+)
+
+# User asks a question
+question = "How do I stop a loop early?"
+
+# Step 1: Find relevant context
+results = collection.query(query_texts=[question], n_results=2)
+context = "\n".join(results["documents"][0])
+
+# Step 2: Build the RAG prompt
+prompt = f"""Answer the user's question using ONLY the context below.
+If the context does not have the answer, say "I don't have information about that."
+
+Context:
+{context}
+
+Question: {question}"""
+
+# Step 3: Call the AI model
+url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+payload = {"contents": [{"parts": [{"text": prompt}]}]}
+response = requests.post(url, json=payload)
+answer = response.json()["candidates"][0]["content"]["parts"][0]["text"]
+
+print(f"AI Answer: {answer}")
+```
+
+---
+
+## Summary
+
+| Concept | What it Means |
+|---|---|
+| **RAG** | Search your own documents, add context to the AI prompt, then generate an answer |
+| **Embedding** | A list of numbers that captures the meaning of text |
+| **Vector Database** | A database that searches by meaning, not exact words |
+| **ChromaDB** | A simple, free vector database for Python |
+| **Semantic Search** | Finding documents by meaning, not keyword matching |
+
+* RAG lets AI models answer questions about **your own private data**.
+* This is one of the **most in-demand skills** for AI engineers in 2027.
+* Companies use RAG to build internal chatbots, document search tools, and AI assistants.

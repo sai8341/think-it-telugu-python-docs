@@ -1,0 +1,155 @@
+---
+title: "REST APIs & AI Integration - Python in Telugu | Think IT Telugu"
+sidebar_label: "1. What is an API?"
+description: "Learn what APIs are, how GET and POST requests work, and how to call AI model APIs from Python."
+keywords: ["Python", "REST API", "AI API", "Gemini API", "Telugu tutorial", "AI", "ML"]
+---
+
+# REST APIs & AI Integration
+
+As an **AI Engineer**, you do not build giant AI models from scratch. Instead, you use **pre-built AI models** (like Google Gemini, Claude, or GPT) through **APIs** and connect them to your own applications.
+
+---
+
+## 1. What is an API?
+
+An **API (Application Programming Interface)** is a bridge that lets different software talk to each other.
+
+**Simple analogy:** Think of a restaurant:
+- **You** = Your Python code (the customer)
+- **Menu** = The API documentation (what you can order)
+- **Waiter** = The API (carries your request to the kitchen)
+- **Kitchen** = The AI model server (does the actual work)
+- **Food** = The API response (the result you get back)
+
+You never go into the kitchen yourself. You just tell the waiter what you want, and the waiter brings back the result.
+
+---
+
+## 2. GET vs POST Requests
+
+| Type | What it Does | Example |
+|---|---|---|
+| **GET** | Gets data FROM a server | Fetch today's weather |
+| **POST** | Sends data TO a server | Send a prompt to an AI model |
+
+AI APIs always use **POST** because prompts are long and need to be sent securely inside the request body (not in the URL).
+
+---
+
+## 3. Making Your First API Call with Python
+
+First, install the `requests` library:
+
+```bash
+pip install requests
+```
+
+### GET Request Example — Fetching Weather Data:
+```python
+import requests
+
+url = "https://api.open-meteo.com/v1/forecast"
+params = {
+    "latitude": 17.38,
+    "longitude": 78.47,
+    "current_weather": True
+}
+
+response = requests.get(url, params=params)
+data = response.json()
+
+temp = data["current_weather"]["temperature"]
+print(f"Hyderabad temperature: {temp}°C")
+```
+
+---
+
+## 4. API Keys & Authentication
+
+Most AI APIs need an **API key** — like a password that proves you are allowed to use the service.
+
+```python
+import requests
+
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer YOUR_API_KEY_HERE"
+}
+```
+
+- **`Content-Type`** tells the server you are sending JSON data.
+- **`Authorization`** proves your identity using your API key.
+
+> ⚠️ **Never share your API key publicly!** Never put it directly in your code. We will learn a safer way in the next lesson.
+
+---
+
+## 5. Keeping API Keys Safe with dotenv
+
+Create a `.env` file in your project folder:
+
+```
+GEMINI_API_KEY=your-secret-key-here
+```
+
+Then load it in Python:
+
+```python
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load the .env file
+
+api_key = os.getenv("GEMINI_API_KEY")
+print("Key loaded!" if api_key else "Key not found!")
+```
+
+Install dotenv:
+```bash
+pip install python-dotenv
+```
+
+> **Why this matters:** In real companies, API keys are never written directly in code. They are stored in `.env` files (which are added to `.gitignore` so they never get pushed to GitHub).
+
+---
+
+## 6. Calling an AI Model API (Google Gemini)
+
+```python
+import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
+
+url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+
+payload = {
+    "contents": [
+        {
+            "parts": [
+                {"text": "Explain what Machine Learning is in 2 simple sentences."}
+            ]
+        }
+    ]
+}
+
+response = requests.post(url, json=payload)
+data = response.json()
+
+# Extract the AI's answer
+answer = data["candidates"][0]["content"]["parts"][0]["text"]
+print("AI says:", answer)
+```
+
+---
+
+## Summary
+
+* **API** = A bridge that lets your Python code talk to AI model servers.
+* **GET** = Fetch data from a server. **POST** = Send data to a server.
+* AI APIs use **POST requests** with **JSON payloads**.
+* Always keep API keys in **`.env` files** — never hardcode them.
+* You can call any AI model (Gemini, Claude, GPT) using Python's `requests` library.
