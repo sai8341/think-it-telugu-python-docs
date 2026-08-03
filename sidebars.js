@@ -92,7 +92,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Module 5: Conditional Statements',
-          className: 'icon-check',
+          className: 'icon-cond',
           collapsed: true,
           items: [
             'part-1/module-5-conditional-statements/if-else-logic',
@@ -127,7 +127,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Module 7: Strings',
-          className: 'icon-code',
+          className: 'icon-text',
           collapsed: true,
           items: [
             'part-2/module-7-strings/string-basics',
@@ -149,7 +149,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Module 9: Tuples',
-          className: 'icon-list',
+          className: 'icon-tuple',
           collapsed: true,
           items: [
             'part-2/module-9-tuples/tuple-basics',
@@ -159,7 +159,7 @@ const sidebars = {
         {
           type: 'category',
           label: 'Module 10: Sets',
-          className: 'icon-list',
+          className: 'icon-set',
           collapsed: true,
           items: [
             'part-2/module-10-sets/set-basics',
@@ -238,14 +238,11 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Module 15: File Handling & JSON',
-          className: 'icon-file',
+          label: 'Module 15: JSON',
+          className: 'icon-code',
           collapsed: true,
           items: [
-            'part-3/module-15-file-handling/intro',
-            'part-3/module-15-file-handling/what-is-a-file',
-            'part-3/module-15-file-handling/reading-files',
-            'part-3/module-15-file-handling/writing-appending',
+            'part-3/module-15-json/intro',
             'part-3/module-15-json/what-is-json',
             'part-3/module-15-json/json-structure',
             'part-3/module-15-json/reading-writing',
@@ -293,11 +290,10 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Module 19: Machine Learning & AI Engineering',
+          label: 'Module 19: Python for AI Engineering',
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-19-python-for-ai-engineering/scikit-learn-ml',
             'part-3/module-19-python-for-ai-engineering/ai-engineering-apis',
             'part-3/module-19-python-for-ai-engineering/dotenv-secrets',
             'part-3/module-19-python-for-ai-engineering/chatbot-memory-project',
