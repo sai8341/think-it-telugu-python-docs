@@ -52,6 +52,14 @@ export default function NavbarWrapper(props) {
             <span className="sub-navbar-kicker">Part 3</span>
             <span className="sub-navbar-title">Applied Python</span>
           </Link>
+          <Link
+            to="/part-4/module-18-google-colab/what-is-colab"
+            className={clsx('sub-navbar-item', activePart === 'part4' && 'sub-navbar-item--active')}
+            aria-current={activePart === 'part4' ? 'page' : undefined}
+          >
+            <span className="sub-navbar-kicker">Part 4 🔒</span>
+            <span className="sub-navbar-title">AI & ML</span>
+          </Link>
         </div>
       </div>
     </>
