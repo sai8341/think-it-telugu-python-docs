@@ -11,3 +11,13 @@ For every video topic in the Python Course (e.g., Arithmetic Operators, If-Else,
 6. **Coding Practice 2**: Real-world/doc-based practice problem 2 (Intermediate).
 7. **Coding Practice 3**: Real-world/doc-based practice problem 3 (Advanced/Scenario-based).
 8. **Assignment [N]**: Comprehensive unassisted Coding Test connecting all 3 concepts into a real-world scenario with 4 test cases (tests if the student can write code independently without a tutorial).
+
+## Syllabus Restructure Plan (Freemium + Upsell Strategy)
+- **Part 1 & Part 2**: Pure Python basics (Solid, no changes needed).
+- **Part 3**: Advanced Python concepts. Must include:
+  - OOPs (Object-Oriented Programming)
+  - File Handling
+  - Error Handling
+  - Modules and Packages
+  *(Note: Can be refined/expanded later if more Python concepts are needed).*
+- **Part 4 (Locked)**: AI and ML related concepts. This section must be visually "locked" in the documentation to create curiosity (FOMO) and serve as a future upsell for a dedicated AI & ML Graphy course.

@@ -204,7 +204,7 @@ const sidebars = {
   part3Sidebar: [
     {
       type: 'category',
-      label: 'Part 3: AI & ML Engineering',
+      label: 'Part 3: Advanced Python Programming',
       collapsed: false,
       link: {type: 'generated-index'},
       items: [
@@ -293,106 +293,116 @@ const sidebars = {
             'part-3/module-17-git-version-control/exercises-qa',
           ],
         },
+      ],
+    },
+  ],
+  part4Sidebar: [
+    {
+      type: 'category',
+      label: 'Part 4: AI & ML Engineering 🔒',
+      collapsed: false,
+      link: {type: 'generated-index'},
+      items: [
         {
           type: 'category',
-          label: 'Module 18: Google Colab',
+          label: 'Module 18: Google Colab 🔒',
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-18-google-colab/what-is-colab',
+            'part-4/module-18-google-colab/what-is-colab',
           ],
         },
         {
           type: 'category',
-          label: 'Module 19: NumPy & Data Math',
+          label: 'Module 19: NumPy & Data Math 🔒',
           className: 'icon-data',
           collapsed: true,
           items: [
-            'part-3/module-19-numpy-data-math/why-numpy',
-            'part-3/module-19-numpy-data-math/basic-statistics',
+            'part-4/module-19-numpy-data-math/why-numpy',
+            'part-4/module-19-numpy-data-math/basic-statistics',
           ],
         },
         {
           type: 'category',
-          label: 'Module 20: Pandas & Data Cleaning',
+          label: 'Module 20: Pandas & Data Cleaning 🔒',
           className: 'icon-data',
           collapsed: true,
           items: [
-            'part-3/module-20-pandas-data-cleaning/dataframes-intro',
-            'part-3/module-20-pandas-data-cleaning/cleaning-messy-data',
+            'part-4/module-20-pandas-data-cleaning/dataframes-intro',
+            'part-4/module-20-pandas-data-cleaning/cleaning-messy-data',
           ],
         },
         {
           type: 'category',
-          label: 'Module 21: Matplotlib & Visualization',
+          label: 'Module 21: Matplotlib & Visualization 🔒',
           className: 'icon-data',
           collapsed: true,
           items: [
-            'part-3/module-21-matplotlib-visualization/charts-and-plots',
+            'part-4/module-21-matplotlib-visualization/charts-and-plots',
           ],
         },
         {
           type: 'category',
-          label: 'Module 22: ML Foundations',
+          label: 'Module 22: ML Foundations 🔒',
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-22-ml-foundations/what-is-ml',
-            'part-3/module-22-ml-foundations/train-test-linear-regression',
+            'part-4/module-22-ml-foundations/what-is-ml',
+            'part-4/module-22-ml-foundations/train-test-linear-regression',
           ],
         },
         {
           type: 'category',
-          label: 'Module 23: Classification',
+          label: 'Module 23: Classification 🔒',
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-23-classification/classification-basics',
+            'part-4/module-23-classification/classification-basics',
           ],
         },
         {
           type: 'category',
-          label: 'Module 24: REST APIs & AI',
+          label: 'Module 24: REST APIs & AI 🔒',
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-24-rest-apis-ai/apis-and-ai',
+            'part-4/module-24-rest-apis-ai/apis-and-ai',
           ],
         },
         {
           type: 'category',
-          label: 'Module 25: Prompt Engineering',
+          label: 'Module 25: Prompt Engineering 🔒',
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-25-prompt-engineering/prompt-engineering',
+            'part-4/module-25-prompt-engineering/prompt-engineering',
           ],
         },
         {
           type: 'category',
-          label: 'Module 26: RAG & Vector Databases',
+          label: 'Module 26: RAG & Vector Databases 🔒',
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-26-rag-vector-databases/rag-basics',
+            'part-4/module-26-rag-vector-databases/rag-basics',
           ],
         },
         {
           type: 'category',
-          label: 'Module 27: Pydantic & Production',
+          label: 'Module 27: Pydantic & Production 🔒',
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-27-pydantic-production/pydantic-validation',
+            'part-4/module-27-pydantic-production/pydantic-validation',
           ],
         },
         {
           type: 'category',
-          label: 'Module 28: Capstone Project',
+          label: 'Module 28: Capstone Project 🔒',
           className: 'icon-star',
           collapsed: true,
           items: [
-            'part-3/module-28-capstone-project/capstone-project',
+            'part-4/module-28-capstone-project/capstone-project',
           ],
         },
       ],
