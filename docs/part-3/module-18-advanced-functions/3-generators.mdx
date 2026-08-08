@@ -1,0 +1,134 @@
+---
+id: generators
+title: "Generators & the yield Keyword in Python | Think IT Telugu"
+sidebar_label: "3. Generators & yield"
+description: "Master Python generators and the yield keyword. Stream gigabytes of data with near-zero RAM usage using generator functions and expressions."
+keywords: ["Python generators", "yield keyword python", "generator expression", "python memory efficiency", "stream large files python"]
+---
+
+# Generators & the `yield` Keyword
+
+Imagine you need to process a 10 GB CSV file with 50,000,000 transaction records on a laptop with only 8 GB of RAM.
+
+If you try to load everything into a standard Python list, your program will crash instantly with an **`OutOfMemoryError`**.
+
+**Generators** solve this exact problem. Instead of computing all values upfront and storing them in RAM, a generator computes values **one at a time on demand**.
+
+---
+
+## 1. What is a Generator Function?
+
+A generator function is written like a normal function, but instead of the **`return`** keyword, it uses the **`yield`** keyword.
+
+### `return` vs. `yield`
+
+| Keyword | Action | Function State |
+| :--- | :--- | :--- |
+| **`return`** | Gives back a value and **terminates** the function completely | State is destroyed |
+| **`yield`** | Gives back a value and **pauses** execution right where it stopped | State is frozen and remembered |
+
+---
+
+## 2. Writing Your First Generator Function
+
+Let's write a simple countdown generator:
+
+```python
+def countdown(start_number):
+    print("Generator starting...")
+    while start_number > 0:
+        yield start_number
+        start_number -= 1
+        print("Resumed for next step...")
+
+# Calling the function returns a generator object (does not run code yet!)
+timer = countdown(3)
+print(timer)  # Output: <generator object countdown at 0x...>
+
+# Fetch values using next()
+print(next(timer))
+# Output:
+# Generator starting...
+# 3
+
+print(next(timer))
+# Output:
+# Resumed for next step...
+# 2
+
+print(next(timer))
+# Output:
+# Resumed for next step...
+# 1
+```
+
+---
+
+## 3. Iterating Over Generators with a `for` Loop
+
+Because generator objects adhere to the iteration protocol, you can loop over them directly:
+
+```python
+def generate_even_numbers(max_limit):
+    current = 2
+    while current <= max_limit:
+        yield current
+        current += 2
+
+for even in generate_even_numbers(10):
+    print(even, end=" ")
+# Output: 2 4 6 8 10
+```
+
+---
+
+## 4. Generator Expressions (Lightweight Syntax)
+
+Just like **List Comprehensions** use square brackets `[...]`, **Generator Expressions** use parentheses `(...)`:
+
+```python
+import sys
+
+# 1. List Comprehension: Allocates memory for 1,000,000 items immediately
+list_data = [x ** 2 for x in range(1000000)]
+print("List RAM usage:", sys.getsizeof(list_data), "bytes")  # ~8.4 Megabytes
+
+# 2. Generator Expression: Generates numbers lazily on the fly
+gen_data = (x ** 2 for x in range(1000000))
+print("Generator RAM usage:", sys.getsizeof(gen_data), "bytes")  # Only ~112 bytes!
+```
+
+---
+
+## 5. Real-World Use Case: Streaming Large Files
+
+Here is how data engineers and backend developers read massive server log files without running out of memory:
+
+```python
+def stream_log_lines(file_path):
+    with open(file_path, "r", encoding="utf-8") as file:
+        for line in file:
+            # Yields one line at a time to the consumer
+            if "ERROR" in line:
+                yield line.strip()
+
+# Processing error lines efficiently
+# for error_line in stream_log_lines("server_production.log"):
+#     alert_system(error_line)
+```
+
+---
+
+## 6. Interactive Practice Quiz
+
+<Quiz
+  question="What happens to the internal local variables of a generator function when it hits a yield statement?"
+  options={[
+    "They are wiped from memory completely",
+    "They are frozen and saved in place until next() is called",
+    "They are converted into global variables",
+    "The function restarts from line 1"
+  ]}
+  correctIndex={1}
+  explanation="When Python encounters yield, it pauses execution and freezes all local variables and instruction pointers, allowing execution to resume exactly where it stopped on the next iteration."
+/>

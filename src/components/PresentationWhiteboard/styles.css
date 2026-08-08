@@ -1,0 +1,31 @@
+/* ========================================================
+   GoodNotes Disappearing Neon Laser Pen Overlay
+   Zero Toolbar Clutter · Auto-Vanishing Ink Physics
+   ======================================================== */
+
+.goodnotes-laser-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9995;
+  pointer-events: none;
+}
+
+.goodnotes-laser-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9996;
+  touch-action: none;
+}
+
+.goodnotes-laser-canvas.laser-enabled {
+  pointer-events: auto !important;
+  cursor: crosshair;
+}
+
+.goodnotes-laser-canvas.laser-disabled {
+  pointer-events: none !important;
+  cursor: default;
+}

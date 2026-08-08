@@ -57,6 +57,15 @@
 
   --docusaurus-highlighted-code-line-bg: #f0fdfa;
 
+  /* Layout and Surface Tokens */
+  --tit-surface: #FFFFFF;
+  --tit-border: #E5E7EB;
+  --tit-border-strong: #0d9488;
+  --tit-text: #111827;
+  --tit-muted: #6B7280;
+  --tit-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --tit-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+
   /* Reset navbar offset for main navbar (60px) */
   --ifm-navbar-height: 60px;
 
@@ -100,33 +109,60 @@
   }
 }
 
-/* ---- Dark Mode ---- */
+/* ---- Dark Mode: GitHub / Vercel / Linear Inspired Reading Experience ---- */
 [data-theme='dark'] {
-  --ifm-color-primary: #2dd4bf;
-  --ifm-color-primary-dark: #14b8a6;
-  --ifm-color-primary-darker: #0d9488;
-  --ifm-color-primary-darkest: #0f766e;
-  --ifm-color-primary-light: #5eead4;
-  --ifm-color-primary-lighter: #99f6e4;
-  --ifm-color-primary-lightest: #ccfbf1;
+  --ifm-color-primary: #00C7B7;
+  --ifm-color-primary-dark: #00b3a4;
+  --ifm-color-primary-darker: #009f92;
+  --ifm-color-primary-darkest: #007a70;
+  --ifm-color-primary-light: #1ad3c4;
+  --ifm-color-primary-lighter: #33dfd2;
+  --ifm-color-primary-lightest: #66ebd0;
 
-  --ifm-font-color-base: #E5E7EB;
-  --ifm-background-color: #0F0F1A;
-  --ifm-background-surface-color: #1A1A2E;
+  --ifm-font-color-base: #E6EDF3;
+  --ifm-secondary-text-color: #8B949E;
+  --ifm-heading-color: #FFFFFF;
 
-  --ifm-navbar-background-color: #0A0A14;
-  --ifm-navbar-link-color: #D1D5DB;
-  --ifm-navbar-link-hover-color: #2dd4bf;
+  --ifm-background-color: #0F1117;
+  --ifm-background-surface-color: #161B22;
 
-  --ifm-footer-background-color: #0A0A14;
+  --ifm-border-color: #30363D;
+  --ifm-toc-border-color: #30363D;
 
-  --ifm-link-color: #2dd4bf;
-  --ifm-link-hover-color: #5eead4;
+  --ifm-navbar-background-color: #161B22;
+  --ifm-navbar-link-color: #8B949E;
+  --ifm-navbar-link-hover-color: #00C7B7;
 
-  --ifm-menu-color-active: #2dd4bf;
-  --ifm-menu-color-background-active: rgba(45, 212, 191, 0.12);
+  --ifm-footer-background-color: #161B22;
+  --ifm-footer-color: #8B949E;
+  --ifm-footer-link-color: #00C7B7;
 
-  --docusaurus-highlighted-code-line-bg: rgba(45, 212, 191, 0.15);
+  --ifm-link-color: #00C7B7;
+  --ifm-link-hover-color: #33dfd2;
+
+  --ifm-menu-color: #8B949E;
+  --ifm-menu-color-active: #FFFFFF;
+  --ifm-menu-color-background-active: rgba(0, 199, 183, 0.12);
+  --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.04);
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 199, 183, 0.12);
+
+  /* Brand Tokens in Dark Mode */
+  --brand-primary: #00C7B7;
+  --brand-accent: #3776AB;
+  --brand-surface: #161B22;
+  --brand-card: #1C2128;
+  --brand-border: #30363D;
+  --brand-muted: #8B949E;
+
+  /* Layout and Surface Tokens in Dark Mode */
+  --tit-surface: #161B22;
+  --tit-border: #30363D;
+  --tit-border-strong: #00C7B7;
+  --tit-text: #FFFFFF;
+  --tit-muted: #8B949E;
+  --tit-shadow-sm: none;
+  --tit-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* ---- Accessibility: Reduced Motion ---- */

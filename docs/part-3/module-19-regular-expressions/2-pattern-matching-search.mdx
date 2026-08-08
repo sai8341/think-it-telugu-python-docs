@@ -1,0 +1,105 @@
+---
+id: pattern-matching-search
+title: "Regex Pattern Matching: search, match & Character Classes | Think IT Telugu"
+sidebar_label: "2. search, match & Sets"
+description: "Master re.search(), re.match(), re.fullmatch(), character classes [a-z], and special shortcuts like \\d, \\w, \\s in Python."
+keywords: ["Python re.search", "re.match vs re.search", "regex character classes", "python regex shortcuts", "match object python"]
+---
+
+# Pattern Matching: `search()`, `match()` & Character Sets
+
+Now that you understand the basic symbols of RegEx, let us explore how Python actually searches through text and returns **Match Objects**.
+
+---
+
+## 1. `re.search()` vs. `re.match()` vs. `re.fullmatch()`
+
+Many beginners get confused between these three functions. Here is the clear distinction:
+
+| Function | What it does | Where it looks |
+| :--- | :--- | :--- |
+| **`re.search()`** | Scans the **entire string** and returns the **first match** anywhere | Anywhere in text |
+| **`re.match()`** | Checks if the pattern matches **strictly at the very start** of the string | First index only |
+| **`re.fullmatch()`** | Checks if the pattern matches the **entire complete string** from start to finish | Whole string |
+
+```python
+import re
+
+message = "Order ID: #98421 confirmed."
+
+# 1. re.search: Finds #98421 anywhere in the text
+search_result = re.search(r"#\d+", message)
+print("search found:", search_result.group())  # Output: search found: #98421
+
+# 2. re.match: Fails because the string starts with 'Order', not digits!
+match_result = re.match(r"#\d+", message)
+print("match found:", match_result)  # Output: match found: None
+```
+
+---
+
+## 2. The Match Object: Extracting Positions and Values
+
+When `re.search()` finds a match, it returns a **Match Object** with useful methods:
+
+```python
+import re
+
+text = "Flight 6E-204 is on time."
+match = re.search(r"\d[A-Z]-\d+", text)
+
+if match:
+    print("Matched Text:", match.group())  # Output: 6E-204
+    print("Start Index:", match.start())    # Output: 7
+    print("End Index:", match.end())        # Output: 13
+    print("Span Coordinates:", match.span()) # Output: (7, 13)
+```
+
+---
+
+## 3. Character Classes `[...]`
+
+A character set in square brackets `[...]` matches **any single character** inside the brackets:
+
+```python
+# [aeiou]  --> Matches any lowercase vowel
+# [a-z]    --> Matches any lowercase letter from a to z
+# [A-Z]    --> Matches any uppercase letter from A to Z
+# [0-9]    --> Matches any digit from 0 to 9
+# [^0-9]   --> The caret ^ INSIDE brackets means NOT a digit (Negation)
+```
+
+### Example: Matching Hex Color Codes
+```python
+import re
+
+color_code = "#A3F90B"
+is_valid_hex = bool(re.search(r"^#[0-9A-Fa-f]{6}$", color_code))
+print(f"Valid Hex Color? {is_valid_hex}")  # Output: True
+```
+
+---
+
+## 4. Special RegEx Character Shortcuts
+
+Instead of typing `[0-9]` or `[a-zA-Z0-9_]`, Python provides clean built-in shortcuts:
+
+| Shortcut | Matches | Meaning |
+| :--- | :--- | :--- |
+| **`\d`** | `[0-9]` | Any single digit |
+| **`\D`** | `[^0-9]` | Any non-digit character |
+| **`\w`** | `[a-zA-Z0-9_]` | Any alphanumeric word character + underscore |
+| **`\W`** | `[^a-zA-Z0-9_]` | Any non-word symbol (e.g., spaces, punctuation) |
+| **`\s`** | `[ \t\n\r]` | Any whitespace (space, tab, newline) |
+| **`\S`** | `[^ \t\n\r]` | Any non-whitespace character |
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Which regex shortcut matches any single digit (0 through 9) in Python?"
+  options={["\\w", "\\s", "\\d", "\\D"]}
+  correctIndex={2}
+  explanation="\\d represents digits [0-9]. (Note: \\w is word characters, \\s is whitespace, and \\D is non-digits)."
+/>

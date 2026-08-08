@@ -1,25 +1,92 @@
 ---
-title: "JSON Structure - Python in Telugu | Think IT Telugu"
+title: "JSON Structure & Data Types - Python in Telugu | Think IT Telugu"
 sidebar_label: "JSON Structure"
-description: "Learn about JSON Structure in Python with real-world examples. This Think IT Telugu tutorial explains JSON Structure easily for AI and Data Science beginners."
-keywords: ["Python", "JSON Structure", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+description: "Understand JSON syntax rules, data types (objects, arrays, strings, numbers, booleans, null), and how Python maps to them."
+keywords: ["JSON structure", "JSON data types", "Python to JSON mapping", "Nested JSON", "Learn Python in Telugu"]
 ---
 
-# JSON Structure
+# JSON Structure & Data Types
 
-JSON data is structured as key-value pairs, which looks very similar to a Python dictionary.
+In this lesson, you will learn the fundamental data types allowed in JSON and how Python maps its native types to JSON.
+
+---
+
+## 1. Supported JSON Data Types
+
+JSON supports 6 core data types:
+
+| JSON Data Type | Python Equivalent | Example |
+| :--- | :--- | :--- |
+| **Object** | `dict` (Dictionary) | `{"name": "Sai", "age": 25}` |
+| **Array** | `list` (List) | `["Python", "Machine Learning"]` |
+| **String** | `str` (Text) | `"Hyderabad"` |
+| **Number** | `int` or `float` | `100` or `98.6` |
+| **Boolean** | `bool` | `true` or `false` |
+| **Null** | `None` | `null` |
+
+---
+
+## 2. Nested JSON: Real-World Example
+
+In real-world applications (like e-commerce apps or AI APIs), JSON objects are rarely flat. They contain **nested objects** and **arrays inside objects**:
 
 ```json
 {
-  "name": "Sai Kumar",
-  "age": 22,
-  "skills": ["Python", "JavaScript"],
-  "is_student": false
+  "order_id": "ORD-98421",
+  "customer": {
+    "name": "Ananya Sharma",
+    "city": "Vijayawada",
+    "is_prime_member": true
+  },
+  "items": [
+    {"product": "Wireless Mouse", "price": 499, "qty": 1},
+    {"product": "USB-C Cable", "price": 199, "qty": 2}
+  ],
+  "discount_code": null,
+  "total_amount": 897.00
 }
 ```
-### Differences (Python Dictionary vs JSON):
-1. In JSON, keys must always use double quotes (`"..."`). Single quotes are invalid.
-2. Boolean values in JSON are lowercase (`true`, `false`). In Python, they are capitalized (`True`, `False`).
-3. JSON uses `null` to represent nothing, which maps to `None` in Python.
+
+### Notice:
+1. `customer` is a **nested JSON object** (maps to a nested Python dictionary).
+2. `items` is a **JSON array of objects** (maps to a Python list of dictionaries).
+3. `discount_code` is `null` (maps to Python `None`).
 
 ---
+
+## 3. How to Navigate Nested JSON in Python
+
+Once this JSON is converted into a Python dictionary, you navigate it using standard dictionary and list bracket notation:
+
+```python
+order = {
+    "order_id": "ORD-98421",
+    "customer": {"name": "Ananya Sharma", "city": "Vijayawada"},
+    "items": [
+        {"product": "Wireless Mouse", "price": 499},
+        {"product": "USB-C Cable", "price": 199}
+    ]
+}
+
+# 1. Access customer name:
+print(order["customer"]["name"])  # Output: Ananya Sharma
+
+# 2. Access the first item's product name:
+print(order["items"][0]["product"])  # Output: Wireless Mouse
+```
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="What Python data structure does a JSON Array containing objects (e.g. [{'id': 1}, {'id': 2}]) map to?"
+  options={[
+    "A tuple of strings",
+    "A list of dictionaries",
+    "A set of keys",
+    "A single dictionary"
+  ]}
+  correctIndex={1}
+  explanation="In JSON, square brackets [] represent an Array (Python List), and curly braces {} represent an Object (Python Dictionary). An array of objects converts directly to a list of dictionaries."
+/>

@@ -1,0 +1,95 @@
+---
+id: why-test-code
+title: "Why Test Your Code? Automated QA Fundamentals | Think IT Telugu"
+sidebar_label: "1. Why Test Code?"
+description: "Understand why automated unit testing is mandatory in software engineering. Learn the Arrange-Act-Assert pattern and testing categories."
+keywords: ["Python unit testing", "why test code python", "automated testing python", "arrange act assert python", "software quality assurance"]
+---
+
+# Why Test Your Code? Automated QA Fundamentals
+
+When beginners write Python code, their testing workflow usually looks like this:
+1. Write 20 lines of code.
+2. Add a `print(result)` at the bottom.
+3. Run the script manually in the terminal.
+4. If the print output looks correct, delete the `print()` statement and submit the code.
+
+While this works for simple 10-line scripts, it **fails catastrophically in production**. 
+
+When a team of 15 engineers adds 500 new features across 80,000 lines of code, manually testing every single button and edge case is impossible.
+
+---
+
+## 1. The Cost of Broken Software
+
+Without automated unit tests:
+- A bug introduced in a discount coupon calculation goes unnoticed for 3 weeks, causing the business to lose ₹10,00,000.
+- Modifying a user login function accidentally breaks the shopping cart checkout.
+
+**Automated Unit Testing** runs 500 test cases in **under 2 seconds** every single time you push code to GitHub.
+
+---
+
+## 2. The 3 Types of Software Tests
+
+```
+              ┌───────────────────────────┐
+              │  End-to-End (E2E) Tests   │ (Slow, Expensive - Tests full UI)
+              ├───────────────────────────┤
+              │    Integration Tests      │ (Tests API + DB working together)
+              ├───────────────────────────┤
+              │        Unit Tests         │ (Fast, 1000s per sec - Tests 1 function)
+              └───────────────────────────┘
+```
+
+- **Unit Tests**: Test one single isolated function in memory (e.g. Does `calculate_gst(100)` return `118.0`?).
+- **Integration Tests**: Test if two modules talk to each other (e.g. Does `save_order()` write correctly to SQLite?).
+- **End-to-End (E2E)**: Simulate a real user clicking buttons on a website.
+
+---
+
+## 3. The Gold Standard: The AAA (Arrange-Act-Assert) Pattern
+
+Every unit test is structured into three distinct steps:
+
+1. **Arrange**: Set up the initial test data and mock inputs.
+2. **Act**: Call the function you want to test.
+3. **Assert**: Verify that the actual output strictly matches the expected output.
+
+```python
+# Function to test:
+def calculate_discount(price, discount_percent):
+    if price < 0 or discount_percent < 0:
+        raise ValueError("Price and discount must be positive numbers!")
+    return price - (price * (discount_percent / 100))
+
+# The AAA Test Logic:
+# 1. Arrange: Price = 1000, Discount = 10%
+# 2. Act: result = calculate_discount(1000, 10)
+# 3. Assert: Verify that result == 900.0
+```
+
+---
+
+## 4. Test Case Categories
+
+When writing tests for any function, you must test three categories:
+1. **Happy Path (Positive test)**: Standard expected input (e.g. Valid username and password).
+2. **Negative Path**: Invalid inputs (e.g. Wrong password or missing email `@`).
+3. **Edge Cases**: Boundary conditions (e.g. Empty list `[]`, zero `0`, negative numbers, or strings with 100,000 characters).
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="What are the three core steps in the AAA pattern of automated unit testing?"
+  options={[
+    "Analyze, Author, Authenticate",
+    "Arrange, Act, Assert",
+    "Allocate, Append, Accept",
+    "Argument, Action, Algorithm"
+  ]}
+  correctIndex={1}
+  explanation="The Arrange-Act-Assert (AAA) pattern sets up input data (Arrange), invokes the target code (Act), and compares actual output against expectations (Assert)."
+/>

@@ -1,0 +1,94 @@
+---
+id: intro-to-regex
+title: "Introduction to Regular Expressions (RegEx) in Python | Think IT Telugu"
+sidebar_label: "1. Intro to RegEx"
+description: "Learn Python regular expressions from scratch. Master the re module, raw strings r'', and foundational metacharacters for text pattern searching."
+keywords: ["Python regex", "regular expressions python", "python re module", "raw strings python", "regex metacharacters"]
+---
+
+# Introduction to Regular Expressions (RegEx)
+
+Have you ever tried to find all phone numbers in a 500-page PDF document, or verify if an email address entered by a user contains `@` and `.com`?
+
+Using standard string methods like `.find()` or `.startswith()` becomes nearly impossible when text patterns are complex and dynamic.
+
+A **Regular Expression (RegEx)** is a specialized, compact search language designed to match, extract, and clean patterns in text.
+
+---
+
+## 1. The Real-World Metaphor: The Metal Detector
+
+Think of standard string searching (`"sai" in text`) like looking for one specific person wearing a red t-shirt.
+
+A **Regular Expression** is like a **metal detector** at a stadium gate. It doesn't look for a specific key; it beeps for **anything that matches the metal pattern** (coins, keys, belt buckles).
+
+---
+
+## 2. Python's Standard `re` Module & Raw Strings
+
+Python has a built-in library for regular expressions called **`re`**:
+
+```python
+import re
+```
+
+### Why You Must Always Use Raw Strings (`r"..."`)
+In regular Python strings, a backslash `\` is used for special escape characters like `\n` (newline) and `\t` (tab).
+
+In RegEx, backslashes are also used for special patterns (like `\d` for digits). To avoid Python confusing `\n` with a regex rule, **always prefix regex patterns with `r`**:
+
+```python
+# ❌ Confusing to Python's parser:
+pattern = "\\d+"
+
+# ✅ Clean and standard raw string:
+pattern = r"\d+"
+```
+
+---
+
+## 3. Essential RegEx Metacharacters
+
+Metacharacters are special symbols with unique superpowers in regular expressions:
+
+| Symbol | Meaning | Example Pattern | Matches |
+| :--- | :--- | :--- | :--- |
+| **`.`** (Dot) | Any single character (except newline) | `r"c.t"` | `cat`, `cot`, `c9t` |
+| **`^`** (Caret) | Starts with | `r"^Hello"` | `"Hello world"` (at start only) |
+| **`$`** (Dollar) | Ends with | `r"end$"` | `"The end"` (at end only) |
+| **`*`** (Star) | 0 or more repetitions | `r"go*l"` | `gl`, `gol`, `goool` |
+| **`+`** (Plus) | 1 or more repetitions | `r"go+l"` | `gol`, `goool` (not `gl`) |
+| **`?`** (Question) | 0 or 1 optional appearance | `r"colou?r"` | `color`, `colour` |
+| **`|`** (Pipe) | OR condition | `r"cat|dog"` | `cat` or `dog` |
+
+---
+
+## 4. Quick Example: Checking if a Pattern Exists
+
+```python
+import re
+
+text = "Payment of Rs 4500 received via UPI"
+
+# Check if text contains the word 'UPI'
+if re.search(r"UPI", text):
+    print("✅ Transaction verified via UPI!")
+else:
+    print("❌ Other payment method.")
+```
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Why is it standard practice to write regex patterns as raw strings r'...' in Python?"
+  options={[
+    "It makes regex run 10x faster in CPU cache",
+    "It treats backslashes as literal characters so Python does not misinterpret escape sequences like \\n or \\d",
+    "It automatically converts the string to uppercase",
+    "It imports the re library automatically"
+  ]}
+  correctIndex={1}
+  explanation="Raw strings (prefixed with r) treat backslashes as literal characters, preventing Python from interpreting sequences like \\n as newlines before the regex engine receives them."
+/>

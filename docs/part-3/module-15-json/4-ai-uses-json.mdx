@@ -1,13 +1,84 @@
 ---
-title: "Why AI Uses JSON - Python in Telugu | Think IT Telugu"
-sidebar_label: "Why AI Uses JSON"
-description: "Learn about Why AI Uses JSON in Python with real-world examples. This Think IT Telugu tutorial explains Why AI Uses JSON easily for AI and Data Science beginners."
-keywords: ["Python", "Why AI Uses JSON", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+title: "Why AI & APIs Use JSON (and Handling JSON Errors) | Think IT Telugu"
+sidebar_label: "AI, APIs & Error Handling"
+description: "Learn how modern AI models, LLM APIs, and web services use JSON for structured outputs, and how to safely catch json.JSONDecodeError."
+keywords: ["AI and JSON", "JSONDecodeError python", "structured output LLM python", "API JSON parsing", "Learn Python in Telugu"]
 ---
 
-# Why AI Uses JSON
+# Why AI & APIs Use JSON (and Handling JSON Errors)
 
-In modern AI development, JSON is extremely important:
+In this lesson, you will learn how modern AI models like ChatGPT and Google Gemini use JSON, and how to protect your code from crashing when an API returns invalid JSON.
 
-1. **Structured Outputs:** When we ask AI models (like Gemini or OpenAI) to generate data, we often tell them to respond in JSON. This makes it easy for our code to parse and use the AI's response.
-2. **Function Calling:** AI agents communicate which tools or functions they want to run by sending parameters in the JSON format.
+---
+
+## 1. How AI Models Use JSON: Structured Outputs
+
+When you build an AI application (e.g., an automated resume parser or email classifier), you don't want the AI to reply with long conversational paragraphs like *"Sure! Here is the summary..."*.
+
+Instead, you instruct the AI to respond **strictly in JSON**:
+
+```python
+import json
+
+# Simulated response from an AI classification model:
+ai_response_text = """
+{
+  "sender": "hdfcbank@alerts.com",
+  "category": "Transaction Alert",
+  "amount": 2500.00,
+  "is_fraud_suspected": false
+}
+"""
+
+parsed_data = json.loads(ai_response_text)
+
+if parsed_data["amount"] > 1000:
+    print(f"🔔 High value transaction alert: ₹{parsed_data['amount']}")
+```
+
+---
+
+## 2. Handling Corrupted / Malformed JSON Safely
+
+In the real world, network drops or AI "hallucinations" can result in broken, incomplete JSON text (e.g., missing closing quotes or broken brackets).
+
+If you pass invalid text to `json.loads()`, Python raises a **`json.JSONDecodeError`**:
+
+```python
+import json
+
+corrupted_json_text = '{"name": "Sai", "score": 95'  # ❌ Missing closing brace!
+
+try:
+    data = json.loads(corrupted_json_text)
+    print("User score:", data["score"])
+except json.JSONDecodeError as error:
+    print("🚨 Could not parse JSON data!")
+    print(f"Error details: {error}")
+```
+
+**Output:**
+```text
+🚨 Could not parse JSON data!
+Error details: Expecting ',' delimiter: line 1 column 27 (char 26)
+```
+
+:::tip Defensive Coding
+Whenever your Python application reads JSON from a web server, external file, or user input, always wrap `json.loads()` or `json.load()` in a `try-except json.JSONDecodeError` block to prevent crashes.
+:::
+
+---
+
+## 3. Interactive Practice Quiz
+
+<Quiz
+  question="Which built-in exception does Python raise when you attempt to parse a corrupted or invalid JSON string with json.loads()?"
+  options={[
+    "json.JSONDecodeError",
+    "ValueError.SyntaxError",
+    "FormatError",
+    "TypeError"
+  ]}
+  correctIndex={0}
+  explanation="When json.loads() or json.load() encounters invalid JSON syntax, it raises json.JSONDecodeError (which inherits from ValueError)."
+/>

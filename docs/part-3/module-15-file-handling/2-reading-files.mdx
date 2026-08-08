@@ -1,29 +1,93 @@
 ---
-title: "Reading Files - Python in Telugu | Think IT Telugu"
+title: "Reading Files in Python - Python in Telugu | Think IT Telugu"
 sidebar_label: "Reading Files"
-description: "Learn about Reading Files in Python with real-world examples. This Think IT Telugu tutorial explains Reading Files easily for AI and Data Science beginners."
-keywords: ["Python", "Reading Files", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+description: "Learn how to read files in Python using read(), readline(), readlines(), and the with statement for safe file handling."
+keywords: ["Python", "read file", "readline", "readlines", "with statement", "Learn Python in Telugu"]
 ---
 
 # Reading Files
 
-Here is how to open and read a file's content:
+Python provides three different methods to read file content, each suited for different situations.
+
+---
+
+## Method 1: `read()` — Read Everything At Once
 
 ```python
-# open(file_path, mode)
 file = open("sample.txt", "r")
 content = file.read()
 print(content)
-file.close() # Always close the file to free up system resources
+file.close()  # Always close the file
 ```
 
-### The with Statement (Recommended Way):
-Using the `with` keyword is safer because Python automatically closes the file for you, even if an error happens.
+This loads the **entire file** into memory as a single string. Works great for small files, but can crash your program if the file is very large (e.g., a 2 GB log file).
+
+---
+
+## Method 2: `readline()` — Read One Line At A Time
+
+```python
+file = open("sample.txt", "r")
+first_line = file.readline()
+second_line = file.readline()
+print(first_line)
+print(second_line)
+file.close()
+```
+
+Each call to `readline()` moves the cursor to the next line, like reading a book one sentence at a time.
+
+---
+
+## Method 3: `readlines()` — Read All Lines Into A List
+
+```python
+file = open("sample.txt", "r")
+all_lines = file.readlines()
+print(all_lines)  # Output: ['Line 1\n', 'Line 2\n', 'Line 3\n']
+file.close()
+```
+
+Returns a list where each element is one line from the file. Notice that each line keeps the `\n` newline character at the end.
+
+---
+
+## The `with` Statement (Recommended Way)
+
+Forgetting `file.close()` is one of the most common beginner mistakes. The `with` statement solves this — Python **automatically closes** the file when the block ends, even if an error occurs:
 
 ```python
 with open("sample.txt", "r") as file:
     content = file.read()
     print(content)
+# File is automatically closed here — no need to call file.close()
 ```
 
+:::tip Golden Rule
+Always use the `with` statement when working with files. It is safer and cleaner than manually calling `file.close()`.
+:::
+
 ---
+
+## Reading Line-by-Line with a `for` Loop
+
+For large files, the most memory-efficient approach is to loop through the file object directly:
+
+```python
+with open("server_log.txt", "r") as file:
+    for line in file:
+        print(line.strip())  # strip() removes the trailing \n
+```
+
+This reads only one line at a time into memory, even if the file has millions of lines.
+
+---
+
+## Interactive Practice Quiz
+
+<Quiz
+  question="Which is the safest way to open and read a file in Python?"
+  options={["file = open('data.txt', 'r')", "with open('data.txt', 'r') as file:", "file = read('data.txt')", "import file('data.txt')"]}
+  correctIndex={1}
+  explanation="The 'with' statement automatically closes the file when the block ends, even if an error occurs. This prevents resource leaks and is the recommended Python pattern."
+/>

@@ -198,16 +198,16 @@ print("Evens:", evens)
 `,
   },
   {
-    label: '🧪 Free Playground',
+    label: 'Free Playground',
     module: 'Custom',
-    code: `# 🧪 Free Playground
+    code: `# Free Playground
 # Write any Python code here and click Run!
 
 # Try something fun:
 for i in range(5):
-    print("⭐" * (i + 1))
+    print("Python is awesome!")
 
-print("\\nHappy Coding! 🎉")
+print("\\nHappy Coding!")
 `,
   },
 ];

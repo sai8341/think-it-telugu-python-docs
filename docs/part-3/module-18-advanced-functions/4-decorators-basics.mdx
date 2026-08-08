@@ -1,0 +1,147 @@
+---
+id: decorators-basics
+title: "Python Decorators: Clean Function Enhancement | Think IT Telugu"
+sidebar_label: "4. Decorators Basics"
+description: "Learn how Python decorators work under the hood. Understand first-class functions, closures, and the @decorator syntax with practical examples."
+keywords: ["Python decorators", "python decorator tutorial", "functools wraps", "python higher order functions", "python wrapper functions"]
+---
+
+# Python Decorators: Fundamentals
+
+Have you ever wanted to add logging, execution timing, or authentication checks to 20 different functions without copying and pasting the exact same lines of code into every single one?
+
+**Decorators** allow you to wrap extra functionality around an existing function cleanly and dynamically without altering the original function's source code.
+
+---
+
+## 1. The Core Foundation: Functions are First-Class Citizens
+
+In Python, functions are not special second-class constructs — they are **objects** just like numbers, strings, or lists.
+
+This means you can:
+1. Assign functions to variables.
+2. Pass functions as arguments into other functions.
+3. Return functions from inside other functions.
+
+### Example: Passing a Function as an Argument
+```python
+def shout(text):
+    return text.upper() + "!"
+
+def greet(func_name, message):
+    # Execute the passed function
+    result = func_name(message)
+    print(result)
+
+greet(shout, "hello world")  # Output: HELLO WORLD!
+```
+
+---
+
+## 2. What is a Decorator?
+
+A decorator is simply a function that takes another function as an input, wraps it inside an internal helper function (`wrapper`), adds new behavior before and after, and returns the modified wrapper function.
+
+### Real-World Metaphor: Gift Wrapping
+Think of a birthday present. The gift inside (the original function) remains unchanged, but the gift wrap and ribbon (the decorator) add beauty and protection around it.
+
+```
+      Original Function: send_email()
+                 ↓
+    Wrapped Inside Decorator:
+    [ Step 1: Check Internet Connection ]
+    [ Step 2: Run send_email()          ]
+    [ Step 3: Log timestamp to database  ]
+```
+
+---
+
+## 3. The Classic Syntax vs. The `@` Syntactic Sugar
+
+### Manual Wrapping (Under the hood)
+```python
+def my_decorator(original_func):
+    def wrapper():
+        print(">> [Before]: Checking user permissions...")
+        original_func()
+        print(">> [After]: Task logged successfully.")
+    return wrapper
+
+def download_data():
+    print("Downloading report from cloud server...")
+
+# Manually wrapping
+decorated_download = my_decorator(download_data)
+decorated_download()
+```
+
+### The Clean `@` Decorator Syntax
+Python provides the **`@`** symbol as a clean shortcut that does the exact same thing:
+
+```python
+def my_decorator(original_func):
+    def wrapper():
+        print(">> [Before]: Checking user permissions...")
+        original_func()
+        print(">> [After]: Task logged successfully.")
+    return wrapper
+
+@my_decorator
+def download_data():
+    print("Downloading report from cloud server...")
+
+# Call the function directly
+download_data()
+```
+
+---
+
+## 4. Handling Arguments with `*args` and `**kwargs`
+
+Real-world functions accept arguments (e.g. `add(x, y)`). To ensure your decorator can wrap **any function with any number of parameters**, always pass `*args` and `**kwargs` into the wrapper:
+
+```python
+import time
+from functools import wraps
+
+def calculate_time(original_func):
+    @wraps(original_func)  # Preserves original function name and docstrings
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        
+        # Execute original function with its arguments
+        result = original_func(*args, **kwargs)
+        
+        duration = time.time() - start_time
+        print(f"⏱️ '{original_func.__name__}' took {duration:.5f} seconds.")
+        return result
+    return wrapper
+
+@calculate_time
+def process_numbers(limit):
+    total = sum(i ** 2 for i in range(limit))
+    return total
+
+answer = process_numbers(100000)
+print(f"Result: {answer}")
+```
+
+:::tip Always use `@wraps`
+Import `from functools import wraps` and decorate your `wrapper` with `@wraps(original_func)`. This prevents your original function from losing its identity (`__name__` and `__doc__`).
+:::
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Why is *args and **kwargs passed into the inner wrapper function of a decorator?"
+  options={[
+    "To make the function execute 2x faster",
+    "To allow the decorator to work with functions that take any number of positional or keyword arguments",
+    "To convert the function into a generator",
+    "To prevent syntax errors in Python 2"
+  ]}
+  correctIndex={1}
+  explanation="Passing *args and **kwargs ensures that the decorator is completely universal and can accept any function regardless of how many parameters it requires."
+/>

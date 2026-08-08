@@ -1,28 +1,86 @@
-/* ======= CODE BLOCKS ======= */
-.prism-code {
+/* ========================================================
+   Clean, Single-Card Code Block Styling
+   100% Unified Deep Midnight Pro Theme with Python Lab
+   ======================================================== */
+
+/* Outer Code Block Container - The ONLY card container */
+div[class*='codeBlockContainer'] {
   border-radius: 10px !important;
-  border: 1px solid #e5e7eb;
-  box-shadow: none;
-  margin: 1.5rem 0;
-  padding: 1.25rem !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  margin: 1.5rem 0 !important;
+  overflow: hidden !important;
+  background-color: #f8fafc !important;
 }
 
-[data-theme='dark'] .prism-code {
-  border-color: rgba(255, 255, 255, 0.08);
+[data-theme='dark'] div[class*='codeBlockContainer'] {
+  background-color: #0D1117 !important; /* 100% Unified with Python Lab Deep Midnight */
+  border: 1px solid #30363D !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
+/* Inner pre/code element - eliminate duplicate margins, borders & backgrounds */
+div[class*='codeBlockContainer'] pre.prism-code,
+pre.prism-code {
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 1.2rem 1.4rem !important;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', var(--ifm-font-family-monospace) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.65 !important;
+  background-color: transparent !important;
+}
+
+[data-theme='dark'] div[class*='codeBlockContainer'] pre.prism-code,
+[data-theme='dark'] pre.prism-code {
+  color: #E6EDF3 !important; /* Crisp white for variables */
+}
+
+/* High-Contrast Crystal Syntax Highlighting in Documentation (Matches Python Lab 100%) */
+[data-theme='dark'] .token.keyword { color: #FF7B72 !important; font-weight: 600; } /* Electric Coral Rose */
+[data-theme='dark'] .token.builtin, 
+[data-theme='dark'] .token.class-name { color: #79C0FF !important; font-weight: 600; } /* Crystal Sky Blue */
+[data-theme='dark'] .token.function { color: #D2A8FF !important; font-weight: 600; } /* Electric Lilac */
+[data-theme='dark'] .token.string, 
+[data-theme='dark'] .token.char { color: #7EE787 !important; } /* Luminous Mint Green */
+[data-theme='dark'] .token.number, 
+[data-theme='dark'] .token.boolean { color: #FFA657 !important; font-weight: 550; } /* Warm Amber Gold */
+[data-theme='dark'] .token.comment { color: #8B949E !important; font-style: normal !important; opacity: 0.95; } /* Clear Silver */
+[data-theme='dark'] .token.operator { color: #FF7B72 !important; } /* Electric Coral Rose */
+[data-theme='dark'] .token.punctuation { color: #E6EDF3 !important; }
+
+/* Inline Code Snippets (:not(pre) > code) */
 :not(pre) > code {
   border-radius: 6px;
-  padding: 3px 6px;
+  padding: 2px 7px;
   background: #E8F5E9;
   color: #00703A;
   font-weight: 600;
-  font-size: 90%;
-  border: 1px solid rgba(0, 168, 89, 0.15);
+  font-size: 88%;
+  border: 1px solid rgba(0, 168, 89, 0.2);
+  font-family: 'JetBrains Mono', 'Fira Code', var(--ifm-font-family-monospace);
 }
 
 [data-theme='dark'] :not(pre) > code {
-  background: rgba(0, 200, 106, 0.12);
-  color: #1BFF94;
-  border-color: rgba(0, 200, 106, 0.2);
+  background: rgba(0, 199, 183, 0.12) !important;
+  color: #00C7B7 !important;
+  border: 1px solid rgba(0, 199, 183, 0.3) !important;
+  font-weight: 550;
+}
+
+/* Copy button inside code block */
+[data-theme='dark'] button[class*='copyButton'] {
+  background: rgba(22, 27, 34, 0.8) !important;
+  border: 1px solid #30363D !important;
+  color: #C9D1D9 !important;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+[data-theme='dark'] button[class*='copyButton']:hover {
+  background: #30363D !important;
+  color: #FFFFFF !important;
+  border-color: #8B949E !important;
 }

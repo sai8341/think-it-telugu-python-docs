@@ -1,0 +1,110 @@
+---
+id: regex-validations
+title: "Real-World RegEx Validations: Emails, Phones & Passwords | Think IT Telugu"
+sidebar_label: "4. Production Validations"
+description: "Master practical regex validation patterns for email addresses, Indian phone numbers, PAN cards, and secure passwords in Python."
+keywords: ["Python regex validation", "validate email python regex", "validate phone number python", "pan card regex python", "greedy vs non-greedy regex"]
+---
+
+# Real-World RegEx Validations: Production Patterns
+
+In real software systems (like banking apps, sign-up forms, and payment checkouts), you cannot afford bad data crashing your backend database.
+
+Here are the four most common, battle-tested regular expression validation patterns used in corporate Python engineering.
+
+---
+
+## 1. Validating Email Addresses
+
+A robust email validator checks for username characters, an `@` symbol, a valid domain name, and a top-level domain (`.com`, `.in`, `.org`, etc.):
+
+```python
+import re
+
+def is_valid_email(email_str):
+    # Pattern: characters @ domain . extension
+    pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+    return bool(re.fullmatch(pattern, email_str.strip()))
+
+# Tests
+print(is_valid_email("support@thinkittelugu.in"))  # Output: True
+print(is_valid_email("invalid-email@com"))          # Output: False
+print(is_valid_email("sai..kumar@gmail.com"))       # Output: True
+```
+
+---
+
+## 2. Validating Indian Mobile Numbers
+
+In India, mobile numbers:
+- Start with 6, 7, 8, or 9
+- Contain exactly 10 digits
+- May optionally have a `+91` or `0` prefix with optional spaces
+
+```python
+import re
+
+def is_valid_indian_phone(phone_str):
+    # Pattern allows optional +91 or 0 prefix followed by 10 digits starting 6-9
+    pattern = r"^(?:\+91[\s-]?)?[6-9]\d{9}$"
+    return bool(re.fullmatch(pattern, phone_str.strip()))
+
+print(is_valid_indian_phone("+91 9876543210"))  # Output: True
+print(is_valid_indian_phone("9876543210"))       # Output: True
+print(is_valid_indian_phone("1234567890"))       # Output: False (starts with 1)
+```
+
+---
+
+## 3. Validating Indian PAN Cards
+
+Indian PAN numbers have a strict government format:
+- Exactly 5 uppercase letters (e.g. `ABCDE`)
+- 4 numeric digits (e.g. `1234`)
+- 1 uppercase letter at the end (e.g. `F`)
+
+```python
+import re
+
+def is_valid_pan(pan_number):
+    pattern = r"^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
+    return bool(re.fullmatch(pattern, pan_number.upper().strip()))
+
+print(is_valid_pan("ABCDE1234F"))  # Output: True
+print(is_valid_pan("12345ABCDE"))  # Output: False
+```
+
+---
+
+## 4. Greedy vs. Non-Greedy (Lazy) Matching
+
+By default, the quantifiers `*`, `+`, and `?` are **greedy** — they eat as much text as possible.
+
+To make a quantifier **lazy** (stop at the earliest possible match), add a `?` after it:
+
+```python
+import re
+
+html_tag = "<div>Hello</div><div>World</div>"
+
+# ❌ Greedy matching (*): Consumes from first <div> all the way to last </div>
+greedy_result = re.findall(r"<div>.*</div>", html_tag)
+print("Greedy:", greedy_result)
+# Output: Greedy: ['<div>Hello</div><div>World</div>']
+
+# ✅ Lazy matching (*?): Stops at the very first closing </div>
+lazy_result = re.findall(r"<div>.*?</div>", html_tag)
+print("Lazy:", lazy_result)
+# Output: Lazy: ['<div>Hello</div>', '<div>World</div>']
+```
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Which quantifier modification makes a greedy regex pattern lazy so it stops at the earliest possible match?"
+  options={["Adding a plus +", "Adding a question mark ?", "Adding a caret ^", "Wrapping in brackets []"]}
+  correctIndex={1}
+  explanation="Appending a question mark ? (e.g., .*? or .+?) changes the behavior from greedy (eating everything) to lazy (stopping at the first valid termination)."
+/>

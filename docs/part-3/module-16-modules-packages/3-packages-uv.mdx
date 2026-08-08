@@ -1,0 +1,62 @@
+---
+title: "Package Management (pip, requirements.txt & Astral's uv) | Think IT Telugu"
+sidebar_label: "3. Packages & Modern uv"
+description: "Learn how to install Python libraries from PyPI using pip, manage requirements.txt, and explore modern ultra-fast tools like Astral's uv."
+keywords: ["pip install python", "requirements.txt", "PyPI", "Astral uv python", "Learn Python in Telugu"]
+---
+
+# Package Management & Modern `uv`
+
+A **Package** is a published collection of Python modules. The official cloud repository where the global developer community shares open-source libraries is **PyPI** (Python Package Index).
+
+---
+
+## 1. Traditional Workflow with `pip`
+
+**`pip`** is the standard package manager bundled with Python.
+
+```bash
+# 1. Install an external package (e.g. requests)
+pip install requests
+
+# 2. Export your installed project packages to a manifest file
+pip freeze > requirements.txt
+
+# 3. Teammates can install all exact dependencies in 1 command
+pip install -r requirements.txt
+```
+
+---
+
+## 2. Modern Standard: Astral's `uv` (Rust-Powered)
+
+In modern AI engineering setups, developers are rapidly adopting **`uv`** (a lightning-fast Python package installer written in Rust).
+
+* **Why use `uv`?** It installs libraries **10x to 100x faster** than pip and automatically manages virtual environments and `pyproject.toml` without manual activation hassles.
+
+```bash
+# 1. Initialize a modern project:
+uv init my-ai-app
+
+# 2. Add a dependency (auto creates venv and locks dependencies):
+uv add requests
+
+# 3. Run any script in the environment seamlessly:
+uv run python main.py
+```
+
+---
+
+## 3. Interactive Practice Quiz
+
+<Quiz
+  question="What is the primary purpose of a requirements.txt file in Python projects?"
+  options={[
+    "To store user passwords securely",
+    "To document all external libraries and versions so other developers can reproduce the exact environment",
+    "To compile Python code into C++",
+    "To list all syntax errors in the code"
+  ]}
+  correctIndex={1}
+  explanation="requirements.txt records the exact external libraries and version numbers, allowing anyone to recreate the identical project environment with 'pip install -r requirements.txt'."
+/>

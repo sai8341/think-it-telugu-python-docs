@@ -1,60 +1,150 @@
-/* ============================================
-   Presentation Mode (Zen Mode)
-   Activated via Shift + P
-   ============================================ */
+/* ========================================================
+   Presentation / Focus Mode (Zen Mode for Screen Recording)
+   Activated via:
+   - Top Navbar Fullscreen Icon [ ⛶ ]
+   - Keyboard Shortcut: Shift + P (or Esc to exit)
+   ======================================================== */
 
-/* Hide all navigation elements */
+/* 0. Prevent any horizontal scrolling or scrollbars */
+html.presentation-mode,
+body.presentation-mode {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+}
+
+/* 1. Hide all distraction elements */
 body.presentation-mode .navbar,
 body.presentation-mode .sub-navbar,
 body.presentation-mode .theme-doc-sidebar-container,
 body.presentation-mode .theme-doc-toc-desktop,
+body.presentation-mode .theme-doc-toc-mobile,
 body.presentation-mode .pagination-nav,
 body.presentation-mode .theme-doc-footer,
 body.presentation-mode .theme-doc-breadcrumbs,
-body.presentation-mode .theme-back-to-top-button {
+body.presentation-mode .theme-back-to-top-button,
+body.presentation-mode .doc-custom-footer,
+body.presentation-mode .pylab-feedback-widget,
+body.presentation-mode .feedback-widget-container {
   display: none !important;
 }
 
-/* Expand main content container to full width */
+/* 2. Expand main canvas to centered, spacious presentation slide with zero horizontal overflow */
 body.presentation-mode main,
 body.presentation-mode .container,
-body.presentation-mode .docMainContainer {
+body.presentation-mode .docMainContainer,
+body.presentation-mode .docItemContainer,
+body.presentation-mode .row,
+body.presentation-mode [class*='docItemCol'] {
   max-width: 100% !important;
   width: 100% !important;
-  margin: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
 }
 
 body.presentation-mode .theme-doc-markdown {
-  max-width: 90% !important;
-  margin: 0 auto;
+  max-width: 1060px !important;
+  margin: 0 auto !important;
+  padding: 3rem 2rem 6rem 2rem !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
 }
 
-/* Increase font sizes for better video readability */
-body.presentation-mode article {
-  font-size: 1.3rem !important;
+/* 3. Scaled typography for crystal-clear 1080p/720p YouTube video recording */
+body.presentation-mode article,
+body.presentation-mode .markdown {
+  font-size: 1.25rem !important;
+  line-height: 1.85 !important;
+  overflow-x: hidden !important;
+}
+
+body.presentation-mode article p,
+body.presentation-mode .markdown p {
+  font-size: 1.25rem !important;
+  line-height: 1.85 !important;
+  margin-bottom: 2rem !important;
+}
+
+body.presentation-mode article li,
+body.presentation-mode .markdown li {
+  font-size: 1.22rem !important;
   line-height: 1.8 !important;
+  margin-bottom: 0.8rem !important;
 }
 
-body.presentation-mode article h1 {
-  font-size: 3rem !important;
-  margin-top: 1rem !important;
+body.presentation-mode article h1,
+body.presentation-mode .markdown h1,
+body.presentation-mode h1 {
+  font-size: 2.8rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.75rem !important;
+  letter-spacing: -0.025em !important;
 }
 
-body.presentation-mode article h2 {
-  font-size: 2.25rem !important;
+body.presentation-mode article h2,
+body.presentation-mode .markdown h2,
+body.presentation-mode h2 {
+  font-size: 2.1rem !important;
+  margin-top: 3rem !important;
+  margin-bottom: 1.25rem !important;
+  padding-bottom: 0.5rem !important;
 }
 
-body.presentation-mode article h3 {
-  font-size: 1.75rem !important;
+body.presentation-mode article h3,
+body.presentation-mode .markdown h3,
+body.presentation-mode h3 {
+  font-size: 1.6rem !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 1rem !important;
 }
 
+/* 4. Code Blocks in Presentation Mode */
+body.presentation-mode .prism-code,
 body.presentation-mode pre {
-  font-size: 1.2rem !important;
+  font-size: 1.15rem !important;
+  line-height: 1.7 !important;
+  padding: 1.5rem 1.75rem !important;
+  margin: 2rem 0 !important;
+  border-radius: 12px !important;
 }
 
-/* Ensure images don't look weirdly large */
-body.presentation-mode article img {
-  max-width: 80% !important;
-  margin: 0 auto;
-  display: block;
+body.presentation-mode :not(pre) > code {
+  font-size: 1.1rem !important;
+  padding: 4px 8px !important;
+}
+
+/* 5. Interactive Components & Visualizers in Presentation Mode */
+body.presentation-mode .quiz-card,
+body.presentation-mode .doc-card,
+body.presentation-mode .theme-admonition,
+body.presentation-mode .responsive-visualizer,
+body.presentation-mode .ill-container,
+body.presentation-mode div[class*='codeBlockContainer'],
+body.presentation-mode .table-wrapper,
+body.presentation-mode table {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+body.presentation-mode .quiz-card,
+body.presentation-mode .doc-card,
+body.presentation-mode .theme-admonition {
+  font-size: 1.15rem !important;
+  padding: 1.75rem !important;
+  margin: 2.25rem 0 !important;
+  border-radius: 12px !important;
+}
+
+body.presentation-mode .quiz-question {
+  font-size: 1.3rem !important;
+  line-height: 1.6 !important;
+}
+
+body.presentation-mode .quiz-option-btn {
+  font-size: 1.15rem !important;
+  padding: 1rem 1.25rem !important;
 }

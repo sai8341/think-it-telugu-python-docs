@@ -1,45 +1,82 @@
 ---
-title: "Writing Files - Python in Telugu | Think IT Telugu"
-sidebar_label: "Writing Files"
-description: "Learn about Writing Files in Python with real-world examples. This Think IT Telugu tutorial explains Writing Files easily for AI and Data Science beginners."
-keywords: ["Python", "Writing Files", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+title: "Writing & Appending Files - Python in Telugu | Think IT Telugu"
+sidebar_label: "Writing & Appending"
+description: "Learn how to write data to files and append content without deleting existing data in Python."
+keywords: ["Python", "write file", "append file", "file write mode", "Learn Python in Telugu"]
 ---
 
-# Writing Files
+# Writing & Appending Files
 
-To write data into a file, open it in `'w'` mode:
+---
+
+## Writing Files (`"w"` Mode)
+
+To create a new file or overwrite an existing one, open it in `"w"` mode:
 
 ```python
 with open("output.txt", "w") as file:
-    file.write("Hello, this file is created by Python!\n")
+    file.write("Hello, this file was created by Python!\n")
     file.write("Writing code is awesome.")
 ```
-*Note: If `output.txt` already exists, this command clears all its old content and replaces it with the new text.*
+
+:::warning
+If `output.txt` already exists, **all old content is permanently deleted** and replaced with the new text. Use `"w"` mode only when you want to start fresh.
+:::
 
 ---
 
+## Appending Files (`"a"` Mode)
 
-## 14.4 Appending Files
-
-To add new lines to the end of a file without deleting the old content, use the `'a'` (append) mode:
+To add new content to the **end** of a file without deleting existing data, use `"a"` mode:
 
 ```python
 with open("output.txt", "a") as file:
-    file.write("\nAdding this new line at the end using Append mode.")
+    file.write("\nThis line was added using Append mode.")
+```
+
+If the file does not exist, Python creates it automatically — just like `"w"` mode.
+
+---
+
+## Writing Multiple Lines with `writelines()`
+
+If you have a list of strings, you can write them all at once:
+
+```python
+lines = ["Line 1\n", "Line 2\n", "Line 3\n"]
+
+with open("multi.txt", "w") as file:
+    file.writelines(lines)
+```
+
+:::note
+`writelines()` does **not** add `\n` automatically. You must include newline characters yourself.
+:::
+
+---
+
+## Practical Example: Saving User Notes
+
+```python
+print("📝 Simple Notes App (type 'quit' to stop)")
+
+with open("my_notes.txt", "a") as file:
+    while True:
+        note = input("Enter a note: ")
+        if note.lower() == "quit":
+            break
+        file.write(note + "\n")
+
+print("Notes saved to my_notes.txt!")
 ```
 
 ---
 
+## Interactive Practice Quiz
 
-## 14.5 Reading a File Line-by-Line
-
-For large files, it is better to read them line-by-line using a `for` loop to save memory:
-
-```python
-with open("lines.txt", "r") as file:
-    for line in file:
-        print(line.strip()) # strip() removes extra blank lines/spaces
-```
-:::tip Real-World Use Case
-File handling is essential for reading server log files, importing CSV reports, or saving simple user preferences!
-:::
+<Quiz
+  question="What is the difference between 'w' and 'a' file modes?"
+  options={["'w' reads the file, 'a' writes to it", "'w' overwrites existing content, 'a' adds to the end without deleting", "'w' is for Windows, 'a' is for Mac", "There is no difference"]}
+  correctIndex={1}
+  explanation="Write mode ('w') erases all existing content and starts fresh. Append mode ('a') keeps existing content and adds new data at the end of the file."
+/>

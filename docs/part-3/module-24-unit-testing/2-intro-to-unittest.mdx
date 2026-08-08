@@ -1,0 +1,109 @@
+---
+id: intro-to-unittest
+title: "Python's Built-in unittest Framework | Think IT Telugu"
+sidebar_label: "2. The unittest Framework"
+description: "Master Python's built-in unittest module. Learn TestCase inheritance, test_ method conventions, and core assertion methods."
+keywords: ["Python unittest", "unittest.TestCase python", "assertEqual python", "python unit test tutorial", "assertIn python unittest"]
+---
+
+# Python's Built-in `unittest` Framework
+
+Python comes pre-packaged with a complete, enterprise-grade test runner and assertion library called **`unittest`** (based on standard xUnit patterns).
+
+---
+
+## 1. Structure of a `unittest` Test File
+
+To write a test suite:
+1. Import `unittest`.
+2. Import the function you want to test.
+3. Create a class that inherits from **`unittest.TestCase`**.
+4. Create test methods whose names **must start with `test_`**.
+
+```python
+# calculator.py (Code to test)
+def add(a, b):
+    return a + b
+
+def divide(a, b):
+    if b == 0:
+        raise ZeroDivisionError("Cannot divide by zero!")
+    return a / b
+```
+
+```python
+# test_calculator.py (The Test File)
+import unittest
+from calculator import add, divide
+
+class TestCalculator(unittest.TestCase):
+    
+    def test_add_positive_numbers(self):
+        result = add(10, 5)
+        self.assertEqual(result, 15)
+
+    def test_add_negative_numbers(self):
+        result = add(-3, -7)
+        self.assertEqual(result, -10)
+
+    def test_divide_valid(self):
+        result = divide(10, 2)
+        self.assertEqual(result, 5.0)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+---
+
+## 2. Running Tests from the Terminal
+
+```bash
+# Run a specific test file
+python test_calculator.py
+
+# Run all test files automatically (Test Discovery)
+python -m unittest discover
+```
+
+### Understanding the Terminal Output
+```
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK
+```
+- Each **`.`** (dot) represents a passing test.
+- An **`F`** means an assertion Failed.
+- An **`E`** means an unhandled Exception crashed your code.
+
+---
+
+## 3. Essential Assertion Methods Cheatsheet
+
+| Assertion Method | Checks | Example |
+| :--- | :--- | :--- |
+| **`self.assertEqual(a, b)`** | `a == b` | `self.assertEqual(add(2, 3), 5)` |
+| **`self.assertNotEqual(a, b)`** | `a != b` | `self.assertNotEqual(result, 0)` |
+| **`self.assertTrue(x)`** | `bool(x) is True` | `self.assertTrue(is_logged_in)` |
+| **`self.assertFalse(x)`** | `bool(x) is False` | `self.assertFalse(is_locked)` |
+| **`self.assertIsNone(x)`** | `x is None` | `self.assertIsNone(user_found)` |
+| **`self.assertIn(item, list)`** | `item in list` | `self.assertIn("Python", skills)` |
+| **`self.assertAlmostEqual(a, b)`** | Floating point match | `self.assertAlmostEqual(0.1+0.2, 0.3, places=5)` |
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="Why must all test method names inside a unittest.TestCase class start with the prefix 'test_'?"
+  options={[
+    "Because Python will delete files without that name",
+    "Because the unittest test discovery engine only executes methods starting with 'test_'",
+    "To tell the CPU to run in debug mode",
+    "To prevent compilation errors in CPython"
+  ]}
+  correctIndex={1}
+  explanation="The test runner automatically discovers and runs methods that start with the test_ prefix, ignoring any internal helper methods."
+/>

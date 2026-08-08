@@ -1,0 +1,123 @@
+---
+id: writing-test-cases
+title: "Testing Exceptions, setUp() & tearDown() Fixtures | Think IT Telugu"
+sidebar_label: "3. Exceptions & Fixtures"
+description: "Master testing expected errors using assertRaises() and managing test state with setUp() and tearDown() in Python unittest."
+keywords: ["assertRaises python unittest", "setUp tearDown python", "test fixtures python", "unit test exceptions python", "test database setup"]
+---
+
+# Testing Exceptions, `setUp()` & `tearDown()` Fixtures
+
+In enterprise Python codebases, your tests need to do more than assert simple math operations:
+1. You must verify that your code **raises the correct exceptions** when given bad data.
+2. You must create temporary mock data before every test and **clean it up immediately after** so tests do not interfere with each other.
+
+---
+
+## 1. Testing Expected Exceptions with `assertRaises()`
+
+When a function is supposed to raise an error (for example, throwing a `ValueError` when a bank withdrawal amount is negative), use `self.assertRaises()` as a **context manager**:
+
+```python
+import unittest
+
+def withdraw_from_account(current_balance, amount):
+    if amount <= 0:
+        raise ValueError("Withdrawal amount must be strictly greater than 0!")
+    if amount > current_balance:
+        raise PermissionError("Insufficient funds available.")
+    return current_balance - amount
+
+class TestBankingRules(unittest.TestCase):
+    
+    def test_negative_withdrawal_raises_value_error(self):
+        # Asserts that ValueError is successfully thrown
+        with self.assertRaises(ValueError):
+            withdraw_from_account(500, -100)
+
+    def test_overdraft_raises_permission_error(self):
+        with self.assertRaises(PermissionError):
+            withdraw_from_account(500, 1000)
+```
+
+---
+
+## 2. Test Fixtures: `setUp()` & `tearDown()`
+
+If you have 10 test methods that all need a fresh SQLite database connection or a temporary mock shopping cart:
+
+- **`setUp()`**: Runs **automatically before every single test method**.
+- **`tearDown()`**: Runs **automatically after every single test method** (even if the test fails!).
+
+```python
+import unittest
+
+class TestShoppingCart(unittest.TestCase):
+    
+    def setUp(self):
+        # Runs BEFORE each test: Create a clean cart with 1 initial product
+        self.cart = ["Laptop Sleeve"]
+        print("\n🔧 Setup: Fresh shopping cart created.")
+
+    def tearDown(self):
+        # Runs AFTER each test: Reset cart state
+        self.cart.clear()
+        print("🧹 Teardown: Cart cleaned up.")
+
+    def test_add_item(self):
+        self.cart.append("Wireless Mouse")
+        self.assertEqual(len(self.cart), 2)
+
+    def test_cart_has_initial_item(self):
+        self.assertIn("Laptop Sleeve", self.cart)
+        self.assertEqual(len(self.cart), 1)
+```
+
+---
+
+## 3. Class-Level Fixtures: `setUpClass()` & `tearDownClass()`
+
+If setting up your resource is heavy and expensive (like creating an in-memory SQLite database table), you don't want to recreate it 50 times.
+
+Use **`@classmethod setUpClass(cls)`** to run setup **once for the entire test class**:
+
+```python
+import unittest
+import sqlite3
+
+class TestDatabaseQueries(unittest.TestCase):
+    
+    @classmethod
+    def setUpClass(cls):
+        # Runs ONCE before all tests in this class
+        cls.conn = sqlite3.connect(":memory:")
+        cls.cursor = cls.conn.cursor()
+        cls.cursor.execute("CREATE TABLE products (id INT, name TEXT)")
+        cls.cursor.execute("INSERT INTO products VALUES (1, 'Mechanical Keyboard')")
+
+    @classmethod
+    def tearDownClass(cls):
+        # Runs ONCE after all tests complete
+        cls.conn.close()
+
+    def test_fetch_product(self):
+        self.cursor.execute("SELECT name FROM products WHERE id = 1")
+        item = self.cursor.fetchone()
+        self.assertEqual(item[0], "Mechanical Keyboard")
+```
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="When does the tearDown() method execute in Python unittest?"
+  options={[
+    "Only when all tests in the entire project have passed with 100% score",
+    "Automatically after each individual test_ method completes, regardless of success or failure",
+    "Only when an unhandled syntax error occurs",
+    "Before the test starts"
+  ]}
+  correctIndex={1}
+  explanation="tearDown() is guaranteed to execute immediately after each test method completes, ensuring that resources and state are always cleaned up."
+/>

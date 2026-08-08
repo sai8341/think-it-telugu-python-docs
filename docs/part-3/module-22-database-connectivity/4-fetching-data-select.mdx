@@ -1,0 +1,113 @@
+---
+id: fetching-data-select
+title: "Querying Data with SELECT, fetchall() & Row Factories | Think IT Telugu"
+sidebar_label: "4. Fetching Data with SELECT"
+description: "Master querying database records in Python SQLite3. Learn cursor.fetchone(), cursor.fetchall(), WHERE filters, and accessing columns by name with sqlite3.Row."
+keywords: ["sqlite3 select python", "cursor.fetchall python", "cursor.fetchone python", "sqlite3.Row factory", "query sqlite database python"]
+---
+
+# Querying Data: `SELECT`, `fetchall()` & Row Factories
+
+To retrieve records from an SQLite database in Python, you execute a **`SELECT`** query and read results from the cursor using **`fetchall()`**, **`fetchone()`**, or **`fetchmany()`**.
+
+---
+
+## 1. Fetching All Records with `cursor.fetchall()`
+
+`cursor.fetchall()` retrieves all matching records and returns them as a **list of Python tuples**:
+
+```python
+import sqlite3
+
+conn = sqlite3.connect("university.db")
+cursor = conn.cursor()
+
+# Query all students with GPA >= 8.5
+cursor.execute("SELECT student_id, name, email, gpa FROM students WHERE gpa >= ?", (8.5,))
+
+# Fetch all matching rows
+all_records = cursor.fetchall()
+
+for row in all_records:
+    # row is a tuple: (1, 'Rahul Sharma', 'rahul@gmail.com', 8.75)
+    print(f"ID: {row[0]} | Name: {row[1]} | GPA: {row[3]}")
+
+conn.close()
+```
+
+---
+
+## 2. Reading One Record at a Time (`fetchone()`)
+
+If you are searching for one unique user by their ID or email, `fetchone()` returns **a single tuple** (or `None` if not found):
+
+```python
+import sqlite3
+
+conn = sqlite3.connect("university.db")
+cursor = conn.cursor()
+
+search_id = 1
+cursor.execute("SELECT name, email FROM students WHERE student_id = ?", (search_id,))
+
+student = cursor.fetchone()
+
+if student:
+    name, email = student
+    print(f"Found student: {name} ({email})")
+else:
+    print("❌ Student not found.")
+
+conn.close()
+```
+
+---
+
+## 3. The Pro Technique: Column Access with `sqlite3.Row`
+
+By default, SQLite returns tuples, meaning you must remember numerical column indices like `row[0]`, `row[1]`.
+
+By setting **`conn.row_factory = sqlite3.Row`**, you can access columns like a Python dictionary using column names:
+
+```python
+import sqlite3
+
+conn = sqlite3.connect("university.db")
+# Enable Row Factory for dictionary-like column access
+conn.row_factory = sqlite3.Row
+
+cursor = conn.cursor()
+cursor.execute("SELECT * FROM students")
+
+for row in cursor.fetchall():
+    print(f"Student: {row['name']} has GPA: {row['gpa']}")
+
+conn.close()
+```
+
+---
+
+## 4. Summary of Fetch Methods
+
+| Method | What It Returns | When to Use |
+| :--- | :--- | :--- |
+| **`cursor.fetchone()`** | Single tuple or `None` | Fetching by primary key / unique ID |
+| **`cursor.fetchall()`** | List of tuples | Small-to-medium dataset queries |
+| **`cursor.fetchmany(n)`** | List of $n$ tuples | Pagination (e.g. 10 items at a time) |
+| **`for row in cursor:`** | Direct cursor iterator | Memory efficient for 1,000,000+ rows |
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="What setting enables column name access (e.g., row['email']) instead of numerical tuple indices (row[1]) in Python SQLite3?"
+  options={[
+    "conn.enable_dict()",
+    "conn.row_factory = sqlite3.Row",
+    "cursor.set_mode('dict')",
+    "sqlite3.use_json_names()"
+  ]}
+  correctIndex={1}
+  explanation="Assigning sqlite3.Row to conn.row_factory allows returned rows to be accessed both by numerical index and by column name string."
+/>

@@ -139,3 +139,14 @@ FileNotFoundError: [Errno 2] No such file or directory: 'missing_file.txt'
 Since these errors occur based on external factors (like a user typing invalid data, or a database connection drop), we cannot always prevent them simply by writing clean code. 
 
 Instead, we must write defensive code that **catches** these exceptions and handles them gracefully. This is where **`try` and `except`** blocks come in, which we will study in the next chapter.
+
+---
+
+## Interactive Practice Quiz
+
+<Quiz
+  question="What exception does Python raise when you try to access a dictionary key that does not exist?"
+  options={["IndexError", "ValueError", "KeyError", "NameError"]}
+  correctIndex={2}
+  explanation="KeyError is raised when you access a key that is not present in the dictionary. IndexError is for lists, ValueError is for invalid values, and NameError is for undefined variables."
+/>

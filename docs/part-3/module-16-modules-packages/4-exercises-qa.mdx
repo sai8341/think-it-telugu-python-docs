@@ -1,0 +1,62 @@
+---
+title: "Module 16: Practice & Interview Q&A - Python in Telugu | Think IT Telugu"
+sidebar_label: "Practice & Interview Q&A"
+description: "Practice exercises and placement interview questions for Python modules, virtual environments, pip, and __name__ == '__main__'."
+keywords: ["Python modules exercises", "virtual environment interview questions", "python pip practice", "Learn Python in Telugu"]
+---
+
+# Module 16: Practice & Interview Q&A
+
+---
+
+## 1. Practice Exercises
+
+1. **Custom Geometry Module:**  
+   Create a file named `shapes.py` with functions `circle_area(radius)` and `rectangle_area(width, height)`. In a separate `app.py` script, import both functions using the alias `import shapes as sh` and calculate the area for a circle of radius 7 and rectangle of 4x5.
+
+2. **The `__name__` Guard Exercise:**  
+   In `shapes.py`, add an `if __name__ == "__main__":` block at the bottom with test print statements. Verify that these prints execute when running `python shapes.py`, but stay completely silent when executing `python app.py`.
+
+3. **Isolated Project Environment:**  
+   Open a new folder in your terminal, initialize a fresh virtual environment named `.venv`, activate it, install `requests`, and export the manifest to `requirements.txt`. Finally, deactivate the environment.
+
+---
+
+## 2. Placement Q&A (Interview Prep)
+
+<AccordionGroup>
+  <Accordion title="Q1. What is the difference between a Module and a Package in Python?">
+    * **Module:** A single `.py` file containing functions, classes, and variables.
+    * **Package:** A directory containing multiple modules and an optional `__init__.py` file to organize related functionality under a shared namespace.
+  </Accordion>
+
+  <Accordion title="Q2. What is the purpose of if __name__ == '__main__': in Python?">
+    It ensures that specific code blocks (such as unit tests or local execution logic) run **only** when the file is executed directly as a script, and are prevented from executing when the file is imported as a module by another program.
+  </Accordion>
+
+  <Accordion title="Q3. Why are virtual environments critical in team development?">
+    Virtual environments prevent library version collisions. They allow each project to specify exact dependency versions in `requirements.txt` or `pyproject.toml` so team members and cloud deployment servers run the identical environment.
+  </Accordion>
+
+  <Accordion title="Q4. What is the relationship between PyPI and pip?">
+    * **PyPI (Python Package Index):** The global cloud registry where open-source Python libraries are published.
+    * **pip:** The command-line tool installed on your computer that downloads, resolves, and installs packages from PyPI into your environment.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 3. Module 16 Cheat Sheet
+
+```bash
+# Virtual Environments
+python -m venv .venv              # Create venv
+.\.venv\Scripts\Activate.ps1       # Activate on Windows (PowerShell)
+source .venv/bin/activate         # Activate on Mac/Linux
+deactivate                        # Exit venv
+
+# Package Management
+pip install requests              # Install package
+pip freeze > requirements.txt     # Export dependencies
+pip install -r requirements.txt   # Install dependencies from file
+```

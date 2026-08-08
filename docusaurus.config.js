@@ -148,6 +148,18 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: 'img/social-card.png',
+      // announcementBar is hidden by default for the documentation-first release.
+      // Re-enable when officially launching/announcing the paid Masterclass.
+      /*
+      announcementBar: {
+        id: 'premium_course_masterclass',
+        content:
+          'Want step-by-step video explanations, Assignments, and Quizzes? Join the <strong>Premium Python Masterclass</strong>. <a target="_blank" rel="noopener noreferrer" href="https://thinkittelugu.graphy.com">Enroll Now</a>',
+        backgroundColor: '#4f46e5',
+        textColor: '#ffffff',
+        isCloseable: true,
+      },
+      */
       colorMode: {
         defaultMode: 'light',
         respectPrefersColorScheme: false,
@@ -186,8 +198,13 @@ const config = {
       },
       prism: {
         theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
+        darkTheme: prismThemes.vsDark,
         additionalLanguages: ['python', 'bash', 'json'],
+      },
+      footer: {
+        style: 'light',
+        links: [],
+        copyright: `© ${new Date().getFullYear()} Think IT Telugu. All rights reserved.`,
       },
     }),
 };

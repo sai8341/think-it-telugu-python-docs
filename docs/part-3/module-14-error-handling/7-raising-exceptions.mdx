@@ -1,0 +1,88 @@
+---
+title: "Raising Exceptions (The raise keyword) - Python in Telugu | Think IT Telugu"
+sidebar_label: "Raising Exceptions"
+description: "Learn how to raise exceptions manually in Python using the raise keyword. Understand when and why to trigger errors intentionally in your programs."
+keywords: ["Python", "raise keyword", "raise exception", "manual errors", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# Raising Exceptions (The `raise` Keyword)
+
+So far, we have been catching errors that Python raises automatically. But sometimes, **you** want to trigger an error manually when a specific rule in your program is violated.
+
+For example: A user enters `-5` as their age. Python does not see any problem with this — it is a valid integer. But **your application's rules** say age must be positive.
+
+This is where the **`raise`** keyword comes in.
+
+---
+
+## Basic Syntax
+
+```python
+raise ExceptionType("Your custom error message")
+```
+
+### Example: Validating Age
+
+```python
+def check_age(age):
+    if age < 0:
+        raise ValueError("Age cannot be negative!")
+    print(f"Age {age} is valid.")
+
+try:
+    check_age(-5)
+except ValueError as e:
+    print("Caught error:", e)
+# Output: Caught error: Age cannot be negative!
+```
+
+---
+
+## When Should You Use `raise`?
+
+Use `raise` when your code receives technically valid data that violates **your business rules**:
+
+| Scenario | Python's View | Your Rule |
+| :--- | :--- | :--- |
+| `age = -5` | Valid integer ✅ | Age must be positive ❌ |
+| `password = "hi"` | Valid string ✅ | Must be 8+ characters ❌ |
+| `quantity = 0` | Valid number ✅ | Must order at least 1 item ❌ |
+
+---
+
+## Re-raising an Exception
+
+Sometimes you want to catch an error, log it, and then **let it crash anyway** so the caller knows something went wrong. Use `raise` without arguments inside an `except` block:
+
+```python
+def process_payment(amount):
+    try:
+        if amount <= 0:
+            raise ValueError("Payment must be positive!")
+        print(f"Processing ₹{amount}...")
+    except ValueError as e:
+        print(f"[LOG] Payment error: {e}")
+        raise  # Re-raise the same error to the caller
+
+try:
+    process_payment(-100)
+except ValueError:
+    print("Transaction failed.")
+```
+
+**Output:**
+```text
+[LOG] Payment error: Payment must be positive!
+Transaction failed.
+```
+
+---
+
+## Interactive Practice Quiz
+
+<Quiz
+  question="When should you use the 'raise' keyword in Python?"
+  options={["To catch errors from other functions", "To manually trigger an error when your program's rules are violated", "To silence all exceptions", "To restart the program"]}
+  correctIndex={1}
+  explanation="The raise keyword lets you manually trigger exceptions when data violates your application's business rules, even if Python considers the data technically valid."
+/>

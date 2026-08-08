@@ -1,0 +1,57 @@
+---
+title: "Module 14: Practice & Interview Q&A - Python in Telugu | Think IT Telugu"
+sidebar_label: "Practice & Interview Q&A"
+description: "Practice error handling in Python with exercises and prepare for placement interviews with Q&A on try-except, finally, raise, and custom exceptions."
+keywords: ["Python", "error handling exercises", "try except interview questions", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# Module 14: Practice & Interview Q&A
+
+---
+
+## Practice Exercises
+
+1. **Safe Calculator:**
+   Write a function `safe_divide(a, b)` that divides two numbers. Handle `ZeroDivisionError` and `TypeError`. Use an `else` block to print the result only on success, and a `finally` block to print "Calculation complete."
+
+2. **Username Validator:**
+   Write a function `validate_username(username)` that raises a `ValueError` if the username is less than 5 characters. Handle the exception using a `try-except` block.
+
+3. **Safe List Access:**
+   Write a program that asks the user for an index and prints the item from `my_list = [10, 20, 30]`. Handle `IndexError` if the index is out of bounds and `ValueError` if the input is not a number.
+
+4. **Custom Exception:**
+   Create a custom exception `NegativeAgeError`. Write a function `set_age(age)` that raises `NegativeAgeError` if age is negative. Test it with both valid and invalid values.
+
+---
+
+## Placement Q&A (Interview Prep)
+
+<AccordionGroup>
+  <Accordion title="Q1. What is the difference between Syntax Errors and Exceptions?">
+    **Syntax Errors** are grammar mistakes that prevent Python from running the code at all (e.g., missing colons). **Exceptions** are runtime errors that occur during execution even though the syntax is valid (e.g., dividing by zero).
+  </Accordion>
+
+  <Accordion title="Q2. What is the purpose of the finally block?">
+    The `finally` block runs regardless of whether an exception was raised or handled. It is used for cleanup actions like closing files, database connections, or network sockets.
+  </Accordion>
+
+  <Accordion title="Q3. When does the else block run in try-except-else?">
+    The `else` block runs only when the `try` block completes successfully without raising any exception. It separates success logic from error-prone code.
+  </Accordion>
+
+  <Accordion title="Q4. How do you create a custom exception in Python?">
+    Create a class that inherits from `Exception`: `class MyError(Exception): pass`. You can then raise it with `raise MyError("message")` and catch it with `except MyError`.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Module 14 Cheat Sheet
+
+* **Syntax vs. Runtime:** Syntax errors prevent execution; Exceptions happen while running.
+* **try-except:** `try` runs risky code; `except` handles specific errors.
+* **else:** Runs only if `try` succeeds (no exception raised).
+* **finally:** Guaranteed to run after try/except (cleanup code).
+* **raise:** Triggers an exception manually (`raise ValueError("...")`).
+* **Custom Exceptions:** `class MyError(Exception): pass`

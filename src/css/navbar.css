@@ -26,6 +26,11 @@
   background: rgba(0, 0, 0, 0.05);
 }
 
+[data-theme='dark'] .navbar {
+  background: #161B22;
+  border-bottom: 1px solid #30363D;
+}
+
 [data-theme='dark'] .navbar__brand:hover {
   background: rgba(255, 255, 255, 0.05);
 }
@@ -40,6 +45,10 @@
   font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: -0.01em;
+}
+
+[data-theme='dark'] .navbar__title {
+  color: #FFFFFF;
 }
 
 /* ---- Left-side nav links (YouTube, Resources) ---- */
@@ -64,7 +73,12 @@
   text-decoration: none;
 }
 
+[data-theme='dark'] .navbar-nav-link {
+  color: #8B949E !important;
+}
+
 [data-theme='dark'] .navbar-nav-link:hover {
+  color: #00C7B7 !important;
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -81,39 +95,42 @@
   font-weight: 650;
 }
 
-/* ---- Python Lab button (redesigned with primary CTA styles) ---- */
+/* ---- Python Lab pill button (Exact Screenshot 1 Design) ---- */
 .navbar-python-lab {
+  background: linear-gradient(135deg, #0f172a, #0d9488) !important;
   color: #ffffff !important;
-  background: #0f172a !important; /* Dark Slate in Light Mode */
-  border: 1px solid #0f172a !important;
-  border-radius: 8px !important;
-  font-weight: 750 !important;
-  font-size: 0.84rem !important;
-  padding: 0.52rem 0.85rem !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-}
-
-[data-theme='dark'] .navbar-python-lab {
-  color: var(--brand-primary) !important;
-  background: rgba(52, 211, 153, 0.06) !important;
-  border: 1px solid rgba(52, 211, 153, 0.35) !important;
-  box-shadow: 0 4px 12px rgba(52, 211, 153, 0.05);
+  padding: 6px 16px !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25) !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
 }
 
 .navbar-python-lab:hover {
+  background: linear-gradient(135deg, #0d9488, #14b8a6) !important;
+  transform: translateY(-1px) !important;
   color: #ffffff !important;
-  background: #1e293b !important;
-  border-color: #1e293b !important;
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.16);
-  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.35) !important;
+  text-decoration: none !important;
+}
+
+[data-theme='dark'] .navbar-python-lab {
+  background: linear-gradient(135deg, #0f172a, #0d9488) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(13, 148, 136, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25) !important;
 }
 
 [data-theme='dark'] .navbar-python-lab:hover {
-  color: #0e141b !important;
-  background: var(--brand-primary) !important;
-  border-color: var(--brand-primary) !important;
-  box-shadow: 0 6px 18px rgba(52, 211, 153, 0.2);
+  background: linear-gradient(135deg, #0d9488, #14b8a6) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.45) !important;
+  transform: translateY(-1px) !important;
 }
 
 /* ---- Fullscreen button ---- */
@@ -284,6 +301,19 @@
   }
 }
 
+/* Hide top bar action buttons on mobile to prevent title truncation */
+@media (max-width: 768px) {
+  .navbar__items--right .navbar-python-lab {
+    display: none !important;
+  }
+  .navbar__title {
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 /* ---- External link icon hide ---- */
 .navbar__link[target="_blank"] svg,
 [class*="iconExternalLink_"] {
@@ -293,19 +323,30 @@
 /* ---- Mobile sidebar drawer ---- */
 .navbar-sidebar {
   background: var(--ifm-navbar-background-color);
+  z-index: 100000 !important;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme='dark'] .navbar-sidebar {
+  background: #161B22 !important;
+  border-right: 1px solid #30363D !important;
 }
 
 .navbar-sidebar__brand {
   border-bottom: 1px solid var(--ifm-border-color, #e3e3e3);
 }
+[data-theme='dark'] .navbar-sidebar__brand {
+  border-bottom-color: #30363D;
+}
 
 .navbar-sidebar .menu__link {
   border-radius: 8px;
+  font-weight: 600;
 }
 
 /* Show nav links and action buttons in mobile sidebar */
 .navbar-sidebar .navbar-nav-link,
 .navbar-sidebar .navbar-python-lab {
   display: flex !important;
-  margin: 0.25rem 0.5rem;
+  margin: 0.5rem 1rem;
 }

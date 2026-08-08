@@ -1,0 +1,100 @@
+---
+id: sending-data-post
+title: "Sending Data with requests.post() & Headers in Python | Think IT Telugu"
+sidebar_label: "3. POST Requests & Headers"
+description: "Send JSON payloads with requests.post(), authenticate with custom headers, and pass API Bearer tokens securely in Python."
+keywords: ["Python requests.post", "send json python requests", "http headers python", "bearer token python requests", "python api auth"]
+---
+
+# Sending Data with `requests.post()` & Headers
+
+When creating a new user account, placing a shopping cart order, or submitting a prompt to an AI model like OpenAI or Claude, you use **HTTP POST** requests to send structured data to the server.
+
+---
+
+## 1. Sending JSON Payloads with `json={...}`
+
+The `requests` library provides a built-in `json` parameter that automatically converts your Python dictionary into a JSON string and sets the `Content-Type: application/json` header for you:
+
+```python
+import requests
+
+url = "https://jsonplaceholder.typicode.com/posts"
+
+# New blog post data to create on server
+new_post = {
+    "title": "Learning Python in Telugu",
+    "body": "Building real AI & Machine Learning applications step by step.",
+    "userId": 101
+}
+
+# Send the POST request
+response = requests.post(url, json=new_post)
+
+print("Status:", response.status_code)  # Output: Status: 201 (Created)
+print("Created Data with New ID:", response.json())
+```
+
+---
+
+## 2. Passing Authentication Headers & API Keys
+
+Most production APIs (e.g. OpenAI, Stripe, GitHub, AWS) require you to authenticate yourself by providing an API Key or Bearer Token inside the **HTTP Headers**:
+
+```python
+import requests
+
+api_endpoint = "https://api.example.com/v1/orders"
+
+# Define Custom Headers with your Bearer Token
+custom_headers = {
+    "Authorization": "Bearer YOUR_SECRET_API_TOKEN_HERE",
+    "User-Agent": "ThinkITTeluguApp/1.0",
+    "Content-Type": "application/json"
+}
+
+order_payload = {
+    "product_id": "course_python_ai",
+    "amount": 2999
+}
+
+response = requests.post(api_endpoint, json=order_payload, headers=custom_headers)
+```
+
+---
+
+## 3. `json=` vs. `data=` Parameter
+
+| Parameter | Used for | Under the Hood |
+| :--- | :--- | :--- |
+| **`json={"key": "val"}`** | Modern REST APIs & JSON | Converts dict to JSON string + sets `Content-Type: application/json` |
+| **`data={"username": "sai"}`** | Traditional HTML Forms | Encodes as `application/x-www-form-urlencoded` |
+| **`files={"file": open(...)}`** | Uploading images & PDFs | Encodes as `multipart/form-data` |
+
+---
+
+## 4. Modifying and Deleting: `PUT` & `DELETE`
+
+```python
+import requests
+
+# 1. Update post #1 (PUT)
+update_payload = {"title": "Updated Title Name"}
+put_response = requests.put("https://jsonplaceholder.typicode.com/posts/1", json=update_payload)
+print("PUT Status:", put_response.status_code)  # 200
+
+# 2. Delete post #1 (DELETE)
+del_response = requests.delete("https://jsonplaceholder.typicode.com/posts/1")
+print("DELETE Status:", del_response.status_code)  # 200 (or 204 No Content)
+```
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="When sending a Python dictionary to a REST API via requests.post(), which argument automatically serializes it to JSON and attaches the correct Content-Type header?"
+  options={["body=my_dict", "json=my_dict", "data=my_dict", "payload=my_dict"]}
+  correctIndex={1}
+  explanation="Passing json=my_dict automatically serializes the dictionary to a valid JSON string and attaches the Content-Type: application/json header automatically."
+/>

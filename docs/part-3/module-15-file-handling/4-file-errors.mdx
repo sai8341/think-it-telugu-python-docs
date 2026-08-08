@@ -1,0 +1,76 @@
+---
+title: "Handling File Errors - Python in Telugu | Think IT Telugu"
+sidebar_label: "Handling File Errors"
+description: "Learn how to handle file errors in Python using try-except and os.path.exists() to build safe file operations."
+keywords: ["Python", "FileNotFoundError", "os.path.exists", "safe file handling", "Learn Python in Telugu"]
+---
+
+# Handling File Errors
+
+When working with files, many things can go wrong:
+- The file does not exist.
+- You do not have permission to read it.
+- The disk is full when writing.
+
+If you do not handle these situations, your program crashes. Let us learn how to make file operations **safe**.
+
+---
+
+## Catching `FileNotFoundError`
+
+```python
+try:
+    with open("config.txt", "r") as file:
+        data = file.read()
+        print(data)
+except FileNotFoundError:
+    print("Error: config.txt not found! Using default settings.")
+```
+
+---
+
+## Checking If a File Exists Before Opening
+
+Python's `os.path` module lets you check if a file exists **before** trying to open it:
+
+```python
+import os
+
+file_path = "data.csv"
+
+if os.path.exists(file_path):
+    with open(file_path, "r") as file:
+        print(file.read())
+else:
+    print(f"'{file_path}' does not exist.")
+```
+
+:::tip Which approach is better?
+- Use `try-except` when you expect the file to usually exist (EAFP — Easier to Ask Forgiveness than Permission).
+- Use `os.path.exists()` when you want to check upfront and take a different action.
+:::
+
+---
+
+## Handling Permission Errors
+
+```python
+try:
+    with open("/etc/shadow", "r") as file:
+        print(file.read())
+except PermissionError:
+    print("Error: You do not have permission to read this file.")
+except FileNotFoundError:
+    print("Error: File not found.")
+```
+
+---
+
+## Interactive Practice Quiz
+
+<Quiz
+  question="What exception does Python raise when you try to open a file that does not exist?"
+  options={["IOError", "FileNotFoundError", "PathError", "MissingFileError"]}
+  correctIndex={1}
+  explanation="Python raises FileNotFoundError when open() cannot find the specified file path on disk."
+/>

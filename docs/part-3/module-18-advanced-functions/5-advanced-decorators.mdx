@@ -1,0 +1,148 @@
+---
+id: advanced-decorators
+title: "Advanced Decorators: Arguments, Chaining & Classes | Think IT Telugu"
+sidebar_label: "5. Advanced Decorators"
+description: "Learn advanced Python decorator patterns: decorators with custom parameters, chaining multiple decorators, and class-based decorators."
+keywords: ["Python advanced decorators", "decorator with arguments python", "chaining decorators python", "class decorator python", "python memoization"]
+---
+
+# Advanced Decorators: Arguments, Chaining & Classes
+
+Once you understand basic function decorators, you will encounter scenarios where you need more power:
+1. Passing **custom configuration parameters** into decorators (e.g., `@repeat(num_times=3)` or `@cache(ttl=60)`).
+2. Applying **multiple decorators** on a single function (Chaining).
+3. Writing **Class-Based Decorators** to preserve state across multiple function calls.
+
+---
+
+## 1. Decorators that Accept Arguments
+
+To pass arguments directly into a decorator, you add **one extra layer of nesting** (a 3-level deep function factory).
+
+### Real-World Example: An Automated Retry Decorator
+```python
+import time
+from functools import wraps
+
+def repeat(num_times):
+    # Outer level: Accepts custom configuration arguments
+    def decorator_factory(original_func):
+        @wraps(original_func)
+        def wrapper(*args, **kwargs):
+            last_result = None
+            for attempt in range(1, num_times + 1):
+                print(f"[Attempt {attempt}/{num_times}] Calling {original_func.__name__}...")
+                last_result = original_func(*args, **kwargs)
+            return last_result
+        return wrapper
+    return decorator_factory
+
+# Using the configurable decorator
+@repeat(num_times=3)
+def send_notification(user):
+    print(f"Pinged message to {user}!")
+
+send_notification("Rahul")
+```
+
+---
+
+## 2. Chaining Multiple Decorators
+
+You can stack multiple decorators on top of a single function. 
+
+:::warning Execution Order
+Decorators are applied from the **bottom up** (closest to the function first) and executed from the **top down**.
+:::
+
+```python
+from functools import wraps
+
+def bold(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        return f"<b>{func(*args, **kwargs)}</b>"
+    return wrapper
+
+def italic(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        return f"<i>{func(*args, **kwargs)}</i>"
+    return wrapper
+
+# Applied bottom-up: italic first, then bold
+@bold
+@italic
+def format_announcement(message):
+    return message
+
+result = format_announcement("Flash Sale 50% Off!")
+print(result)  # Output: <b><i>Flash Sale 50% Off!</i></b>
+```
+
+---
+
+## 3. Class-Based Decorators (Preserving State)
+
+If a decorator needs to remember state across multiple function calls (such as counting how many times an API was requested or rate-limiting users), using a Python **Class** with the **`__call__`** dunder method is much cleaner than global variables:
+
+```python
+class CallCounter:
+    def __init__(self, original_func):
+        self.original_func = original_func
+        self.call_count = 0  # State remembered across calls
+
+    def __call__(self, *args, **kwargs):
+        self.call_count += 1
+        print(f"📊 Function '{self.original_func.__name__}' called {self.call_count} times.")
+        return self.original_func(*args, **kwargs)
+
+@CallCounter
+def process_payment(amount):
+    return f"Payment of ₹{amount} processed."
+
+process_payment(500)
+process_payment(1200)
+process_payment(300)
+# Output:
+# 📊 Function 'process_payment' called 1 times.
+# 📊 Function 'process_payment' called 2 times.
+# 📊 Function 'process_payment' called 3 times.
+```
+
+---
+
+## 4. Built-in Production Decorators in Python
+
+Python's standard library comes with several pre-built decorators that every engineer should know:
+
+<CardGroup cols={2}>
+  <Card title="@property" icon="code">
+    Turns a method into a read-only attribute getter with encapsulation.
+  </Card>
+  <Card title="@functools.lru_cache" icon="data">
+    Automatically caches expensive calculation results in memory (memoization).
+  </Card>
+  <Card title="@classmethod" icon="star">
+    Passes the class (`cls`) instead of an instance (`self`) into methods.
+  </Card>
+  <Card title="@staticmethod" icon="check">
+    Creates independent utility methods that don't need access to class or instance state.
+  </Card>
+</CardGroup>
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="In what order are stacked decorators applied when placed on top of a function?"
+  options={[
+    "Random order depending on CPU threads",
+    "Alphabetical order based on decorator names",
+    "Bottom to top (closest to the function definition first)",
+    "Top to bottom"
+  ]}
+  correctIndex={2}
+  explanation="When chaining multiple decorators, Python wraps the function from the inside out, meaning the decorator closest to the function (the bottom one) is evaluated first."
+/>

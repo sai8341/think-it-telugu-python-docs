@@ -1,0 +1,97 @@
+---
+id: multiprocessing-vs-threading
+title: "Multiprocessing vs Threading & ThreadPoolExecutor | Think IT Telugu"
+sidebar_label: "4. Multiprocessing & ThreadPool"
+description: "Compare Python multiprocessing vs threading. Learn concurrent.futures, ThreadPoolExecutor, and ProcessPoolExecutor for high-speed concurrent batch processing."
+keywords: ["Python multiprocessing vs threading", "ThreadPoolExecutor python", "concurrent.futures python", "ProcessPoolExecutor", "parallel programming python"]
+---
+
+# Multiprocessing vs. Threading & `ThreadPoolExecutor`
+
+When choosing between `threading` and `multiprocessing` in Python, remember the ultimate rule of hardware:
+
+- **Threading**: Perfect for **Network I/O & API calls** where threads spend 95% of their time waiting on web sockets.
+- **Multiprocessing**: Perfect for **Heavy CPU math & Image processing** because it spawns separate Python processes, each with its own independent Python interpreter and CPU core, completely bypassing the GIL.
+
+---
+
+## 1. Modern Concurrency: `concurrent.futures`
+
+Modern Python engineers rarely create threads manually using `threading.Thread` loops. 
+
+Instead, they use **`ThreadPoolExecutor`** from Python's standard `concurrent.futures` library, which automatically manages a pool of background worker threads for you:
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+import time
+
+def fetch_stock_price(symbol):
+    print(f"Fetching {symbol}...")
+    time.sleep(1)  # Simulate network API latency
+    return f"{symbol}: ₹2,450"
+
+stock_symbols = ["TCS", "INFY", "RELIANCE", "HDFCBANK", "WIPRO"]
+
+# Create a pool of 5 worker threads
+with ThreadPoolExecutor(max_workers=5) as executor:
+    # .map() distributes the list across threads and preserves result order
+    results = executor.map(fetch_stock_price, stock_symbols)
+
+for res in results:
+    print(res)
+# All 5 stocks fetched concurrently in ~1.0 second instead of 5.0 seconds!
+```
+
+---
+
+## 2. Using `multiprocessing` for CPU-Bound Work
+
+For computationally intensive math (like hashing 10,000 passwords or resizing images), `ProcessPoolExecutor` utilizes all CPU cores in your laptop:
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+import time
+
+def compute_heavy_factors(n):
+    return sum(i * i for i in range(n))
+
+if __name__ == '__main__':
+    data_loads = [10000000, 10000000, 10000000, 10000000]
+    
+    start = time.perf_counter()
+    with ProcessPoolExecutor() as executor:
+        results = list(executor.map(compute_heavy_factors, data_loads))
+    
+    print(f"All 4 CPU cores finished in: {time.perf_counter() - start:.2f}s")
+```
+
+:::warning `if __name__ == '__main__':` Guard
+When using `multiprocessing` on Windows or macOS, you **must always wrap your entrypoint inside `if __name__ == '__main__':`** to prevent child processes from infinitely re-importing the main script.
+:::
+
+---
+
+## 3. Summary Comparison Table
+
+| Feature | `threading` / `ThreadPoolExecutor` | `multiprocessing` / `ProcessPoolExecutor` |
+| :--- | :--- | :--- |
+| **Best Used For** | Network requests, Web scraping, APIs, DB reads | Heavy math, Video encoding, ML training |
+| **Memory Footprint** | Shared RAM memory (Very low ~8 KB per thread) | Separate RAM memory per process (~20 MB+) |
+| **GIL Limitation** | Bound by GIL (Single core for pure Python code) | Bypasses GIL completely (Utilizes all CPU cores) |
+| **IPC Communication** | Direct memory sharing | Requires Pipes, Queues, or Pickling |
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="Why must multiprocessing scripts on Windows always be protected with if __name__ == '__main__':?"
+  options={[
+    "To prevent Windows Defender from deleting Python",
+    "To prevent new child worker processes from infinitely re-executing the top-level script upon spawn",
+    "To enable GPU acceleration automatically",
+    "Because Windows requires scripts to end with return 0"
+  ]}
+  correctIndex={1}
+  explanation="On Windows, multiprocessing creates new processes by re-importing the main script. Without the __main__ guard, child processes would spawn recursive child processes endlessly."
+/>

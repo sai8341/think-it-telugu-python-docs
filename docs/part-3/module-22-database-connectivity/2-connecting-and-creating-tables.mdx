@@ -1,0 +1,113 @@
+---
+id: connecting-and-creating-tables
+title: "Connecting & Creating Tables in SQLite3 | Think IT Telugu"
+sidebar_label: "2. Connect & Create Tables"
+description: "Learn how to connect to SQLite databases, work with Cursors, and execute CREATE TABLE IF NOT EXISTS statements in Python."
+keywords: ["sqlite3.connect python", "sqlite cursor python", "create table sqlite3 python", "sqlite autoincrement primary key", "sqlite in-memory python"]
+---
+
+# Connecting & Creating Tables in SQLite3
+
+To interact with a database in Python, you follow a 3-step lifecycle:
+1. **Connect** to the database file.
+2. Create a **Cursor** (the worker who executes SQL statements).
+3. Execute SQL commands and **close** the connection.
+
+---
+
+## 1. Connecting to a Database
+
+```python
+import sqlite3
+
+# 1. Connects to 'university.db' (Creates file automatically if it doesn't exist)
+conn = sqlite3.connect("university.db")
+
+# 2. Create the Cursor object
+cursor = conn.cursor()
+
+print("✅ Connected to SQLite database successfully!")
+
+# 3. Always close the connection when finished
+conn.close()
+```
+
+:::tip In-Memory Temporary Databases
+If you are writing unit tests and don't want to create files on your hard drive, connect to **`sqlite3.connect(":memory:")`**. It builds the whole database in RAM and wipes it clean when the script ends.
+:::
+
+---
+
+## 2. Writing Your First `CREATE TABLE` Query
+
+SQL queries are executed using `cursor.execute("""...""")`:
+
+```python
+import sqlite3
+
+conn = sqlite3.connect("university.db")
+cursor = conn.cursor()
+
+# Create 'students' table with schema definition
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS students (
+    student_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    gpa REAL DEFAULT 0.0,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+)
+""")
+
+# Commit (save) changes to the database file
+conn.commit()
+
+print("✅ 'students' table created successfully!")
+conn.close()
+```
+
+---
+
+## 3. SQL Keywords Explained
+
+- **`INTEGER PRIMARY KEY AUTOINCREMENT`**: Generates a unique, non-repeating number (`1, 2, 3...`) automatically for every new student.
+- **`NOT NULL`**: Prevents empty values for required fields (e.g. every student must have a name).
+- **`UNIQUE`**: Prevents duplicate entries (e.g. no two students can register the exact same email).
+- **`DEFAULT`**: Automatically populates a default value if not provided during insertion.
+
+---
+
+## 4. Modern Python Best Practice: Using Context Managers
+
+Instead of manually typing `conn.close()` and `conn.commit()`, you can use Python's `with` statement for automatic transaction commit:
+
+```python
+import sqlite3
+
+# Context manager automatically handles commit and rollback on errors
+with sqlite3.connect("university.db") as conn:
+    cursor = conn.cursor()
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS courses (
+        course_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        course_title TEXT NOT NULL,
+        fees REAL
+    )
+    """)
+```
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Why is AUTOINCREMENT used on an INTEGER PRIMARY KEY column in SQLite3?"
+  options={[
+    "It converts all numbers into strings",
+    "It automatically assigns the next sequential integer (1, 2, 3...) to new records",
+    "It makes the table read-only",
+    "It encrypts the column using password hashing"
+  ]}
+  correctIndex={1}
+  explanation="AUTOINCREMENT guarantees that each newly inserted row receives a strictly increasing unique integer ID automatically."
+/>

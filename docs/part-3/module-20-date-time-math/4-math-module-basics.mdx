@@ -1,0 +1,109 @@
+---
+id: math-module-basics
+title: "The Python math Standard Library | Think IT Telugu"
+sidebar_label: "4. The math Module"
+description: "Master Python's built-in math module. Learn ceil(), floor(), sqrt(), logarithms, trigonometry, and scientific constants like pi and e."
+keywords: ["Python math module", "math.ceil math.floor python", "math.sqrt python", "math.pi python", "python logarithmic functions"]
+---
+
+# The Python `math` Standard Library
+
+While Python provides basic arithmetic operators (`+`, `-`, `*`, `/`, `**`), advanced scientific, engineering, and data science calculations require Python's built-in **`math`** module.
+
+```python
+import math
+```
+
+---
+
+## 1. Rounding & Boundaries: `ceil()` vs. `floor()` vs. `trunc()`
+
+```python
+import math
+
+number = 4.28
+
+# 1. math.ceil: Rounds UP to the next whole integer
+print("Ceil:", math.ceil(number))  # Output: Ceil: 5
+
+# 2. math.floor: Rounds DOWN to the previous whole integer
+print("Floor:", math.floor(number))  # Output: Floor: 4
+
+# 3. math.trunc: Truncates (chops off) all decimal digits
+print("Truncated:", math.trunc(-4.85))  # Output: Truncated: -4
+```
+
+### Real-World Use Case: E-Commerce Pagination
+If you have 42 products and show 10 items per page:
+```python
+total_products = 42
+items_per_page = 10
+total_pages = math.ceil(total_products / items_per_page)
+print(f"Total pages needed: {total_pages}")  # Output: Total pages needed: 5
+```
+
+---
+
+## 2. Power, Roots & Logarithms
+
+```python
+import math
+
+# 1. Square Root
+print("Square root of 64:", math.sqrt(64))  # Output: 8.0
+
+# 2. Powers (Alternative to **)
+print("2 to the power 5:", math.pow(2, 5))  # Output: 32.0
+
+# 3. Natural Log (ln) and Base-10 Log
+print("Natural log of 10:", math.log(10))     # Base e
+print("Base-10 log of 1000:", math.log10(1000))  # Output: 3.0
+```
+
+---
+
+## 3. Mathematical Constants
+
+Instead of typing hardcoded decimal approximations like `3.14159`, use standard built-in constants:
+
+```python
+import math
+
+print("Value of Pi (π):", math.pi)  # 3.141592653589793
+print("Euler's constant (e):", math.e)  # 2.718281828459045
+print("Infinity:", math.inf)
+```
+
+### Example: Area of a Circle
+```python
+import math
+
+radius = 7
+area = math.pi * (radius ** 2)
+print(f"Area of circle: {area:.2f} sq units")  # Output: Area of circle: 153.94 sq units
+```
+
+---
+
+## 4. Greatest Common Divisor (GCD) & Factorials
+
+```python
+import math
+
+# 1. Factorial of 5 (5 * 4 * 3 * 2 * 1)
+print("5! =", math.factorial(5))  # Output: 120
+
+# 2. GCD (Highest common factor of two numbers)
+print("GCD of 36 and 60:", math.gcd(36, 60))  # Output: 12
+```
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="If you have 21 items and each box holds 5 items, which math function gives you the correct number of 5 boxes needed?"
+  options={["math.floor(21 / 5)", "math.ceil(21 / 5)", "math.trunc(21 / 5)", "math.sqrt(21 / 5)"]}
+  correctIndex={1}
+  explanation="math.ceil(21 / 5) evaluates 4.2 and rounds up to 5, ensuring you have enough boxes to store all items."
+/>

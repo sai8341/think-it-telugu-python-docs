@@ -1,0 +1,122 @@
+---
+id: iterators-and-yield
+title: "Iterators, iter(), next() & yield in Python | Think IT Telugu"
+sidebar_label: "2. Iterators & iter() / next()"
+description: "Understand Python iterators under the hood. Learn iter(), next(), StopIteration, and how Python traverses collections efficiently in memory."
+keywords: ["Python iterators", "iter and next in python", "StopIteration", "Python iterable vs iterator", "Python yield"]
+---
+
+# Iterators & the Iteration Protocol
+
+In Python, you use `for item in collection:` every single day. But have you ever wondered **what actually happens behind the scenes** when Python steps through a list, string, or dictionary?
+
+Python uses a powerful mechanism called the **Iteration Protocol** using two built-in functions: **`iter()`** and **`next()`**.
+
+---
+
+## 1. Iterable vs. Iterator: The Real-World Metaphor
+
+Many beginners confuse an *Iterable* with an *Iterator*. Here is the simplest way to understand the difference:
+
+- **Iterable (A Book)**: A collection of data that *can* be traversed. It has pages, but it doesn't remember which page you are currently reading. (e.g., lists, tuples, strings, dictionaries).
+- **Iterator (A Bookmark)**: An active stateful object that knows **where you are right now** and gives you the **next item** when you ask for it.
+
+```
++-------------------------------------------------------------+
+| Iterable (List of songs: ["Track 1", "Track 2", "Track 3"]) |
++-------------------------------------------------------------+
+                              ↓  iter() creates
++-------------------------------------------------------------+
+| Iterator (MP3 Player: Current position → Track 1)           |
+| Calling next() → Returns Track 1, moves needle to Track 2   |
++-------------------------------------------------------------+
+```
+
+---
+
+## 2. Under the Hood: `iter()` and `next()`
+
+Let us manually perform what a `for` loop does behind the scenes:
+
+```python
+numbers = [10, 20, 30]
+
+# 1. Create an iterator from the iterable
+num_iterator = iter(numbers)
+
+# 2. Fetch items one by one using next()
+print(next(num_iterator))  # Output: 10
+print(next(num_iterator))  # Output: 20
+print(next(num_iterator))  # Output: 30
+```
+
+### What Happens When Elements Run Out?
+If you call `next()` when there are no more elements left, Python raises a **`StopIteration`** exception:
+
+```python
+# Calling next() again when empty:
+# next(num_iterator)  --> Raises: StopIteration
+```
+
+---
+
+## 3. How a `for` Loop Silently Handles Iterators
+
+A `for` loop in Python is simply a friendly wrapper around `iter()`, `next()`, and a `try-except` block catching `StopIteration`:
+
+```python
+# What you write:
+for item in [1, 2, 3]:
+    print(item)
+
+# What Python executes underneath:
+iterator = iter([1, 2, 3])
+while True:
+    try:
+        item = next(iterator)
+        print(item)
+    except StopIteration:
+        # Loop ends gracefully without crashing
+        break
+```
+
+---
+
+## 4. Why Iterators Save Millions of Megabytes of RAM
+
+When you create a normal list with 10,000,000 integers in memory, Python allocates hundreds of megabytes of RAM upfront:
+
+```python
+# ❌ High Memory Consumption (Creates 10M numbers in RAM immediately)
+huge_list = [x for x in range(10000000)]
+```
+
+With an **iterator** or **generator**, numbers are calculated **lazily (one at a time on demand)**:
+- Memory required for 10 items: **~48 bytes**
+- Memory required for 10,000,000 items: **~48 bytes**
+
+---
+
+## 5. Providing a Custom Default Value to `next()`
+
+If you don't want `next()` to raise a `StopIteration` error when exhausted, you can pass a safe fallback default value as the second argument:
+
+```python
+items = ["Python", "JavaScript"]
+it = iter(items)
+
+print(next(it, "End of list"))  # Output: Python
+print(next(it, "End of list"))  # Output: JavaScript
+print(next(it, "End of list"))  # Output: End of list (No crash!)
+```
+
+---
+
+## 6. Interactive Practice Quiz
+
+<Quiz
+  question="What built-in exception is raised when next() is called on an exhausted iterator with no default value?"
+  options={["IndexError", "StopIteration", "ValueError", "KeyError"]}
+  correctIndex={1}
+  explanation="When an iterator has no more items remaining, Python raises StopIteration to signal the iteration loop to terminate."
+/>

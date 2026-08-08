@@ -1,0 +1,107 @@
+---
+id: creating-threads
+title: "Creating & Managing Threads in Python | Think IT Telugu"
+sidebar_label: "2. Creating Threads"
+description: "Learn how to spawn threads using the threading module in Python. Master thread.start(), thread.join(), and daemon threads with real-world examples."
+keywords: ["Python threading.Thread", "thread.start thread.join python", "daemon threads python", "concurrent downloads python", "python multithreading tutorial"]
+---
+
+# Creating & Managing Threads in Python
+
+Python provides the standard **`threading`** module to create, manage, and coordinate lightweight concurrent execution threads.
+
+---
+
+## 1. Creating Your First Thread (`threading.Thread`)
+
+To run a function in the background on a separate thread:
+1. Import `threading`.
+2. Instantiate `threading.Thread(target=your_function, args=(...))`.
+3. Call **`thread.start()`** to begin execution.
+
+```python
+import threading
+import time
+
+def send_welcome_email(user_name):
+    print(f"📧 Starting email transmission to {user_name}...")
+    time.sleep(2)  # Simulate network latency
+    print(f"✅ Email delivered to {user_name}!")
+
+# Create a worker thread
+worker_thread = threading.Thread(target=send_welcome_email, args=("Sai",))
+
+# Start the thread in the background
+worker_thread.start()
+
+print("🚀 Main script continues instantly without freezing UI!")
+```
+
+---
+
+## 2. Waiting for Threads with `thread.join()`
+
+If your main script needs the results of background threads before it can proceed (for example, waiting for 3 database queries before rendering a dashboard), call **`thread.join()`**:
+
+```python
+import threading
+import time
+
+def download_chunk(chunk_id):
+    print(f"Downloading chunk {chunk_id}...")
+    time.sleep(1.5)
+    print(f"Chunk {chunk_id} done!")
+
+t1 = threading.Thread(target=download_chunk, args=(1,))
+t2 = threading.Thread(target=download_chunk, args=(2,))
+
+t1.start()
+t2.start()
+
+# Main thread pauses here until both t1 and t2 finish
+t1.join()
+t2.join()
+
+print("🎉 Both chunks downloaded! Assembling final video file now.")
+```
+
+---
+
+## 3. What are Daemon Threads?
+
+By default, Python **waits for all active threads to finish** before the entire program terminates.
+
+If you set **`daemon=True`**, the thread runs strictly as a background service (e.g. background heartbeat logger). The moment your main program exits, all daemon threads are **terminated immediately**:
+
+```python
+import threading
+import time
+
+def background_heartbeat():
+    while True:
+        print("💓 Heartbeat ping to monitoring server...")
+        time.sleep(1)
+
+# Set as a daemon thread
+monitor = threading.Thread(target=background_heartbeat, daemon=True)
+monitor.start()
+
+time.sleep(3)
+print("Main application finished. Daemon thread will close automatically!")
+```
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="What does calling thread.join() do in Python?"
+  options={[
+    "It permanently cancels and kills the thread",
+    "It blocks the calling (main) thread until the target thread finishes its execution",
+    "It merges the memory of two different operating system processes",
+    "It restarts the thread from line 1"
+  ]}
+  correctIndex={1}
+  explanation="thread.join() instructs the main thread to pause and wait until the background worker thread completes its task before moving forward."
+/>

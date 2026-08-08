@@ -1,0 +1,124 @@
+---
+id: handling-api-responses
+title: "Robust API Error Handling, Timeouts & raise_for_status() | Think IT Telugu"
+sidebar_label: "4. Error Handling & Timeouts"
+description: "Build crash-proof API integrations in Python using timeouts, raise_for_status(), RequestException, and ConnectionError handling."
+keywords: ["Python requests error handling", "raise_for_status python", "requests.exceptions python", "api timeout python", "robust api client"]
+---
+
+# Robust API Error Handling, Timeouts & Best Practices
+
+In tutorial examples, API requests always succeed with `200 OK`. 
+
+In the real world:
+- The server might go down (`500 Server Error`).
+- The user's internet cable might get disconnected (`ConnectionError`).
+- The API might hang forever without responding, freezing your entire application.
+
+Here is how production engineering teams build **bulletproof API clients** that never crash.
+
+---
+
+## 1. Always Set a `timeout` Parameter
+
+If a cloud server hangs, a Python request without a timeout will wait **indefinitely**, freezing your entire app and locking CPU threads.
+
+Always specify `timeout=5` (in seconds):
+
+```python
+import requests
+
+try:
+    # Fail fast if server does not respond within 3.5 seconds
+    response = requests.get("https://api.github.com/users/octocat", timeout=3.5)
+except requests.exceptions.Timeout:
+    print("⏳ Server is taking too long to respond. Request timed out!")
+```
+
+---
+
+## 2. Using `raise_for_status()` to Catch 4xx & 5xx HTTP Errors
+
+By default, `requests.get()` does not raise a Python exception when a server returns a `404 Not Found` or `500 Server Error`.
+
+Calling **`response.raise_for_status()`** automatically throws an `HTTPError` whenever the status code is `400` or above:
+
+```python
+import requests
+
+url = "https://jsonplaceholder.typicode.com/invalid-endpoint-999"
+
+try:
+    response = requests.get(url, timeout=5)
+    
+    # Raises an HTTPError if status code is 4xx or 5xx
+    response.raise_for_status()
+    
+    # Process only if response was successful
+    data = response.json()
+    print("Data received:", data)
+
+except requests.exceptions.HTTPError as http_err:
+    print(f"❌ HTTP Error occurred: {http_err} (Status: {response.status_code})")
+except requests.exceptions.ConnectionError:
+    print("❌ Internet connection failure or server DNS unresolved.")
+except requests.exceptions.RequestException as err:
+    print(f"❌ General Network Error: {err}")
+```
+
+---
+
+## 3. The Hierarchy of Requests Exceptions
+
+All `requests` errors inherit from the base class **`requests.exceptions.RequestException`**:
+
+```
+requests.exceptions.RequestException (Base Class)
+├── HTTPError (404, 401, 500, etc.)
+├── ConnectionError (No internet / DNS failure)
+├── Timeout (Server hung)
+└── TooManyRedirects
+```
+
+---
+
+## 4. End-to-End Practical Mini-Project: Live Weather Client
+
+```python
+import requests
+
+def fetch_weather(city_name):
+    # Free public weather API
+    endpoint = f"https://api.weatherapi.com/v1/current.json"
+    params = {
+        "key": "demo_key",
+        "q": city_name
+    }
+    
+    try:
+        response = requests.get(endpoint, params=params, timeout=5)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.Timeout:
+        print("Network timed out. Please try again.")
+        return None
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to fetch weather data: {e}")
+        return None
+```
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="What does response.raise_for_status() do in Python requests?"
+  options={[
+    "It converts all response data into uppercase strings",
+    "It raises a Python HTTPError exception if the HTTP status code is 4xx (client error) or 5xx (server error)",
+    "It shuts down the web server immediately",
+    "It returns a boolean True or False"
+  ]}
+  correctIndex={1}
+  explanation="response.raise_for_status() inspects the HTTP code and automatically raises an HTTPError if the response indicates failure (400 to 599)."
+/>

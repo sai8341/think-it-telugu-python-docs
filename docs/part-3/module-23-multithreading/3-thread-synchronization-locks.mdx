@@ -1,0 +1,107 @@
+---
+id: thread-synchronization-locks
+title: "Race Conditions & Thread Synchronization with Locks | Think IT Telugu"
+sidebar_label: "3. Race Conditions & Locks"
+description: "Understand race conditions in multithreaded Python. Protect shared state, bank balances, and counters using threading.Lock."
+keywords: ["Python threading.Lock", "race condition python", "thread safe python", "mutex lock python", "with lock context manager"]
+---
+
+# Race Conditions & Thread Synchronization with Locks
+
+When multiple threads read and write to the **exact same global variable or shared data structure** at the exact same millisecond, a catastrophic bug called a **Race Condition** occurs.
+
+---
+
+## 1. The Race Condition: The Shared Bank Account Bug
+
+Imagine two family members using two ATM debit cards connected to one joint bank balance of ₹1,000 at the exact same microsecond:
+
+```python
+import threading
+import time
+
+# Shared global bank balance
+bank_balance = 1000
+
+def withdraw_money(amount, person_name):
+    global bank_balance
+    if bank_balance >= amount:
+        print(f"✅ {person_name} approved! Withdrawing ₹{amount}...")
+        time.sleep(0.1)  # Simulate cash dispenser latency
+        bank_balance -= amount
+        print(f"💰 {person_name} finished! Remaining balance: ₹{bank_balance}")
+    else:
+        print(f"❌ {person_name} declined: Insufficient funds!")
+
+# Both threads attempt to withdraw ₹800 simultaneously
+t1 = threading.Thread(target=withdraw_money, args=(800, "Rahul"))
+t2 = threading.Thread(target=withdraw_money, args=(800, "Priya"))
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+
+print(f"🚨 Final Bank Balance: ₹{bank_balance}")
+# Output can result in -₹600! Overdraft disaster!
+```
+
+---
+
+## 2. Fixing the Bug with `threading.Lock()` (Mutual Exclusion)
+
+A **Lock** (Mutex) ensures that **only one thread is allowed to access the critical section at a time**. 
+
+All other threads are placed on hold in a queue until the active thread releases the lock:
+
+```python
+import threading
+import time
+
+bank_balance = 1000
+# Create the security lock
+balance_lock = threading.Lock()
+
+def safe_withdraw(amount, person_name):
+    global bank_balance
+    
+    # Acquire the lock using Python context manager
+    with balance_lock:
+        print(f"🔒 Lock acquired by {person_name}")
+        if bank_balance >= amount:
+            time.sleep(0.1)
+            bank_balance -= amount
+            print(f"✅ {person_name} withdrew ₹{amount}. Remaining: ₹{bank_balance}")
+        else:
+            print(f"❌ {person_name} declined: Insufficient funds!")
+    # Lock is automatically released here
+
+t1 = threading.Thread(target=safe_withdraw, args=(800, "Rahul"))
+t2 = threading.Thread(target=safe_withdraw, args=(800, "Priya"))
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+print(f"🎉 Final Safe Bank Balance: ₹{bank_balance}")  # Correctly prints ₹200!
+```
+
+---
+
+## 3. Manual `acquire()` vs. `with lock:`
+
+| Pattern | Syntax | Risk |
+| :--- | :--- | :--- |
+| **Manual** | `lock.acquire()` ... `lock.release()` | If an error occurs before release, program suffers **Deadlock** (freezes forever) |
+| **Context Manager** | `with lock:` | Automatically releases lock even if an unexpected exception occurs |
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="What catastrophic bug occurs when two threads modify a shared variable simultaneously without synchronization?"
+  options={["A Deadlock", "A Race Condition", "A Memory Leak", "A Segmentation Fault"]}
+  correctIndex={1}
+  explanation="A Race Condition occurs when the final outcome of an operation depends on the unpredictable timing and interleaving of concurrent thread executions."
+/>

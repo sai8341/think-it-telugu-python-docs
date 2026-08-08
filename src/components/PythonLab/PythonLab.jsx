@@ -348,8 +348,10 @@ async def __run_with_safe_input(code_str):
       let finalOutput = (stdout || '') + (stderr || '');
       setOutput(prev => {
         let result = prev + finalOutput;
-        if (!result.trim()) result = 'Code ran successfully, but nothing printed. Try adding a print() statement!\n';
-        return result + `\n\n[Finished in ${duration}s]`;
+        if (result.trim()) {
+          return (result.endsWith('\n') ? result : result + '\n') + `\n[Finished in ${duration}s]`;
+        }
+        return `[Finished in ${duration}s]`;
       });
     } catch (err) {
       if (isCancelledRef.current) {

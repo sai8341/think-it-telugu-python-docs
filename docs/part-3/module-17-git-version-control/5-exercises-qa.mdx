@@ -1,0 +1,64 @@
+---
+title: "Module 17: Practice & Interview Q&A - Python in Telugu | Think IT Telugu"
+sidebar_label: "Practice & Interview Q&A"
+description: "Practice Git commands and version control workflows. Prepare for tech placement interviews with Q&A on Git vs GitHub, branches, and merge conflicts."
+keywords: ["Git interview questions", "Git practice exercises", "Git pull request interview", "Learn Git in Telugu"]
+---
+
+# Module 17: Practice & Interview Q&A
+
+---
+
+## 1. Practice Exercises
+
+1. **Local Repository Initialization:**  
+   Create a new directory named `git-playground`. Initialize it with `git init`. Create a Python file `math_helper.py`, stage it with `git add .`, and commit it with a clear commit message.
+
+2. **Feature Branch & Merge Practice:**  
+   Create a new branch named `feature-subtraction`. Add a `subtract(a, b)` function to `math_helper.py` and commit on this branch. Switch back to `main` and merge your new feature.
+
+3. **Ignore Secrets Challenge:**  
+   Create a `.env` file containing fake API keys `OPENAI_API_KEY="sk-12345"`. Check `git status` to see it untracked. Add `.env` to a new `.gitignore` file and verify with `git status` that Git now completely ignores it.
+
+---
+
+## 2. Placement Q&A (Interview Prep)
+
+<AccordionGroup>
+  <Accordion title="Q1. What is the difference between git status and git log?">
+    * **`git status`:** Shows the **current real-time state** of your working directory and staging area (untracked files, modified files, files staged for commit).
+    * **`git log`:** Displays the **historical timeline** of all completed snapshots (commits) that have already been saved to the repository.
+  </Accordion>
+
+  <Accordion title="Q2. What is a Git Merge Conflict, and when does it happen?">
+    A merge conflict occurs when two branches modify the **exact same line of code in the same file** in different ways. Git stops and asks the developer to manually choose which version to keep before completing the merge.
+  </Accordion>
+
+  <Accordion title="Q3. If I accidentally commit an API key in Git, is it enough to delete the file and commit again?">
+    **No!** Git preserves full historical snapshots. Deleting the file in a new commit only removes it from future versions; the secret key remains readable in previous commit history. You must rotate/revoke the key immediately.
+  </Accordion>
+
+  <Accordion title="Q4. What is a Pull Request (PR) in team development?">
+    A Pull Request is a feature on platforms like GitHub where a developer asks teammates to review, comment on, and approve their feature branch before it is merged into the production `main` codebase.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## 3. Module 17 Cheat Sheet
+
+```bash
+git init                       # Start tracking a project
+git status                     # Check modified files
+git add .                      # Stage all changes
+git commit -m "Your message"   # Save permanent snapshot
+git log --oneline              # View compact commit history
+
+git checkout -b feature-name   # Create & switch to new branch
+git checkout main              # Switch back to main
+git merge feature-name         # Merge feature into main
+git branch -d feature-name     # Delete feature branch
+
+git remote add origin <URL>    # Link local repo to GitHub
+git push -u origin main        # Push code online
+```

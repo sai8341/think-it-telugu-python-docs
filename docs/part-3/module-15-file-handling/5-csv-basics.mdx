@@ -1,0 +1,102 @@
+---
+title: "CSV Basics - Python in Telugu | Think IT Telugu"
+sidebar_label: "CSV Basics"
+description: "Learn how to read and write CSV files in Python using the built-in csv module. CSV is the most common format for data storage in data science."
+keywords: ["Python", "csv module", "csv reader", "csv writer", "Learn Python in Telugu", "data science"]
+---
+
+# CSV Basics
+
+**CSV (Comma-Separated Values)** is one of the most common file formats in the world. When you download data from a bank statement, Google Sheets, or a government data portal, it often comes as a `.csv` file.
+
+---
+
+## What Does a CSV File Look Like?
+
+```text
+Name,Age,City
+Rahul,22,Hyderabad
+Priya,20,Bangalore
+Sai,23,Vizag
+```
+
+Each line is a row. Values within a row are separated by commas. The first row is usually the header.
+
+---
+
+## Reading CSV Files
+
+Python has a built-in `csv` module (no installation needed):
+
+```python
+import csv
+
+with open("students.csv", "r") as file:
+    reader = csv.reader(file)
+    
+    for row in reader:
+        print(row)
+# Output:
+# ['Name', 'Age', 'City']
+# ['Rahul', '22', 'Hyderabad']
+# ['Priya', '20', 'Bangalore']
+# ['Sai', '23', 'Vizag']
+```
+
+Each row is returned as a **list of strings**.
+
+---
+
+## Writing CSV Files
+
+```python
+import csv
+
+students = [
+    ["Name", "Age", "City"],
+    ["Rahul", 22, "Hyderabad"],
+    ["Priya", 20, "Bangalore"],
+    ["Sai", 23, "Vizag"]
+]
+
+with open("output.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(students)
+
+print("CSV file created!")
+```
+
+:::note Why `newline=""`?
+On Windows, without `newline=""`, Python adds extra blank lines between rows. This parameter prevents that.
+:::
+
+---
+
+## Reading CSV as Dictionaries
+
+For easier access by column name, use `DictReader`:
+
+```python
+import csv
+
+with open("students.csv", "r") as file:
+    reader = csv.DictReader(file)
+    
+    for row in reader:
+        print(f"{row['Name']} is from {row['City']}")
+# Output:
+# Rahul is from Hyderabad
+# Priya is from Bangalore
+# Sai is from Vizag
+```
+
+---
+
+## Interactive Practice Quiz
+
+<Quiz
+  question="What does csv.reader() return for each row in a CSV file?"
+  options={["A dictionary", "A single string", "A list of strings", "A tuple"]}
+  correctIndex={2}
+  explanation="csv.reader() returns each row as a list of string values. Use csv.DictReader() if you want dictionary access with column headers as keys."
+/>

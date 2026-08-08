@@ -1,0 +1,92 @@
+---
+id: formatting-dates-strftime
+title: "Formatting & Parsing Dates: strftime & strptime | Think IT Telugu"
+sidebar_label: "2. strftime & strptime"
+description: "Convert dates to human strings using strftime and parse text strings into datetime objects using strptime in Python."
+keywords: ["Python strftime", "strptime python", "format date python", "parse string to date python", "python datetime format codes"]
+---
+
+# Date Formatting & Parsing: `strftime()` & `strptime()`
+
+When interacting with users, databases, or APIs, dates are passed back and forth as **text strings** (e.g., `"08-Aug-2026"` or `"2026/08/08 14:30:00"`).
+
+Python provides two essential methods for date conversion:
+1. **`strftime()`** (String **Format** Time): Converts a `datetime` object into a readable text string.
+2. **`strptime()`** (String **Parse** Time): Converts a raw text string back into a Python `datetime` object.
+
+:::tip Easy Mnemonic
+- **`f`** in `strftime` stands for **Format** (Output to String).
+- **`p`** in `strptime` stands for **Parse** (Input from String).
+:::
+
+---
+
+## 1. Converting Dates to Strings with `strftime()`
+
+```python
+from datetime import datetime
+
+now = datetime.now()
+
+# Format 1: Standard YYYY-MM-DD
+print(now.strftime("%Y-%m-%d"))  # Output: 2026-08-08
+
+# Format 2: Readable format (e.g. 08 August 2026)
+print(now.strftime("%d %B %Y"))  # Output: 08 August 2026
+
+# Format 3: Time format (12-hour format with AM/PM)
+print(now.strftime("%I:%M %p"))  # Output: 01:45 PM
+
+# Format 4: Complete timestamp with weekday
+print(now.strftime("%A, %b %d, %Y - %H:%M:%S"))
+# Output: Saturday, Aug 08, 2026 - 13:45:10
+```
+
+---
+
+## 2. Essential Format Codes Cheatsheet
+
+| Code | Meaning | Example Output |
+| :--- | :--- | :--- |
+| **`%Y`** | 4-Digit Year | `2026` |
+| **`%y`** | 2-Digit Short Year | `26` |
+| **`%m`** | 2-Digit Month Number | `08` |
+| **`%B`** | Full Month Name | `August` |
+| **`%b`** | Short Month Name | `Aug` |
+| **`%d`** | Day of Month (01-31) | `08` |
+| **`%A`** | Full Weekday Name | `Saturday` |
+| **`%a`** | Short Weekday Name | `Sat` |
+| **`%H`** | 24-Hour Clock (00-23) | `14` |
+| **`%I`** | 12-Hour Clock (01-12) | `02` |
+| **`%M`** | Minutes (00-59) | `30` |
+| **`%S`** | Seconds (00-59) | `45` |
+| **`%p`** | AM / PM marker | `PM` |
+
+---
+
+## 3. Parsing Raw Text into Dates with `strptime()`
+
+When receiving raw date strings from API JSON payloads or user input forms, use `strptime()` with the exact matching format template:
+
+```python
+from datetime import datetime
+
+raw_input_1 = "25/12/2026"
+date_obj_1 = datetime.strptime(raw_input_1, "%d/%m/%Y")
+print("Parsed Date:", date_obj_1.year)  # Output: Parsed Date: 2026
+
+raw_input_2 = "2026-Aug-15 09:30 AM"
+date_obj_2 = datetime.strptime(raw_input_2, "%Y-%b-%d %I:%M %p")
+print("Parsed Month:", date_obj_2.month)  # Output: Parsed Month: 8
+```
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="Which format specifier produces the full month name (e.g., 'December') in Python strftime?"
+  options={["%m", "%b", "%B", "%M"]}
+  correctIndex={2}
+  explanation="%B produces the full month name (e.g. August, December), whereas %b produces the short name (Aug, Dec), %m gives numbers (08, 12), and %M represents minutes."
+/>

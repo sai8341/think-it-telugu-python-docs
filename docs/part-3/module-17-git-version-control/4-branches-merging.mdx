@@ -1,0 +1,88 @@
+---
+title: "Git Branches & Merging Basics | Think IT Telugu"
+sidebar_label: "4. Branches & Merging"
+description: "Understand Git branching, creating feature branches, merging changes back into main, and GitHub Pull Requests."
+keywords: ["git branch", "git checkout -b", "git merge", "git pull request", "Learn Git in Telugu"]
+---
+
+# Git Branches & Merging Basics
+
+When multiple developers work on the same project (or when you are testing a risky new feature), you should never edit the stable `main` branch directly.
+
+**Git Branches** let you diverge from the main line of development to write and test code in complete isolation.
+
+---
+
+## 1. Beginner Mental Model: The Parallel Universe
+
+```text
+main branch (Production App)  ──●───●──────────────────● (Merge!)
+                                     \                /
+feature-payment branch                └───●─────●────┘
+```
+
+* **`main`:** The stable, working version of your app running on live servers.
+* **`feature-payment` branch:** A temporary parallel universe. You can experiment, make mistakes, and test without breaking the live app for users.
+* **Merge:** Once the feature is tested and working, you safely combine it back into `main`.
+
+---
+
+## 2. Core Branching Commands
+
+### Step 1: Create and switch to a new branch
+```bash
+# Creates and switches to a branch named 'feature-auth' in 1 command:
+git checkout -b feature-auth
+```
+*(In modern Git, you can also use `git switch -c feature-auth`).*
+
+---
+
+### Step 2: Work and commit your feature
+```bash
+git add .
+git commit -m "Add user login and token generation"
+```
+*(These commits exist strictly on your `feature-auth` branch! `main` remains untouched).*
+
+---
+
+### Step 3: Switch back to main and merge
+```bash
+# 1. Switch back to the main branch:
+git checkout main
+
+# 2. Merge the feature branch into main:
+git merge feature-auth
+```
+
+---
+
+### Step 4: Delete the completed branch
+```bash
+git branch -d feature-auth
+```
+
+---
+
+## 3. What is a Pull Request (PR) on GitHub?
+
+In professional tech companies, developers never merge directly on their local computers. 
+
+Instead, you push your feature branch to GitHub and open a **Pull Request (PR)**. A senior engineer reviews your code line-by-line, leaves feedback, and clicks the **"Merge PR"** button on GitHub when approved!
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="Why should developers build new features on a separate Git branch rather than directly on main?"
+  options={[
+    "Because Git requires at least 3 branches to function",
+    "To isolate unfinished or experimental code so the production (main) branch stays stable and working",
+    "To compress the project file size",
+    "To prevent other developers from viewing the code"
+  ]}
+  correctIndex={1}
+  explanation="Branching provides complete isolation. You can experiment, test, and break things freely without affecting the stable code on the main branch."
+/>

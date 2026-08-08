@@ -1,7 +1,7 @@
 /* ======= MAIN CONTENT ======= */
 .markdown {
   animation: fadeInUp 0.5s ease-out;
-  padding: 2rem 1rem;
+  padding: 0.2rem 1rem 2rem 1rem; /* Dramatically reduced top padding so heading is near breadcrumbs */
 }
 
 /*
@@ -39,7 +39,7 @@ h1 {
 [data-theme='dark'] [class*="generatedIndexPage_"] h1,
 [data-theme='dark'] main h1,
 [data-theme='dark'] h1 {
-  color: #f0f0f0;
+  color: #FFFFFF;
 }
 
 /* H2 Section Headings - target size: 1.5rem (24px) */
@@ -63,8 +63,8 @@ h2 {
 [data-theme='dark'] .markdown h2,
 [data-theme='dark'] .theme-doc-markdown h2,
 [data-theme='dark'] h2 {
-  color: #f0f0f0;
-  border-bottom-color: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  border-bottom-color: #30363D;
 }
 
 /* H3 Sub-section Headings - target size: 1.25rem (20px) */
@@ -86,7 +86,26 @@ h3 {
 [data-theme='dark'] .markdown h3,
 [data-theme='dark'] .theme-doc-markdown h3,
 [data-theme='dark'] h3 {
-  color: #FFD54F;
+  color: #00C7B7;
+}
+
+[data-theme='dark'] .markdown strong,
+[data-theme='dark'] .markdown b {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .markdown ul li::marker {
+  color: #00C7B7;
+}
+
+[data-theme='dark'] blockquote {
+  background: #161B22;
+  border-left: 3px solid #00C7B7;
+  color: #E6EDF3;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
 }
 
 /* Constrain document layouts for premium reading margins */
@@ -101,7 +120,11 @@ h3 {
 /* Paragraph and list spacings */
 .markdown p {
   margin-bottom: 1.6rem;
-  line-height: 1.8;
+  line-height: 1.75;
+}
+
+[data-theme='dark'] .markdown p {
+  color: #E6EDF3;
 }
 
 .markdown ul,
@@ -115,10 +138,14 @@ h3 {
   line-height: 1.7;
 }
 
+[data-theme='dark'] .markdown li {
+  color: #E6EDF3;
+}
+
 /* --- Mobile Responsive Typography (Mintlify-inspired Spacing & Sizes) --- */
 @media (max-width: 768px) {
   .markdown {
-    padding: 1.25rem 0.75rem; /* Cozy padding on mobile */
+    padding: 0.2rem 0.75rem 1.25rem 0.75rem; /* Cozy padding on mobile, pulled up */
   }
 
   /* Body Text */

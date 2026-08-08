@@ -1,0 +1,79 @@
+---
+title: "Introduction to Version Control & Git | Think IT Telugu"
+sidebar_label: "1. What is Git & VCS?"
+description: "Understand Version Control Systems, why Git was created, the critical difference between Git and GitHub, and first-time configuration."
+keywords: ["Git vs GitHub", "Version Control basics", "Git config user.name", "Learn Git in Telugu", "AI Python course"]
+---
+
+# Introduction to Version Control
+
+In modern software development, coding without version control is like writing a book without saving backups. You are guaranteed to accidentally delete code or introduce bugs that you cannot undo.
+
+---
+
+## 1. The File Versioning Nightmare
+
+Have you ever saved a project folder like this?
+* `app.py`
+* `app_final.py`
+* `app_final_fixed.py`
+* `app_backup_june30.py`
+
+This manual file renaming is messy, confusing, and prone to losing code. **Version Control Systems (VCS)** solve this by tracking every single change to your files systematically over time.
+
+---
+
+## 2. Beginner Mental Model: Video Game Save Points
+
+Imagine playing an adventure game:
+* Before entering a dangerous boss fight, you save your game at a **Check-Point**.
+* If your character dies, you don't lose the game forever — you simply reload from that save point!
+
+In programming:
+* **Git Commit:** Your checkpoint (save point).
+* If your new code breaks the application, you can jump back to any previous checkpoint in 1 second!
+
+---
+
+## 3. Git vs. GitHub (The Core Difference)
+
+Beginners often confuse Git and GitHub. Here is the clear distinction:
+
+| Feature | Git | GitHub |
+| :--- | :--- | :--- |
+| **What is it?** | A local command-line software tool. | A cloud-based web hosting service. |
+| **Where does it run?** | Locally on your laptop (offline). | On remote cloud servers. |
+| **Primary Job:** | Tracks files and commits changes locally. | Backs up code online and facilitates team collaboration. |
+
+---
+
+## 4. First-Time Git Configuration
+
+After installing Git, tell it your name and email address so all your code commits are properly signed:
+
+```bash
+# 1. Set your name:
+git config --global user.name "Sai Kumar"
+
+# 2. Set your email:
+git config --global user.email "sai@thinkittelugu.in"
+
+# 3. Verify settings:
+git config --list
+```
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Which statement accurately describes the difference between Git and GitHub?"
+  options={[
+    "Git and GitHub are the exact same product from Microsoft",
+    "Git is a local command-line tool that works offline; GitHub is a cloud service for hosting and sharing Git repositories",
+    "GitHub runs on your laptop and Git runs only in the cloud",
+    "Git requires a paid monthly subscription"
+  ]}
+  correctIndex={1}
+  explanation="Git is the local open-source version control engine installed on your computer. GitHub is a cloud platform for backing up and sharing Git repositories with other developers."
+/>

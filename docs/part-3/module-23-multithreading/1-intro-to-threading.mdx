@@ -1,0 +1,70 @@
+---
+id: intro-to-threading
+title: "Introduction to Concurrency, Threads & the GIL | Think IT Telugu"
+sidebar_label: "1. Concurrency & the GIL"
+description: "Understand multithreading, concurrency vs parallelism, CPU-bound vs I/O-bound tasks, and the Python Global Interpreter Lock (GIL)."
+keywords: ["Python threading", "GIL python", "python concurrency vs parallelism", "CPU bound vs IO bound python", "global interpreter lock python"]
+---
+
+# Introduction to Concurrency, Threads & the GIL
+
+By default, Python executes scripts **synchronously line by line**. If line 5 takes 10 seconds to download a file from the internet, line 6 is blocked and waits for 10 full seconds before executing.
+
+**Concurrency** allows your program to juggle multiple tasks at once so that while one task is waiting for a network download, another task can continue processing.
+
+---
+
+## 1. Process vs. Thread: The Restaurant Metaphor
+
+- **Process (A Complete Restaurant Branch)**: Has its own dedicated building, its own private kitchen, and its own separate electricity bill. (In computing: isolated memory space, heavy to start).
+- **Thread (A Chef working inside the Kitchen)**: Multiple chefs share the exact same kitchen counter, knives, and refrigerator. (In computing: lightweight sub-worker sharing the same memory heap).
+
+```
++-----------------------------------------------------------+
+| Python Process (Dedicated OS Process & RAM Space)         |
+|   ┌───────────────┐   ┌───────────────┐   ┌─────────────┐ |
+|   | Thread 1 (API)|   | Thread 2 (UI) |   | Thread 3(DB)| |
+|   └───────────────┘   └───────────────┘   └─────────────┘ |
++-----------------------------------------------------------+
+```
+
+---
+
+## 2. I/O-Bound vs. CPU-Bound Tasks
+
+Knowing when to use threading comes down to one question: **Where is the program spending most of its time?**
+
+| Task Type | Bottleneck | Real-World Examples | Best Tool in Python |
+| :--- | :--- | :--- | :--- |
+| **I/O-Bound** (Input/Output) | Network, Disk, Database (Waiting for external responses) | Downloading 50 web pages, calling AI APIs, writing to disk | **`threading`** module |
+| **CPU-Bound** (Calculation) | Mathematical processing (Heavy calculations on CPU cores) | Image filtering, matrix math, machine learning training | **`multiprocessing`** module |
+
+---
+
+## 3. The Python GIL (Global Interpreter Lock) Explained
+
+In CPython (the standard implementation of Python), there is a safety lock called the **GIL (Global Interpreter Lock)**.
+
+The GIL ensures that **only one native thread executes Python bytecode at a time per process**.
+
+### Why Does the GIL Exist?
+Memory management in Python uses reference counting. The GIL prevents multiple threads from corrupting memory counters at the exact same millisecond.
+
+### Does the GIL Make Threading Useless?
+**No!** For **I/O-bound tasks** (like network calls, database queries, and file downloads), Python automatically **releases the GIL** while waiting for the network card. This means 50 threads can download 50 files simultaneously in parallel!
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="Why is multithreading highly effective for downloading 20 web pages simultaneously despite Python's GIL?"
+  options={[
+    "Because the GIL makes the CPU run 10x faster",
+    "Because Python releases the GIL while threads wait on network I/O responses",
+    "Because threads do not use memory",
+    "Because web pages disable the operating system kernel"
+  ]}
+  correctIndex={1}
+  explanation="During network and disk I/O operations, Python releases the Global Interpreter Lock, allowing multiple threads to wait on external responses simultaneously."
+/>

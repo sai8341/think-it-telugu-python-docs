@@ -18,7 +18,7 @@
 }
 
 [data-theme='dark'] .menu__link--sublist {
-  color: #F9FAFB !important;
+  color: #E6EDF3 !important;
 }
 
 .menu__caret {
@@ -29,8 +29,8 @@
 .menu__link {
   font-weight: 500;
   font-size: 0.88rem;
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  border-radius: 6px;
+  transition: all 0.15s ease;
   padding: 0.45rem 0.75rem;
   margin: 2px 0;
   color: #4B5563;
@@ -49,8 +49,8 @@
 }
 
 [data-theme='dark'] .theme-doc-sidebar-container {
-  background-color: #0F0F1A !important;
-  border-right-color: rgba(255, 255, 255, 0.06) !important;
+  background-color: #161B22 !important;
+  border-right: 1px solid #30363D !important;
 }
 
 /* ====== SIDEBAR ICONS ====== */
@@ -172,7 +172,7 @@
 }
 
 [data-theme='dark'] .theme-doc-sidebar-container .menu__link {
-  color: #9CA3AF;
+  color: #8B949E;
 }
 
 .theme-doc-sidebar-container .menu__link:hover {
@@ -181,21 +181,23 @@
 }
 
 [data-theme='dark'] .theme-doc-sidebar-container .menu__link:hover {
-  background: #374151;
-  color: #F9FAFB;
+  background: rgba(255, 255, 255, 0.04);
+  color: #E6EDF3;
 }
 
 .theme-doc-sidebar-container .menu__link--active {
   background: var(--ifm-menu-color-background-active) !important;
   color: var(--ifm-color-primary) !important;
   font-weight: 600;
-  border-left: none;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 [data-theme='dark'] .theme-doc-sidebar-container .menu__link--active {
-  background: var(--ifm-menu-color-background-active) !important;
-  color: var(--ifm-color-primary) !important;
+  background: rgba(0, 199, 183, 0.12) !important;
+  color: #FFFFFF !important;
+  border-left: 3px solid #00C7B7 !important;
+  border-radius: 0 6px 6px 0 !important;
+  font-weight: 600 !important;
 }
 
 /* Sidebar custom buttons */

@@ -1,0 +1,105 @@
+---
+id: extracting-data-findall
+title: "Regex Extraction: findall, finditer & Groups in Python | Think IT Telugu"
+sidebar_label: "3. Extraction with findall"
+description: "Extract structured data from unstructured text using re.findall(), re.finditer(), capturing groups (), and named groups in Python."
+keywords: ["Python re.findall", "re.finditer python", "regex capturing groups", "regex named groups", "re.sub python"]
+---
+
+# Extracting Data with `findall()` & Groups
+
+While `re.search()` stops at the very first match, real-world data engineering and web scraping require finding **all occurrences** of a pattern across whole web pages, invoices, or log files.
+
+Python's **`re.findall()`**, **`re.finditer()`**, and **Capturing Groups `()`** are designed for high-speed batch text extraction.
+
+---
+
+## 1. Extracting All Matches with `re.findall()`
+
+`re.findall()` scans the text from left to right and returns a **plain Python list of strings** containing every matching item:
+
+```python
+import re
+
+text = "User Rahul (Phone: 9876543210) transferred funds to Priya (Phone: 8765432109)."
+
+# Find all 10-digit phone numbers
+phone_numbers = re.findall(r"\d{10}", text)
+print(phone_numbers)  # Output: ['9876543210', '8765432109']
+```
+
+---
+
+## 2. Capturing Groups with Parentheses `()`
+
+Parentheses `()` allow you to **isolate specific parts** of a pattern while keeping the surrounding context for matching:
+
+```python
+import re
+
+log_data = """
+ERROR: 2026-08-08 Database connection timeout
+WARNING: 2026-08-09 High CPU usage
+ERROR: 2026-08-10 Out of memory
+"""
+
+# Extract the log LEVEL and the DATE into tuples
+pattern = r"(ERROR|WARNING):\s(\d{4}-\d{2}-\d{2})"
+matches = re.findall(pattern, log_data)
+
+for level, log_date in matches:
+    print(f"Severity: {level} on Date: {log_date}")
+# Output:
+# Severity: ERROR on Date: 2026-08-08
+# Severity: WARNING on Date: 2026-08-09
+# Severity: ERROR on Date: 2026-08-10
+```
+
+---
+
+## 3. Named Groups `(?P<name>...)` (Self-Documenting Code)
+
+Instead of relying on index numbers (`group(1)`, `group(2)`), you can give human-readable names to your regex capture groups using `(?P<group_name>...)`:
+
+```python
+import re
+
+flight_info = "Flight: AI-302 From: HYD To: BLR"
+pattern = r"Flight:\s(?P<flight_id>[A-Z0-9-]+)\sFrom:\s(?P<origin>[A-Z]{3})\sTo:\s(?P<dest>[A-Z]{3})"
+
+match = re.search(pattern, flight_info)
+if match:
+    # Access by dictionary or group name
+    data = match.groupdict()
+    print("Flight ID:", data["flight_id"])  # Output: Flight ID: AI-302
+    print("Origin Airport:", data["origin"])  # Output: Origin Airport: HYD
+    print("Destination:", data["dest"])       # Output: Destination: BLR
+```
+
+---
+
+## 4. Text Redaction & Cleaning with `re.sub()`
+
+`re.sub()` (substitute) replaces every pattern match with new text. It is widely used to **mask sensitive data** (PII) before logging:
+
+```python
+import re
+
+chat_message = "My secret PIN is 4912 and account password is 9871"
+
+# Mask all 4-digit numbers with ****
+redacted_message = re.sub(r"\b\d{4}\b", "****", chat_message)
+print(redacted_message)
+# Output: My secret PIN is **** and account password is ****
+```
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="What data structure does re.findall() return when no capturing parentheses are used in the regex pattern?"
+  options={["A dictionary", "A list of strings", "A single boolean True/False", "A Match Object"]}
+  correctIndex={1}
+  explanation="re.findall() returns a standard Python list containing all matching strings found across the input text."
+/>

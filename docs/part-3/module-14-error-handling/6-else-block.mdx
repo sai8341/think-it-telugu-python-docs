@@ -1,0 +1,106 @@
+---
+title: "The else Block in try-except - Python in Telugu | Think IT Telugu"
+sidebar_label: "The else Block"
+description: "Learn how the else block works in Python's try-except-else-finally chain. Understand when code should run only if no exception occurred."
+keywords: ["Python", "try except else", "else block error handling", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# The `else` Block in try-except
+
+You already know that `try` runs risky code and `except` handles errors. But what if you want to run some code **only when no error occurred**?
+
+That is exactly what the `else` block does.
+
+---
+
+## When Does `else` Run?
+
+The `else` block runs **only if the `try` block completes successfully** without raising any exception.
+
+```python
+try:
+    number = int(input("Enter a number: "))
+except ValueError:
+    print("That is not a valid number!")
+else:
+    # This runs ONLY if no error occurred in try
+    print(f"You entered: {number}")
+finally:
+    print("Input process complete.")
+```
+
+### If user enters `42`:
+```text
+You entered: 42
+Input process complete.
+```
+
+### If user enters `hello`:
+```text
+That is not a valid number!
+Input process complete.
+```
+
+---
+
+## Why Not Just Put Code Inside `try`?
+
+Beginners often ask: *"Why not put the success code inside the `try` block itself?"*
+
+The answer: **Separation of concerns.** Code inside `try` should only contain the risky operation. Code in `else` should contain what happens after success. This prevents accidentally catching errors that were not from the risky operation.
+
+```python
+# ❌ Problem: Both lines are inside try
+try:
+    data = int(input("Enter age: "))
+    print(data / 0)  # Bug! But except catches it silently
+except ValueError:
+    print("Bad input")
+
+# ✅ Better: Only risky code in try, success logic in else
+try:
+    data = int(input("Enter age: "))
+except ValueError:
+    print("Bad input")
+else:
+    print(data / 0)  # Bug is NOT hidden — it crashes visibly
+```
+
+---
+
+## The Complete Flow: try-except-else-finally
+
+```text
+try:          →  Run risky code
+except:       →  Handle specific errors (if any)
+else:         →  Run only if NO error occurred
+finally:      →  Always run (cleanup)
+```
+
+```python
+try:
+    result = 10 / 2
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+else:
+    print(f"Division successful! Result: {result}")
+finally:
+    print("Calculation attempt finished.")
+```
+
+**Output:**
+```text
+Division successful! Result: 5.0
+Calculation attempt finished.
+```
+
+---
+
+## Interactive Practice Quiz
+
+<Quiz
+  question="When does the else block execute in a try-except-else statement?"
+  options={["When an exception is raised", "Always, regardless of errors", "Only when the try block completes without any exception", "Before the try block runs"]}
+  correctIndex={2}
+  explanation="The else block runs only when the try block finishes successfully without raising any exception. If an error occurs, Python skips else and jumps to except."
+/>

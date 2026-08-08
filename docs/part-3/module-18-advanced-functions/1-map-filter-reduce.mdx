@@ -1,0 +1,154 @@
+---
+id: map-filter-reduce
+title: "Map, Filter & Reduce in Python - Simple Explanation | Think IT Telugu"
+sidebar_label: "1. Map, Filter & Reduce"
+description: "Master map(), filter(), and functools.reduce() in Python. Transform and aggregate collections cleanly without manual loops."
+keywords: ["Python map filter reduce", "python map function", "python filter list", "python reduce", "functional programming python"]
+---
+
+# Map, Filter & Reduce
+
+When working with lists and collections, beginner programmers often write long `for` loops just to change every item or filter out specific values.
+
+Python provides three built-in functional tools — **`map()`**, **`filter()`**, and **`reduce()`** — that allow you to transform, filter, and summarize data in a single, elegant line of code.
+
+---
+
+## 1. The `map()` Function (Transform Every Item)
+
+`map()` takes a function and an iterable (like a list), applies the function to **every single element**, and returns a new mapped object.
+
+### The Real-World Metaphor
+Think of an assembly line at a package delivery warehouse. Every incoming package gets stamped with a delivery barcode. The stamping machine is the function, the packages are the list, and `map()` runs every package through the machine.
+
+```
+Input List:     [1,    2,    3,    4]
+Function:       x * 2 (Double each number)
+                 ↓     ↓     ↓     ↓
+Mapped Output:  [2,    4,    6,    8]
+```
+
+### Syntax
+```python
+map(function_to_apply, iterable)
+```
+
+### Practical Example: Squaring Numbers
+```python
+numbers = [1, 2, 3, 4, 5]
+
+# Define the transformation function
+def square(n):
+    return n ** 2
+
+# Apply square to every item in numbers
+squared_iterator = map(square, numbers)
+
+# Convert iterator to a list to view results
+squared_list = list(squared_iterator)
+print(squared_list)  # Output: [1, 4, 9, 16, 25]
+```
+
+### Using `map()` with `lambda`
+In modern Python, `map()` is frequently combined with short anonymous **`lambda`** functions:
+
+```python
+prices_in_usd = [10, 25, 50, 100]
+exchange_rate = 83  # USD to INR
+
+prices_in_inr = list(map(lambda price: price * exchange_rate, prices_in_usd))
+print(prices_in_inr)  # Output: [830, 2075, 4150, 8300]
+```
+
+:::tip Memory Efficiency
+`map()` returns an **iterator**, meaning it transforms items on-the-fly one by one when requested, saving memory when processing massive datasets.
+:::
+
+---
+
+## 2. The `filter()` Function (Keep What Matches)
+
+`filter()` tests every element in a collection using a function that returns `True` or `False`. It keeps only the items where the condition is `True`.
+
+### The Real-World Metaphor
+Think of a water filter or a security gate at an airport. Only passengers with valid boarding passes (`True`) are allowed through; invalid ones (`False`) are discarded.
+
+### Practical Example: Filtering Passing Marks
+```python
+scores = [45, 88, 32, 91, 55, 28, 76]
+
+# Function returns True for passing marks (>= 40)
+def is_passing(score):
+    return score >= 40
+
+passing_scores = list(filter(is_passing, scores))
+print(passing_scores)  # Output: [45, 88, 91, 55, 76]
+```
+
+### Using `filter()` with `lambda`
+```python
+usernames = ["rahul", "admin", "sai", "super_admin", "dev"]
+
+# Keep only usernames with 5 or more characters
+long_usernames = list(filter(lambda u: len(u) >= 5, usernames))
+print(long_usernames)  # Output: ['rahul', 'admin', 'super_admin']
+```
+
+---
+
+## 3. The `reduce()` Function (Aggregate to a Single Value)
+
+Unlike `map()` and `filter()` which return a collection, **`reduce()`** combines all elements from left to right into a **single summary value** (like a total sum, product, or maximum).
+
+:::note Import Required
+`reduce()` lives in Python's standard `functools` module, so you must import it first.
+:::
+
+### The Real-World Metaphor
+Think of a grocery shopping receipt. You start with the first item's price, add the second item, add the third, until you reach **one final grand total bill**.
+
+### Practical Example: Calculating Total Cart Value
+```python
+from functools import reduce
+
+cart_prices = [120, 450, 30, 899, 210]
+
+# Function takes two arguments: accumulator (running total) and current item
+def add_prices(running_total, current_price):
+    return running_total + current_price
+
+grand_total = reduce(add_prices, cart_prices)
+print(f"Grand Total: ₹{grand_total}")  # Output: Grand Total: ₹1709
+```
+
+### Finding the Maximum Number with `reduce()`
+```python
+from functools import reduce
+
+numbers = [14, 82, 35, 99, 41]
+
+highest_number = reduce(lambda a, b: a if a > b else b, numbers)
+print(f"Highest: {highest_number}")  # Output: Highest: 99
+```
+
+---
+
+## 4. Comparison: When to Use What?
+
+| Tool | Purpose | Input $\rightarrow$ Output Size | Example |
+| :--- | :--- | :--- | :--- |
+| **`map()`** | Transform every item | 10 items $\rightarrow$ 10 items | Convert temperatures from Celsius to Fahrenheit |
+| **`filter()`** | Select matching items | 10 items $\rightarrow$ $\le$ 10 items | Keep only active subscriber emails |
+| **`reduce()`** | Aggregate into one result | 10 items $\rightarrow$ 1 single value | Compute rolling product or total invoice |
+| **List Comprehension** | Pythonic alternative | Flexible | `[x * 2 for x in nums if x > 0]` |
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="What is the output of list(filter(lambda x: x % 2 == 0, [1, 2, 3, 4, 5, 6]))?"
+  options={["[1, 3, 5]", "[2, 4, 6]", "[True, False, True, False, True, False]", "[0, 0, 0]"]}
+  correctIndex={1}
+  explanation="filter() keeps only the elements where the lambda condition evaluates to True. Even numbers (x % 2 == 0) produce True, so [2, 4, 6] is returned."
+/>

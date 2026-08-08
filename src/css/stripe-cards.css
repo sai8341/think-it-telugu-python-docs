@@ -20,30 +20,33 @@
   flex-direction: column;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 20px 22px;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none !important;
   color: inherit !important;
   height: 100%;
 }
+
 [data-theme='dark'] .doc-card {
-  background: #0f172a;
-  border-color: #1e293b;
+  background: #1C2128;
+  border: 1px solid #30363D;
 }
 
 .doc-card--link {
   cursor: pointer;
 }
+
 .doc-card--link:hover {
   border-color: #10b981;
   transform: translateY(-2px);
   box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.12);
 }
+
 [data-theme='dark'] .doc-card--link:hover {
-  border-color: #10b981;
-  background: #111c30;
-  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.18);
+  border-color: #00C7B7;
+  background: #1e2630;
+  box-shadow: 0 10px 25px -5px rgba(0, 199, 183, 0.15);
 }
 
 .doc-card-top {
@@ -58,13 +61,15 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #f1f5f9;
   color: #10b981;
 }
+
 [data-theme='dark'] .doc-card-icon {
-  background: #1e293b;
-  color: #34d399;
+  background: #161B22;
+  color: #00C7B7;
+  border: 1px solid #30363D;
 }
 
 .doc-card-title {
@@ -74,8 +79,9 @@
   margin: 0 0 6px 0 !important;
   line-height: 1.35 !important;
 }
+
 [data-theme='dark'] .doc-card-title {
-  color: #f8fafc !important;
+  color: #FFFFFF !important;
 }
 
 .doc-card-body {
@@ -84,6 +90,7 @@
   line-height: 1.6 !important;
   margin: 0 !important;
 }
+
 [data-theme='dark'] .doc-card-body {
-  color: #94a3b8 !important;
+  color: #8B949E !important;
 }

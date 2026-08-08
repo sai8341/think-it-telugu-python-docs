@@ -1,0 +1,91 @@
+---
+id: time-module-sleep
+title: "The time Module, Delays & Benchmarking in Python | Think IT Telugu"
+sidebar_label: "3. time & sleep()"
+description: "Learn how to introduce delays with time.sleep(), measure execution performance using time.perf_counter(), and handle epoch timestamps in Python."
+keywords: ["Python time module", "time.sleep python", "time.perf_counter python", "measure code execution time python", "unix epoch timestamp python"]
+---
+
+# The `time` Module, Delays & Performance Benchmarking
+
+While `datetime` is built for calendar dates, human months, and clock time, Python's built-in **`time`** module is designed for **system timers, epoch timestamps, and execution delays**.
+
+---
+
+## 1. Introducing Delays with `time.sleep()`
+
+`time.sleep(seconds)` pauses the execution of your Python script for the specified number of seconds (can be a float for milliseconds):
+
+```python
+import time
+
+print("Sending verification OTP to user...")
+# Pause execution for 2 seconds
+time.sleep(2)
+print("OTP sent successfully!")
+
+# Fractional seconds (e.g. 500 milliseconds):
+time.sleep(0.5)
+```
+
+### Real-World Use Case: Polite Web Scraping & Polling
+When calling third-party APIs or polling background servers for task status, adding a 1–2 second sleep prevents your IP address from getting rate-limited or blocked.
+
+---
+
+## 2. Unix Epoch Timestamps with `time.time()`
+
+Computers store time as the number of seconds that have passed since **January 1, 1970 UTC** (known as the Unix Epoch):
+
+```python
+import time
+
+epoch_seconds = time.time()
+print("Epoch timestamp:", epoch_seconds)  # Output: 1786184710.123456
+```
+
+---
+
+## 3. High-Precision Benchmarking with `time.perf_counter()`
+
+When measuring how fast an algorithm, database query, or sorting function executes, never use `time.time()` (which can be affected by system clock resets).
+
+Always use **`time.perf_counter()`**, which provides ultra-high resolution nanosecond hardware timers:
+
+```python
+import time
+
+def benchmark_calculation():
+    start = time.perf_counter()
+    
+    # Run expensive operation: sum of squares up to 1,000,000
+    total = sum(x ** 2 for x in range(1000000))
+    
+    end = time.perf_counter()
+    execution_time = end - start
+    print(f"Calculation completed in: {execution_time:.6f} seconds.")
+
+benchmark_calculation()
+```
+
+---
+
+## 4. Summary: `time` vs. `datetime`
+
+| Feature | `time` module | `datetime` module |
+| :--- | :--- | :--- |
+| **Primary Focus** | Hardware clock, pauses, seconds | Human calendar dates & formatting |
+| **Delay execution** | `time.sleep(seconds)` | Not supported |
+| **Benchmarking** | `time.perf_counter()` | Not designed for nanoseconds |
+| **Parsing strings** | `time.strptime()` | `datetime.strptime()` (Recommended) |
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Which function from the time module should you use for accurate, high-precision code performance benchmarking?"
+  options={["time.clock_now()", "time.perf_counter()", "time.sleep()", "time.calendar_time()"]}
+  correctIndex={1}
+  explanation="time.perf_counter() offers highest available resolution hardware timers specifically designed for measuring code execution intervals."
+/>

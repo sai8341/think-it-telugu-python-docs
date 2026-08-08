@@ -1,0 +1,112 @@
+---
+id: working-with-datetime
+title: "Working with datetime & timedelta in Python | Think IT Telugu"
+sidebar_label: "1. datetime & timedelta"
+description: "Master dates and timestamps in Python using the datetime and timedelta standard modules. Perform date arithmetic, subscription expiry calculations, and timestamping."
+keywords: ["Python datetime", "datetime now python", "timedelta python", "date arithmetic python", "calculate age in python"]
+---
+
+# Working with `datetime` & `timedelta`
+
+Whether you are building an e-commerce order tracker, calculating loan interest intervals, or computing the exact date when a user's subscription expires — working with dates and times is a mandatory skill for every software engineer.
+
+Python provides the built-in **`datetime`** standard library to make date arithmetic safe and easy without worrying about leap years, 28/30/31-day month boundaries, or timestamps.
+
+---
+
+## 1. Getting Current Date & Time
+
+The `datetime` class inside the `datetime` module gives you the current clock time down to the microsecond:
+
+```python
+from datetime import datetime, date
+
+# 1. Current Date and Time
+now = datetime.now()
+print("Current timestamp:", now)
+# Output: Current timestamp: 2026-08-08 13:45:10.123456
+
+# 2. Accessing Individual Components
+print(f"Year: {now.year}, Month: {now.month}, Day: {now.day}")
+print(f"Hour: {now.hour}, Minute: {now.minute}, Second: {now.second}")
+
+# 3. Only Date (Without Time)
+today = date.today()
+print("Today's date:", today)  # Output: Today's date: 2026-08-08
+```
+
+---
+
+## 2. Creating Custom Date Objects
+
+You can construct any past or future date by passing `(year, month, day, hour, minute, second)`:
+
+```python
+from datetime import datetime
+
+# India Independence Day: 15 August 1947, 00:00:00
+independence_day = datetime(1947, 8, 15, 0, 0, 0)
+print(independence_day)  # Output: 1947-08-15 00:00:00
+```
+
+---
+
+## 3. Date Arithmetic with `timedelta`
+
+A **`timedelta`** represents a duration — the difference between two dates or a period of time (e.g. 30 days, 2 hours, 15 minutes).
+
+### Real-World Use Case: Subscription Expiry
+```python
+from datetime import datetime, timedelta
+
+current_time = datetime.now()
+
+# Add a 30-day Premium Plan duration
+subscription_validity = timedelta(days=30)
+expiry_date = current_time + subscription_validity
+
+print("Purchase Date:", current_time.strftime("%Y-%m-%d"))
+print("Plan Expiry Date:", expiry_date.strftime("%Y-%m-%d"))
+```
+
+### Real-World Use Case: Calculating Days Between Two Dates
+```python
+from datetime import date
+
+birthday = date(2002, 5, 20)
+today = date.today()
+
+difference = today - birthday
+print(f"You have been alive for {difference.days} days!")
+```
+
+---
+
+## 4. Comparing Dates
+
+Dates in Python can be compared naturally using standard comparison operators (`<`, `>`, `==`):
+
+```python
+from datetime import date
+
+event_date = date(2026, 12, 31)
+today = date.today()
+
+if event_date > today:
+    print("🗓️ Event is in the future.")
+elif event_date == today:
+    print("🎉 Event is happening today!")
+else:
+    print("⌛ Event has already passed.")
+```
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Which Python object from the datetime module is used to represent a duration or add days to a timestamp?"
+  options={["dateinterval", "timedelta", "timegap", "dateoffset"]}
+  correctIndex={1}
+  explanation="timedelta represents a duration of time (days, seconds, microseconds, etc.) and is used for adding or subtracting from datetime objects."
+/>

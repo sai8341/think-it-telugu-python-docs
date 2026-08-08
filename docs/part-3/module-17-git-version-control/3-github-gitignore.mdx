@@ -1,0 +1,78 @@
+---
+title: "GitHub Remote Backups & .gitignore Security | Think IT Telugu"
+sidebar_label: "3. GitHub & .gitignore"
+description: "Learn how to push local Git repositories to GitHub and protect API keys and sensitive files with .gitignore."
+keywords: ["git push to github", ".gitignore python", "protect API keys git", "git remote add origin", "Learn Git in Telugu"]
+---
+
+# GitHub Remote Backups & `.gitignore` Security
+
+Once you have saved commits locally on your computer, you should back them up online to **GitHub** and configure rules to keep private keys safe.
+
+---
+
+## 1. Pushing Local Code to GitHub
+
+### Step 1: Create an empty repo on GitHub
+1. Go to [github.com](https://github.com) and click **New Repository**.
+2. Give it a name (e.g. `python-ai-project`).
+3. Leave README and .gitignore unchecked and click **Create Repository**.
+
+### Step 2: Link and Push from Terminal
+```bash
+# 1. Rename your default branch to main:
+git branch -M main
+
+# 2. Link your local project to your GitHub URL:
+git remote add origin https://github.com/YOUR_USERNAME/python-ai-project.git
+
+# 3. Push your commits online (first time only uses -u):
+git push -u origin main
+```
+*(On subsequent commits, simply typing `git push` is enough!)*
+
+---
+
+## 2. Protecting Secrets with `.gitignore`
+
+In modern AI engineering, you work with sensitive API keys (e.g., OpenAI, Gemini, database passwords). **You must never publish these secrets to GitHub.**
+
+To prevent Git from tracking unwanted files, create a file named exactly **`.gitignore`** in your project root:
+
+```text
+# Sensitive credentials & API keys
+.env
+*.pem
+
+# Heavy virtual environment folder (megabytes of downloads)
+.venv/
+myenv/
+
+# Python compiled bytecode cache
+__pycache__/
+*.pyc
+
+# OS temporary metadata
+.DS_Store
+Thumbs.db
+```
+
+:::warning Golden Rule
+Always create and save your `.gitignore` file **before** running `git add .`. If you commit a secret file once, it remains permanently stored in Git's historical logs!
+:::
+
+---
+
+## 3. Interactive Practice Quiz
+
+<Quiz
+  question="Why must your virtual environment (.venv/) and .env API keys be added to .gitignore?"
+  options={[
+    "Because GitHub will charge you money for storing files",
+    "To prevent leaking private credentials publicly and to avoid uploading redundant third-party package files",
+    "Because Python cannot run on GitHub",
+    "To make Git run slower"
+  ]}
+  correctIndex={1}
+  explanation=".env contains sensitive private keys, and .venv contains thousands of downloaded dependencies that any teammate can recreate using 'pip install -r requirements.txt'."
+/>

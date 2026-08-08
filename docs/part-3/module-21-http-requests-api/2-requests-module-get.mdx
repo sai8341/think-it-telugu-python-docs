@@ -1,0 +1,100 @@
+---
+id: requests-module-get
+title: "Fetching Data with requests.get() in Python | Think IT Telugu"
+sidebar_label: "2. GET Requests"
+description: "Make HTTP GET requests in Python using the requests library. Learn query parameters, status inspection, and JSON decoding."
+keywords: ["Python requests.get", "fetch API data python", "requests json response python", "requests query params", "pip install requests"]
+---
+
+# Fetching Data with `requests.get()`
+
+The standard tool for interacting with HTTP APIs in Python is the popular third-party library **`requests`** ("HTTP for Humans").
+
+---
+
+## 1. Installation
+
+Install the library using `pip` or modern `uv`:
+
+```bash
+# Using standard pip
+pip install requests
+
+# Or using high-speed uv
+uv add requests
+```
+
+---
+
+## 2. Making Your First GET Request
+
+Let's call the free public GitHub API to fetch details about a public repository:
+
+```python
+import requests
+
+# 1. Send the GET request
+response = requests.get("https://api.github.com/users/octocat")
+
+# 2. Check the Status Code
+print("Status Code:", response.status_code)  # Output: Status Code: 200
+
+# 3. Parse the JSON response body directly into a Python Dictionary
+if response.status_code == 200:
+    user_data = response.json()
+    print("User Name:", user_data.get("name"))
+    print("Public Repos:", user_data.get("public_repos"))
+    print("Bio:", user_data.get("bio"))
+```
+
+---
+
+## 3. Passing Query Parameters (`params={...}`)
+
+When searching or filtering API data (e.g., `https://api.site.com/search?city=Hyderabad&limit=5`), never build URLs manually using string concatenation.
+
+Always pass query parameters cleanly using a Python dictionary:
+
+```python
+import requests
+
+url = "https://jsonplaceholder.typicode.com/posts"
+
+# Define filtering parameters
+query_params = {
+    "userId": 1,
+    "_limit": 3
+}
+
+# requests automatically formats: .../posts?userId=1&_limit=3
+response = requests.get(url, params=query_params)
+posts = response.json()
+
+for post in posts:
+    print(f"📌 [Post {post['id']}]: {post['title']}")
+```
+
+---
+
+## 4. Inspecting Response Properties
+
+A `Response` object returned by `requests.get()` provides several helpful properties:
+
+| Property | Type | Usage |
+| :--- | :--- | :--- |
+| **`response.status_code`** | `int` | `200`, `404`, `500` status verification |
+| **`response.json()`** | `dict` / `list` | Parses JSON body into Python native types |
+| **`response.text`** | `str` | Raw response content as a text string |
+| **`response.headers`** | `dict` | Response headers (e.g. `content-type`, `rate-limit`) |
+| **`response.ok`** | `bool` | Returns `True` if `status_code < 400` |
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Which requests method parses an API's JSON response body directly into a native Python dictionary or list?"
+  options={["response.to_dict()", "response.json()", "response.parse()", "response.decode_json()"]}
+  correctIndex={1}
+  explanation="response.json() automatically deserializes the raw JSON text payload from the server into Python dictionaries or lists."
+/>

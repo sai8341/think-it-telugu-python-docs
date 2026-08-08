@@ -1,0 +1,140 @@
+---
+id: intro-to-pytest
+title: "Modern Testing with Pytest & Parametrization | Think IT Telugu"
+sidebar_label: "4. Intro to Pytest"
+description: "Learn why top tech companies prefer pytest over standard unittest. Master simple asserts, pytest fixtures, and @pytest.mark.parametrize."
+keywords: ["pytest tutorial python", "pytest vs unittest", "pytest.mark.parametrize", "pytest fixtures python", "modern python testing"]
+---
+
+# Modern Testing with `pytest` & Parametrization
+
+While Python's built-in `unittest` is solid, modern engineering teams worldwide prefer **`pytest`** because:
+1. **Zero Boilerplate**: No need to create classes or remember `self.assertEqual()`.
+2. **Standard `assert` Keyword**: You write normal, readable Python assertions (`assert a == b`).
+3. **Parametrized Testing**: Run 20 test variations using one single 3-line function.
+
+---
+
+## 1. Installation
+
+```bash
+# Using standard pip
+pip install pytest
+
+# Or using high-speed uv
+uv add pytest
+```
+
+---
+
+## 2. Writing Your First Pytest Test
+
+With `pytest`, you simply create a Python file whose name starts with `test_` and write normal functions:
+
+```python
+# test_math_operations.py
+
+def add(x, y):
+    return x + y
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+# Pytest test functions:
+def test_add_numbers():
+    assert add(10, 20) == 30
+    assert add(-1, 1) == 0
+
+def test_prime_numbers():
+    assert is_prime(7) is True
+    assert is_prime(4) is False
+```
+
+### Running Pytest
+Just type `pytest` in your terminal:
+```bash
+pytest -v
+```
+
+---
+
+## 3. Parametrized Tests with `@pytest.mark.parametrize`
+
+Instead of writing 10 separate test functions to test 10 different coupon codes or passwords, pass a table of inputs and expected outputs directly:
+
+```python
+import pytest
+
+def validate_age_for_voting(age):
+    return age >= 18
+
+# Runs the test 4 separate times with 4 different inputs automatically!
+@pytest.mark.parametrize("input_age, expected_result", [
+    (21, True),
+    (18, True),
+    (15, False),
+    (0, False),
+    (99, True)
+])
+def test_voting_eligibility(input_age, expected_result):
+    assert validate_age_for_voting(input_age) == expected_result
+```
+
+---
+
+## 4. Pytest Fixtures (`@pytest.fixture`)
+
+Fixtures provide a clean, dependency-injection style way to supply mock databases, API clients, or test data to your test functions:
+
+```python
+import pytest
+
+@pytest.fixture
+def sample_user_profile():
+    # Returns a fresh user dictionary for tests
+    return {
+        "user_id": 402,
+        "name": "Sai Kumar",
+        "role": "admin",
+        "is_active": True
+    }
+
+def test_user_is_admin(sample_user_profile):
+    assert sample_user_profile["role"] == "admin"
+
+def test_user_is_active(sample_user_profile):
+    assert sample_user_profile["is_active"] is True
+```
+
+---
+
+## 5. Summary: `unittest` vs. `pytest`
+
+| Feature | Built-in `unittest` | Modern `pytest` |
+| :--- | :--- | :--- |
+| **Requires Classes?** | Yes (`unittest.TestCase`) | No (Plain functions) |
+| **Assertions** | `self.assertEqual(a, b)` | Standard `assert a == b` |
+| **Parametrization** | Complex | Simple `@pytest.mark.parametrize` |
+| **Installation** | Built-in | `pip install pytest` |
+| **Industry Adoption** | Legacy enterprise code | 85%+ modern Python / AI teams |
+
+---
+
+## 6. Interactive Practice Quiz
+
+<Quiz
+  question="What decorator in pytest allows you to run a single test function multiple times across an array of different inputs and expected outputs?"
+  options={[
+    "@pytest.loop_test",
+    "@pytest.mark.parametrize",
+    "@pytest.repeat_all",
+    "@pytest.data_matrix"
+  ]}
+  correctIndex={1}
+  explanation="@pytest.mark.parametrize passes a list of parameter tuples into a single test function, executing an isolated test run for each test case."
+/>

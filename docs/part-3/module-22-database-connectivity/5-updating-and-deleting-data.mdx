@@ -1,0 +1,119 @@
+---
+id: updating-and-deleting-data
+title: "Updating, Deleting & Transactions in SQLite3 | Think IT Telugu"
+sidebar_label: "5. Update, Delete & Transactions"
+description: "Master UPDATE, DELETE, and ACID transaction rollbacks with sqlite3 in Python. Build a complete CRUD student management application."
+keywords: ["sqlite3 update python", "sqlite3 delete python", "sqlite rollback python", "cursor.rowcount sqlite", "python database CRUD app"]
+---
+
+# Updating, Deleting & ACID Transactions in SQLite3
+
+In real applications, user profiles get updated, account balances shift, and inactive records are deleted.
+
+This lesson covers **`UPDATE`**, **`DELETE`**, and how to safely use **Transactions & `rollback()`** to prevent partial database corruption.
+
+---
+
+## 1. Modifying Records with SQL `UPDATE`
+
+```python
+import sqlite3
+
+with sqlite3.connect("university.db") as conn:
+    cursor = conn.cursor()
+    
+    update_sql = "UPDATE students SET gpa = ? WHERE email = ?"
+    cursor.execute(update_sql, (9.85, "rahul@gmail.com"))
+    
+    # cursor.rowcount tells you how many records were modified
+    print(f"✅ Records updated: {cursor.rowcount}")
+```
+
+:::warning Always Include a `WHERE` Clause!
+If you write `UPDATE students SET gpa = 9.85` without a `WHERE` clause, **every single student** in the entire university database will be updated to GPA 9.85!
+:::
+
+---
+
+## 2. Removing Records with SQL `DELETE`
+
+```python
+import sqlite3
+
+with sqlite3.connect("university.db") as conn:
+    cursor = conn.cursor()
+    
+    delete_sql = "DELETE FROM students WHERE student_id = ?"
+    cursor.execute(delete_sql, (1,))
+    
+    if cursor.rowcount > 0:
+        print("🗑️ Student record removed successfully.")
+    else:
+        print("⚠️ No record found matching that ID.")
+```
+
+---
+
+## 3. Database Transactions: `commit()` and `rollback()`
+
+A **Transaction** is a unit of work that contains multiple database steps. Under ACID principles, either **all steps succeed**, or **none of them take effect** (all-or-nothing).
+
+### Real-World Example: Bank Account Transfer
+Imagine transferring ₹1,000 from Rahul to Sai:
+1. Deduct ₹1,000 from Rahul.
+2. Add ₹1,000 to Sai.
+
+If the computer loses power or errors occur during Step 2, Rahul loses money, but Sai never gets it. **`rollback()`** undoes Step 1 automatically:
+
+```python
+import sqlite3
+
+conn = sqlite3.connect("bank.db")
+cursor = conn.cursor()
+
+try:
+    # Step 1: Deduct from Rahul
+    cursor.execute("UPDATE accounts SET balance = balance - 1000 WHERE name = 'Rahul'")
+    
+    # Step 2: Add to Sai (Simulate an error like network crash)
+    cursor.execute("UPDATE accounts SET balance = balance + 1000 WHERE name = 'Sai'")
+    
+    # If both steps pass with zero errors, commit permanently
+    conn.commit()
+    print("✅ Bank transfer completed successfully!")
+
+except Exception as err:
+    # Undo step 1 so Rahul's money is restored!
+    conn.rollback()
+    print(f"❌ Transfer failed! Transaction rolled back: {err}")
+
+finally:
+    conn.close()
+```
+
+---
+
+## 4. Complete CRUD Summary Cheatsheet
+
+| Operation | SQL Command | Python Execution |
+| :--- | :--- | :--- |
+| **Create** | `INSERT INTO ...` | `cursor.execute(sql, (val1, val2))` |
+| **Read** | `SELECT ... FROM ...` | `cursor.fetchall()` or `cursor.fetchone()` |
+| **Update** | `UPDATE ... SET ... WHERE ...` | `cursor.execute(sql, (new_val, id))` |
+| **Delete** | `DELETE FROM ... WHERE ...` | `cursor.execute(sql, (id,))` |
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="What happens when you call conn.rollback() in SQLite3 after an exception occurs?"
+  options={[
+    "It permanently deletes the database file",
+    "It cancels and reverts all uncommitted changes in the current transaction, returning the database to its previous safe state",
+    "It converts SQLite into PostgreSQL",
+    "It sends an email alert to the admin"
+  ]}
+  correctIndex={1}
+  explanation="conn.rollback() cancels all uncommitted database operations since the last commit, guaranteeing data consistency and preventing partial updates."
+/>

@@ -1,0 +1,102 @@
+---
+id: inserting-data
+title: "Inserting Records & Preventing SQL Injection in Python | Think IT Telugu"
+sidebar_label: "3. Inserting Data & Security"
+description: "Master SQL INSERT statements in SQLite3. Learn parameterized queries with ? placeholders to prevent dangerous SQL injection vulnerabilities."
+keywords: ["sqlite3 insert python", "prevent sql injection python", "cursor.executemany sqlite", "parameterized query python sqlite3", "conn.commit sqlite"]
+---
+
+# Inserting Records & Preventing SQL Injection
+
+Once your table is created, you can add records using SQL **`INSERT INTO`** queries.
+
+However, how you insert variables into your SQL query determines whether your application is **secure and production-ready**, or **vulnerable to devastating hacker attacks**.
+
+---
+
+## 1. Single Record Insertion (`cursor.execute()`)
+
+### ❌ The Dangerous Anti-Pattern (SQL Injection Bug)
+Never use Python f-strings or string concatenation (`+`) to insert user input into SQL queries:
+
+```python
+# 🚨 NEVER DO THIS IN PRODUCTION:
+# cursor.execute(f"INSERT INTO users (name) VALUES ('{user_input}')")
+# If user enters: "Sai'); DROP TABLE users; --" your entire database gets deleted!
+```
+
+### ✅ The Secure Way: Parameterized Queries (`?` Placeholders)
+Always pass values as a **tuple of parameters** using question mark **`?`** placeholders. SQLite handles safe escaping automatically:
+
+```python
+import sqlite3
+
+conn = sqlite3.connect("university.db")
+cursor = conn.cursor()
+
+# Safe parameterized insertion
+insert_query = """
+INSERT INTO students (name, email, gpa)
+VALUES (?, ?, ?)
+"""
+
+student_data = ("Rahul Sharma", "rahul@gmail.com", 8.75)
+cursor.execute(insert_query, student_data)
+
+# ⚠️ CRITICAL: Must commit, otherwise changes disappear when program closes!
+conn.commit()
+
+print(f"✅ Record inserted with ID: {cursor.lastrowid}")
+conn.close()
+```
+
+---
+
+## 2. Bulk Insertion with `cursor.executemany()`
+
+If you need to insert 500 records from a CSV file or list, calling `cursor.execute()` inside a `for` loop is slow because it creates 500 separate disk write operations.
+
+Use **`cursor.executemany()`** to insert all 500 records in a single high-speed database transaction:
+
+```python
+import sqlite3
+
+students_list = [
+    ("Priya Rao", "priya@gmail.com", 9.1),
+    ("Sai Kumar", "sai@thinkittelugu.in", 9.4),
+    ("Ananya Sen", "ananya@gmail.com", 8.2)
+]
+
+with sqlite3.connect("university.db") as conn:
+    cursor = conn.cursor()
+    
+    insert_sql = "INSERT INTO students (name, email, gpa) VALUES (?, ?, ?)"
+    
+    # Executes all inserts in one batch
+    cursor.executemany(insert_sql, students_list)
+    print(f"✅ Batch insert complete! Rows added: {cursor.rowcount}")
+```
+
+---
+
+## 3. Why `conn.commit()` is Mandatory
+
+SQLite uses **ACID Transactions**. When you insert data, SQLite keeps changes in a temporary staging area in RAM.
+
+Calling **`conn.commit()`** writes those staged changes permanently to the `.db` file on your hard disk.
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="Why must you always use question mark ? placeholders instead of f-strings when building SQL insert queries?"
+  options={[
+    "Because SQLite crashes on f-strings",
+    "To prevent dangerous SQL Injection attacks by letting the database engine safely sanitize all inputs",
+    "Because question marks make the text lowercase",
+    "To compress the file size by 50%"
+  ]}
+  correctIndex={1}
+  explanation="Using ? parameter substitution ensures that user input is treated strictly as data rather than executable SQL commands, completely neutralizing SQL Injection vulnerabilities."
+/>

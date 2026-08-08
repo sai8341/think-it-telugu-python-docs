@@ -1,0 +1,67 @@
+---
+title: "Custom Exceptions - Python in Telugu | Think IT Telugu"
+sidebar_label: "Custom Exceptions"
+description: "Learn how to create your own custom exception classes in Python by extending the Exception base class. Build domain-specific error types for cleaner code."
+keywords: ["Python", "custom exceptions", "class Exception", "user defined errors", "Learn Python in Telugu", "AI", "Data Science"]
+---
+
+# Custom Exceptions
+
+Python provides many built-in exceptions like `ValueError`, `TypeError`, and `FileNotFoundError`. But what if your application needs a **very specific error type** that Python does not have?
+
+For example, in a banking app, you might want an `InsufficientBalanceError`. Python does not have this — so you create it yourself.
+
+---
+
+## How to Create a Custom Exception
+
+A custom exception is simply a Python class that inherits from the built-in `Exception` class:
+
+```python
+class InsufficientBalanceError(Exception):
+    pass
+```
+
+That is it! Now you can `raise` it just like any built-in exception:
+
+```python
+class InsufficientBalanceError(Exception):
+    pass
+
+def withdraw(balance, amount):
+    if amount > balance:
+        raise InsufficientBalanceError(
+            f"Cannot withdraw ₹{amount}. Available balance: ₹{balance}"
+        )
+    return balance - amount
+
+try:
+    remaining = withdraw(500, 1000)
+except InsufficientBalanceError as e:
+    print("Transaction denied:", e)
+# Output: Transaction denied: Cannot withdraw ₹1000. Available balance: ₹500
+```
+
+---
+
+## When to Use Custom Exceptions
+
+Use custom exceptions when:
+- Built-in exceptions are too generic for your use case
+- You want the caller to handle **your** specific error differently from general errors
+- You are building a library or API that other developers will use
+
+:::tip Keep It Simple
+For most beginner projects, built-in exceptions like `ValueError` are sufficient. Create custom exceptions only when your application genuinely needs a distinct error type.
+:::
+
+---
+
+## Interactive Practice Quiz
+
+<Quiz
+  question="How do you create a custom exception class in Python?"
+  options={["By importing it from the exceptions module", "By creating a class that inherits from Exception", "By calling raise with a custom string", "By modifying Python's source code"]}
+  correctIndex={1}
+  explanation="Custom exceptions are created by defining a new class that inherits from Python's built-in Exception class. You can then raise and catch them like any built-in exception."
+/>

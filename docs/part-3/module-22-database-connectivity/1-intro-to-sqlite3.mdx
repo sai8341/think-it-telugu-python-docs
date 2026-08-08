@@ -1,0 +1,80 @@
+---
+id: intro-to-sqlite3
+title: "Introduction to SQLite3 & Relational Databases | Think IT Telugu"
+sidebar_label: "1. Intro to SQLite3"
+description: "Learn SQLite3 fundamentals in Python. Understand flat files vs relational databases, tables, columns, rows, and why SQLite needs zero configuration."
+keywords: ["Python sqlite3", "relational database python", "sqlite3 tutorial python", "why sqlite3", "python database for beginners"]
+---
+
+# Introduction to SQLite3 & Relational Databases
+
+Until now, when you save data in Python, you stored it in lists, dictionaries, text files, or JSON files.
+
+However, flat files have serious limitations:
+1. **Searching is slow**: To find one student out of 500,000, you have to read the entire text file into RAM.
+2. **Data corruption**: If two users write to a text file at the exact same millisecond, the data gets scrambled.
+3. **No relations**: Connecting an `orders.txt` file to a `customers.txt` file requires dozens of manual lines of code.
+
+A **Relational Database Management System (RDBMS)** stores structured data in tables with guaranteed consistency, relationships, and lightning-fast search queries.
+
+---
+
+## 1. Why SQLite3 is Special
+
+Most relational databases (like PostgreSQL, MySQL, Oracle) require you to:
+- Install a heavy background database server.
+- Configure ports, firewalls, and usernames/passwords.
+
+**SQLite3** is different:
+- **Serverless**: It runs directly inside your Python process.
+- **Single File**: Your entire database lives in one single file on disk (e.g. `store.db`).
+- **Built-in Standard Library**: Included in Python by default (`import sqlite3`) — zero `pip install` required!
+
+```
++-----------------------------------------------------------+
+| Python Script (import sqlite3)                            |
+|                            ↓                              |
+| Direct file read/write to database file (e.g. library.db) |
++-----------------------------------------------------------+
+```
+
+---
+
+## 2. Core Relational Database Terminology
+
+| Term | What It Means | Real-World Example |
+| :--- | :--- | :--- |
+| **Table** | A 2D grid containing rows and columns | `students` table |
+| **Row (Record)** | A single individual entry in the table | Student #101: `("Rahul", 21, "CSE")` |
+| **Column (Field)** | A specific property / attribute | `student_id`, `email`, `gpa` |
+| **Primary Key** | A unique ID that never repeats | Aadhaar Number or `user_id` |
+
+---
+
+## 3. SQL Data Types in SQLite
+
+SQLite uses a clean, compact type system:
+
+| SQLite Type | Python Equivalent | Description |
+| :--- | :--- | :--- |
+| **`INTEGER`** | `int` | Whole numbers (`10`, `-5`, `0`) |
+| **`REAL`** | `float` | Decimal numbers (`99.5`, `3.14`) |
+| **`TEXT`** | `str` | Text strings (`"Sai"`, `"CSE"`) |
+| **`BLOB`** | `bytes` | Binary data (images, PDFs) |
+| **`NULL`** | `None` | Missing or empty value |
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="Why is SQLite3 widely used for mobile apps, prototypes, and local Python development?"
+  options={[
+    "It requires paying an enterprise monthly subscription",
+    "It is serverless, stores everything in a single portable file, and comes built into Python standard library",
+    "It only supports numbers and cannot store text",
+    "It runs inside a web browser only"
+  ]}
+  correctIndex={1}
+  explanation="SQLite3 is completely serverless, zero-configuration, stores all data in a single local file, and is built directly into Python standard library."
+/>

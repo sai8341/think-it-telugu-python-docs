@@ -1,0 +1,99 @@
+---
+title: "Modules in Python & __name__ Guard | Think IT Telugu"
+sidebar_label: "1. Modules & Imports"
+description: "Learn how to create custom Python modules, use different import techniques, explore built-in modules, and understand the if __name__ == '__main__' guard."
+keywords: ["Python modules", "import in python", "if __name__ == '__main__'", "import alias python", "Learn Python in Telugu"]
+---
+
+# Modules in Python & `__name__` Guard
+
+As your Python projects grow, keeping thousands of lines of code in a single file becomes messy and difficult to manage.
+
+A **Module** is simply a Python file (e.g., `calculator.py`) containing functions, classes, and variables. By breaking your code into modules, your project remains organized, reusable, and easy to maintain.
+
+---
+
+## 1. Creating and Importing a Custom Module
+
+Let us create a simple math helper module.
+
+### Step 1: Create `calculator.py`
+```python
+# calculator.py
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+```
+
+### Step 2: Import into `main.py`
+```python
+# main.py
+import calculator
+
+result = calculator.add(10, 5)
+print("Result:", result)  # Output: Result: 15
+```
+
+---
+
+## 2. The 3 Ways to Import in Python
+
+| Import Technique | Code Example | When to Use |
+| :--- | :--- | :--- |
+| **Full Import** | `import math` <br/> `math.sqrt(25)` | When you want clear clarity on where functions come from. |
+| **Specific Import** | `from math import sqrt` <br/> `sqrt(25)` | When you only need 1 or 2 functions and want shorter code. |
+| **Aliasing (`as`)** | `import pandas as pd` <br/> `import numpy as np` | Standard industry convention for shorter library names. |
+
+```python
+# Real-world alias example in Data Science
+import math as m
+
+print("Square root of 64 is:", m.sqrt(64))  # Output: 8.0
+```
+
+---
+
+## 3. The Crucial `if __name__ == "__main__":` Guard
+
+Have you ever seen this line at the bottom of Python files?
+```python
+if __name__ == "__main__":
+    main()
+```
+
+### Why Does It Exist?
+When Python runs a file directly (e.g., `python calculator.py`), it automatically sets a special hidden variable named `__name__` to the string `"__main__"`.
+
+However, when another file **imports** `calculator.py` (`import calculator`), Python sets `__name__` to `"calculator"` (the file name).
+
+### Real-World Example:
+```python
+# math_utils.py
+def multiply(a, b):
+    return a * b
+
+# Test code that should ONLY run when executing this file directly:
+if __name__ == "__main__":
+    print("Testing locally:", multiply(4, 5))
+```
+
+If you run `python math_utils.py`, the test prints.  
+If another file does `import math_utils`, the test code **will NOT run automatically**!
+
+---
+
+## 4. Interactive Practice Quiz
+
+<Quiz
+  question="What is the value of __name__ when a Python file is imported into another script as a module?"
+  options={[
+    '"__main__"',
+    'The name of the module file (e.g. "calculator")',
+    'None',
+    '"import"'
+  ]}
+  correctIndex={1}
+  explanation="When executed directly, __name__ is '__main__'. When imported by another file, __name__ equals the module's actual filename without the .py extension."
+/>

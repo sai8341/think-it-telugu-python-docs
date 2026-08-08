@@ -1,0 +1,86 @@
+---
+title: "The Core Git Workflow (init, add, commit, log) | Think IT Telugu"
+sidebar_label: "2. Core Git Workflow"
+description: "Master the 3 stages of Git: Working Directory, Staging Area, and Local Repository. Learn git init, status, add, commit, and log."
+keywords: ["git workflow", "git add and commit", "git staging area", "git log oneline", "Learn Git in Telugu"]
+---
+
+# The Core Git Workflow
+
+To save snapshots of your files locally, Git uses a simple 3-stage loop: writing code, staging modified files, and committing.
+
+---
+
+## 1. The 3 Stages of Git
+
+Before saving anything, Git divides your directory files into three distinct zones:
+
+```text
+[ Working Directory ] ───( git add )───> [ Staging Area ] ───( git commit )───> [ Local Repository ]
+(Your edited files)                      (Packing the box)                        (Permanent snapshot)
+```
+
+1. **Working Directory:** The physical folder on your computer where you write and edit code.
+2. **Staging Area (`git add`):** A digital preview table. You choose which specific files are ready to be included in the next snapshot.
+3. **Local Repository (`git commit`):** The secure internal database (inside `.git`) where snapshots are permanently stored.
+
+---
+
+## 2. Step-by-Step Command Flow
+
+### Step 1: Initialize Git in your project folder
+```bash
+git init
+```
+*(Runs only once per project. It creates a hidden `.git` tracking database).*
+
+---
+
+### Step 2: Check current file status
+```bash
+git status
+```
+*(Shows which files are modified, untracked, or ready to be committed).*
+
+---
+
+### Step 3: Stage your modified files
+```bash
+# Stage a specific file:
+git add main.py
+
+# Or stage ALL modified files in the folder (most common):
+git add .
+```
+
+---
+
+### Step 4: Commit your snapshot with a descriptive message
+```bash
+git commit -m "Add student marks calculator and error handling"
+```
+*(The `-m` stands for message. Always write a short, clear description of what changed).*
+
+---
+
+### Step 5: View your commit history
+```bash
+git log --oneline
+```
+*(Displays a clean, single-line list of all previous save points with their unique commit hashes).*
+
+---
+
+## 3. Interactive Practice Quiz
+
+<Quiz
+  question="What is the role of the staging area in Git (git add)?"
+  options={[
+    "It permanently uploads the files to the internet",
+    "It serves as a preparation area where you select and group changes before saving them in a commit",
+    "It deletes any files that have syntax errors",
+    "It compiles Python code into binary"
+  ]}
+  correctIndex={1}
+  explanation="The staging area (index) lets you curate and review exactly which modified files will be saved in your next commit snapshot."
+/>

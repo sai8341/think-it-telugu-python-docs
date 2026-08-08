@@ -117,13 +117,13 @@
   }
 
   [data-theme='dark'] .navbar__search {
-    background-color: #1A1A2E !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: #0D1117 !important;
+    border: 1px solid #30363D !important;
   }
 
   .navbar__search:focus-within {
     border-color: var(--ifm-color-primary) !important;
-    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15) !important;
+    box-shadow: 0 0 0 3px rgba(0, 199, 183, 0.15) !important;
   }
 
   .navbar__search-input {

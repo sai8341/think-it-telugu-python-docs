@@ -124,3 +124,14 @@ try:
 except KeyError:
     print("Warning: Phone number is not set in user profile.")
 ```
+
+---
+
+## Interactive Practice Quiz
+
+<Quiz
+  question="Why is it bad practice to write a bare 'except:' block that catches every error?"
+  options={["It makes the code slower", "It hides the actual problem, making debugging very difficult", "Python does not allow it", "It crashes the program"]}
+  correctIndex={1}
+  explanation="A generic except: catches all errors silently, so you never know what actually went wrong. Always catch specific exceptions like ValueError or ZeroDivisionError."
+/>

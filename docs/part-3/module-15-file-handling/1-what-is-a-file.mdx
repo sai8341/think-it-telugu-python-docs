@@ -1,19 +1,64 @@
 ---
-title: "What is a File? - Python in Telugu | Think IT Telugu"
+title: "What is a File? File Types & Modes - Python in Telugu | Think IT Telugu"
 sidebar_label: "What is a File?"
-description: "Learn about What is a File? in Python with real-world examples. This Think IT Telugu tutorial explains What is a File? easily for AI and Data Science beginners."
-keywords: ["Python", "What is a File?", "Telugu tutorial", "Learn Python in Telugu", "AI", "Data Science"]
+description: "Understand what files are in Python, the difference between text and binary files, and all file opening modes (r, w, a, r+)."
+keywords: ["Python", "file types", "file modes", "text vs binary files", "open function", "Learn Python in Telugu"]
 ---
 
 # What is a File?
 
-Variables and lists store data in RAM. This data is temporary and disappears when the program stops. Files store data permanently on your disk.
+Variables and lists store data in RAM. This data is temporary — it disappears when the program stops. **Files** store data permanently on your hard disk.
 
-We use the built-in `open()` function to work with files.
-
-### Common File Modes:
-* **`'r'` (Read):** Opens a file for reading (throws an error if the file does not exist).
-* **`'w'` (Write):** Opens a file for writing (creates a new file if missing, or overwrites existing content).
-* **`'a'` (Append):** Opens a file for adding data at the end (does not delete existing data).
+We use the built-in `open()` function to work with files in Python.
 
 ---
+
+## Text Files vs Binary Files
+
+| Feature | Text Files | Binary Files |
+| :--- | :--- | :--- |
+| **Content** | Human-readable characters (letters, numbers, symbols) | Raw bytes (machine-readable data) |
+| **Examples** | `.txt`, `.csv`, `.py`, `.json` | `.jpg`, `.png`, `.pdf`, `.mp3` |
+| **Open mode** | `"r"`, `"w"`, `"a"` | `"rb"`, `"wb"`, `"ab"` |
+
+For this module, we will focus on **text files** since they are the most common in Python programming and data science.
+
+---
+
+## File Opening Modes
+
+When you open a file, you must tell Python **what you plan to do** with it:
+
+| Mode | Name | What It Does |
+| :--- | :--- | :--- |
+| `"r"` | Read | Opens for reading. Throws error if file does not exist. |
+| `"w"` | Write | Opens for writing. **Creates new file** or **overwrites** existing content. |
+| `"a"` | Append | Opens for adding data at the end. Does not delete existing data. |
+| `"r+"` | Read + Write | Opens for both reading and writing. File must exist. |
+
+---
+
+## The `open()` Function
+
+```python
+# Basic syntax
+file = open("filename.txt", "mode")
+
+# Example: Open a file for reading
+file = open("notes.txt", "r")
+```
+
+:::warning Important
+When you open a file with `open()`, you must always **close it** when done using `file.close()`. If you forget, the file stays locked and other programs cannot access it. We will learn a better approach using the `with` statement in the next lesson.
+:::
+
+---
+
+## Interactive Practice Quiz
+
+<Quiz
+  question="What happens when you open a file in 'w' (write) mode that already contains data?"
+  options={["Python adds new data to the end", "Python reads the existing data first", "Python deletes all existing content and starts fresh", "Python raises a FileExistsError"]}
+  correctIndex={2}
+  explanation="Write mode ('w') creates a new file or completely overwrites the existing file content. If you want to keep existing data, use append mode ('a') instead."
+/>

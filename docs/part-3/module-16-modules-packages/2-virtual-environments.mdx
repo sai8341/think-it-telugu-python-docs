@@ -1,0 +1,85 @@
+---
+title: "Virtual Environments (venv) in Python | Think IT Telugu"
+sidebar_label: "2. Virtual Environments (venv)"
+description: "Master Python virtual environments. Learn why environment isolation is critical, how to create, activate, and deactivate venv on Windows, Mac, and Linux."
+keywords: ["Python venv", "Virtual environments python", "activate venv windows", "Python package isolation", "Learn Python in Telugu"]
+---
+
+# Virtual Environments (`venv`) in Python
+
+When you build real-world Python applications, different projects often require **different versions** of the same library. 
+
+If you install everything globally on your operating system, updating a package for Project A can instantly break Project B.
+
+To solve this, Python gives us **Virtual Environments (`venv`)** — isolated sandbox folders for each individual project.
+
+---
+
+## 1. The Real-World Conflict: Global vs Isolated
+
+```text
+Global Python Installation (pip global)
+   ├── Project A (requires requests v2.20)  <── Dependency Conflict! 💥
+   └── Project B (requires requests v2.31)  <── Dependency Conflict! 💥
+
+With Virtual Environments:
+   ├── Project A ── [venv A] ── requests v2.20 (Safe & Isolated) ✅
+   └── Project B ── [venv B] ── requests v2.31 (Safe & Isolated) ✅
+```
+
+---
+
+## 2. Step-by-Step Setup Guide
+
+### Step 1: Create the Virtual Environment
+Open your terminal inside your project folder and run:
+```bash
+python -m venv .venv
+```
+*(This creates a local `.venv` folder containing a dedicated copy of Python and pip).*
+
+---
+
+### Step 2: Activate the Environment
+You must activate the environment so terminal commands use this sandbox:
+
+* **Windows (PowerShell):**
+  ```powershell
+  .\.venv\Scripts\Activate.ps1
+  ```
+* **Windows (Command Prompt):**
+  ```cmd
+  .\.venv\Scripts\activate.bat
+  ```
+* **macOS / Linux (Bash / Zsh):**
+  ```bash
+  source .venv/bin/activate
+  ```
+
+:::tip Visual Confirmation
+When activated, you will see `(.venv)` displayed at the start of your terminal line. Any package you install with `pip` now stays strictly inside this project!
+:::
+
+---
+
+### Step 3: Deactivate When Finished
+To return your terminal back to the standard global Python path, run:
+```bash
+deactivate
+```
+
+---
+
+## 3. Interactive Practice Quiz
+
+<Quiz
+  question="Why should every professional Python project use a dedicated virtual environment?"
+  options={[
+    "To make Python code execute twice as fast",
+    "To prevent package version conflicts between different projects on the same computer",
+    "Because Python will not run without a venv folder",
+    "To automatically upload the code to GitHub"
+  ]}
+  correctIndex={1}
+  explanation="Virtual environments isolate external dependencies, ensuring upgrading a package in one project never breaks dependencies in another project."
+/>

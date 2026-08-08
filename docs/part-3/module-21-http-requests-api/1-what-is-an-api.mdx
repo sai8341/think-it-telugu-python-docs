@@ -1,0 +1,87 @@
+---
+id: what-is-an-api
+title: "What is an API? REST Architecture Explained | Think IT Telugu"
+sidebar_label: "1. What is an API?"
+description: "Understand REST APIs, Client-Server architecture, HTTP methods (GET, POST, PUT, DELETE), and HTTP status codes in crystal clear terms."
+keywords: ["What is an API in python", "REST API explained python", "HTTP status codes python", "client server architecture", "HTTP methods"]
+---
+
+# What is an API? REST Architecture Explained
+
+Whenever you check live cricket scores, query weather forecasts, or ask ChatGPT a question in your Python app, you are talking to an **API** (Application Programming Interface).
+
+An API is a messenger that allows **two independent software programs to talk to each other over the internet**.
+
+---
+
+## 1. The Real-World Metaphor: The Restaurant Waiter
+
+Think of a restaurant:
+- **You (The Client / Python App)**: You sit at the table with the menu.
+- **The Kitchen (The Server / Database)**: Where the food is prepared and stored.
+- **The Waiter (The API)**: You give your food order (HTTP Request) to the waiter. The waiter walks to the kitchen, brings your food back, and delivers it to your table (HTTP Response).
+
+```
++------------------+          HTTP Request (GET /weather)        +------------------+
+|  Python Program  | ──────────────────────────────────────────> |   Cloud Server   |
+|   (The Client)   | <────────────────────────────────────────── |   (Weather DB)   |
++------------------+          HTTP Response (JSON: 28°C)         +------------------+
+```
+
+---
+
+## 2. Anatomy of an HTTP Request
+
+When your Python code talks to an API server, it sends four pieces of information:
+
+1. **Endpoint (URL)**: Where the resource lives (e.g. `https://api.github.com/users/octocat`).
+2. **HTTP Method (Action verb)**: What action you want the server to perform.
+3. **Headers**: Metadata (e.g. `Content-Type: application/json` or authentication tokens).
+4. **Body (Payload)**: Data sent along with POST/PUT requests (e.g. login credentials).
+
+---
+
+## 3. The Core HTTP Action Verbs
+
+| Method | What It Does | Real-World CRUD Equivalent |
+| :--- | :--- | :--- |
+| **`GET`** | **Fetch** data from the server (Read only) | **R**ead |
+| **`POST`** | **Create** a brand new resource on the server | **C**reate |
+| **`PUT`** / **`PATCH`** | **Update** or modify existing records | **U**pdate |
+| **`DELETE`** | **Remove** a record from the database | **D**elete |
+
+---
+
+## 4. Understanding HTTP Status Codes
+
+When an API answers back, it includes a 3-digit numerical status code indicating whether the request succeeded:
+
+<CardGroup cols={2}>
+  <Card title="2xx: Success" icon="check">
+    • <strong>200 OK</strong>: Request succeeded.<br />
+    • <strong>201 Created</strong>: New record saved.
+  </Card>
+  <Card title="3xx: Redirection" icon="arrow-right">
+    • <strong>301 Moved Permanently</strong>: Resource has a new URL.
+  </Card>
+  <Card title="4xx: Client Mistakes" icon="warning">
+    • <strong>400 Bad Request</strong>: Invalid JSON syntax.<br />
+    • <strong>401 Unauthorized</strong>: Missing or invalid API key.<br />
+    • <strong>404 Not Found</strong>: Endpoint URL does not exist.
+  </Card>
+  <Card title="5xx: Server Crashes" icon="logic">
+    • <strong>500 Internal Server Error</strong>: Bug inside cloud server code.<br />
+    • <strong>503 Service Unavailable</strong>: Server overloaded.
+  </Card>
+</CardGroup>
+
+---
+
+## 5. Interactive Practice Quiz
+
+<Quiz
+  question="Which HTTP status code indicates that an API key is missing or unauthorized?"
+  options={["200", "404", "401", "500"]}
+  correctIndex={2}
+  explanation="401 Unauthorized indicates that authentication credentials (like an API token) are either missing, expired, or invalid."
+/>
