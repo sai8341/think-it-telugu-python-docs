@@ -8,7 +8,7 @@ const LASER_COLORS = {
   yellow: { stroke: '#FFE600', core: '#FFFFE0', glow: '#FFE600' },
 };
 
-// Inactivity threshold: All letters (a = 20) stay 100% alive together while writing.
+// Inactivity threshold: All letters stay 100% alive together while writing.
 // Fade only starts after 1400ms of complete pen inactivity.
 const SESSION_IDLE_TIMEOUT_MS = 1400;
 const FADE_DURATION_MS = 850;
@@ -25,6 +25,41 @@ export default function PresentationWhiteboard({ onExit }) {
   const lastActiveTimeRef = useRef(performance.now());
   const animFrameIdRef = useRef(null);
 
+  // Click vs Draw distinction ref
+  const pointerStartRef = useRef(null); // { x, y, time, targetZoomable, targetInteractive }
+  const lastHoveredZoomableRef = useRef(null);
+
+  // Helper to find clickable elements beneath the canvas overlay
+  const findUnderlyingTargets = (clientX, clientY) => {
+    const elements = document.elementsFromPoint(clientX, clientY) || [];
+    let targetZoomable = null;
+    let targetInteractive = null;
+
+    for (let el of elements) {
+      if (el === canvasRef.current) continue;
+
+      if (!targetZoomable) {
+        if (el.classList?.contains('zoomable-image-wrapper')) {
+          targetZoomable = el;
+        } else if (el.closest?.('.zoomable-image-wrapper')) {
+          targetZoomable = el.closest('.zoomable-image-wrapper');
+        } else if (el.tagName === 'IMG' && el.classList?.contains('zoomable-image')) {
+          targetZoomable = el.closest('.zoomable-image-wrapper') || el;
+        }
+      }
+
+      if (!targetInteractive) {
+        if (el.tagName === 'BUTTON' || el.tagName === 'A' || el.classList?.contains('quiz-option-btn')) {
+          targetInteractive = el;
+        } else if (el.closest?.('button') || el.closest?.('a') || el.closest?.('.quiz-option-btn')) {
+          targetInteractive = el.closest('button') || el.closest('a') || el.closest('.quiz-option-btn');
+        }
+      }
+    }
+
+    return { targetZoomable, targetInteractive };
+  };
+
   // Resize canvas to cover window with high DPI
   useEffect(() => {
     const handleResize = () => {
@@ -38,7 +73,12 @@ export default function PresentationWhiteboard({ onExit }) {
 
     handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (lastHoveredZoomableRef.current) {
+        lastHoveredZoomableRef.current.classList.remove('presentation-hover');
+      }
+    };
   }, []);
 
   // Continuous 60/120fps GoodNotes Laser Render Loop with Session Memory
@@ -57,8 +97,7 @@ export default function PresentationWhiteboard({ onExit }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.scale(dpr, dpr);
 
-      // Determine session opacity:
-      // If pen is touching pad OR last pen action was within IDLE timeout -> 100% SOLID
+      // Determine session opacity
       let groupAlpha = 1.0;
 
       if (isPenDownRef.current) {
@@ -67,7 +106,7 @@ export default function PresentationWhiteboard({ onExit }) {
       } else {
         const timeSinceLastAction = now - lastActiveTimeRef.current;
         if (timeSinceLastAction <= SESSION_IDLE_TIMEOUT_MS) {
-          groupAlpha = 1.0; // All letters (a = 20) stay 100% visible together!
+          groupAlpha = 1.0;
         } else {
           // After idle timeout, all strokes fade away smoothly together
           const fadeElapsed = timeSinceLastAction - SESSION_IDLE_TIMEOUT_MS;
@@ -175,6 +214,18 @@ export default function PresentationWhiteboard({ onExit }) {
   // Pointer / Pen Tablet Event Handlers
   const handlePointerDown = (e) => {
     if (!isEnabled) return;
+
+    // Detect if clicking on a zoomable image or interactive component underneath
+    const { targetZoomable, targetInteractive } = findUnderlyingTargets(e.clientX, e.clientY);
+
+    pointerStartRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      time: performance.now(),
+      targetZoomable,
+      targetInteractive,
+    };
+
     isPenDownRef.current = true;
     lastActiveTimeRef.current = performance.now();
 
@@ -192,9 +243,33 @@ export default function PresentationWhiteboard({ onExit }) {
   };
 
   const handlePointerMove = (e) => {
-    if (!isPenDownRef.current || !currentStrokeRef.current || !isEnabled) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // When pen is UP: handle interactive hover feedback (cursor and badge)
+    if (!isPenDownRef.current) {
+      if (isEnabled) {
+        const { targetZoomable } = findUnderlyingTargets(e.clientX, e.clientY);
+
+        if (lastHoveredZoomableRef.current && lastHoveredZoomableRef.current !== targetZoomable) {
+          lastHoveredZoomableRef.current.classList.remove('presentation-hover');
+        }
+
+        if (targetZoomable) {
+          targetZoomable.classList.add('presentation-hover');
+          lastHoveredZoomableRef.current = targetZoomable;
+          canvas.style.cursor = 'zoom-in';
+        } else {
+          lastHoveredZoomableRef.current = null;
+          canvas.style.cursor = 'crosshair';
+        }
+      }
+      return;
+    }
+
+    if (!currentStrokeRef.current || !isEnabled) return;
     lastActiveTimeRef.current = performance.now();
-    const rect = canvasRef.current.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
 
     // Capture ultra-smooth high-frequency pen stylus points
     if (e.getCoalescedEvents) {
@@ -214,10 +289,45 @@ export default function PresentationWhiteboard({ onExit }) {
     }
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e) => {
+    if (pointerStartRef.current) {
+      const { x, y, time, targetZoomable, targetInteractive } = pointerStartRef.current;
+      const distance = Math.hypot(e.clientX - x, e.clientY - y);
+      const duration = performance.now() - time;
+
+      // Click / Tap detection: minimal movement (<10px) and fast (<450ms)
+      if (distance < 10 && duration < 450) {
+        if (targetZoomable) {
+          // Remove temporary single-dot stroke created on pointer down
+          if (strokesRef.current.length > 0 && currentStrokeRef.current === strokesRef.current[strokesRef.current.length - 1]) {
+            strokesRef.current.pop();
+          }
+          currentStrokeRef.current = null;
+          isPenDownRef.current = false;
+          pointerStartRef.current = null;
+
+          // Open zoom lightbox
+          targetZoomable.click();
+          return;
+        } else if (targetInteractive) {
+          // Remove temporary single-dot stroke
+          if (strokesRef.current.length > 0 && currentStrokeRef.current === strokesRef.current[strokesRef.current.length - 1]) {
+            strokesRef.current.pop();
+          }
+          currentStrokeRef.current = null;
+          isPenDownRef.current = false;
+          pointerStartRef.current = null;
+
+          targetInteractive.click();
+          return;
+        }
+      }
+    }
+
     isPenDownRef.current = false;
     lastActiveTimeRef.current = performance.now();
     currentStrokeRef.current = null;
+    pointerStartRef.current = null;
   };
 
   // Keyboard Shortcuts for Instructor

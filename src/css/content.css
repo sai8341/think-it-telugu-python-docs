@@ -219,7 +219,8 @@ h3 {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-.zoomable-image-wrapper:hover .zoomable-image-badge {
+.zoomable-image-wrapper:hover .zoomable-image-badge,
+.zoomable-image-wrapper.presentation-hover .zoomable-image-badge {
   opacity: 1;
   transform: translateY(0);
 }

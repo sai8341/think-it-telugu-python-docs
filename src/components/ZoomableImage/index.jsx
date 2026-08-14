@@ -14,20 +14,22 @@ export default function ZoomableImage({ src, alt, style, className, ...props }) 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
+        e.stopPropagation();
+        e.stopImmediatePropagation();
         handleClose();
       }
     };
 
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener('keydown', handleKeyDown, { capture: true });
     } else {
       document.body.style.overflow = '';
     }
 
     return () => {
       document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown, { capture: true });
     };
   }, [isOpen, handleClose]);
 

@@ -168,7 +168,8 @@
 
 /* Sidebar link colors */
 .theme-doc-sidebar-container .menu__link {
-  color: #4B5563;
+  color: #475569;
+  border-radius: 8px;
 }
 
 [data-theme='dark'] .theme-doc-sidebar-container .menu__link {
@@ -176,8 +177,8 @@
 }
 
 .theme-doc-sidebar-container .menu__link:hover {
-  background: #F3F4F6;
-  color: #111827;
+  background: rgba(13, 148, 136, 0.05);
+  color: var(--ifm-color-primary);
 }
 
 [data-theme='dark'] .theme-doc-sidebar-container .menu__link:hover {
@@ -189,14 +190,14 @@
   background: var(--ifm-menu-color-background-active) !important;
   color: var(--ifm-color-primary) !important;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 [data-theme='dark'] .theme-doc-sidebar-container .menu__link--active {
   background: rgba(0, 199, 183, 0.12) !important;
   color: #FFFFFF !important;
   border-left: 3px solid #00C7B7 !important;
-  border-radius: 0 6px 6px 0 !important;
+  border-radius: 0 8px 8px 0 !important;
   font-weight: 600 !important;
 }
 
