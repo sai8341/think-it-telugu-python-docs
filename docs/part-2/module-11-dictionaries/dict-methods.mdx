@@ -113,23 +113,27 @@ print(student)                    # Output: {'name': 'Rahul', 'age': 20}
 
 ---
 
-## Common Beginner Mistakes
+:::warning[Common Beginner Mistakes]
+* **Dict Views are not Lists:** `.keys()`, `.values()`, and `.items()` return dynamic view objects. Wrap in `list(user.keys())` if positional indexing (`[0]`) is required.
+:::
 
-<AccordionGroup>
-  <Accordion title="Forgetting to convert dictionary views into a standard list">
-    ```python
-    # Note: .keys() returns a special dict_keys view object
-    user = {"name": "Rahul"}
-    
-    # If you need standard list indexing like [0], convert it using list():
-    keys_list = list(user.keys())
-    print(keys_list[0])  # Output: name
-    ```
-  </Accordion>
-</AccordionGroup>
+---
+
+## Quick Summary
+
+* **Safe Lookup (`.get(key, default)`):** Avoids `KeyError` by returning `None` or a custom fallback if the key is not found.
+* **Extraction Methods:** `.keys()` (all keys), `.values()` (all values), and `.items()` (all key-value tuples).
+* **Updating (`.update()`):** Merges another dictionary or key-value sequence directly into the existing dictionary.
+* **Deletion:** `.pop(key)` removes a key and returns its value; `.clear()` empties the entire dictionary.
 
 ---
 
 ## What's Next?
 
-Let's explore how to loop through dictionaries and organize complex nested structures like dictionaries containing lists in the next lesson!
+Let's explore how to loop through dictionaries and organize complex nested structures in the next lesson!
+
+<CardGroup cols={1}>
+  <Card title="Nested Dictionaries & Iteration" icon="arrow-right" href="/part-2/module-11-dictionaries/nested-dicts-iteration">
+    Learn how to loop over keys and values, and organize multi-level nested dictionaries
+  </Card>
+</CardGroup>

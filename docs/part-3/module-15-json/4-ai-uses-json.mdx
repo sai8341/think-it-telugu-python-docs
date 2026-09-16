@@ -63,22 +63,26 @@ except json.JSONDecodeError as error:
 Error details: Expecting ',' delimiter: line 1 column 27 (char 26)
 ```
 
-:::tip Defensive Coding
+:::tip[Defensive Coding]
 Whenever your Python application reads JSON from a web server, external file, or user input, always wrap `json.loads()` or `json.load()` in a `try-except json.JSONDecodeError` block to prevent crashes.
 :::
 
 ---
 
-## 3. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Which built-in exception does Python raise when you attempt to parse a corrupted or invalid JSON string with json.loads()?"
-  options={[
-    "json.JSONDecodeError",
-    "ValueError.SyntaxError",
-    "FormatError",
-    "TypeError"
-  ]}
-  correctIndex={0}
-  explanation="When json.loads() or json.load() encounters invalid JSON syntax, it raises json.JSONDecodeError (which inherits from ValueError)."
-/>
+* **Structured LLM Outputs:** Modern AI models (OpenAI, Gemini, Anthropic) return structured function calls and analytical data in JSON.
+* **Schema Enforcement:** Strict JSON keys allow downstream Python systems to reliably automate business workflows.
+* **Defensive Parsing:** Always wrap JSON parsing in `try ... except json.JSONDecodeError` to handle malformed outputs or network truncations safely.
+
+---
+
+## What's Next?
+
+Now that you can exchange data using JSON, let's learn how to organize code into reusable files and manage external libraries in **Module 16: Modules & Packages**!
+
+<CardGroup cols={1}>
+  <Card title="Module 16: Modules & Packages" icon="arrow-right" href="/part-3/module-16-modules-packages/modules">
+    Learn how to create modules, manage virtual environments, and install packages using uv and pip
+  </Card>
+</CardGroup>

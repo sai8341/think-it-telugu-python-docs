@@ -47,16 +47,20 @@ uv run python main.py
 
 ---
 
-## 3. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What is the primary purpose of a requirements.txt file in Python projects?"
-  options={[
-    "To store user passwords securely",
-    "To document all external libraries and versions so other developers can reproduce the exact environment",
-    "To compile Python code into C++",
-    "To list all syntax errors in the code"
-  ]}
-  correctIndex={1}
-  explanation="requirements.txt records the exact external libraries and version numbers, allowing anyone to recreate the identical project environment with 'pip install -r requirements.txt'."
-/>
+* **PyPI & pip:** PyPI is the cloud repository for Python packages; `pip install package_name` downloads and installs them.
+* **`requirements.txt`:** Locks dependency lists (`pip freeze > requirements.txt`, `pip install -r requirements.txt`) for team reproducibility.
+* **Modern `uv`:** Ultra-fast Rust-based package manager (`uv init`, `uv add`, `uv run`) that simplifies virtual environments and project workflows.
+
+---
+
+## What's Next?
+
+Now that you can manage packages and environments, let's learn how to track code changes and collaborate like professional software engineers in **Module 17: Git & Version Control**!
+
+<CardGroup cols={1}>
+  <Card title="Module 17: Git & Version Control" icon="arrow-right" href="/part-3/module-17-git-version-control/version-control-basics">
+    Master Git repositories, commits, branches, GitHub, and professional version control workflows
+  </Card>
+</CardGroup>

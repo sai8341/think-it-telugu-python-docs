@@ -216,29 +216,19 @@ acc.deposit(-500)  # Validation fails: "Error: Amount must be positive!" Data re
 
 ---
 
-## 11. Knowledge Check
-
-1. Why does `acc.__balance` raise an `AttributeError`?
-2. What mangled name does Python store in Heap RAM for `self.__secret` inside class `User`?
-3. What is the difference between a Getter method and a Setter method?
-4. How do Python `@property` decorators simplify Getters and Setters? (e.g. `@property` and `@balance.setter`).
-
----
-
-## 12. Mini Exercises
-
-### Exercise 9.1: Student Grade Encapsulation
-Create a class `StudentGrade`:
-* Private attribute `__score` initialized via `__init__(self, student_name, score)`.
-* Getter `get_score(self)` that returns `__score`.
-* Setter `set_score(self, new_score)` that verifies `0 <= new_score <= 100` before updating. If `new_score` is invalid, print an error message.
-* Test updating scores with `105`, `-10`, and `95`.
-
----
-
-## 13. Summary
+## Quick Summary
 
 * **Encapsulation** bundles data and methods while restricting direct external access to sensitive attributes.
 * Use double underscores **`__attribute`** to make attributes private.
 * Python protects private attributes via **Name Mangling** (`_ClassName__attribute`).
 * **Getters and Setters** provide controlled, validated interfaces to read and update private object data safely.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Abstraction & Abstract Base Classes" icon="arrow-right" href="/part-3/module-13-oop-basics/10-abstraction">
+    Enforce interface contracts using ABC and @abstractmethod
+  </Card>
+</CardGroup>

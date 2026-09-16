@@ -41,10 +41,10 @@ const DocSidebarMobileSecondaryMenu = ({sidebar, path}) => {
           onChange={handleChange}
           className="mobile-sidebar-select"
         >
-          <option value="intro">Introduction</option>
-          <option value="part1">Part 1: Programming & Basics</option>
-          <option value="part2">Part 2: Data Structures & Funcs</option>
-          <option value="part3">Part 3: Advanced & AI Foundation</option>
+          <option value="intro">Start</option>
+          <option value="part1">Part 1: Basics</option>
+          <option value="part2">Part 2: Data Structures</option>
+          <option value="part3">Part 3: Advanced Python</option>
         </select>
         <div className="mobile-sidebar-select-icon">
           <svg viewBox="0 0 24 24" width="16" height="16">

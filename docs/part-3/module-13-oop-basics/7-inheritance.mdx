@@ -248,30 +248,19 @@ Refueling Maruti Swift with petrol...
 
 ---
 
-## 11. Knowledge Check
-
-1. What happens if a child class defines a method with the exact same name as a parent class method? (Hint: Method Overriding).
-2. How can you check if `ev` is an instance of `Vehicle` using built-in function `isinstance()`?
-3. What is Method Resolution Order (MRO) in Python, and how can you view it for a class using `ClassName.__mro__`?
-4. What error occurs if a child class constructor forgets to call `super().__init__()` and then tries to access `self.brand`?
-
----
-
-## 12. Mini Exercises
-
-### Exercise 7.1: Employee Inheritance Hierarchy
-Create a parent class `Employee` with attributes `name` and `salary`, and method `get_details()`.
-Create two child classes:
-1. `Manager(Employee)` with extra attribute `department` and method `schedule_meeting()`.
-2. `Developer(Employee)` with extra attribute `programming_language` and method `write_code()`.
-
-Instantiate one `Manager` and one `Developer`. Call inherited methods and child-specific methods for both.
-
----
-
-## 13. Summary
+## Quick Summary
 
 * **Inheritance** allows child classes to inherit attributes and methods from a parent base class using `class Child(Parent):`.
 * Inheritance creates **ONE unified object** in Heap RAM containing both parent and child attributes.
 * **`super().__init__()`** delegates initialization of common parent attributes to the parent constructor.
 * Inheritance eliminates duplicate code and organizes software into clean hierarchical models.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Polymorphism & Duck Typing" icon="arrow-right" href="/part-3/module-13-oop-basics/8-polymorphism">
+    Learn method overriding, duck typing, and dynamic dispatch
+  </Card>
+</CardGroup>

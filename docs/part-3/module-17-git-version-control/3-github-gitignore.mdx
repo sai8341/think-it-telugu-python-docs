@@ -57,22 +57,20 @@ __pycache__/
 Thumbs.db
 ```
 
-:::warning Golden Rule
+:::warning[Golden Rule]
 Always create and save your `.gitignore` file **before** running `git add .`. If you commit a secret file once, it remains permanently stored in Git's historical logs!
 :::
 
 ---
 
-## 3. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Why must your virtual environment (.venv/) and .env API keys be added to .gitignore?"
-  options={[
-    "Because GitHub will charge you money for storing files",
-    "To prevent leaking private credentials publicly and to avoid uploading redundant third-party package files",
-    "Because Python cannot run on GitHub",
-    "To make Git run slower"
-  ]}
-  correctIndex={1}
-  explanation=".env contains sensitive private keys, and .venv contains thousands of downloaded dependencies that any teammate can recreate using 'pip install -r requirements.txt'."
-/>
+* **Remote Repositories:** `git remote add origin <URL>` links local Git repos to cloud hosts like GitHub.
+* **Pushing Code:** `git push -u origin main` uploads commits to GitHub for backup and team sharing.
+* **`.gitignore` Rules:** Exclude `.venv/`, `.env` (API keys/passwords), and temporary OS metadata (`__pycache__/`, `.DS_Store`) before staging files.
+
+---
+
+## What's Next?
+
+Let's explore how teams collaborate simultaneously without overwriting each other's work using **Branches & Merging** in the next lesson!

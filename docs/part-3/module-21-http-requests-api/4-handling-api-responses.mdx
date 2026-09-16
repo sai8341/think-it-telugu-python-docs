@@ -109,16 +109,20 @@ def fetch_weather(city_name):
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What does response.raise_for_status() do in Python requests?"
-  options={[
-    "It converts all response data into uppercase strings",
-    "It raises a Python HTTPError exception if the HTTP status code is 4xx (client error) or 5xx (server error)",
-    "It shuts down the web server immediately",
-    "It returns a boolean True or False"
-  ]}
-  correctIndex={1}
-  explanation="response.raise_for_status() inspects the HTTP code and automatically raises an HTTPError if the response indicates failure (400 to 599)."
-/>
+* **`timeout=N` Parameter:** Crucial production guardrail preventing threads from hanging indefinitely on stalled networks.
+* **`response.raise_for_status()`:** Automatically raises an `HTTPError` on 4xx/5xx responses for centralized `try-except` handling.
+* **Exception Handling:** Catch specific errors (`Timeout`, `ConnectionError`, `HTTPError`) or catch the base `RequestException`.
+
+---
+
+## What's Next?
+
+Now that we know how to fetch external data from APIs, let's learn how to store, query, update, and persist structured data locally using **Module 22: Database Connectivity & SQLite3**!
+
+<CardGroup cols={1}>
+  <Card title="Module 22: Database Connectivity & SQLite3" icon="arrow-right" href="/part-3/module-22-database-connectivity/intro-to-sqlite3">
+    Learn SQL basics, table creation, parameterized queries, and CRUD operations with Python's built-in sqlite3 module
+  </Card>
+</CardGroup>

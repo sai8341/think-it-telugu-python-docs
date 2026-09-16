@@ -51,19 +51,31 @@ area = 6 * 4       # 24
 half = 10 / 2      # 5.0 (Division always gives a float!)
 ```
 
-<AccordionGroup>
-  <Accordion title="Common Mistake: Quotation marks around numbers">
-    If you put quotation marks around a number, it becomes a **String (Text)**, not a number! You cannot do math with text.
-    ```python
-    # This is math
-    print(5 + 5)     # Output: 10
-    
-    # This is just joining text together!
-    print("5" + "5") # Output: 55
-    ```
-  </Accordion>
-</AccordionGroup>
+:::warning[Common Mistake: Quotes Around Numbers]
+If you wrap numbers in quotation marks (`"5"`), Python treats them as **Strings (Text)** rather than numbers:
+```python
+print(5 + 5)     # Output: 10 (Math Addition)
+print("5" + "5") # Output: 55 (Text Concatenation)
+```
+:::
+
+---
+
+## Quick Summary
+
+* **Integers (`int`):** Whole positive or negative numbers with no decimal points (e.g., `42`, `-10`).
+* **Floats (`float`):** Numbers that contain decimal fractions (e.g., `3.14`, `-0.5`).
+* **Division Rule (`/`):** Regular division in Python 3 always returns a `float` (e.g., `10 / 2` yields `5.0`).
+* **Type Conversion:** Use `int()` to truncate to whole numbers and `float()` to convert numbers/strings to decimals.
+
+---
 
 ## What's Next?
 
-Sometimes you don't need a number or a word. You just need a simple "Yes" or "No". Let's look at Booleans in the next lesson!
+Sometimes you do not need numbers or words; you just need a simple "Yes" or "No" flag. Let's look at **Booleans** in the next lesson!
+
+<CardGroup cols={1}>
+  <Card title="Booleans (True & False)" icon="arrow-right" href="/part-1/module-2-variables-datatypes/booleans">
+    Master logical true/false flags and conditional state tracking
+  </Card>
+</CardGroup>

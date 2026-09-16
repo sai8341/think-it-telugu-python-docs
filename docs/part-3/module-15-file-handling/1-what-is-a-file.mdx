@@ -48,17 +48,20 @@ file = open("filename.txt", "mode")
 file = open("notes.txt", "r")
 ```
 
-:::warning Important
+:::warning[Important]
 When you open a file with `open()`, you must always **close it** when done using `file.close()`. If you forget, the file stays locked and other programs cannot access it. We will learn a better approach using the `with` statement in the next lesson.
 :::
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What happens when you open a file in 'w' (write) mode that already contains data?"
-  options={["Python adds new data to the end", "Python reads the existing data first", "Python deletes all existing content and starts fresh", "Python raises a FileExistsError"]}
-  correctIndex={2}
-  explanation="Write mode ('w') creates a new file or completely overwrites the existing file content. If you want to keep existing data, use append mode ('a') instead."
-/>
+* **File Operations:** Built-in `open(filename, mode)` function handles file I/O operations.
+* **Access Modes:** `'r'` (read only, file must exist), `'w'` (write, overwrites existing file), `'a'` (append to end), `'r+'` / `'w+'` (read/write), `'b'` suffix (binary mode for media).
+* **Resource Release:** Files opened with raw `open()` must be explicitly closed with `.close()` to release the operating system lock.
+
+---
+
+## What's Next?
+
+Let's look at how to safely read text from files using `read()`, `readline()`, and `with open(...)` in **Reading Files**!

@@ -87,16 +87,14 @@ Calling **`conn.commit()`** writes those staged changes permanently to the `.db`
 
 ---
 
-## 4. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Why must you always use question mark ? placeholders instead of f-strings when building SQL insert queries?"
-  options={[
-    "Because SQLite crashes on f-strings",
-    "To prevent dangerous SQL Injection attacks by letting the database engine safely sanitize all inputs",
-    "Because question marks make the text lowercase",
-    "To compress the file size by 50%"
-  ]}
-  correctIndex={1}
-  explanation="Using ? parameter substitution ensures that user input is treated strictly as data rather than executable SQL commands, completely neutralizing SQL Injection vulnerabilities."
-/>
+* **Parameterized Queries (`?`):** Always pass query variables as tuples to prevent malicious SQL Injection vulnerabilities.
+* **`cursor.executemany(sql, list_of_tuples)`:** Batch inserts thousands of records in a single high-performance operation.
+* **ACID Transactions (`conn.commit()`):** Saves in-memory staging updates permanently to disk.
+
+---
+
+## What's Next?
+
+Let's explore how to query rows, filter by conditions, sort, and iterate through result sets in **Fetching Data with `SELECT`**!

@@ -56,7 +56,7 @@ You must activate the environment so terminal commands use this sandbox:
   source .venv/bin/activate
   ```
 
-:::tip Visual Confirmation
+:::tip[Visual Confirmation]
 When activated, you will see `(.venv)` displayed at the start of your terminal line. Any package you install with `pip` now stays strictly inside this project!
 :::
 
@@ -70,16 +70,15 @@ deactivate
 
 ---
 
-## 3. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Why should every professional Python project use a dedicated virtual environment?"
-  options={[
-    "To make Python code execute twice as fast",
-    "To prevent package version conflicts between different projects on the same computer",
-    "Because Python will not run without a venv folder",
-    "To automatically upload the code to GitHub"
-  ]}
-  correctIndex={1}
-  explanation="Virtual environments isolate external dependencies, ensuring upgrading a package in one project never breaks dependencies in another project."
-/>
+* **Dependency Isolation:** Virtual environments keep external packages separate per project, avoiding global version conflicts.
+* **Creation:** `python -m venv .venv` creates an isolated Python sandbox directory.
+* **Activation:** `.\.venv\Scripts\activate` (Windows) or `source .venv/bin/activate` (Mac/Linux).
+* **Deactivation:** `deactivate` exits the virtual environment back to global system Python.
+
+---
+
+## What's Next?
+
+Let's look at modern package management with `pip`, `requirements.txt`, and the ultra-fast tool **uv** in **Managing Packages & Modern uv**!

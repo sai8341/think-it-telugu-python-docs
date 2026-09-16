@@ -81,17 +81,20 @@ finally:
 
 Even if the file does not exist and `FileNotFoundError` fires, the `finally` block ensures we attempt to close the file handle properly.
 
-:::tip Golden Rule
+:::tip[Golden Rule]
 Use the `finally` block for cleanup tasks — closing files, releasing database connections, or stopping timers. This prevents resource leaks that can slow down or crash long-running applications.
 :::
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="When does the finally block execute in Python?"
-  options={["Only when an error occurs", "Only when no error occurs", "Always, regardless of whether an error occurred or not", "Only when you call it manually"]}
-  correctIndex={2}
-  explanation="The finally block is guaranteed to execute in all scenarios — whether try succeeds, except catches an error, or even if an unhandled exception occurs."
-/>
+* **Guaranteed Execution:** The `finally` block **always** executes, regardless of whether exceptions were raised, caught, or missed.
+* **Resource Cleanup:** Ideal for closing network sockets, releasing database connections, or freeing file handles.
+* **Safety Pattern:** Prevents resource leaks that could freeze servers or crash production software.
+
+---
+
+## What's Next?
+
+Let's look at how to cleanly separate success logic from risky operations using the **`else` block** in the next lesson!

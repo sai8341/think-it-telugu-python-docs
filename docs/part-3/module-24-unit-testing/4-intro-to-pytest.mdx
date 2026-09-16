@@ -113,28 +113,26 @@ def test_user_is_active(sample_user_profile):
 
 ---
 
-## 5. Summary: `unittest` vs. `pytest`
+## Quick Summary
 
 | Feature | Built-in `unittest` | Modern `pytest` |
 | :--- | :--- | :--- |
-| **Requires Classes?** | Yes (`unittest.TestCase`) | No (Plain functions) |
-| **Assertions** | `self.assertEqual(a, b)` | Standard `assert a == b` |
-| **Parametrization** | Complex | Simple `@pytest.mark.parametrize` |
+| **Requires Classes?** | Yes (`unittest.TestCase`) | No (Plain standalone functions) |
+| **Assertions** | `self.assertEqual(a, b)` | Standard Python `assert a == b` |
+| **Parametrization** | Complex loops / subtests | Expressive `@pytest.mark.parametrize` |
+| **Fixtures** | `setUp` / `tearDown` OOP | Dependency injection via `@pytest.fixture` |
 | **Installation** | Built-in | `pip install pytest` |
-| **Industry Adoption** | Legacy enterprise code | 85%+ modern Python / AI teams |
 
 ---
 
-## 6. Interactive Practice Quiz
+## What's Next?
 
-<Quiz
-  question="What decorator in pytest allows you to run a single test function multiple times across an array of different inputs and expected outputs?"
-  options={[
-    "@pytest.loop_test",
-    "@pytest.mark.parametrize",
-    "@pytest.repeat_all",
-    "@pytest.data_matrix"
-  ]}
-  correctIndex={1}
-  explanation="@pytest.mark.parametrize passes a list of parameter tuples into a single test function, executing an isolated test run for each test case."
-/>
+🎉 **Congratulations! You have completed Part 3: Advanced Python Programming!** 
+
+You now possess the foundational engineering tools required for modern software development. Next up is **Part 4: AI & ML Engineering**!
+
+<CardGroup cols={1}>
+  <Card title="Part 4: AI & ML Engineering" icon="star" href="/part-4/module-18-google-colab/what-is-colab">
+    Level up with NumPy, Pandas, Data Visualizations, Machine Learning, and LLM Applications
+  </Card>
+</CardGroup>

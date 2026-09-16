@@ -90,11 +90,14 @@ print("DELETE Status:", del_response.status_code)  # 200 (or 204 No Content)
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="When sending a Python dictionary to a REST API via requests.post(), which argument automatically serializes it to JSON and attaches the correct Content-Type header?"
-  options={["body=my_dict", "json=my_dict", "data=my_dict", "payload=my_dict"]}
-  correctIndex={1}
-  explanation="Passing json=my_dict automatically serializes the dictionary to a valid JSON string and attaches the Content-Type: application/json header automatically."
-/>
+* **`requests.post(url, json=dict)`:** Automatically serializes payloads to JSON format and attaches `Content-Type: application/json`.
+* **Headers & Authentication:** Pass custom tokens or API keys using `headers={"Authorization": "Bearer ..."}`.
+* **Updating & Deleting:** `requests.put()` / `requests.patch()` modify existing records; `requests.delete()` removes resources.
+
+---
+
+## What's Next?
+
+Let's look at production-grade error handling, network timeouts, and status code verification in **Handling API Responses & Errors**!

@@ -62,42 +62,29 @@ total = add_numbers(10, 15)
 print(f"The total is: {total}")  # Output: The total is: 25
 ```
 
-:::warning Return stops the function
+:::warning[Return stops the function]
 As soon as Python runs a `return` statement, it exits the function immediately. Any lines of code written below the `return` statement will never run!
 :::
 
-## Common Beginner Mistakes
+:::warning[Common Beginner Mistakes]
+* **Forgetting Parentheses:** Typing `greet_user` without `()` only references the function object. You must add `()` to invoke and run it (`greet_user()`).
+* **`print()` vs `return`:** `print()` only displays text in the terminal and returns `None`. If you want to store or calculate with the function output, you must use `return`.
+:::
 
-<AccordionGroup>
-  <Accordion title="Forgetting parentheses when calling a function">
-    ```python
-    # Wrong - typing just the name without () does not run the function
-    greet_user
-    
-    # Right - parentheses tell Python to actually execute it
-    greet_user()
-    ```
-  </Accordion>
+---
 
-  <Accordion title="Confusing print with return">
-    ```python
-    # Wrong - print does not send data back to a variable
-    def add(x, y):
-        print(x + y)
-    
-    result = add(5, 5)
-    print(result)  # Outputs None!
-    
-    # Right - use return to give the value back
-    def add(x, y):
-        return x + y
-    ```
-  </Accordion>
-</AccordionGroup>
+## Quick Summary
+
+* **`def` Keyword:** Defines a named, reusable block of logic.
+* **Parameters & Arguments:** Parameters are function inputs; arguments are the values passed at invocation.
+* **`return` Statement:** Sends output data back to the caller and exits the function immediately.
+* **Reusability (DRY):** Eliminates copy-pasted duplicate logic across your project.
+
+---
 
 ## What's Next?
 
-Let's learn how to set default values for function inputs and understand how variable scope works inside and outside functions.
+Let's learn how to set default values for function inputs and understand how variable scope works in the next lesson!
 
 <CardGroup cols={1}>
   <Card title="Default Parameters & Scope Rules" icon="arrow-right" href="/part-2/module-12-functions/default-args-scope">

@@ -57,24 +57,23 @@ print(city_name)       # Output: Hyderabad
 
 ## Common Beginner Mistakes
 
-<AccordionGroup>
-  <Accordion title="Looping over a dictionary without .items() when needing both key and value">
-    ```python
-    # Wrong - looping over dictionary directly only yields keys
-    scores = {"Alice": 95}
-    for item in scores:
-        print(item)  # Only prints "Alice", not 95!
-    
-    # Right - use .items() to get both variables
-    for name, score in scores.items():
-        print(f"{name}: {score}")
-    ```
-  </Accordion>
-</AccordionGroup>
+:::warning[Common Beginner Mistakes]
+* **Iterating Without `.items()`:** Iterating directly over `my_dict` only returns the keys. To unpack both keys and values simultaneously, always use `for key, value in my_dict.items():`.
+:::
+
+---
+
+## Quick Summary
+
+* **Dictionary Looping:** Use `.items()` to loop through both keys and values together.
+* **Nested Dictionaries:** Dictionaries inside dictionaries enable multi-level data hierarchies (`users["alice"]["age"]`).
+* **Lists of Dictionaries:** The standard Python data model for tabular rows, JSON records, and API datasets.
+
+---
 
 ## What's Next?
 
-Congratulations on mastering dictionaries! Let's move to **Module 12: Functions** to learn how to write reusable blocks of logic using `def`.
+Congratulations on mastering Dictionaries! Let's move to **Module 12: Functions** to learn how to package reusable blocks of logic using `def`!
 
 <CardGroup cols={1}>
   <Card title="Module 12: Functions" icon="arrow-right" href="/part-2/module-12-functions/defining-functions">

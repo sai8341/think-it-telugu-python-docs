@@ -1,0 +1,90 @@
+---
+title: "Mutable vs Immutable in Python (String Immutability) | Think IT Telugu"
+sidebar_label: "Mutable vs Immutable"
+description: "Simple and beginner-friendly explanation of Mutable vs Immutable in Python and why Strings are Immutable."
+keywords: ["python mutable vs immutable", "string immutability python", "python strings immutable in telugu", "learn python in telugu"]
+---
+
+# Mutable vs. Immutable (String Immutability)
+
+In Python, all data types are divided into two simple categories:
+
+* **Mutable (Changeable):** You **can** change or update the data after creating it.
+* **Immutable (Unchangeable):** You **cannot** change or modify the data once created.
+
+:::tip[Golden Rule]
+In Python, **Strings are 100% Immutable**! Once a string is created, you cannot change its individual characters.
+:::
+
+---
+
+## 1. Trying to Change a String (Common Mistake)
+
+Let's see what happens if we try to change the first letter of a string:
+
+```python
+word = "Python"
+
+# Trying to change 'P' to 'J' to make it "Jython"
+word[0] = "J"
+```
+
+### Output:
+```
+TypeError: 'str' object does not support item assignment
+```
+
+Python throws a **`TypeError`** because string characters are locked and cannot be edited in place.
+
+---
+
+## 2. How to "Modify" a String in Python
+
+If you need to change a string, you don't edit the original text — instead, you **create a new string** with your changes!
+
+### Approach 1: Slicing & Concatenation
+```python
+word = "Python"
+
+# Take "J" and attach the rest of the word from index 1 onwards:
+new_word = "J" + word[1:]
+print(new_word)  # Output: Jython
+```
+
+### Approach 2: Using `.replace()`
+```python
+message = "Hello Java"
+
+# Creates a brand new string with the replaced word
+new_message = message.replace("Java", "Python")
+print(new_message)  # Output: Hello Python
+```
+
+---
+
+## 3. Quick Reference: Mutable vs. Immutable Types
+
+| Type Category | Python Data Types | Can Modify in Place? |
+| :--- | :--- | :--- |
+| **Immutable** (Unchangeable) | `str`, `int`, `float`, `tuple` | ❌ No |
+| **Mutable** (Changeable) | `list`, `dict`, `set` | ✅ Yes |
+
+---
+
+## Quick Summary
+
+* **Immutable Meaning:** Data that cannot be changed once created.
+* **String Immutability:** You cannot assign new values to string indices (`word[0] = 'X'` causes an error).
+* **Modifying Strings:** Always create a new string using slicing (`+`) or string methods (`.replace()`).
+
+---
+
+## What's Next?
+
+Now that you understand string immutability, let's explore all the powerful built-in tools Python provides for text manipulation in **Built-in String Methods**!
+
+<CardGroup cols={1}>
+  <Card title="Built-in String Methods" icon="arrow-right" href="/part-2/module-7-strings/string-methods">
+    Discover upper(), lower(), replace(), find(), strip(), and split()
+  </Card>
+</CardGroup>

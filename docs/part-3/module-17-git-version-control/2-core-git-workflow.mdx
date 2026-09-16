@@ -71,16 +71,15 @@ git log --oneline
 
 ---
 
-## 3. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What is the role of the staging area in Git (git add)?"
-  options={[
-    "It permanently uploads the files to the internet",
-    "It serves as a preparation area where you select and group changes before saving them in a commit",
-    "It deletes any files that have syntax errors",
-    "It compiles Python code into binary"
-  ]}
-  correctIndex={1}
-  explanation="The staging area (index) lets you curate and review exactly which modified files will be saved in your next commit snapshot."
-/>
+* **Three Architecture Zones:** Working Directory (local modifications) -> Staging Area (`git add`) -> Git Repository History (`git commit`).
+* **`git init`:** Initializes a hidden `.git` folder in the project root.
+* **`git status`:** Shows tracked, modified, and untracked files in the current workspace.
+* **`git log --oneline`:** Displays chronological commit history with unique SHA hashes and descriptions.
+
+---
+
+## What's Next?
+
+Let's look at how to protect API keys and skip redundant files using **GitHub Repositories & .gitignore** in the next lesson!

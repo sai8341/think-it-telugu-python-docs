@@ -214,31 +214,20 @@ If you want to visualize this concept in an Excalidraw-style diagram generator, 
 
 ---
 
-## 11. Knowledge Check
-
-Test your understanding with these conceptual questions:
-
-1. Does the variable `s1` contain the actual object or a memory reference?
-2. What happens in RAM when you run `s2 = Student()` after `s1 = Student()`?
-3. Why does printing `s1` show something like `<__main__.Student object at 0x00...>`?
-4. If you delete `s1` using `del s1`, does the `class Student` definition disappear?
-
----
-
-## 12. Mini Exercises
-
-### Exercise 1.1: Multi-Object Creation
-Write code to create three distinct objects from a class named `Car`. Print their memory addresses using `print(c1)`, `print(c2)`, `print(c3)`. Are all three memory addresses identical or different? Why?
-
-### Exercise 1.2: Type Verification
-Create a class named `Laptop`. Instantiate an object `my_laptop`. Use `isinstance(my_laptop, Laptop)` to check if `my_laptop` is an instance of `Laptop`. What does it return?
-
----
-
-## 13. Summary
+## Quick Summary
 
 * **Procedural code** creates loose, unmanaged variables that break at scale.
 * **OOP** groups related data and actions together inside objects.
 * A **Class** is a paper blueprint (template).
 * An **Object** is a physical entity allocated in Heap RAM.
 * A variable like `s1` holds a **memory address reference**, not the physical object itself.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Memory References & The Dot Operator" icon="arrow-right" href="/part-3/module-13-oop-basics/2-memory-references-dot">
+    Understand how Python stores objects in Heap memory and how dot notation works
+  </Card>
+</CardGroup>

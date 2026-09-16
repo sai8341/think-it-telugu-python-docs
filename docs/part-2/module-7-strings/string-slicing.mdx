@@ -87,52 +87,29 @@ new_text = "B" + text[1:]
 print(new_text)  # Output: Bat
 ```
 
-## Common Beginner Mistakes
+:::warning[Common Beginner Mistakes]
+* **Zero-Based Indexing:** The first character is always at index `0`, not `1` (`word[0]` is `"P"` in `"PYTHON"`).
+* **Stop Index Exclusion:** In slicing `[start:stop]`, the `stop` position is excluded (e.g., `word[0:3]` gives indices 0, 1, 2).
+* **Index Out of Range:** Accessing an index `>= len(string)` raises an `IndexError`.
+:::
 
-<AccordionGroup>
-  <Accordion title="1. Forgetting that Index Starts at 0 (Not 1)">
-    ```python
-    word = "PYTHON"
-    
-    # Wrong - assuming index 1 is the first letter
-    print(word[1])  # Output: Y (second letter!)
+---
 
-    # Right - the first character is always at index 0
-    print(word[0])  # Output: P
-    ```
-  </Accordion>
+## Quick Summary
 
-  <Accordion title="2. Forgetting that the Stop Index is Excluded">
-    ```python
-    word = "PYTHON"
-    
-    # Wrong - thinking word[0:3] includes index 3 ('H')
-    print(word[0:3])  # Output: PYT (only includes indices 0, 1, 2!)
+* **Indexing (`word[i]`):** Access individual characters using positive (left-to-right from `0`) or negative (right-to-left from `-1`) indices.
+* **Slicing (`word[start:stop:step]`):** Extracts a range of characters up to (excluding) the `stop` position.
+* **Shorthands:** `word[:3]` starts from the beginning; `word[3:]` goes until the end.
+* **String Reversal:** `word[::-1]` reverses the entire string using a negative step.
 
-    # Right - to include index 3 ('H'), set the stop index to 4
-    print(word[0:4])  # Output: PYTH
-    ```
-  </Accordion>
-
-  <Accordion title="3. Index Out of Range Error">
-    ```python
-    word = "Hello"
-    
-    # Wrong - trying to grab index 5 when word has 5 letters (indices 0 to 4)
-    print(word[5])  # IndexError: string index out of range
-    
-    # Right - valid indices go from 0 up to len(word) - 1
-    print(word[len(word) - 1])  # Last letter: o
-    ```
-  </Accordion>
-</AccordionGroup>
+---
 
 ## What's Next?
 
-Let's explore built-in string methods to easily uppercase text, find words, replace letters, and strip extra spaces.
+Now that we know how to access characters and slices, can we modify a character in place? Let's uncover one of Python's most important concepts in **Mutable vs. Immutable (String Immutability)**!
 
 <CardGroup cols={1}>
-  <Card title="String Methods" icon="arrow-right" href="/part-2/module-7-strings/string-methods">
-    Discover upper(), lower(), replace(), find(), strip(), and split()
+  <Card title="Mutable vs. Immutable" icon="arrow-right" href="/part-2/module-7-strings/mutable-vs-immutable">
+    Understand object mutability, memory addresses (id), and why strings cannot be changed in place
   </Card>
 </CardGroup>

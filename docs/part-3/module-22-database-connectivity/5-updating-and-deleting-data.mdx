@@ -29,7 +29,7 @@ with sqlite3.connect("university.db") as conn:
     print(f"✅ Records updated: {cursor.rowcount}")
 ```
 
-:::warning Always Include a `WHERE` Clause!
+:::warning[Always Include a `WHERE` Clause!]
 If you write `UPDATE students SET gpa = 9.85` without a `WHERE` clause, **every single student** in the entire university database will be updated to GPA 9.85!
 :::
 
@@ -93,7 +93,7 @@ finally:
 
 ---
 
-## 4. Complete CRUD Summary Cheatsheet
+## Quick Summary
 
 | Operation | SQL Command | Python Execution |
 | :--- | :--- | :--- |
@@ -101,19 +101,16 @@ finally:
 | **Read** | `SELECT ... FROM ...` | `cursor.fetchall()` or `cursor.fetchone()` |
 | **Update** | `UPDATE ... SET ... WHERE ...` | `cursor.execute(sql, (new_val, id))` |
 | **Delete** | `DELETE FROM ... WHERE ...` | `cursor.execute(sql, (id,))` |
+| **Rollback** | `conn.rollback()` | Reverts pending transaction on errors |
 
 ---
 
-## 5. Interactive Practice Quiz
+## What's Next?
 
-<Quiz
-  question="What happens when you call conn.rollback() in SQLite3 after an exception occurs?"
-  options={[
-    "It permanently deletes the database file",
-    "It cancels and reverts all uncommitted changes in the current transaction, returning the database to its previous safe state",
-    "It converts SQLite into PostgreSQL",
-    "It sends an email alert to the admin"
-  ]}
-  correctIndex={1}
-  explanation="conn.rollback() cancels all uncommitted database operations since the last commit, guaranteeing data consistency and preventing partial updates."
-/>
+Now let's explore concurrent computing, parallel tasks, race conditions, and thread safety in **Module 23: Multithreading & Concurrency**!
+
+<CardGroup cols={1}>
+  <Card title="Module 23: Multithreading & Concurrency" icon="arrow-right" href="/part-3/module-23-multithreading/intro-to-threading">
+    Master threading basics, thread pools, locks, race conditions, and multiprocessing vs multithreading
+  </Card>
+</CardGroup>

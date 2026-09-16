@@ -84,16 +84,14 @@ If another file does `import math_utils`, the test code **will NOT run automatic
 
 ---
 
-## 4. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What is the value of __name__ when a Python file is imported into another script as a module?"
-  options={[
-    '"__main__"',
-    'The name of the module file (e.g. "calculator")',
-    'None',
-    '"import"'
-  ]}
-  correctIndex={1}
-  explanation="When executed directly, __name__ is '__main__'. When imported by another file, __name__ equals the module's actual filename without the .py extension."
-/>
+* **Module Concept:** Any `.py` file is a module that can be imported using `import module_name` or `from module_name import function_name`.
+* **Namespace Isolation:** Avoid `from module import *` to prevent accidental variable name collisions.
+* **`if __name__ == "__main__":` Pattern:** Ensures testing/demo code runs only when the file is executed directly, not when imported.
+
+---
+
+## What's Next?
+
+Let's learn how to isolate project dependencies and avoid package conflicts using **Virtual Environments** in the next lesson!

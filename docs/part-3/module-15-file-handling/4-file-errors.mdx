@@ -45,7 +45,7 @@ else:
     print(f"'{file_path}' does not exist.")
 ```
 
-:::tip Which approach is better?
+:::tip[Which approach is better?]
 - Use `try-except` when you expect the file to usually exist (EAFP — Easier to Ask Forgiveness than Permission).
 - Use `os.path.exists()` when you want to check upfront and take a different action.
 :::
@@ -66,11 +66,15 @@ except FileNotFoundError:
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What exception does Python raise when you try to open a file that does not exist?"
-  options={["IOError", "FileNotFoundError", "PathError", "MissingFileError"]}
-  correctIndex={1}
-  explanation="Python raises FileNotFoundError when open() cannot find the specified file path on disk."
-/>
+* **`FileNotFoundError`:** Raised when opening a non-existent file path in read mode.
+* **`PermissionError`:** Raised when attempting to access restricted or locked OS files.
+* **`os.path.exists(path)`:** Pre-checks if a target file exists before attempting to open it.
+* **Defensive Practice:** Always wrap file operations in structured `try-except` blocks.
+
+---
+
+## What's Next?
+
+Now let's explore structured tabular datasets and spreadsheets using Python's built-in **CSV Basics** in the next lesson!

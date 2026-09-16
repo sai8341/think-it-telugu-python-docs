@@ -90,11 +90,14 @@ A `Response` object returned by `requests.get()` provides several helpful proper
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Which requests method parses an API's JSON response body directly into a native Python dictionary or list?"
-  options={["response.to_dict()", "response.json()", "response.parse()", "response.decode_json()"]}
-  correctIndex={1}
-  explanation="response.json() automatically deserializes the raw JSON text payload from the server into Python dictionaries or lists."
-/>
+* **`requests.get(url, params=dict)`:** Sends an HTTP GET request and automatically encodes query string parameters.
+* **`response.json()`:** Deserializes JSON response text directly into Python dictionaries or lists.
+* **Core Response Inspection:** `response.status_code` (HTTP code), `response.ok` (boolean truthiness check), and `response.headers`.
+
+---
+
+## What's Next?
+
+Let's explore how to create new records and submit form/JSON payloads using **Sending Data with `POST` Requests**!

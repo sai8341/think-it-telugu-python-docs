@@ -112,11 +112,14 @@ print(next(it, "End of list"))  # Output: End of list (No crash!)
 
 ---
 
-## 6. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What built-in exception is raised when next() is called on an exhausted iterator with no default value?"
-  options={["IndexError", "StopIteration", "ValueError", "KeyError"]}
-  correctIndex={1}
-  explanation="When an iterator has no more items remaining, Python raises StopIteration to signal the iteration loop to terminate."
-/>
+* **Iterable vs. Iterator:** An iterable is any object that can return an iterator (`iter(obj)`); an iterator yields items one-by-one via `next(it)`.
+* **Termination Mechanism:** When exhausted, calling `next()` raises a `StopIteration` exception to gracefully terminate loops.
+* **Lazy Evaluation:** Generates values dynamically on demand, keeping memory consumption near constant $O(1)$ RAM regardless of sequence size.
+
+---
+
+## What's Next?
+
+Let's explore how to write custom memory-efficient streaming functions using the `yield` statement in **Generators & Generator Expressions**!

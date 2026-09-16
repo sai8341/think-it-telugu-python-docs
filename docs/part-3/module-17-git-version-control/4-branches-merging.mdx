@@ -73,16 +73,20 @@ Instead, you push your feature branch to GitHub and open a **Pull Request (PR)**
 
 ---
 
-## 4. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Why should developers build new features on a separate Git branch rather than directly on main?"
-  options={[
-    "Because Git requires at least 3 branches to function",
-    "To isolate unfinished or experimental code so the production (main) branch stays stable and working",
-    "To compress the project file size",
-    "To prevent other developers from viewing the code"
-  ]}
-  correctIndex={1}
-  explanation="Branching provides complete isolation. You can experiment, test, and break things freely without affecting the stable code on the main branch."
-/>
+* **Branching Purpose:** Isolates experimental code or new features from the stable `main` production branch.
+* **Key Commands:** `git checkout -b branch_name` (create and switch), `git checkout main` (switch), `git merge branch_name` (integrate changes).
+* **Pull Requests (PRs):** Cloud-based review workflows on GitHub where team members inspect diffs and run CI tests before merging code into `main`.
+
+---
+
+## What's Next?
+
+Now that you have mastered version control, let's explore high-performance functional programming patterns and generators in **Module 18: Advanced Functions**!
+
+<CardGroup cols={1}>
+  <Card title="Module 18: Advanced Functions" icon="arrow-right" href="/part-3/module-18-advanced-functions/map-filter-reduce">
+    Explore map, filter, reduce, iterators, generators, and decorators in Python
+  </Card>
+</CardGroup>

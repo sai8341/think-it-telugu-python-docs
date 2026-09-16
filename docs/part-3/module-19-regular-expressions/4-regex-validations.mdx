@@ -100,11 +100,20 @@ print("Lazy:", lazy_result)
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Which quantifier modification makes a greedy regex pattern lazy so it stops at the earliest possible match?"
-  options={["Adding a plus +", "Adding a question mark ?", "Adding a caret ^", "Wrapping in brackets []"]}
-  correctIndex={1}
-  explanation="Appending a question mark ? (e.g., .*? or .+?) changes the behavior from greedy (eating everything) to lazy (stopping at the first valid termination)."
-/>
+* **Exact Boundary Validation:** Combine `^` (start) and `$` (end) to validate entire input fields (e.g., `r"^[6-9]\d{9}$"`).
+* **Quantifiers:** `+` (1 or more), `*` (0 or more), `?` (0 or 1), `{min,max}` (exact range).
+* **Greedy vs. Lazy:** Standard quantifiers consume maximum matching characters; append `?` (`*?`, `+?`) to make them match lazily.
+
+---
+
+## What's Next?
+
+Now let's explore handling timestamps, durations, timezones, and mathematical operations in **Module 20: Date, Time & Math**!
+
+<CardGroup cols={1}>
+  <Card title="Module 20: Date, Time & Math" icon="arrow-right" href="/part-3/module-20-date-time-math/working-with-datetime">
+    Master Python's datetime, timedelta, time.sleep, strftime formatting, and the math module
+  </Card>
+</CardGroup>

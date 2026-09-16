@@ -21,7 +21,7 @@ greet()         # Uses default: Welcome, Guest!
 greet("Alice")  # Uses argument: Welcome, Alice!
 ```
 
-:::danger Never Use Lists as Default Parameters
+:::danger[Never Use Lists as Default Parameters]
 When creating optional arguments, **never put an empty list `[]` or dictionary `{}` as a default parameter!** Python creates default parameters only once when reading the program. If you modify that list, every subsequent function call shares the exact same modified list:
 
 ```python
@@ -63,31 +63,25 @@ def show_banner():
     print(f"Running on {APP_NAME}")
 ```
 
-## Common Beginner Mistakes
+:::warning[Common Beginner Mistakes]
+* **Local Variable Leak:** Trying to access a variable declared inside a function from outside raises `NameError`.
+* **Fix:** Use `return` to pass the local result out to the caller (`total = calculate()`).
+:::
 
-<AccordionGroup>
-  <Accordion title="Trying to read a local variable from outside the function">
-    ```python
-    # Wrong - total_score only exists inside calculate()
-    def calculate():
-        total_score = 100
-    
-    calculate()
-    print(total_score)  # NameError!
-    
-    # Right - return the value so outside code can save it
-    def calculate():
-        return 100
-    
-    total_score = calculate()
-    print(total_score)
-    ```
-  </Accordion>
-</AccordionGroup>
+---
+
+## Quick Summary
+
+* **Default Parameters:** Provide fallback values when callers omit arguments (e.g., `def connect(port=8080):`).
+* **Parameter Ordering:** Default parameters must always follow non-default parameters.
+* **Local Scope:** Variables created inside a function are destroyed when the function finishes.
+* **Global Scope:** Variables defined at the module level are readable globally.
+
+---
 
 ## What's Next?
 
-Let's explore how to write functions that accept any number of inputs using `*args` and `**kwargs`.
+Let's explore how to write functions that accept any number of inputs using `*args` and `**kwargs` in the next lesson!
 
 <CardGroup cols={1}>
   <Card title="Flexible Inputs (*args & **kwargs)" icon="arrow-right" href="/part-2/module-12-functions/args-kwargs">

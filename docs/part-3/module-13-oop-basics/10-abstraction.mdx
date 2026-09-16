@@ -212,31 +212,19 @@ Processing ₹1200 payment via Credit Card Gateway.
 
 ---
 
-## 11. Knowledge Check
-
-1. What happens if you try to run `g = PaymentGateway()` directly?
-2. What module must you import in Python to create Abstract Base Classes and `@abstractmethod` decorators?
-3. How does Abstraction improve collaboration across large engineering teams?
-4. How do the 4 Pillars of OOP work together in real-world systems like PyTorch or Scikit-Learn?
-
----
-
-## 12. Mini Exercises
-
-### Exercise 10.1: Notification Service Abstraction
-Create an Abstract Base Class `NotificationService(ABC)`:
-* Declare an `@abstractmethod` named `send_notification(self, user_id, message)`.
-Create two concrete subclasses:
-1. `EmailNotification(NotificationService)` &rarr; prints `"Sending Email to user {user_id}: {message}"`.
-2. `SMSNotification(NotificationService)` &rarr; prints `"Sending SMS to user {user_id}: {message}"`.
-
-Instantiate both concrete classes and send test notifications. Verify that attempting to instantiate `NotificationService` directly raises a `TypeError`.
-
----
-
-## 13. Summary
+## Quick Summary
 
 * **Abstraction** hides complex background logic and exposes a clean public interface.
 * Import **`from abc import ABC, abstractmethod`** to define abstract classes in Python.
 * Abstract Base Classes **cannot be instantiated** directly in memory.
 * **`@abstractmethod`** enforces mandatory method implementations in all child classes, guaranteeing software reliability across large development teams.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Module 14: Error Handling" icon="arrow-right" href="/part-3/module-14-error-handling/intro">
+    Master try-except, runtime exceptions, and building crash-proof Python programs
+  </Card>
+</CardGroup>

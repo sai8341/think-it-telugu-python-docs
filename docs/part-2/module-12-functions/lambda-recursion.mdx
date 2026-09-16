@@ -61,30 +61,26 @@ countdown(3)
 # Blast off!
 ```
 
-## Common Beginner Mistakes
+:::warning[Common Beginner Mistakes]
+* **Missing Base Case in Recursion:** Forgetting a termination check causes a function to call itself indefinitely until it crashes with `RecursionError: maximum recursion depth exceeded`.
+:::
 
-<AccordionGroup>
-  <Accordion title="Forgetting the base case in recursion">
-    ```python
-    # Wrong - calling itself forever without checking when to stop
-    def repeat_forever(n):
-        return repeat_forever(n + 1)
-    
-    # This crashes Python with: RecursionError: maximum recursion depth exceeded
-    ```
-  </Accordion>
-</AccordionGroup>
+---
 
-## Part 2 Summary
+## Quick Summary
 
-Congratulations on completing **Part 2: Data Structures & Functions**! You have mastered strings, lists, tuples, sets, dictionaries, and functions in simple, practical Python.
+* **Lambda Functions (`lambda args: expression`):** Anonymous, concise one-line functions ideal for sorting keys, `map()`, or `filter()`.
+* **Recursion Mechanism:** A function that calls itself with a reduced subset of the original problem.
+* **Base Case Necessity:** Every recursive function must contain a base condition that stops recursion and begins unwinding call frames.
+
+---
 
 ## What's Next?
 
-Advance to **Part 3: Production & Advanced Engineering** to master handling errors safely using try-except blocks, working with files, and building Object-Oriented programs.
+Let's dive into **Module 12.5: Comprehensions & Pythonic Patterns** to learn powerful, elegant idioms for creating lists, sets, and dictionaries cleanly!
 
 <CardGroup cols={1}>
-  <Card title="Part 3 Module 14: Error Handling & Exceptions" icon="arrow-right" href="/part-3/module-14-error-handling/intro">
-    Learn how to stop your code from crashing when something unexpected happens
+  <Card title="Module 12.5: Comprehensions & Pythonic Patterns" icon="arrow-right" href="/part-2/module-12.5-comprehensions/list-comprehensions">
+    Master advanced list, dict, and set comprehensions and modern Python shortcuts
   </Card>
 </CardGroup>

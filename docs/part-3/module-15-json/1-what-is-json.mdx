@@ -72,23 +72,21 @@ user_dict = {
 
 ## 4. Common Beginner Mistakes
 
-:::warning Watch Out for Quotes
+:::warning[Watch Out for Quotes]
 In Python, writing `{'name': 'Sai'}` is completely valid.  
 In JSON, single quotes `{'name': 'Sai'}` will cause a **JSONDecodeError**! Always use double quotes `{"name": "Sai"}`.
 :::
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Which of the following is a valid JSON representation of a boolean and empty value?"
-  options={[
-    '{"active": True, "score": None}',
-    '{"active": true, "score": null}',
-    "{'active': true, 'score': null}",
-    '{"active": TRUE, "score": NULL}'
-  ]}
-  correctIndex={1}
-  explanation="JSON strictly requires double quotes for keys and uses lowercase 'true', 'false', and 'null' (unlike Python's capitalized True, False, and None)."
-/>
+* **JSON Definition:** JavaScript Object Notation is a lightweight, human-readable text standard for data interchange.
+* **Double Quote Rule:** JSON strictly requires double quotation marks (`"key": "value"`) for all keys and strings. Single quotes are invalid.
+* **Data Type Mappings:** `true` -> `True`, `false` -> `False`, `null` -> `None`, Array `[]` -> `list`, Object `{}` -> `dict`.
+
+---
+
+## What's Next?
+
+Let's dive deeper into syntax rules, nesting, and data hierarchy in **JSON Structure & Data Types**!

@@ -95,11 +95,15 @@ print(redacted_message)
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What data structure does re.findall() return when no capturing parentheses are used in the regex pattern?"
-  options={["A dictionary", "A list of strings", "A single boolean True/False", "A Match Object"]}
-  correctIndex={1}
-  explanation="re.findall() returns a standard Python list containing all matching strings found across the input text."
-/>
+* **`re.findall(pattern, text)`:** Extracts all occurrences matching a pattern as a list of strings (or tuples of capture groups).
+* **Capture Groups (`(...)`):** Isolates specific subsets of matched text (e.g., username and domain from email).
+* **Named Groups (`(?P<name>...)`):** Creates self-documenting dictionary extractions via `match.groupdict()`.
+* **`re.sub(pattern, replacement, text)`:** Replaces matched patterns, ideal for data cleaning and PII redaction.
+
+---
+
+## What's Next?
+
+Let's build real-world input validators for emails, Indian mobile numbers, and PAN cards in **Real-World RegEx Validations**!

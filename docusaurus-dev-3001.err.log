@@ -1,2 +1,0 @@
-Panic occurred at runtime. Please file an issue on GitHub with the backtrace below: https://github.com/web-infra-dev/rspack/issues: panicked at crates\rspack_core\src\module_graph\mod.rs:722:26:
-ModuleGraphModule with identifier Identifier(u!("D:\\AI Engine\\think-it-telugu-docs\\node_modules\\@rspack\\core\\dist\\cssExtractHmr.js")) not found

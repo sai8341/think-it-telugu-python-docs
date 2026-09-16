@@ -97,11 +97,14 @@ print(f"🎉 Final Safe Bank Balance: ₹{bank_balance}")  # Correctly prints �
 
 ---
 
-## 4. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What catastrophic bug occurs when two threads modify a shared variable simultaneously without synchronization?"
-  options={["A Deadlock", "A Race Condition", "A Memory Leak", "A Segmentation Fault"]}
-  correctIndex={1}
-  explanation="A Race Condition occurs when the final outcome of an operation depends on the unpredictable timing and interleaving of concurrent thread executions."
-/>
+* **Race Conditions:** Bug where multiple concurrent threads read and mutate shared memory out of order, corrupting data.
+* **`threading.Lock()` (Mutex):** Ensures mutual exclusion so only 1 thread executes a critical section at any moment.
+* **Context Manager (`with lock:`):** Safely acquires and auto-releases locks, preventing catastrophic program Deadlocks.
+
+---
+
+## What's Next?
+
+Let's compare multithreading with full multi-core parallel processing in **Multiprocessing vs. Multithreading**!

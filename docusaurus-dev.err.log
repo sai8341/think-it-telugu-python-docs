@@ -1,7 +1,0 @@
-[ERROR] Something is already running on port 3000.
-┌───────────────────────────────────────────────────────────────┐
-│             @docusaurus/core update check failed              │
-│              Try running with sudo or get access              │
-│             to the local update config store via              │
-│ sudo chown -R $USER:$(id -gn $USER) C:\Users\saikumar\.config │
-└───────────────────────────────────────────────────────────────┘

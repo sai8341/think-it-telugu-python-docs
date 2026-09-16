@@ -3,16 +3,26 @@
   padding: 1rem 0.75rem !important;
 }
 
-/* Clean category headers matching the new reference design */
+/* Clean category headers with interactive hover caret */
 .menu__list-item-collapsible {
-  margin-top: 0.75rem;
+  margin-top: 0.65rem;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+.menu__list-item-collapsible:hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+
+[data-theme='dark'] .menu__list-item-collapsible:hover {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .menu__link--sublist {
-  font-size: 0.9rem !important;
-  font-weight: 600 !important;
-  color: #111827 !important;
-  padding: 0.5rem 0.8rem !important;
+  font-size: 0.85rem !important;
+  font-weight: 650 !important;
+  color: #1F2937 !important;
+  padding: 0.45rem 0.75rem !important;
   cursor: pointer;
   background: transparent !important;
 }
@@ -21,8 +31,17 @@
   color: #E6EDF3 !important;
 }
 
+/* Caret / Chevron Arrow: Hidden by default, appears only on hover with native orientation */
+.menu__link--sublist-caret::after,
 .menu__caret {
-  display: none !important;
+  opacity: 0 !important;
+  transition: opacity 0.15s ease !important;
+}
+
+.menu__list-item-collapsible:hover .menu__link--sublist-caret::after,
+.menu__list-item-collapsible:hover .menu__caret,
+.menu__link--sublist:hover::after {
+  opacity: 0.7 !important;
 }
 
 /* Normal links */

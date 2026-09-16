@@ -14,12 +14,22 @@ const config = {
 
   url: 'https://python.thinkittelugu.in',
   baseUrl: '/',
+  trailingSlash: true,
 
   organizationName: 'thinkittelugu',
   projectName: 'python-course',
 
   customFields: {
     feedbackWebhookUrl: process.env.FEEDBACK_WEBHOOK_URL || '',
+    socials: {
+      youtube: 'https://youtube.com/@ThinkIT-Telugu',
+      telegram: 'https://t.me/thinkittelugu',
+      instagram: 'https://instagram.com/thinkittelugu',
+      linkedin: 'https://www.linkedin.com/company/think-it-telugu',
+      x: 'https://x.com/ThinkITTelugu',
+      facebook: 'https://facebook.com/thinkit.telugu',
+      website: 'https://www.thinkittelugu.in',
+    },
   },
 
   onBrokenLinks: 'warn',
@@ -70,7 +80,10 @@ const config = {
           sameAs: [
             'https://www.thinkittelugu.in',
             'https://www.youtube.com/@ThinkIT-Telugu',
+            'https://t.me/thinkittelugu',
             'https://www.instagram.com/thinkittelugu',
+            'https://www.linkedin.com/company/think-it-telugu',
+            'https://x.com/ThinkITTelugu',
             'https://www.facebook.com/thinkit.telugu'
           ],
         },
@@ -93,7 +106,10 @@ const config = {
           sameAs: [
             'https://www.thinkittelugu.in',
             'https://www.youtube.com/@ThinkIT-Telugu',
+            'https://t.me/thinkittelugu',
             'https://www.instagram.com/thinkittelugu',
+            'https://www.linkedin.com/company/think-it-telugu',
+            'https://x.com/ThinkITTelugu',
             'https://www.facebook.com/thinkit.telugu'
           ],
         },
@@ -165,10 +181,10 @@ const config = {
         respectPrefersColorScheme: false,
       },
       navbar: {
-        title: 'Think IT Telugu',
+        title: '',
         logo: {
-          alt: 'Think IT Telugu Logo',
-          src: 'img/python-logo.svg',
+          alt: 'Think IT Telugu',
+          src: 'img/think-it-telugu-logo-dark.jpg',
         },
         items: [
           {
@@ -178,13 +194,14 @@ const config = {
             className: 'navbar-nav-link',
           },
           {
-            href: 'https://resources.thinkittelugu.in',
-            label: 'Resources',
+            to: '/python-interview-questions',
+            label: 'Interview Preparation',
             position: 'left',
             className: 'navbar-nav-link',
+            target: '_blank',
           },
           {
-            to: '/python-lab',
+            to: '/online-python-compiler',
             label: 'Python Lab',
             position: 'right',
             className: 'navbar-python-lab',

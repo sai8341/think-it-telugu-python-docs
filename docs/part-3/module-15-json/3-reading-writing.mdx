@@ -69,7 +69,7 @@ print(json_string)
 }
 ```
 
-:::tip Why `indent=2`?
+:::tip[Why `indent=2`?]
 By default, `json.dumps()` produces one compact continuous line. Adding `indent=2` or `indent=4` formats the output with beautiful spacing (pretty-printing).
 :::
 
@@ -116,7 +116,7 @@ print("Active Theme:", loaded_config["theme"])
 
 ## 3. Common Beginner Mistake: `load` vs `loads`
 
-:::warning The Extra 's' Matters!
+:::warning[The Extra 's' Matters!]
 * `json.loads(file)` ❌ **Crashes!** (`loads` expects a text string, not a file object).
 * `json.load(file)` ✅ **Correct** for files.
 * `json.load('{"id": 1}')` ❌ **Crashes!** (`load` expects an open file handle, not a string).
@@ -125,16 +125,16 @@ print("Active Theme:", loaded_config["theme"])
 
 ---
 
-## 4. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="You have an open file handle: with open('data.json', 'r') as f. Which method should you call to read the JSON file into a Python dictionary?"
-  options={[
-    "json.loads(f)",
-    "json.load(f)",
-    "json.read(f)",
-    "f.to_json()"
-  ]}
-  correctIndex={1}
-  explanation="json.load() (without 's') is designed to read directly from open file objects. json.loads() (with 's') is only for strings in memory."
-/>
+* **`json.loads(str)`:** Deserializes a JSON string into Python dict/list.
+* **`json.dumps(obj)`:** Serializes a Python dict/list into a JSON formatted string (`indent=4` for pretty-printing).
+* **`json.load(file)`:** Reads and parses JSON directly from an open file handle.
+* **`json.dump(obj, file)`:** Writes a Python data structure directly to an open disk file.
+* **Memory vs. File:** The `s` suffix stands for **String** (`loads`/`dumps`), while methods without `s` operate on **Files** (`load`/`dump`).
+
+---
+
+## What's Next?
+
+Let's explore why LLMs, AI agents, and OpenAI/Anthropic APIs rely fundamentally on JSON in **Why AI Uses JSON**!

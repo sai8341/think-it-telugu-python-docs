@@ -70,22 +70,17 @@ benchmark_calculation()
 
 ---
 
-## 4. Summary: `time` vs. `datetime`
+## Quick Summary
 
 | Feature | `time` module | `datetime` module |
 | :--- | :--- | :--- |
 | **Primary Focus** | Hardware clock, pauses, seconds | Human calendar dates & formatting |
 | **Delay execution** | `time.sleep(seconds)` | Not supported |
-| **Benchmarking** | `time.perf_counter()` | Not designed for nanoseconds |
+| **Benchmarking** | `time.perf_counter()` | Not designed for high-resolution nanoseconds |
 | **Parsing strings** | `time.strptime()` | `datetime.strptime()` (Recommended) |
 
 ---
 
-## 5. Interactive Practice Quiz
+## What's Next?
 
-<Quiz
-  question="Which function from the time module should you use for accurate, high-precision code performance benchmarking?"
-  options={["time.clock_now()", "time.perf_counter()", "time.sleep()", "time.calendar_time()"]}
-  correctIndex={1}
-  explanation="time.perf_counter() offers highest available resolution hardware timers specifically designed for measuring code execution intervals."
-/>
+Let's explore mathematical constants, rounding, factorials, and trigonometric calculations in **The `math` Module**!

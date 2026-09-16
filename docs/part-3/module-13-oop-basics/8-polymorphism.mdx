@@ -239,28 +239,19 @@ def process_payment(self, amount):
 
 ---
 
-## 11. Knowledge Check
-
-1. What is the difference between Method Overloading (same method name, different parameters) and Method Overriding (same method name, redefined in child class)?
-2. Does Python natively support traditional compile-time Method Overloading (e.g. `def add(x)` and `def add(x, y)` in the same class)? What happens if you define two methods with the same name in Python?
-3. How does Duck Typing allow `CryptoWallet` to work inside `checkout()` even though it does not inherit from `PaymentGateway`?
-4. What error occurs at runtime if one object in the list does NOT define `process_payment()`?
-
----
-
-## 12. Mini Exercises
-
-### Exercise 8.1: Animal Sound Polymorphism
-Create three classes: `Dog`, `Cat`, and `Cow`.
-* Each class should implement a method `make_sound(self)`.
-* `Dog` returns `"Woof!"`, `Cat` returns `"Meow!"`, `Cow` returns `"Moo!"`.
-* Write a function `play_farm_sounds(animal_list)` that loops through a list of animal objects and prints their sounds.
-
----
-
-## 13. Summary
+## Quick Summary
 
 * **Polymorphism** allows different object classes to share the exact same method interface while executing unique custom logic.
 * **Method Overriding** occurs when a child class redefines a parent method.
 * **Duck Typing** means Python evaluates objects based on whether they implement required methods, rather than their formal class inheritance tree.
 * Polymorphism eliminates messy `if/else` type checking, making software easy to extend.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Encapsulation & Data Hiding" icon="arrow-right" href="/part-3/module-13-oop-basics/9-encapsulation">
+    Protect private attributes with getters, setters, and @property decorators
+  </Card>
+</CardGroup>

@@ -127,11 +127,16 @@ except KeyError:
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Why is it bad practice to write a bare 'except:' block that catches every error?"
-  options={["It makes the code slower", "It hides the actual problem, making debugging very difficult", "Python does not allow it", "It crashes the program"]}
-  correctIndex={1}
-  explanation="A generic except: catches all errors silently, so you never know what actually went wrong. Always catch specific exceptions like ValueError or ZeroDivisionError."
-/>
+* **`try` Block:** Encloses risky code that might raise an exception at runtime.
+* **`except SpecificError:`** Catches and handles the named error without crashing the program.
+* **Multiple `except` Blocks:** Handle different error types individually with tailored recovery logic.
+* **Exception Alias (`as e`):** Inspect the system error message directly using `except Exception as e:`.
+* **Anti-Pattern:** Avoid bare `except:` as it silences bugs and makes debugging difficult.
+
+---
+
+## What's Next?
+
+Let's look at the **`finally` block** to guarantee cleanup actions (like closing files or database connections) run every single time!

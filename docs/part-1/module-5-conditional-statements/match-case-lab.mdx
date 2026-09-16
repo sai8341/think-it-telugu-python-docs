@@ -86,19 +86,17 @@ print(result)  # Output: Pass
 
 ---
 
-## Simple Q&A
+---
 
-### Q1: What does `match-case` replace in Python?
-**Answer:** It replaces long, repetitive `if-elif-elif-else` chains when comparing a single variable against exact fixed options (like menu options 1, 2, 3 or days of the week).
+## Quick Summary
 
-### Q2: What happens if I forget `case _:`?
-**Answer:** If none of the specified cases match and there is no `case _:`, Python simply does nothing and moves to the next line of code without throwing an error.
+* **`match-case` (Python 3.10+):** Structural pattern matching syntax for comparing a variable against exact values.
+* **Wildcard Fallback (`case _:`):** Runs as the default fallback when no other cases match.
+* **Or Patterns (`|`):** Combine multiple possible matches in a single case line (e.g., `case "B" | "C":`).
+* **Ternary Operator:** Clean inline one-line condition (`value_if_true if condition else value_if_false`).
 
 ---
 
-## Module Summary
+## What's Next?
 
-*   **`if` & `if-else`:** Basic decision checks. Always remember the colon (`:`) and 4-space indentation.
-*   **`elif` chains:** Check multiple conditions top-to-bottom in order.
-*   **`nested if-else`:** Decisions inside decisions (inner checks).
-*   **`match-case`:** A clean replacement for long `elif` chains matching exact values.
+Congratulations on completing Module 5! Now that we know how to make decisions in code, let's learn how to repeat tasks automatically using **Loops (for, while)** in Module 6!

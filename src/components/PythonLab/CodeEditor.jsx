@@ -180,48 +180,50 @@ export default function CodeEditor({
         })}
       </div>
       <div className="pylab-editor-inner">
-        {/* Scrollable container for highlight and overlays */}
-        <div 
-          className="pylab-highlight-container"
-          ref={hlRef}
-        >
-          {/* Syntax-highlighted overlay */}
-          <pre
-            className="pylab-highlight"
-            aria-hidden="true"
-            dangerouslySetInnerHTML={{ __html: highlightedCode + '\n' }}
+        <div className="pylab-editor-body">
+          {/* Scrollable container for highlight and overlays */}
+          <div 
+            className="pylab-highlight-container"
+            ref={hlRef}
+          >
+            {/* Syntax-highlighted overlay */}
+            <pre
+              className="pylab-highlight"
+              aria-hidden="true"
+              dangerouslySetInnerHTML={{ __html: highlightedCode + '\n' }}
+            />
+            {/* Active Line Overlay */}
+            {isDebugging && currentDebugStep && currentDebugStep.line > 0 && (
+              <div 
+                className="pylab-active-line-overlay"
+                style={{ top: `calc(14px + ${(currentDebugStep.line - 1) * 1.65}em)` }}
+              />
+            )}
+            {/* Previous Line Overlay */}
+            {isDebugging && prevLine > 0 && (
+              <div 
+                className="pylab-prev-line-overlay"
+                style={{ top: `calc(14px + ${(prevLine - 1) * 1.65}em)` }}
+              />
+            )}
+          </div>
+          {/* Invisible textarea for input */}
+          <textarea
+            ref={taRef}
+            className="pylab-input"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onScroll={syncScroll}
+            readOnly={isDebugging || isRunning}
+            style={{ pointerEvents: isDebugging ? 'none' : 'auto' }}
+            spellCheck={false}
+            autoCapitalize="off"
+            autoCorrect="off"
+            autoComplete="off"
+            wrap="off"
           />
-          {/* Active Line Overlay */}
-          {isDebugging && currentDebugStep && currentDebugStep.line > 0 && (
-            <div 
-              className="pylab-active-line-overlay"
-              style={{ top: `calc(12px + ${(currentDebugStep.line - 1) * 1.5}em)` }}
-            />
-          )}
-          {/* Previous Line Overlay */}
-          {isDebugging && prevLine > 0 && (
-            <div 
-              className="pylab-prev-line-overlay"
-              style={{ top: `calc(12px + ${(prevLine - 1) * 1.5}em)` }}
-            />
-          )}
         </div>
-        {/* Invisible textarea for input */}
-        <textarea
-          ref={taRef}
-          className="pylab-input"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onScroll={syncScroll}
-          readOnly={isDebugging || isRunning}
-          style={{ pointerEvents: isDebugging ? 'none' : 'auto' }}
-          spellCheck={false}
-          autoCapitalize="off"
-          autoCorrect="off"
-          autoComplete="off"
-          wrap="off"
-        />
         
         {/* Mobile keyboard helpers (only visible on mobile via CSS) */}
         <div className="pylab-mobile-helpers">

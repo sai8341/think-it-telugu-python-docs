@@ -79,16 +79,15 @@ else:
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Why is it standard practice to write regex patterns as raw strings r'...' in Python?"
-  options={[
-    "It makes regex run 10x faster in CPU cache",
-    "It treats backslashes as literal characters so Python does not misinterpret escape sequences like \\n or \\d",
-    "It automatically converts the string to uppercase",
-    "It imports the re library automatically"
-  ]}
-  correctIndex={1}
-  explanation="Raw strings (prefixed with r) treat backslashes as literal characters, preventing Python from interpreting sequences like \\n as newlines before the regex engine receives them."
-/>
+* **Regular Expression (RegEx):** A sequence of characters defining a search pattern to validate, extract, or replace text.
+* **`import re`:** Python's built-in regular expression engine.
+* **Raw Strings (`r"..."`):** Always prefix regex patterns with `r` to preserve backslashes (`\d`, `\n`) without Python escape interference.
+* **`re.search(pattern, text)`:** Scans through a string looking for the first location where the pattern matches.
+
+---
+
+## What's Next?
+
+Let's learn the core regex syntax, metacharacters, and character classes in **Pattern Matching & Character Classes** in the next lesson!

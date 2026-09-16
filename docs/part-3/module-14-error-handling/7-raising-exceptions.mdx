@@ -78,11 +78,14 @@ Transaction failed.
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="When should you use the 'raise' keyword in Python?"
-  options={["To catch errors from other functions", "To manually trigger an error when your program's rules are violated", "To silence all exceptions", "To restart the program"]}
-  correctIndex={1}
-  explanation="The raise keyword lets you manually trigger exceptions when data violates your application's business rules, even if Python considers the data technically valid."
-/>
+* **`raise` Keyword:** Manually throws an exception when application rules or business logic constraints are violated.
+* **Syntax:** `raise ExceptionType("Custom explanation message")`.
+* **Re-raising Exceptions:** Writing `raise` without arguments inside an `except` block logs or catches the issue locally and propagates it up to the caller.
+
+---
+
+## What's Next?
+
+Let's learn how to create your own domain-specific error classes by building **Custom Exceptions** in the next lesson!

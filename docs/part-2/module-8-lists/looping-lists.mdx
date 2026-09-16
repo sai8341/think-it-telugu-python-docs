@@ -1,0 +1,147 @@
+---
+sidebar_position: 3
+title: "Looping Through Lists - Python in Telugu | Think IT Telugu"
+sidebar_label: "Looping Through Lists"
+description: "Learn how to iterate and loop through lists in Python using for loops, while loops, range(), and enumerate() with simple beginner-friendly examples."
+keywords: ["Python", "Looping Through Lists", "List iteration", "for loop in list", "enumerate in python", "Learn Python in Telugu"]
+---
+
+# Looping Through Lists
+
+When working with lists, you will frequently need to loop through every item one by one to inspect, print, or calculate data.
+
+Python makes iterating through lists simple and intuitive.
+
+---
+
+## 1. Looping by Item (`for item in list`)
+
+The cleanest and most common way to iterate through a list is using a standard `for` loop:
+
+```python
+fruits = ["apple", "banana", "orange", "mango"]
+
+for fruit in fruits:
+    print(f"I like {fruit}")
+```
+
+**Output:**
+```
+I like apple
+I like banana
+I like orange
+I like mango
+```
+
+---
+
+## 2. Getting Both Index and Item (`enumerate()`)
+
+If you need both the **index position** (0, 1, 2...) and the **item value** at the same time, use Python's built-in `enumerate()` function:
+
+```python
+tasks = ["Write code", "Review PR", "Deploy app"]
+
+for index, task in enumerate(tasks):
+    print(f"Task #{index + 1}: {task}")
+```
+
+**Output:**
+```
+Task #1: Write code
+Task #2: Review PR
+Task #3: Deploy app
+```
+
+---
+
+## 3. Looping by Index (`range(len(list))`)
+
+If you specifically need to access items by their index numbers:
+
+```python
+scores = [85, 92, 78, 90]
+
+for i in range(len(scores)):
+    print(f"Student {i}: score is {scores[i]}")
+```
+
+**Output:**
+```
+Student 0: score is 85
+Student 1: score is 92
+Student 2: score is 78
+Student 3: score is 90
+```
+
+---
+
+## 4. Looping with a `while` Loop
+
+You can also use a `while` loop with an index counter variable:
+
+```python
+colors = ["red", "green", "blue"]
+i = 0
+
+while i < len(colors):
+    print(colors[i])
+    i += 1
+```
+
+**Output:**
+```
+red
+green
+blue
+```
+
+---
+
+## 5. Practical Example: Calculating Total & Average
+
+```python
+prices = [120, 250, 80, 450]
+total = 0
+
+for price in prices:
+    total += price
+
+average = total / len(prices)
+
+print(f"Total Bill: ₹{total}")
+print(f"Average Price: ₹{average}")
+```
+
+**Output:**
+```
+Total Bill: ₹900
+Average Price: ₹225.0
+```
+
+---
+
+:::warning[Modifying While Iterating]
+Avoid adding or removing items directly inside a `for` loop while iterating over the same list, as it alters index positions. If you need to filter elements, create a new filtered list.
+:::
+
+---
+
+## Quick Summary
+
+* **Direct Iteration:** `for item in list:` is the most readable, pythonic way to visit every element.
+* **Indexed Iteration (`enumerate`):** `for index, item in enumerate(list):` provides both position and value together.
+* **Length-Based Loop:** `for i in range(len(list)):` allows accessing elements via index subscription `list[i]`.
+* **While Loop:** Uses an explicit index counter (`i = 0` up to `len(list) - 1`).
+
+---
+
+## What's Next?
+
+Let's understand **List Mutability** to see how Python allows changing, replacing, and modifying list elements in-place!
+
+<CardGroup cols={1}>
+  <Card title="List Mutability" icon="arrow-right" href="/part-2/module-8-lists/list-mutability">
+    Learn why lists are mutable, how in-place modifications work, and compare with strings
+  </Card>
+</CardGroup>

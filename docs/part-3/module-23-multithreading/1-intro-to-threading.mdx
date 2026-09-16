@@ -55,16 +55,14 @@ Memory management in Python uses reference counting. The GIL prevents multiple t
 
 ---
 
-## 4. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Why is multithreading highly effective for downloading 20 web pages simultaneously despite Python's GIL?"
-  options={[
-    "Because the GIL makes the CPU run 10x faster",
-    "Because Python releases the GIL while threads wait on network I/O responses",
-    "Because threads do not use memory",
-    "Because web pages disable the operating system kernel"
-  ]}
-  correctIndex={1}
-  explanation="During network and disk I/O operations, Python releases the Global Interpreter Lock, allowing multiple threads to wait on external responses simultaneously."
-/>
+* **Concurrency vs. Parallelism:** Concurrency is dealing with lots of things at once; parallelism is doing lots of things at once on multiple CPU cores.
+* **Process vs. Thread:** A process has its own isolated memory space; threads live inside a process and share the same memory heap.
+* **Python's GIL:** Restricts Python bytecode execution to 1 thread at a time, but releases automatically during I/O wait times (networking, disks).
+
+---
+
+## What's Next?
+
+Let's learn how to spawn background worker threads, pass arguments, and manage daemon lifecycles in **Creating & Managing Threads**!

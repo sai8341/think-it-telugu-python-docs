@@ -87,27 +87,18 @@ conn.close()
 
 ---
 
-## 4. Summary of Fetch Methods
+## Quick Summary
 
 | Method | What It Returns | When to Use |
 | :--- | :--- | :--- |
 | **`cursor.fetchone()`** | Single tuple or `None` | Fetching by primary key / unique ID |
 | **`cursor.fetchall()`** | List of tuples | Small-to-medium dataset queries |
-| **`cursor.fetchmany(n)`** | List of $n$ tuples | Pagination (e.g. 10 items at a time) |
+| **`cursor.fetchmany(n)`** | List of $n$ tuples | Pagination (e.g., 10 items at a time) |
 | **`for row in cursor:`** | Direct cursor iterator | Memory efficient for 1,000,000+ rows |
+| **`conn.row_factory = sqlite3.Row`** | Row mappings | Dictionary-like column name access (`row['email']`) |
 
 ---
 
-## 5. Interactive Practice Quiz
+## What's Next?
 
-<Quiz
-  question="What setting enables column name access (e.g., row['email']) instead of numerical tuple indices (row[1]) in Python SQLite3?"
-  options={[
-    "conn.enable_dict()",
-    "conn.row_factory = sqlite3.Row",
-    "cursor.set_mode('dict')",
-    "sqlite3.use_json_names()"
-  ]}
-  correctIndex={1}
-  explanation="Assigning sqlite3.Row to conn.row_factory allows returned rows to be accessed both by numerical index and by column name string."
-/>
+Let's complete our database mastery with update, delete, and transaction rollback patterns in **Updating & Deleting Data (CRUD Mastery)**!

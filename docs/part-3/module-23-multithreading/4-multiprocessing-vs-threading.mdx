@@ -65,33 +65,29 @@ if __name__ == '__main__':
     print(f"All 4 CPU cores finished in: {time.perf_counter() - start:.2f}s")
 ```
 
-:::warning `if __name__ == '__main__':` Guard
+:::warning[`if __name__ == '__main__':` Guard]
 When using `multiprocessing` on Windows or macOS, you **must always wrap your entrypoint inside `if __name__ == '__main__':`** to prevent child processes from infinitely re-importing the main script.
 :::
 
 ---
 
-## 3. Summary Comparison Table
+## Quick Summary
 
 | Feature | `threading` / `ThreadPoolExecutor` | `multiprocessing` / `ProcessPoolExecutor` |
 | :--- | :--- | :--- |
-| **Best Used For** | Network requests, Web scraping, APIs, DB reads | Heavy math, Video encoding, ML training |
+| **Best Used For** | Network requests, Web scraping, APIs, DB reads (I/O-Bound) | Heavy math, Video encoding, ML training (CPU-Bound) |
 | **Memory Footprint** | Shared RAM memory (Very low ~8 KB per thread) | Separate RAM memory per process (~20 MB+) |
 | **GIL Limitation** | Bound by GIL (Single core for pure Python code) | Bypasses GIL completely (Utilizes all CPU cores) |
 | **IPC Communication** | Direct memory sharing | Requires Pipes, Queues, or Pickling |
 
 ---
 
-## 4. Interactive Practice Quiz
+## What's Next?
 
-<Quiz
-  question="Why must multiprocessing scripts on Windows always be protected with if __name__ == '__main__':?"
-  options={[
-    "To prevent Windows Defender from deleting Python",
-    "To prevent new child worker processes from infinitely re-executing the top-level script upon spawn",
-    "To enable GPU acceleration automatically",
-    "Because Windows requires scripts to end with return 0"
-  ]}
-  correctIndex={1}
-  explanation="On Windows, multiprocessing creates new processes by re-importing the main script. Without the __main__ guard, child processes would spawn recursive child processes endlessly."
-/>
+Now let's learn how to write automated test suites, verify edge cases, and ensure production software quality using **Module 24: Unit Testing with unittest & pytest**!
+
+<CardGroup cols={1}>
+  <Card title="Module 24: Unit Testing & QA" icon="arrow-right" href="/part-3/module-24-unit-testing/why-test-code">
+    Master automated test design, assertions, edge-case testing, unittest framework, and modern pytest workflows
+  </Card>
+</CardGroup>

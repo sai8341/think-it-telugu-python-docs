@@ -23,13 +23,13 @@ const sidebars = {
   part1Sidebar: [
     {
       type: 'category',
-      label: 'Part 1: Programming & Python Basics',
+      label: 'Part 1: Python Fundamentals',
       collapsed: false,
       link: {type: 'generated-index'},
       items: [
         {
           type: 'category',
-          label: 'Module 0: Before Python',
+          label: 'Module 0: Before You Code',
           className: 'icon-intro',
           collapsed: true,
           items: [
@@ -60,7 +60,6 @@ const sidebars = {
             'part-1/module-2-variables-datatypes/strings',
             'part-1/module-2-variables-datatypes/numbers',
             'part-1/module-2-variables-datatypes/booleans',
-            'part-1/module-2-variables-datatypes/exercises-qa',
           ],
         },
         {
@@ -129,6 +128,7 @@ const sidebars = {
           items: [
             'part-2/module-7-strings/string-basics',
             'part-2/module-7-strings/string-slicing',
+            'part-2/module-7-strings/mutable-vs-immutable',
             'part-2/module-7-strings/string-methods',
           ],
         },
@@ -140,7 +140,8 @@ const sidebars = {
           items: [
             'part-2/module-8-lists/list-basics',
             'part-2/module-8-lists/list-methods',
-            'part-2/module-8-lists/list-comprehensions',
+            'part-2/module-8-lists/looping-lists',
+            'part-2/module-8-lists/list-mutability',
           ],
         },
         {
@@ -195,7 +196,6 @@ const sidebars = {
             'part-2/module-12.5-comprehensions/list-comprehensions',
             'part-2/module-12.5-comprehensions/dict-set-comprehensions',
             'part-2/module-12.5-comprehensions/pythonic-patterns',
-            'part-2/module-12.5-comprehensions/exercises-qa',
           ],
         },
       ],
@@ -204,7 +204,7 @@ const sidebars = {
   part3Sidebar: [
     {
       type: 'category',
-      label: 'Part 3: Advanced Python Programming',
+      label: 'Part 3: Advanced Python & OOP',
       collapsed: false,
       link: {type: 'generated-index'},
       items: [
@@ -224,7 +224,6 @@ const sidebars = {
             'part-3/module-13-oop-basics/8-polymorphism',
             'part-3/module-13-oop-basics/9-encapsulation',
             'part-3/module-13-oop-basics/10-abstraction',
-            'part-3/module-13-oop-basics/12-exercises-placement-qa',
           ],
         },
         {
@@ -242,7 +241,6 @@ const sidebars = {
             'part-3/module-14-error-handling/else-block',
             'part-3/module-14-error-handling/raising-exceptions',
             'part-3/module-14-error-handling/custom-exceptions',
-            'part-3/module-14-error-handling/exercises-qa',
           ],
         },
         {
@@ -257,7 +255,6 @@ const sidebars = {
             'part-3/module-15-file-handling/writing-appending',
             'part-3/module-15-file-handling/file-errors',
             'part-3/module-15-file-handling/csv-basics',
-            'part-3/module-15-file-handling/exercises-qa',
           ],
         },
         {
@@ -271,7 +268,6 @@ const sidebars = {
             'part-3/module-15-json/json-structure',
             'part-3/module-15-json/reading-writing',
             'part-3/module-15-json/ai-uses-json',
-            'part-3/module-15-json/exercises-qa',
           ],
         },
         {
@@ -283,7 +279,6 @@ const sidebars = {
             'part-3/module-16-modules-packages/modules',
             'part-3/module-16-modules-packages/virtual-environments',
             'part-3/module-16-modules-packages/packages-uv',
-            'part-3/module-16-modules-packages/exercises-qa',
           ],
         },
         {
@@ -296,7 +291,6 @@ const sidebars = {
             'part-3/module-17-git-version-control/core-git-workflow',
             'part-3/module-17-git-version-control/github-gitignore',
             'part-3/module-17-git-version-control/branches-merging',
-            'part-3/module-17-git-version-control/exercises-qa',
           ],
         },
         {

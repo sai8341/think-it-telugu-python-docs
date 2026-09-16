@@ -119,16 +119,14 @@ def stream_log_lines(file_path):
 
 ---
 
-## 6. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What happens to the internal local variables of a generator function when it hits a yield statement?"
-  options={[
-    "They are wiped from memory completely",
-    "They are frozen and saved in place until next() is called",
-    "They are converted into global variables",
-    "The function restarts from line 1"
-  ]}
-  correctIndex={1}
-  explanation="When Python encounters yield, it pauses execution and freezes all local variables and instruction pointers, allowing execution to resume exactly where it stopped on the next iteration."
-/>
+* **`yield` Keyword:** Pauses function execution, yields a value to the caller, and freezes local state until `next()` is called.
+* **Generator Expressions:** Memory-lightweight comprehension syntax using parentheses `(x**2 for x in data)`.
+* **RAM Efficiency:** Stream giant datasets, server logs, or infinite sequences using tiny constant memory.
+
+---
+
+## What's Next?
+
+Now let's explore one of Python's most elegant meta-programming features: modifying function behaviors cleanly with **Decorators**!

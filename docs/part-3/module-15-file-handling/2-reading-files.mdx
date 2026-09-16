@@ -63,7 +63,7 @@ with open("sample.txt", "r") as file:
 # File is automatically closed here — no need to call file.close()
 ```
 
-:::tip Golden Rule
+:::tip[Golden Rule]
 Always use the `with` statement when working with files. It is safer and cleaner than manually calling `file.close()`.
 :::
 
@@ -83,11 +83,16 @@ This reads only one line at a time into memory, even if the file has millions of
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Which is the safest way to open and read a file in Python?"
-  options={["file = open('data.txt', 'r')", "with open('data.txt', 'r') as file:", "file = read('data.txt')", "import file('data.txt')"]}
-  correctIndex={1}
-  explanation="The 'with' statement automatically closes the file when the block ends, even if an error occurs. This prevents resource leaks and is the recommended Python pattern."
-/>
+* **Context Manager (`with open(...) as f:`):** The standard Python best practice that automatically closes the file upon exit.
+* **`file.read()`:** Reads the entire file content into a single string in memory.
+* **`file.readline()`:** Reads one line at a time from current cursor position.
+* **`file.readlines()`:** Loads all lines as a list of strings.
+* **Streaming Line-by-Line:** `for line in file:` streams large multi-gigabyte files efficiently without RAM exhaustion.
+
+---
+
+## What's Next?
+
+Let's look at how to write new files and append text to existing logs in **Writing & Appending Files**!

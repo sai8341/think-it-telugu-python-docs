@@ -92,16 +92,14 @@ print("Main application finished. Daemon thread will close automatically!")
 
 ---
 
-## 4. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What does calling thread.join() do in Python?"
-  options={[
-    "It permanently cancels and kills the thread",
-    "It blocks the calling (main) thread until the target thread finishes its execution",
-    "It merges the memory of two different operating system processes",
-    "It restarts the thread from line 1"
-  ]}
-  correctIndex={1}
-  explanation="thread.join() instructs the main thread to pause and wait until the background worker thread completes its task before moving forward."
-/>
+* **Creating Threads:** `t = threading.Thread(target=fn, args=(arg1,))` and `t.start()` launches execution asynchronously.
+* **`thread.join()`:** Blocks the calling (main) thread until the worker thread completes its work.
+* **Daemon Threads (`daemon=True`):** Background utility threads that automatically terminate as soon as the main program exits.
+
+---
+
+## What's Next?
+
+Let's learn how to protect shared memory and prevent corrupt calculations using **Thread Synchronization & Locks**!

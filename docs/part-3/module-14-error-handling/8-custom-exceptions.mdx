@@ -51,17 +51,26 @@ Use custom exceptions when:
 - You want the caller to handle **your** specific error differently from general errors
 - You are building a library or API that other developers will use
 
-:::tip Keep It Simple
+:::tip[Keep It Simple]
 For most beginner projects, built-in exceptions like `ValueError` are sufficient. Create custom exceptions only when your application genuinely needs a distinct error type.
 :::
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="How do you create a custom exception class in Python?"
-  options={["By importing it from the exceptions module", "By creating a class that inherits from Exception", "By calling raise with a custom string", "By modifying Python's source code"]}
-  correctIndex={1}
-  explanation="Custom exceptions are created by defining a new class that inherits from Python's built-in Exception class. You can then raise and catch them like any built-in exception."
-/>
+* **Custom Exception Creation:** Inherit from Python's base `Exception` class: `class CustomError(Exception): pass`.
+* **Domain Modeling:** Custom exceptions make application code expressive and allow callers to handle domain failures specifically (e.g., `InvalidAuthTokenError`).
+* **Attributes & Messages:** Custom exception classes can accept and store extra contextual details like error codes or user IDs.
+
+---
+
+## What's Next?
+
+Congratulations on mastering error handling! Next up is **Module 15: File Handling**, where you will learn how to read and write permanent files on disk!
+
+<CardGroup cols={1}>
+  <Card title="Module 15: File Handling" icon="arrow-right" href="/part-3/module-15-file-handling/intro">
+    Learn how to open, read, write, and process text and CSV files in Python
+  </Card>
+</CardGroup>

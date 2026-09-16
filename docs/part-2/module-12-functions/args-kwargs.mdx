@@ -48,25 +48,24 @@ def setup_user(standard_arg, default_arg="OK", *args, **kwargs):
 3. **`*args`**
 4. **`**kwargs`**
 
-## Common Beginner Mistakes
+:::warning[Common Beginner Mistakes]
+* **Order of `*args` and `**kwargs`:** `**kwargs` must always be placed at the very end of the parameter list (`def fn(*args, **kwargs):`). Reversing them raises `SyntaxError`.
+:::
 
-<AccordionGroup>
-  <Accordion title="Putting *args after **kwargs in the definition">
-    ```python
-    # Wrong - **kwargs must always come at the very end
-    def my_func(**kwargs, *args):
-        pass
-    
-    # Right - *args comes before **kwargs
-    def my_func(*args, **kwargs):
-        pass
-    ```
-  </Accordion>
-</AccordionGroup>
+---
+
+## Quick Summary
+
+* **`*args` (Variable Positional Arguments):** Captures any number of positional arguments into a `tuple`.
+* **`**kwargs` (Variable Keyword Arguments):** Captures any number of named key-value arguments into a `dict`.
+* **Parameter Ordering:** `def func(positional, *args, default="val", **kwargs):`.
+* **Argument Spreading:** Use `*` and `**` during function calls to unpack lists and dicts into arguments.
+
+---
 
 ## What's Next?
 
-Let's explore one-line shortcut functions called lambdas and how functions can call themselves (recursion).
+Let's explore one-line shortcut functions called lambdas and recursive self-calling functions in the next lesson!
 
 <CardGroup cols={1}>
   <Card title="Lambdas & Recursion" icon="arrow-right" href="/part-2/module-12-functions/lambda-recursion">

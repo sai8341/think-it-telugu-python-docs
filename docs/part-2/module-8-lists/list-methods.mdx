@@ -217,44 +217,29 @@ print(original)  # Output: ['red', 'blue'] (Unchanged!)
 print(backup)    # Output: ['red', 'blue', 'green']
 ```
 
+:::warning[Common Beginner Mistakes]
+* **In-Place Returns `None`:** `.sort()` and `.reverse()` modify the list directly in place and return `None`. Do not write `nums = nums.sort()`.
+* **Shared Reference Trap:** `list2 = list1` does not clone a list; both point to the same memory object. Always use `list2 = list1.copy()`.
+:::
+
 ---
 
-## Common Beginner Mistakes
+## Quick Summary
 
-<AccordionGroup>
-  <Accordion title="Assigning the result of .append() or .sort() to a variable">
-    ```python
-    # Wrong - .append() and .sort() modify the list directly and return None
-    numbers = [3, 1, 2]
-    numbers = numbers.sort()
-    print(numbers)  # Outputs None!
-    
-    # Right - call the method on a separate line
-    numbers = [3, 1, 2]
-    numbers.sort()
-    print(numbers)  # Outputs [1, 2, 3]
-    ```
-  </Accordion>
-
-  <Accordion title="Forgetting to copy when duplicating lists">
-    ```python
-    # Wrong - both variables point to the exact same list in memory
-    list1 = [1, 2, 3]
-    list2 = list1
-    list2.append(4)
-    print(list1)  # Outputs [1, 2, 3, 4]!
-    
-    # Right - use .copy() to create a true separate copy
-    list1 = [1, 2, 3]
-    list2 = list1.copy()
-    list2.append(4)
-    print(list1)  # Outputs [1, 2, 3]
-    ```
-  </Accordion>
-</AccordionGroup>
+* **Adding:** `.append(item)` (adds to end), `.insert(index, item)` (adds at position), `.extend(list)` (merges collections).
+* **Removing:** `.pop(index)` (removes and returns item), `.remove(value)` (removes first matching value), `.clear()` (empties list).
+* **Inspection:** `len()` (total items), `.count(val)` (occurrences), `.index(val)` (position lookup).
+* **Sorting:** `.sort()` modifies in place; `sorted(list)` returns a new sorted list without modifying the original.
+* **Duplicating:** Always use `.copy()` or slicing `[:]` to create independent clones.
 
 ---
 
 ## What's Next?
 
-Let's learn how to process list items cleanly using loops and shortcuts called list comprehensions in the next lesson!
+Let's learn how to iterate and loop through list items using `for` loops, `while` loops, and `enumerate()` in the next lesson!
+
+<CardGroup cols={1}>
+  <Card title="Looping Through Lists" icon="arrow-right" href="/part-2/module-8-lists/looping-lists">
+    Learn standard for-loops, enumerate(), and index-based iteration
+  </Card>
+</CardGroup>

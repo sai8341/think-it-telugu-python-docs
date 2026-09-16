@@ -6,9 +6,9 @@
   right: 0;
   z-index: 30;
   display: none;
-  height: 50px;
+  height: 48px;
   background: var(--ifm-navbar-background-color);
-  border-bottom: 1px solid var(--ifm-border-color, #e3e3e3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 @media (min-width: 997px) {
@@ -22,10 +22,10 @@
   max-width: 1440px;
   height: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1.75rem;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -34,68 +34,90 @@
   display: none;
 }
 
-/* Light mode sub-navbar item */
+/* Minimal Tab links with active bottom border */
 .sub-navbar-item {
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: 34px;
-  color: #4B5563;
-  background: transparent;
+  height: 100%;
+  color: #64748b;
+  background: transparent !important;
   text-decoration: none !important;
-  transition: all 0.15s ease;
-  padding: 0 0.75rem;
-  border-radius: 6px;
-  font-size: 0.84rem;
-  font-weight: 600;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  padding: 0 0.15rem;
+  border-bottom: 2px solid transparent;
+  font-size: 0.88rem;
+  font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
 }
 
 .sub-navbar-item:hover {
-  color: var(--brand-primary);
-  background: rgba(13, 148, 136, 0.05);
+  color: #0f172a;
+  text-decoration: none !important;
 }
 
 .sub-navbar-item--active {
-  color: var(--brand-primary) !important;
-  background: rgba(13, 148, 136, 0.1) !important;
-  font-weight: 700;
+  color: #0d9488 !important;
+  border-bottom: 2px solid #0d9488 !important;
+  font-weight: 600;
 }
 
-/* ---- Dark Mode: Sleek Linear/Vercel Segmented Pill Tabs ---- */
+/* ---- Dark Mode ---- */
 [data-theme='dark'] .sub-navbar {
   background: #161B22;
   border-bottom: 1px solid #30363D;
 }
 
 [data-theme='dark'] .sub-navbar-item {
-  color: #8B949E;
-  background: transparent;
-  border: 1px solid transparent;
+  color: #8b949e;
+  border-bottom: 2px solid transparent;
 }
 
 [data-theme='dark'] .sub-navbar-item:hover {
-  color: #E6EDF3;
-  background: rgba(255, 255, 255, 0.04);
-  border-color: #30363D;
+  color: #f0f6fc;
 }
 
 [data-theme='dark'] .sub-navbar-item--active {
   color: #00C7B7 !important;
-  background: rgba(0, 199, 183, 0.12) !important;
-  border: 1px solid rgba(0, 199, 183, 0.3) !important;
+  border-bottom: 2px solid #00C7B7 !important;
   font-weight: 600;
 }
 
 .sub-navbar-kicker {
-  font-size: 0.84rem;
+  font-size: 0.88rem;
   font-weight: inherit;
-  margin-right: 0.25rem;
+  margin-right: 0.35rem;
 }
 
 .sub-navbar-title {
-  font-size: 0.84rem;
+  font-size: 0.88rem;
   font-weight: inherit;
   white-space: nowrap;
+}
+
+.sub-navbar-lock-icon {
+  display: inline-block;
+  vertical-align: -2px;
+  margin-left: 5px;
+  color: #64748b;
+  opacity: 0.9;
+  transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sub-navbar-item:hover .sub-navbar-lock-icon {
+  color: #334155;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+[data-theme='dark'] .sub-navbar-lock-icon {
+  color: #94a3b8;
+  opacity: 0.9;
+}
+
+[data-theme='dark'] .sub-navbar-item:hover .sub-navbar-lock-icon {
+  color: #f1f5f9;
+  opacity: 1;
+  transform: scale(1.1);
 }

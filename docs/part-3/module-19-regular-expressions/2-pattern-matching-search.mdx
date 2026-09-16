@@ -95,11 +95,15 @@ Instead of typing `[0-9]` or `[a-zA-Z0-9_]`, Python provides clean built-in shor
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Which regex shortcut matches any single digit (0 through 9) in Python?"
-  options={["\\w", "\\s", "\\d", "\\D"]}
-  correctIndex={2}
-  explanation="\\d represents digits [0-9]. (Note: \\w is word characters, \\s is whitespace, and \\D is non-digits)."
-/>
+* **Character Classes (`[...]`):** Define a set of allowed characters (e.g., `[a-z]`, `[0-9]`).
+* **Negated Classes (`[^...]`):** Matches any character *not* in the set.
+* **Character Shortcuts:** `\d` (digits), `\w` (word chars), `\s` (whitespace) and their uppercase inverses (`\D`, `\W`, `\S`).
+* **Match Anchors:** `^` anchors to start of string; `$` anchors to end of string.
+
+---
+
+## What's Next?
+
+Let's look at how to extract multiple matching items, emails, and phone numbers from documents in **Extracting Data with `findall()` & `sub()`**!

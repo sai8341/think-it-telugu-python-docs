@@ -199,40 +199,19 @@ Let's dissect the line `self.name = name` inside `__init__`:
 
 ---
 
-## 11. Knowledge Check
-
-1. What happens if you call `Student()` without passing required positional arguments like `name` and `age`?
-2. Is `self` a mandatory keyword in Python, or can you name it `this` or `me`? (What is the PEP 8 standard?)
-3. What is the difference between local parameter `name` and instance attribute `self.name`?
-4. Does `__init__` return a value explicitly using a `return` statement?
-
----
-
-## 12. Mini Exercises
-
-### Exercise 3.1: Bank Account Constructor
-Create a class `BankAccount` whose constructor `__init__(self, account_number, holder_name, balance=0)` initializes three instance attributes. Create two account objects: one with an initial balance of `1000` and one with the default balance. Print both balances.
-
-### Exercise 3.2: Debugging Attribute Name Collision
-Fix the bug in the following code:
-
-```python
-class Car:
-    def __init__(self, brand, speed):
-        brand = brand  # Bug here!
-        speed = speed  # Bug here!
-
-c1 = Car("Tesla", 150)
-print(c1.brand)  # Throws AttributeError! Why?
-```
-
-Rewrite the code so that attributes are correctly attached to the object instance.
-
----
-
-## 13. Summary
+## Quick Summary
 
 * **`__init__`** is an automatic initialization function that runs immediately after an object is created in memory.
 * **`self`** holds the memory address reference of the object currently being initialized.
 * **`self.attribute_name = value`** attaches data directly to the object in Heap RAM.
 * Constructors guarantee that every object is instantiated with mandatory attributes.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Methods, Variables & Scope" icon="arrow-right" href="/part-3/module-13-oop-basics/4-methods-variables-scope">
+    Explore instance methods, instance variables, and local variable scope
+  </Card>
+</CardGroup>

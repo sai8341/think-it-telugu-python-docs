@@ -66,7 +66,7 @@ with open("output.csv", "w", newline="") as file:
 print("CSV file created!")
 ```
 
-:::note Why `newline=""`?
+:::note[Why `newline=""`?]
 On Windows, without `newline=""`, Python adds extra blank lines between rows. This parameter prevents that.
 :::
 
@@ -92,11 +92,22 @@ with open("students.csv", "r") as file:
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What does csv.reader() return for each row in a CSV file?"
-  options={["A dictionary", "A single string", "A list of strings", "A tuple"]}
-  correctIndex={2}
-  explanation="csv.reader() returns each row as a list of string values. Use csv.DictReader() if you want dictionary access with column headers as keys."
-/>
+* **CSV Format:** Comma-Separated Values for storing tabular datasets.
+* **`csv.reader(file)`:** Reads rows as lists of string values.
+* **`csv.DictReader(file)`:** Reads rows as dictionaries using the header line for keys.
+* **`csv.writer(file)` & `writerow()`:** Writes list rows to disk.
+* **Windows Formatting:** Always pass `newline=''` to `open()` when writing CSVs on Windows to avoid unwanted blank rows.
+
+---
+
+## What's Next?
+
+Now that you can work with text and CSV files, let's learn how to process web and AI data in **Module 15b: JSON**!
+
+<CardGroup cols={1}>
+  <Card title="Module 15b: JSON" icon="arrow-right" href="/part-3/module-15-json/intro">
+    Learn how to serialize, deserialize, and exchange structured JSON data in Python
+  </Card>
+</CardGroup>

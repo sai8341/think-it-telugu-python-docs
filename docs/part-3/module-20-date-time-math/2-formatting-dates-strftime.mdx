@@ -14,7 +14,7 @@ Python provides two essential methods for date conversion:
 1. **`strftime()`** (String **Format** Time): Converts a `datetime` object into a readable text string.
 2. **`strptime()`** (String **Parse** Time): Converts a raw text string back into a Python `datetime` object.
 
-:::tip Easy Mnemonic
+:::tip[Easy Mnemonic]
 - **`f`** in `strftime` stands for **Format** (Output to String).
 - **`p`** in `strptime` stands for **Parse** (Input from String).
 :::
@@ -82,11 +82,14 @@ print("Parsed Month:", date_obj_2.month)  # Output: Parsed Month: 8
 
 ---
 
-## 4. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Which format specifier produces the full month name (e.g., 'December') in Python strftime?"
-  options={["%m", "%b", "%B", "%M"]}
-  correctIndex={2}
-  explanation="%B produces the full month name (e.g. August, December), whereas %b produces the short name (Aug, Dec), %m gives numbers (08, 12), and %M represents minutes."
-/>
+* **`strftime(format)` (String From Time):** Converts datetime objects into formatted custom text strings (e.g., `%Y-%m-%d`).
+* **`strptime(str, format)` (String Parse Time):** Parses raw strings from APIs or forms into Python `datetime` objects.
+* **Core Format Codes:** `%Y` (4-digit year), `%m` (month number), `%B` (month name), `%d` (day), `%H` (24h) / `%I` (12h), `%M` (minute), `%p` (AM/PM).
+
+---
+
+## What's Next?
+
+Let's look at hardware timers, rate-limiting delays, and precision performance benchmarking with the **`time` module**!

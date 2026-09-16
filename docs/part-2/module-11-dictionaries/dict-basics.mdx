@@ -71,25 +71,25 @@ print(f"Removed role: {user_role}")
 print(user)  # Output: {'name': 'Alice'}
 ```
 
-## Common Beginner Mistakes
+:::warning[Common Beginner Mistakes]
+* **`KeyError` on Missing Keys:** Looking up a key that does not exist (`user["phone"]`) crashes Python.
+* **Fix:** Use `"phone" in user` to check first, or use `.get("phone")` for safe lookup.
+:::
 
-<AccordionGroup>
-  <Accordion title="KeyError when accessing missing keys">
-    ```python
-    # Wrong - looking up a key that does not exist crashes Python
-    user = {"name": "Alice"}
-    print(user["phone"])  # KeyError: 'phone'
-    
-    # Right - check if the key exists first using 'in', or use .get()
-    if "phone" in user:
-        print(user["phone"])
-    ```
-  </Accordion>
-</AccordionGroup>
+---
+
+## Quick Summary
+
+* **Dictionary Definition:** A collection of `key: value` mappings enclosed in curly braces `{...}`.
+* **Key Rules:** Keys must be unique and immutable (strings, integers, tuples); values can be any data type.
+* **Access & Mutation:** Access using `dict[key]`; create or update values using `dict[key] = new_value`.
+* **Fast Lookup:** Dictionaries use hash tables for lightning-fast $O(1)$ key lookups.
+
+---
 
 ## What's Next?
 
-Let's explore dictionary inspection methods like `.get()`, `.keys()`, `.values()`, and `.items()`.
+Let's explore dictionary inspection methods like `.get()`, `.keys()`, `.values()`, and `.items()` in the next lesson!
 
 <CardGroup cols={1}>
   <Card title="Dictionary Methods" icon="arrow-right" href="/part-2/module-11-dictionaries/dict-methods">

@@ -51,7 +51,7 @@ send_notification("Rahul")
 
 You can stack multiple decorators on top of a single function. 
 
-:::warning Execution Order
+:::warning[Execution Order]
 Decorators are applied from the **bottom up** (closest to the function first) and executed from the **top down**.
 :::
 
@@ -133,16 +133,21 @@ Python's standard library comes with several pre-built decorators that every eng
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="In what order are stacked decorators applied when placed on top of a function?"
-  options={[
-    "Random order depending on CPU threads",
-    "Alphabetical order based on decorator names",
-    "Bottom to top (closest to the function definition first)",
-    "Top to bottom"
-  ]}
-  correctIndex={2}
-  explanation="When chaining multiple decorators, Python wraps the function from the inside out, meaning the decorator closest to the function (the bottom one) is evaluated first."
-/>
+* **Decorators with Arguments:** Uses a 3-layer nested function factory to accept configuration parameters.
+* **Stacking Order:** Multiple decorators execute bottom-to-top (inside-out) closest to the function first.
+* **Class Decorators (`__call__`):** Useful when decorators need to remember state (rate limits, request counts).
+* **Built-in Essentials:** `@property` (getters/setters), `@lru_cache` (memoization), `@classmethod`, and `@staticmethod`.
+
+---
+
+## What's Next?
+
+Now let's explore powerful text pattern matching, string validation, and data extraction using **Module 19: Regular Expressions (RegEx)**!
+
+<CardGroup cols={1}>
+  <Card title="Module 19: Regular Expressions" icon="arrow-right" href="/part-3/module-19-regular-expressions/intro-to-regex">
+    Master regex metacharacters, pattern matching, email validation, and text extraction with the re module
+  </Card>
+</CardGroup>

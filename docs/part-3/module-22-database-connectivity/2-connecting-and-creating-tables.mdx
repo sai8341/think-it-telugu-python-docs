@@ -32,7 +32,7 @@ print("✅ Connected to SQLite database successfully!")
 conn.close()
 ```
 
-:::tip In-Memory Temporary Databases
+:::tip[In-Memory Temporary Databases]
 If you are writing unit tests and don't want to create files on your hard drive, connect to **`sqlite3.connect(":memory:")`**. It builds the whole database in RAM and wipes it clean when the script ends.
 :::
 
@@ -98,16 +98,15 @@ with sqlite3.connect("university.db") as conn:
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Why is AUTOINCREMENT used on an INTEGER PRIMARY KEY column in SQLite3?"
-  options={[
-    "It converts all numbers into strings",
-    "It automatically assigns the next sequential integer (1, 2, 3...) to new records",
-    "It makes the table read-only",
-    "It encrypts the column using password hashing"
-  ]}
-  correctIndex={1}
-  explanation="AUTOINCREMENT guarantees that each newly inserted row receives a strictly increasing unique integer ID automatically."
-/>
+* **`sqlite3.connect(database_path)`:** Connects to an existing database or creates a new `.db` file if absent.
+* **`cursor` Object:** Used to execute SQL statements (`cursor.execute(sql)`).
+* **Constraints:** `PRIMARY KEY AUTOINCREMENT` (unique ID generation), `NOT NULL` (mandatory field), `UNIQUE` (prevent duplicates).
+* **`conn.commit()` / `conn.close()`:** Persists pending database transactions and releases the file handle.
+
+---
+
+## What's Next?
+
+Let's learn how to safely insert single and batch records using parameterized queries in **Inserting Data Safely (SQL Injection Prevention)**!

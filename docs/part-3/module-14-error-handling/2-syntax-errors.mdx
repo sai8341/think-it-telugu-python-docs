@@ -115,11 +115,15 @@ def greet():
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What happens when Python finds a syntax error in your code?"
-  options={["Python fixes it automatically", "Python runs the program but skips the broken line", "Python refuses to run even a single line of the program", "Python converts it to a warning"]}
-  correctIndex={2}
-  explanation="A syntax error means the code grammar is broken. Python cannot understand the instructions at all, so it refuses to execute any part of the program."
-/>
+* **SyntaxError:** Occurs when code violates Python grammar rules (missing colons, mismatched quotes, unclosed parentheses).
+* **IndentationError:** A specific subtype of syntax error caused by improper code block indentation.
+* **Zero-Execution:** Python refuses to execute any part of a file if even a single syntax error is detected during parsing.
+* **Fixing Strategy:** Inspect the caret marker (`^`) in the traceback, check the preceding line, and use IDE linting.
+
+---
+
+## What's Next?
+
+Now that you understand compile-time grammar mistakes, let's explore errors that happen while the program is actively running: **Runtime Errors (Exceptions)**!

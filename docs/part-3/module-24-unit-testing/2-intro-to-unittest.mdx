@@ -80,7 +80,7 @@ OK
 
 ---
 
-## 3. Essential Assertion Methods Cheatsheet
+## Quick Summary
 
 | Assertion Method | Checks | Example |
 | :--- | :--- | :--- |
@@ -92,18 +92,10 @@ OK
 | **`self.assertIn(item, list)`** | `item in list` | `self.assertIn("Python", skills)` |
 | **`self.assertAlmostEqual(a, b)`** | Floating point match | `self.assertAlmostEqual(0.1+0.2, 0.3, places=5)` |
 
+* **Method Naming:** Test method names must start with `test_` for automatic test discovery.
+
 ---
 
-## 4. Interactive Practice Quiz
+## What's Next?
 
-<Quiz
-  question="Why must all test method names inside a unittest.TestCase class start with the prefix 'test_'?"
-  options={[
-    "Because Python will delete files without that name",
-    "Because the unittest test discovery engine only executes methods starting with 'test_'",
-    "To tell the CPU to run in debug mode",
-    "To prevent compilation errors in CPython"
-  ]}
-  correctIndex={1}
-  explanation="The test runner automatically discovers and runs methods that start with the test_ prefix, ignoring any internal helper methods."
-/>
+Let's learn how to manage database setup, API teardown fixtures, and test exceptions using **Writing Test Cases & Test Fixtures (`setUp`/`tearDown`)**!

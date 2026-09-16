@@ -19,7 +19,7 @@ with open("output.txt", "w") as file:
     file.write("Writing code is awesome.")
 ```
 
-:::warning
+:::warning[Overwrite Warning]
 If `output.txt` already exists, **all old content is permanently deleted** and replaced with the new text. Use `"w"` mode only when you want to start fresh.
 :::
 
@@ -49,7 +49,7 @@ with open("multi.txt", "w") as file:
     file.writelines(lines)
 ```
 
-:::note
+:::note[Newline Notice]
 `writelines()` does **not** add `\n` automatically. You must include newline characters yourself.
 :::
 
@@ -72,11 +72,15 @@ print("Notes saved to my_notes.txt!")
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What is the difference between 'w' and 'a' file modes?"
-  options={["'w' reads the file, 'a' writes to it", "'w' overwrites existing content, 'a' adds to the end without deleting", "'w' is for Windows, 'a' is for Mac", "There is no difference"]}
-  correctIndex={1}
-  explanation="Write mode ('w') erases all existing content and starts fresh. Append mode ('a') keeps existing content and adds new data at the end of the file."
-/>
+* **Write Mode (`'w'`):** Creates a new file or completely wipes and overwrites existing file content.
+* **Append Mode (`'a'`):** Preserves existing data and adds new text at the end of the file.
+* **`file.write(string)`:** Writes a string directly to disk (does not append newline `\n` automatically).
+* **`file.writelines(list)`:** Writes a list of formatted strings to disk.
+
+---
+
+## What's Next?
+
+Let's look at how to handle missing files and permission denials safely in **Handling File Errors**!

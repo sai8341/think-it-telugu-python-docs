@@ -1,0 +1,134 @@
+---
+sidebar_position: 4
+title: "List Mutability in Python - Simple Explanation | Think IT Telugu"
+sidebar_label: "List Mutability"
+description: "Understand List Mutability in Python. Learn why lists are mutable, how in-place item changes work, and how lists differ from immutable strings and tuples."
+keywords: ["python list mutability", "mutable vs immutable python", "python list modify in place", "learn python in telugu", "python data structures"]
+---
+
+# List Mutability (Mutable vs. Immutable)
+
+In Python, every data type is either **Mutable** (can be changed) or **Immutable** (cannot be changed).
+
+A **List is 100% Mutable**. Once you create a list, you can freely change, replace, add, or delete its elements directly **in-place**.
+
+---
+
+## 1. Real-Life Analogy: Whiteboard vs. Printed Page
+
+To understand why mutability matters:
+
+* **String (Immutable) = A Printed Book Page**  
+  You cannot erase or change a single printed letter without printing a brand new page.
+* **List (Mutable) = A Whiteboard / Shopping Notepad**  
+  You can erase any item and write a new one in its exact same place anytime without buying a new board!
+
+---
+
+## 2. Modifying Elements by Index
+
+Because lists are mutable, you can change any item by assigning a new value to its index:
+
+```python
+fruits = ["apple", "banana", "cherry"]
+
+# Replace "apple" with "mango" at index 0
+fruits[0] = "mango"
+
+print(fruits)
+# Output: ['mango', 'banana', 'cherry']
+```
+
+### Contrast: String vs. List
+
+Let's see what happens when you try to change a character in a String versus an item in a List:
+
+```python
+# ❌ String: Raises TypeError!
+name = "Python"
+# name[0] = "J"  # TypeError: 'str' object does not support item assignment
+
+# ✅ List: Works smoothly!
+skills = ["HTML", "CSS", "Java"]
+skills[2] = "Python"
+print(skills)  # Output: ['HTML', 'CSS', 'Python']
+```
+
+---
+
+## 3. Modifying Multiple Items (Slice Assignment)
+
+You can replace an entire slice of items in one single step:
+
+```python
+numbers = [10, 20, 30, 40, 50]
+
+# Replace items at index 1 and 2 with new numbers
+numbers[1:3] = [99, 100]
+
+print(numbers)
+# Output: [10, 99, 100, 40, 50]
+```
+
+---
+
+## 4. In-Place Methods (No New List Created)
+
+When you call list methods like `.append()`, `.pop()`, `.sort()`, or `.reverse()`, Python modifies the **original list directly**:
+
+```python
+numbers = [40, 10, 30, 20]
+
+# Sorts the list directly in place
+numbers.sort()
+
+print(numbers)
+# Output: [10, 20, 30, 40]
+```
+
+:::warning[Important: In-Place Methods Return None]
+Because `.sort()` and `.reverse()` modify the existing list directly, they return `None`.
+
+```python
+# ❌ Incorrect: numbers will become None!
+numbers = numbers.sort()
+
+# ✅ Correct: Just call the method directly
+numbers.sort()
+```
+:::
+
+---
+
+## 5. Quick Comparison: Mutable vs. Immutable
+
+| Data Type | Category | Can change items in-place? | Example |
+| :--- | :--- | :--- | :--- |
+| **String (`str`)** | **Immutable** | ❌ No (Cannot assign by index) | `"hello"` |
+| **Integer (`int`) / Float** | **Immutable** | ❌ No | `10`, `3.14` |
+| **List (`list`)** | **Mutable** | ✅ Yes (`list[0] = "new"`) | `[1, 2, 3]` |
+| **Tuple (`tuple`)** | **Immutable** | ❌ No (Locked read-only list) | `(1, 2, 3)` |
+
+---
+
+## Quick Summary
+
+* **Definition:** Lists are **Mutable**, meaning their contents can be modified after creation.
+* **Item Assignment:** Update items in-place using `list[index] = new_value`.
+* **Slice Replacement:** Update multiple items simultaneously with `list[start:stop] = [new_items]`.
+* **In-Place Modification:** Methods like `.append()`, `.remove()`, `.sort()`, and `.reverse()` alter the existing list directly.
+* **Strings vs. Lists:** Strings reject item assignment (`TypeError`); lists allow full item mutation.
+
+---
+
+## What's Next?
+
+Now that you know lists are mutable, what if you need a list that **can never be changed**?
+
+Let's explore **Module 9: Tuples** — Python's locked, read-only sequences!
+
+<CardGroup cols={1}>
+  <Card title="Module 9: Tuples" icon="arrow-right" href="/part-2/module-9-tuples/tuple-basics">
+    Learn how to store fixed, protected records that cannot be accidentally modified
+  </Card>
+</CardGroup>

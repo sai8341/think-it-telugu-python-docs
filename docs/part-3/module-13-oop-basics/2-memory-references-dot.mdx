@@ -213,43 +213,19 @@ Do s1 and s2 point to same memory location? True
 
 ---
 
-## 11. Knowledge Check
-
-1. If you execute `s2.name = "Ananya"`, what will `print(s1.name)` output?
-2. What is the difference between `s1 == s2` and `s1 is s2` in Python?
-3. What error occurs if you try to access `s1.non_existent_attribute`?
-4. How many objects exist in memory after executing `a = Student()`, `b = Student()`, `c = a`?
-
----
-
-## 12. Mini Exercises
-
-### Exercise 2.1: Reference Mutation Challenge
-Predict the output of the following code before running it:
-
-```python
-class Phone:
-    pass
-
-p1 = Phone()
-p1.brand = "Apple"
-
-p2 = p1
-p2.brand = "Samsung"
-
-print(p1.brand)
-```
-
-Explain what happened in Heap memory.
-
-### Exercise 2.2: The `id()` Function
-Python has a built-in function `id(obj)` that returns the integer memory address of an object. Create two objects `x = Phone()` and `y = Phone()`. Print `id(x)` and `id(y)`. Are they equal? Now set `z = x` and print `id(z)`. Which ID does it match?
-
----
-
-## 13. Summary
+## Quick Summary
 
 * Variables in Python store **Memory Address References**, not actual object data.
 * `s2 = s1` copies the reference address, creating a second pointer to the **same physical object**.
 * The **Dot Operator (`.`)** is a navigation mechanism that resolves a reference to its heap memory location.
 * Modifying an object through one reference affects all other references pointing to that same object.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Constructors (__init__) & Self" icon="arrow-right" href="/part-3/module-13-oop-basics/3-constructors-init-self">
+    Learn how objects are initialized automatically with attributes upon creation
+  </Card>
+</CardGroup>

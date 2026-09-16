@@ -1,85 +1,122 @@
 ---
 sidebar_position: 2
-title: "Python Data Types Explained for Beginners"
+title: "Python Built-in Data Types Explained for Beginners | Think IT Telugu"
 sidebar_label: "Data Types"
-description: "Explore the fundamental data types in Python including numbers, strings, and booleans."
-keywords: [python data types, what are data types, python strings, python numbers, python booleans, variable types]
+description: "An overview of Python's 4 fundamental built-in data types: String (str), Integer (int), Float (float), and Boolean (bool). Clear beginner guide by Think IT Telugu."
+keywords: [python built-in data types, what are data types, python strings, python numbers, python booleans, variable data types, python str int float bool]
 ---
 
-# What are Data Types?
+# Python Built-in Data Types
 
-In the previous lesson, you learned how to store information inside variables. But have you noticed that not all information is the same?
+In the previous lesson, you learned how to create variables to store information. But have you noticed that different pieces of information come in different forms?
 
-Look at these three examples from real life:
-- Your **name** is text (e.g., "Rahul").
-- Your **age** is a number (e.g., 21).
-- Whether you **passed an exam** is either Yes or No (e.g., True).
+Look at these real-life examples:
+* Your **name** is text (`"Rahul"`).
+* Your **age** is a whole number (`21`).
+* The **price** of an item has decimals (`99.50`).
+* Whether you **passed an exam** is a Yes/No answer (`True`).
 
-These are three completely different **kinds** of information. The computer needs to know exactly what kind of information you are giving it, so it can handle it correctly.
-
-The "kind" of information stored inside a variable is called its **Data Type**.
-
----
-
-## The 3 Basic Data Types in Python
-
-For now, you only need to know three types. We will explore each one in detail in the next few lessons:
-
-| Data Type | What it stores | Example |
-| :--- | :--- | :--- |
-| **String** (`str`) | Text, words, sentences | `"Rahul"`, `"Hello World"` |
-| **Integer** (`int`) | Whole numbers (no decimals) | `25`, `100`, `-5` |
-| **Float** (`float`) | Decimal numbers | `19.99`, `3.14`, `-2.5` |
-| **Boolean** (`bool`) | True or False | `True`, `False` |
+In programming, the specific category or form of value stored inside a variable is called its **Data Type**.
 
 ---
 
-## Why Do Data Types Matter?
+## 1. What are Built-in Data Types?
 
-Because the computer treats different types differently!
+Python comes with core data types pre-packaged right out of the box. You do not need to install or import anything extra to use them. Because they are native to Python, they are called **Built-in Data Types**.
 
-For example, the `+` sign behaves differently depending on the data type:
+Python has **4 fundamental built-in data types**:
 
-```python
-# With numbers, + does math (addition)
-print(5 + 3)         # Output: 8
-
-# With text, + joins the text together
-print("Hello" + "World")  # Output: HelloWorld
-```
-
-If you try to mix types without converting them, Python will crash:
-
-```python
-# This will cause an ERROR!
-# You cannot add a number to text directly.
-print("My age is " + 25)
-```
-
-We will learn how to handle this properly in upcoming lessons.
+| Data Type | Keyword | What It Stores | Real-Life Example |
+| :--- | :--- | :--- | :--- |
+| **String** | `str` | Text, words, and characters | `"Hello World"`, `'Python'` |
+| **Integer** | `int` | Whole numbers (positive, negative, zero) | `25`, `-10`, `0` |
+| **Float** | `float` | Decimal numbers | `99.50`, `3.14`, `-0.75` |
+| **Boolean** | `bool` | Logical truth states (`True` or `False`) | `True`, `False` |
 
 ---
 
-## Checking the Data Type of a Variable
+## 2. Checking Data Types with `type()`
 
-Python has a built-in command called `type()` that tells you exactly what kind of data a variable is holding:
+Python provides a built-in function called `type()` to inspect the exact data type of any variable:
 
 ```python
 name = "Rahul"
 age = 21
-price = 99.5
-passed = True
+price = 99.50
+is_student = True
 
-print(type(name))    # <class 'str'>
-print(type(age))     # <class 'int'>
-print(type(price))   # <class 'float'>
-print(type(passed))  # <class 'bool'>
+print(type(name))        # Output: <class 'str'>
+print(type(age))         # Output: <class 'int'>
+print(type(price))       # Output: <class 'float'>
+print(type(is_student))  # Output: <class 'bool'>
 ```
 
-Don't worry about the `<class '...'>` part for now. Just look at the word inside the quotes - it tells you the data type (`str`, `int`, `float`, or `bool`).
+> 💡 **Reading the Output:** The label inside the quotes (`'str'`, `'int'`, `'float'`, `'bool'`) tells you the data type of that variable.
+
+---
+
+## 3. Why Do Data Types Matter?
+
+Python behaves differently depending on the data type of your values. For example, the `+` operator changes its behavior based on type:
+
+```python
+# With numbers (int / float), + performs mathematical addition
+print(10 + 5)             # Output: 15
+
+# With strings (str), + joins the text together (concatenation)
+print("10" + "5")         # Output: 105
+print("Think IT " + "Telugu")  # Output: Think IT Telugu
+```
+
+### Avoiding Type Errors
+
+You cannot directly combine text and numbers using `+` without converting them first:
+
+```python
+# ❌ Causes an error: TypeError: can only concatenate str (not "int") to str
+# print("Score: " + 95)
+
+# ✅ Correct: Convert the number to a string using str()
+print("Score: " + str(95))  # Output: Score: 95
+```
+
+---
+
+## 4. Module 2 Learning Roadmap
+
+Now that you understand what data types are, let's explore each of the 4 fundamental built-in data types in depth across the upcoming lessons:
+
+<CardGroup cols={3}>
+  <Card title="1. Strings (str)" icon="code" href="/part-1/module-2-variables-datatypes/strings">
+    Learn how to create, join, and format text in Python
+  </Card>
+
+  <Card title="2. Numbers (int & float)" icon="data" href="/part-1/module-2-variables-datatypes/numbers">
+    Learn whole numbers, decimals, math operators, and type casting
+  </Card>
+
+  <Card title="3. Booleans (bool)" icon="logic" href="/part-1/module-2-variables-datatypes/booleans">
+    Master logical true/false switches and decision flags
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Summary
+
+* **Data Type:** The category of value assigned to a variable (text, numbers, or logic).
+* **4 Built-in Types:** `str` (text), `int` (whole numbers), `float` (decimals), and `bool` (true/false).
+* **The `type()` Function:** Returns the native data type of any variable.
+* **Type Behavior:** Python executes operations based on data types (`+` adds numbers, joins strings).
 
 ---
 
 ## What's Next?
 
-Let's start exploring the first data type - **Strings (Text)** in the next lesson!
+Let's begin with our first fundamental data type: **Strings (Text)**!
+
+<CardGroup cols={1}>
+  <Card title="Strings (Text)" icon="arrow-right" href="/part-1/module-2-variables-datatypes/strings">
+    Start learning Python strings, quotes, and text manipulation
+  </Card>
+</CardGroup>

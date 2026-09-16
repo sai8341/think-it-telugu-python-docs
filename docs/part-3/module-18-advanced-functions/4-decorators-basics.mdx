@@ -126,22 +126,21 @@ answer = process_numbers(100000)
 print(f"Result: {answer}")
 ```
 
-:::tip Always use `@wraps`
+:::tip[Always use `@wraps`]
 Import `from functools import wraps` and decorate your `wrapper` with `@wraps(original_func)`. This prevents your original function from losing its identity (`__name__` and `__doc__`).
 :::
 
 ---
 
-## 5. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="Why is *args and **kwargs passed into the inner wrapper function of a decorator?"
-  options={[
-    "To make the function execute 2x faster",
-    "To allow the decorator to work with functions that take any number of positional or keyword arguments",
-    "To convert the function into a generator",
-    "To prevent syntax errors in Python 2"
-  ]}
-  correctIndex={1}
-  explanation="Passing *args and **kwargs ensures that the decorator is completely universal and can accept any function regardless of how many parameters it requires."
-/>
+* **First-Class Functions:** Functions in Python can be passed as arguments, returned from other functions, and assigned to variables.
+* **Decorator Syntax (`@decorator_name`):** Syntactic sugar that wraps an existing function to extend its behavior before and after invocation.
+* **Universal Parameters (`*args, **kwargs`):** Inside the inner `wrapper`, accept `*args, **kwargs` to support functions with arbitrary signatures.
+* **Preserving Metadata (`@wraps`):** Always decorate the wrapper with `@functools.wraps(func)` so docstrings and function names are preserved.
+
+---
+
+## What's Next?
+
+Let's explore advanced decorator techniques: passing arguments to decorators, stacking multiple decorators, and built-in decorators in **Advanced Decorators**!

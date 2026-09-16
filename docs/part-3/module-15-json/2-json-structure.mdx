@@ -77,16 +77,15 @@ print(order["items"][0]["product"])  # Output: Wireless Mouse
 
 ---
 
-## 4. Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="What Python data structure does a JSON Array containing objects (e.g. [{'id': 1}, {'id': 2}]) map to?"
-  options={[
-    "A tuple of strings",
-    "A list of dictionaries",
-    "A set of keys",
-    "A single dictionary"
-  ]}
-  correctIndex={1}
-  explanation="In JSON, square brackets [] represent an Array (Python List), and curly braces {} represent an Object (Python Dictionary). An array of objects converts directly to a list of dictionaries."
-/>
+* **JSON Objects (`{}`):** Unordered sets of key-value pairs matching Python dictionaries.
+* **JSON Arrays (`[]`):** Ordered lists of values matching Python lists.
+* **Primitive Types:** Strings (double-quoted), numbers (integer/float), booleans (`true`/`false`), and `null`.
+* **Deep Nesting:** Objects and Arrays can nest arbitrarily to represent complex hierarchical data models (like e-commerce orders or REST responses).
+
+---
+
+## What's Next?
+
+Now let's learn how to read and write JSON strings and disk files using Python's `json` module in **Reading & Writing JSON**!

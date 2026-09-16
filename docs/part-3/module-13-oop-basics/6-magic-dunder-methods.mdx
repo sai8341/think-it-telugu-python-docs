@@ -215,29 +215,19 @@ Developer Repr: Book(title='Python Mastery', pages=350)
 
 ---
 
-## 11. Knowledge Check
-
-1. What happens if you print an object whose class defines `__repr__` but does NOT define `__str__`?
-2. What error occurs if your `__len__()` dunder method returns a string like `"350"` instead of an integer `350`?
-3. Without defining `__eq__`, what does Python use by default when comparing `b1 == b2`? (Hint: Does it compare memory addresses or values?)
-4. Which dunder method is triggered when you run `obj1 + obj2`?
-
----
-
-## 12. Mini Exercises
-
-### Exercise 6.1: Custom Playlist Dunder Methods
-Create a class `Playlist`:
-* Attributes: `name` (string), `songs` (list of song titles).
-* Implement `__str__` so `print(my_playlist)` displays `"Playlist 'Telugu Hits' - 3 songs"`.
-* Implement `__len__` so `len(my_playlist)` returns `len(self.songs)`.
-* Implement `__add__` so `playlist1 + playlist2` combines songs into a new `Playlist` object!
-
----
-
-## 13. Summary
+## Quick Summary
 
 * **Dunder Methods** (`__name__`) are special hook methods that bind custom objects to Python built-in syntax.
 * **`__str__`** provides user-friendly text descriptions (`print()`).
 * **`__repr__`** provides developer-focused debug representations.
 * **`__len__`** and **`__eq__`** customize `len()` and `==` operator behaviors.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Inheritance in Python" icon="arrow-right" href="/part-3/module-13-oop-basics/7-inheritance">
+    Understand parent-child class hierarchies, code reuse, and super()
+  </Card>
+</CardGroup>

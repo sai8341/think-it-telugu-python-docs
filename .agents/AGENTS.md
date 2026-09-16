@@ -14,6 +14,23 @@ This document provides definitive instructions, architectural patterns, and guar
 
 ---
 
+## 1.1 Official Social Media & Community Channels
+
+All AI agents must strictly use the following canonical URLs, channel handles, and branding details when referencing Think IT Telugu community resources, CTAs, video links, and meta tags:
+
+| Platform | Channel / Page Name | Handle / ID | Canonical URL | Purpose / Focus |
+| :--- | :--- | :--- | :--- | :--- |
+| **YouTube** | Think IT Telugu | `@ThinkIT-Telugu` | `https://youtube.com/@ThinkIT-Telugu` | Video tutorials, conceptual Telugu lectures & live coding |
+| **Telegram** | Think IT Telugu 1% Better | `@thinkittelugu` | `https://t.me/thinkittelugu` | Daily study notes, 1% better self-improvement, roadmap updates |
+| **Instagram** | Think IT Telugu | `@thinkittelugu` | `https://instagram.com/thinkittelugu` | Tech reels, bite-sized carousels, coding tips & announcements |
+| **LinkedIn** | Think IT Telugu | `think-it-telugu` | `https://www.linkedin.com/company/think-it-telugu` | Career guidance, job prep, company updates & networking |
+| **X (Twitter)** | Think IT Telugu | `@ThinkITTelugu` | `https://x.com/ThinkITTelugu` | Tech thoughts, quick Python snippets & developer discussions |
+| **Facebook** | Think IT Telugu | `thinkit.telugu` | `https://facebook.com/thinkit.telugu` | Community announcements & video broadcasts |
+| **Main Website** | Think IT Telugu | Portal | `https://www.thinkittelugu.in` | Main organizational home |
+| **Docs Portal** | Python for AI & ML | Documentation | `https://python.thinkittelugu.in` | Complete documentation handbook |
+
+---
+
 ## 2. Technology Stack & CLI Workflow
 
 | Layer | Technology | Details |
@@ -240,6 +257,10 @@ const headers = [
 - **Language**: Use **super simple, clear English** (e.g., `"is False"` instead of `"evaluated to False"`, `"before it"` instead of `"preceding"`) so Telugu beginners understand without ambiguity.
 - **Marks**: Standard is `1.00` correct, `0.00` negative.
 - **Difficulty Spread**: 8 Easy, 8 Medium, 4 Hard.
+
+### Graphy 1:1 Coaching & Mentorship Strategy
+- Full architectural design and UI integration blueprint: See [`.agents/GRAPHY_1ON1_COACHING_STRATEGY.md`](file:///d:/AI%20Engine/think-it-telugu-python-docs/.agents/GRAPHY_1ON1_COACHING_STRATEGY.md).
+- Covers 1:1 Python Doubt Solving, Mock Interviews, and Career Roadmaps with automated Google Calendar & Meet integration.
 
 ---
 

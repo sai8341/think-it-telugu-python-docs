@@ -96,11 +96,14 @@ Calculation attempt finished.
 
 ---
 
-## Interactive Practice Quiz
+## Quick Summary
 
-<Quiz
-  question="When does the else block execute in a try-except-else statement?"
-  options={["When an exception is raised", "Always, regardless of errors", "Only when the try block completes without any exception", "Before the try block runs"]}
-  correctIndex={2}
-  explanation="The else block runs only when the try block finishes successfully without raising any exception. If an error occurs, Python skips else and jumps to except."
-/>
+* **`else` Block:** Executes **only** when the `try` block succeeds without raising any exceptions.
+* **Separation of Concerns:** Keep only risky statements in `try`, and place dependent success logic in `else`.
+* **Full Pattern Architecture:** `try` (attempt) -> `except` (catch) -> `else` (on success) -> `finally` (always cleanup).
+
+---
+
+## What's Next?
+
+Now that we know how to catch exceptions, let's learn how to trigger our own exceptions manually using the **`raise` keyword** in the next lesson!

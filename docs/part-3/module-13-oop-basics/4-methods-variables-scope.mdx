@@ -198,46 +198,19 @@ Sai Passed with total score: 45
 
 ---
 
-## 11. Knowledge Check
-
-1. What happens under the hood when you call `obj.my_method(arg1, arg2)`?
-2. If you define a variable `temp = 50` inside a method without writing `self.temp = 50`, can other methods in the same class access `temp`? Why or why not?
-3. What is the scope lifetime of an Instance Variable versus a Local Variable?
-4. Can an instance method modify an instance variable created inside `__init__`?
-
----
-
-## 12. Mini Exercises
-
-### Exercise 4.1: Bank Account Withdrawal Method
-Extend the `BankAccount` class with a method `withdraw(self, amount)`.
-* `amount` should be a local parameter.
-* Check if `self.balance >= amount`. If true, deduct `amount` from `self.balance` and return updated balance. Otherwise, return `"Insufficient Funds"`.
-* Verify that `self.balance` is updated permanently on Heap RAM.
-
-### Exercise 4.2: Identifying Variable Types
-Look at the following method and classify every variable as either **Instance Variable** or **Local Variable**:
-
-```python
-class Rectangle:
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-
-    def get_diagonal(self):
-        w_sq = self.width ** 2
-        h_sq = self.height ** 2
-        diag = (w_sq + h_sq) ** 0.5
-        return diag
-```
-
-Classify: `self.width`, `w_sq`, `h_sq`, `diag`.
-
----
-
-## 13. Summary
+## Quick Summary
 
 * **Instance Methods** are functions defined inside a class that operate on specific object instances.
 * Python automatically rewrites `obj.method()` to `Class.method(obj)`, passing `obj` into `self`.
 * **Instance Variables (`self.x`)** live in Heap RAM inside the object as long as the object exists.
 * **Local Variables (`x`)** live in Stack RAM inside the method call frame and are destroyed as soon as the method returns.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Class Methods & Static Methods" icon="arrow-right" href="/part-3/module-13-oop-basics/5-class-static-methods">
+    Master shared class variables, @classmethod, and @staticmethod decorators
+  </Card>
+</CardGroup>

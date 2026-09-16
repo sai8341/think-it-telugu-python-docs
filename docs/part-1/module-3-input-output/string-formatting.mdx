@@ -57,62 +57,21 @@ print(receipt)
 
 ---
 
-## 3. Hands-On Practice Exercises
+## Quick Summary
 
-Try copying these exercises into your `hello.py` file to see how they work.
-
-### Exercise 1: Interactive Receipt Generator
-```python
-# Ask the user for details
-customer_name = input("Customer Name: ")
-item_name = input("Purchased Item: ")
-price = float(input("Unit Price: "))
-
-# Build the receipt layout using a triple-quoted string
-receipt = f"""
-=============================
-       OFFICIAL RECEIPT      
-=============================
-Customer: {customer_name}
-Item:     {item_name}
-Total:    ${price:.2f}
-=============================
-"""
-print(receipt)
-```
-
-### Exercise 2: Print Server Connection Details
-```python
-host = "192.168.1.100"
-port = "8080"
-protocol = "https"
-
-# Use sep="" to avoid spaces between variables
-print(protocol, "://", host, ":", port, sep="")
-# Output: https://192.168.1.100:8080
-```
-
----
-
-## Common Interview Questions
-
-### Q1: Why are f-strings better than old methods of joining text?
-**Answer:** F-strings are much easier to read, write, and maintain. They are also much faster for the computer to run compared to older Python formatting methods.
-
-### Q2: What happens if I forget to convert `input()` when asking for numbers?
-**Answer:** Python will keep it as text (a string). If you try to do math with it later (like multiplying or adding), Python will either join the text together (`"10" + "10" = "1010"`) or crash with an error because it cannot do math on text.
-
----
-
-## Module Summary
-
-*   **`print()`**: Shows messages. You can use `sep=` to change the space between items, and `end=` to keep text on the same line.
-*   **`input()`**: Pauses the program to ask the user a question. Always returns their answer as **text (String)**.
-*   **Type Casting**: Converts text to numbers using `int()` or `float()`.
-*   **f-strings**: A clean way to insert variables directly into text using `f"Hello {name}"`.
+* **f-Strings (`f"..."`):** The modern, Pythonic standard to embed variables directly inside text using `{}` placeholders.
+* **Inline Expressions:** Calculate math and call functions directly within curly braces (e.g., `f"Total: {price * 1.18}"`).
+* **Decimal Formatting:** Format float precision cleanly with formatting specifiers (e.g., `{pi:.2f}`).
+* **Best Practice:** Always prefer f-strings over older `%` formatting or `.format()` methods for better speed and readability.
 
 ---
 
 ## What's Next?
 
-Now that we know how to handle input and output, let's learn how to do math, make comparisons, and write logic using **Operators** in the next module!
+Now that we know how to handle input and output, let's learn how to perform calculations, make comparisons, and build decision logic using **Operators** in Module 4!
+
+<CardGroup cols={1}>
+  <Card title="Module 4: Operators" icon="arrow-right" href="/part-1/module-4-operators/arithmetic-operators">
+    Learn arithmetic, comparison, logical, and membership operators
+  </Card>
+</CardGroup>

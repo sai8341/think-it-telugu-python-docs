@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import PresentationWhiteboard from '@site/src/components/PresentationWhiteboard';
 
+// Safe stub for Google Analytics in dev mode
+if (typeof window !== 'undefined') {
+  window.dataLayer = window.dataLayer || [];
+  if (typeof window.gtag !== 'function') {
+    window.gtag = function() {
+      window.dataLayer.push(arguments);
+    };
+  }
+}
+
 export default function Root({ children }) {
   const [isPresentation, setIsPresentation] = useState(false);
 

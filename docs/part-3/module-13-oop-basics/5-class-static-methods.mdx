@@ -219,31 +219,19 @@ Is age 21 valid? True
 
 ---
 
-## 11. Knowledge Check
-
-1. What happens if you modify a class variable using `Student.university_name = "IIT"` versus `s1.university_name = "IIT"`?
-2. Does a `@staticmethod` have access to `self.name`? What happens if you try to use `self` inside a static method?
-3. Why are class methods frequently used as **Alternative Constructors** (e.g., `Student.from_string("Sai,21")`)?
-4. How many copies of a Class Variable exist in RAM when you create 1,000 instance objects?
-
----
-
-## 12. Mini Exercises
-
-### Exercise 5.1: Employee Counter & Company Policy
-Create a class `Employee`:
-* Class variable `company_name = "TechCorp"` and `employee_count = 0`.
-* `__init__(self, name, salary)` increments `employee_count` by 1.
-* Add a `@classmethod` named `change_company_name(cls, new_name)` that updates `company_name` for all employees.
-* Add a `@staticmethod` named `is_valid_salary(salary)` that returns `True` if `salary >= 20000`.
-
-Test changing the company name and verify that all employee instances reflect the new name!
-
----
-
-## 13. Summary
+## Quick Summary
 
 * **Class Variables** are defined directly inside a class body and shared by ALL instances in a single Class Memory location.
 * **Instance Variables (`self.x`)** are unique to each individual Heap object.
 * **Class Methods (`@classmethod`)** receive `cls` and manipulate shared class state.
 * **Static Methods (`@staticmethod`)** are utility helper functions that operate without receiving `self` or `cls`.
+
+---
+
+## What's Next?
+
+<CardGroup cols={1}>
+  <Card title="Magic (Dunder) Methods" icon="arrow-right" href="/part-3/module-13-oop-basics/6-magic-dunder-methods">
+    Learn __str__, __repr__, __len__, and operator overloading
+  </Card>
+</CardGroup>
