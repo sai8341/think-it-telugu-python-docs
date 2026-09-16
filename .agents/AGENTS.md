@@ -4,6 +4,15 @@ This document provides definitive instructions, architectural patterns, and guar
 
 ---
 
+## 0. Long-Term Support (LTS) Baseline & Version Lock
+
+> [!IMPORTANT]
+> **Official Stable LTS Release Tag: `v1.0.0-lts`**
+> - **Commit / Baseline**: Complete Python curriculum release (Parts 1 to 3 active, Part 4 locked, Python Lab compiler, Interview Preparation portal, offline search, mobile responsive UI).
+> - **Recovery & Rollback Standard**: If any future experimental migration, Next.js refactor, or deployment troubleshooting causes regressions or unrecoverable site breakage, agents and developers must immediately restore from or compare against the stable `v1.0.0-lts` git baseline (`git checkout v1.0.0-lts`).
+
+---
+
 ## 1. Project Mission & Pedagogical Philosophy
 
 - **Platform Purpose**: An open-source, ultra-clear Python & AI/ML documentation platform tailored for beginners, college freshers, and non-CS career switchers.
